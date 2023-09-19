@@ -39,5 +39,46 @@ Este documento descreve o diagrama de entidade-relacionamento (DER) elaborado pa
 
 11. **Habilidade**:
     - Engloba as ações ou capacidades especiais que o personagem pode adquirir ou aprimorar ao longo do jogo, proporcionando vantagens em combate.
-   
+
+## Relacionamentos
+
+- **Mapa (possui) Bairro**:
+  - Indica que um mapa possui vários bairros, fornecendo uma relação de propriedade entre essas entidades.
+
+- **Bairro (possui) Local**:
+  - Estabelece a relação de propriedade entre um bairro e vários locais dentro dele.
+
+- **Local (leva_em) Local**:
+  - Representa a conexão entre diferentes locais, indicando a possibilidade de se mover de um local para outro.
+
+- **Local (possui) Personagem**:
+  - Reflete a relação entre um local e os personagens que estão presentes nele.
+
+- **Personagem (é) PC**:
+  - Indica que um personagem é controlado diretamente pelo jogador, sendo o protagonista jogável.
+
+- **Personagem (é) NPC**:
+  - Representa que um personagem é não controlado diretamente pelo jogador, sendo controlado pela inteligência artificial ou parte da narrativa.
+
+- **PC (enfrenta) NPC**:
+  - Descreve a relação de enfrentamento entre o personagem controlado pelo jogador e personagens não controlados.
+
+- **PC (possui) Mochila**:
+  - Estabelece a posse de uma mochila pelo personagem controlado pelo jogador.
+
+- **Mochila (guarda) Traje**:
+  - Demonstra que uma mochila pode guardar diferentes trajes que o personagem pode usar.
+
+- **Mochila (guarda) Colecionável**:
+  - Indica que a mochila pode armazenar itens colecionáveis encontrados no jogo.
+
+- **Colecionável (libera) Traje**:
+  - Reflete que a coleta de determinados itens colecionáveis pode desbloquear novos trajes para o personagem.
+
+- **Traje (libera) Habilidade**:
+  - Mostra a relação entre um traje adquirido e as habilidades específicas que ele pode proporcionar ao personagem.
+
+- **Personagem (possui) Habilidade**:
+  - Indica que um personagem possui habilidades que podem ser aprimoradas ou adquiridas ao longo do jogo.
+
     
