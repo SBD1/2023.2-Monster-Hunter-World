@@ -1,6 +1,6 @@
 # 2023.2 - Spider-Man: Miles Morales
 <div align="center">
-    <img src="https://i.pinimg.com/originals/16/0a/1e/160a1e61b59d3baaa0a9a49107222435.png" style="width:17vw"/>
+    <img src="https://pin.it/3mkl9k0" style="width:17vw"/>
     <p> Figura 1: Personagem principal do jogo Spider-Man: Miles Morales</p> 
 </div>
 
