@@ -2,7 +2,7 @@
 Este documento descreve o diagrama de entidade-relacionamento (DER) elaborado para o jogo "Spider-Man: Miles Morales", que servirá como base para nosso trabalho na disciplina de Sistemas de Banco de Dados 1. O objetivo é modelar as entidades e suas relações no contexto do jogo para facilitar o armazenamento e gerenciamento dos dados relacionados.
 
 ## Diagrama Entidade Relacionamento
-![der](https://raw.githubusercontent.com/SBD1/2023.2-Spider-Man-Miles-Morales/main/docs/imagens/DER-SPIDER-MAN.drawio.png)
+![der](https://github.com/SBD1/2023.2-Spider-Man-Miles-Morales/blob/main/docs/imagens/DIAGRAMA-ENTIDADE-RELACIONAMENTO.drawio.png?raw=true)
 <font size="3"><p style="text-align: center">Fonte: Autores.</p></font>
 
 ## Descrição das Entidades
@@ -78,7 +78,11 @@ Este documento descreve o diagrama de entidade-relacionamento (DER) elaborado pa
 - **Traje (libera) Habilidade**:
   - Mostra a relação entre um traje adquirido e as habilidades específicas que ele pode proporcionar ao personagem.
 
-- **Personagem (possui) Habilidade**:
-  - Indica que um personagem possui habilidades que podem ser aprimoradas ou adquiridas ao longo do jogo.
+- **PC (ganha) Habilidade**:
+  - Indica que o PC ganhou uma habilidade através de um traje.
+  - 
+- **NPC (possui) Habilidade**:
+  - Indica que o NPC possui determinada habilidade.
+    
 
     
