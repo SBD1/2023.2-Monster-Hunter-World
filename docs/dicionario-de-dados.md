@@ -107,8 +107,8 @@
 ### Descrição: Tabela que armazenará  as informações das habilidades dos NPC's.
 #### Observações: Essa tabela possui duas chaves estrangeiras, uma da tabela NPC e a outra da tabela Habilidade.
 
-|:-:|:-:|:-:|:-:|:-:|
 |Nome Variável|Descrição|Tipo de Dado|Tamanho|Restrições de Dominío|
+|:-:|:-:|:-:|:-:|:-:|
 |idHabilidadeNPC|Número de identificação da habilidade do NPC.|Int|4|PK|
 |idNPC|Número de identificação do NPC.|Int|4|FK|
 |idHabilidade|Número de identificação da habilidade.|Int|4|FK|
@@ -117,8 +117,8 @@
 ### Descrição: Tabela que armazenará as informações das habilidades dos PC's.
 #### Obervações: Essa tabela possui três chaves estrangeiraw, uma da tabela PC, uma da tabela Traje e a outra da tabela Habilidade.
 
-|:-:|:-:|:-:|:-:|:-:|
 |Nome Variável|Descrição|Tipo de Dado|Tamanho|Restrições de Dominío|
+|:-:|:-:|:-:|:-:|:-:|
 |idHabilidadePC|Número de identificação da habilidade do PC.|Int|4|PK|
 |idPC|Número de identificação do PC.|Int|4|FK|
 |idHabilidade|Número de identificação da habilidade.|Int|4|FK|
