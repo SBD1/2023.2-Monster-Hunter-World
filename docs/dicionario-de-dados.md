@@ -64,7 +64,7 @@
 |identidadeSecreta|Identidade secreta do PC.|Varchar|20|-|
 |idade|Idade do PC.|Int|4|-|
 |especie|Espécie do PC.|Varchar|20|Not null|
-|vida||Int|4|Default|
+|vida|Vida do PC no início do game.|Int|4|Default|
 
 ## Tabela: Npc (Non Playable Character)
 ### Descrição: Tabela que armazenará as informações dos npc's.
