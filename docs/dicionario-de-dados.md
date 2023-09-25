@@ -142,8 +142,8 @@
 ### Descrição: Tabela que armazenará os colecionáveis do PC
 #### Observações: Essa tabela possui duas chaves estrangeiras, uma da tabela PC e a outra da tabela Traje.
 
-|:-:|:-:|:-:|:-:|:-:|
 |Nome Variável|Descrição|Tipo de Dado|Tamanho|Restrições de Dominío|
+|:-:|:-:|:-:|:-:|:-:|
 |idColecionavel|Número de identificação do colecionável|Int|4|PK|
 |idPC|Número de identificação do PC (player character).|Int|4|FK|
 |idTraje|Número de identificação do traje.|Int|4|FK|
