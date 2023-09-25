@@ -3,7 +3,7 @@
 Este documento descreve o modelo entidade-relacionamento (MER) elaborado para o jogo "Spider-Man: Miles Morales", que servirá como base para nosso trabalho na disciplina de Sistemas de Banco de Dados 1. O objetivo é demonstrar as tabelas e suas conexões no banco de dados através de um diagrama facilitar a manutenção e  o gerenciamento dos dados relacionados.
 
 ## Modelo Entidade-Relacionamento
-![der](https://github.com/SBD1/2023.2-Spider-Man-Miles-Morales/blob/main/docs/imagens/MAPEAMENTO-SPIDER-MAN.drawio (2).png?raw=true)
+![MER](https://github.com/SBD1/2023.2-Spider-Man-Miles-Morales/blob/main/docs/imagens/MER_SPIDER-MAN_V1.png?raw=true)
 <font size="3"><p style="text-align: center">Fonte: Autores.</p></font>
 
 ## Descrição das tabelas

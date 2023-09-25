@@ -2,7 +2,7 @@
 Este documento descreve o diagrama de entidade-relacionamento (DER) elaborado para o jogo "Spider-Man: Miles Morales", que servirá como base para nosso trabalho na disciplina de Sistemas de Banco de Dados 1. O objetivo é modelar as entidades e suas relações no contexto do jogo para facilitar o armazenamento e gerenciamento dos dados relacionados.
 
 ## Diagrama Entidade Relacionamento
-![der](https://github.com/SBD1/2023.2-Spider-Man-Miles-Morales/blob/main/docs/imagens/DIAGRAMA-ENTIDADE-RELACIONAMENTO.drawio%20(2).png?raw=true)
+![DER](https://github.com/SBD1/2023.2-Spider-Man-Miles-Morales/blob/main/docs/imagens/DER_SPIDER-MAN_V1.png?raw=true)
 <font size="3"><p style="text-align: center">Fonte: Autores.</p></font>
 
 ## Descrição das Entidades
