@@ -28,9 +28,6 @@ Este documento descreve o diagrama de entidade-relacionamento (DER) elaborado pa
 7. **Missão**:
    - Representa uma tarefa ou objetivo que o jogador deve realizar durante o jogo, muitas vezes associada a uma batalha contra um inimigo.
 
-8. **Mochila**:
-   - Descreve os itens ou componentes que o personagem pode carregar consigo durante o jogo, como trajes e itens colecionáveis.
-
 9. **Traje**:
    - Representa as diferentes roupas ou trajes que o personagem pode usar, cada um podendo oferecer habilidades ao jogador.
 
@@ -65,15 +62,12 @@ Este documento descreve o diagrama de entidade-relacionamento (DER) elaborado pa
 
 - **PC (enfrenta) NPC**:
   - Descreve a relação de enfrentamento entre o personagem controlado pelo jogador e personagens não controlados.
+  
+- **PC (guarda) Traje**:
+  - Demonstra que um personagem controlável pode guardar diferentes trajes.
 
-- **PC (possui) Mochila**:
-  - Estabelece a posse de uma mochila pelo personagem controlado pelo jogador.
-
-- **Mochila (guarda) Traje**:
-  - Demonstra que uma mochila pode guardar diferentes trajes que o personagem pode usar.
-
-- **Mochila (guarda) Colecionável**:
-  - Indica que a mochila pode armazenar itens colecionáveis encontrados no jogo.
+- **PC (guarda) Colecionável**:
+  - Indica que o personagem controlável pode armazenar itens colecionáveis encontrados no jogo.
 
 - **Colecionável (libera) Traje**:
   - Reflete que a coleta de determinados itens colecionáveis pode desbloquear novos trajes para o personagem.
