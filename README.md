@@ -1,6 +1,6 @@
 # 2023.2 - Monster Hunter World
 <div align="center">
-    <img src="https://i.pinimg.com/originals/9e/c3/cb/9ec3cb982cff34c327457fc43da67fc1.png" style="width:17vw"/>
+    <img src="https://i.pinimg.com/originals/d2/d6/c3/d2d6c3aa26d0555412c0f422924a45ab.png" style="width:17vw"/>
     <p> Figura 1: Logo do jogo Monster Hunter World</p> 
 </div>
 
