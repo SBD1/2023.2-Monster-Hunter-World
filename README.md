@@ -1,11 +1,11 @@
-# 2023.2 - Spider-Man: Miles Morales
+# 2023.2 - Monster Hunter World
 <div align="center">
-    <img src="https://i.pinimg.com/originals/b4/ce/02/b4ce027ef6d8e7a71ba79f3a5ed0881e.png" style="width:17vw"/>
-    <p> Figura 1: Personagem principal do jogo Spider-Man: Miles Morales</p> 
+    <img src="https://i.pinimg.com/564x/9e/c3/cb/9ec3cb982cff34c327457fc43da67fc1.jpg" style="width:17vw"/>
+    <p> Figura 1: Logo do jogo Monster Hunter World</p> 
 </div>
 
 ## Sobre o projeto
-Este repositório servirá para aprofundarmos e trabalharmos os conhecimentos com relação a disciplina Sistema de Banco de Dados I da Universidade de Brasília (UnB), através da implementação de um jogo inspirado em Spider-Man: Miles Morales.
+Este repositório servirá para aprofundarmos e trabalharmos os conhecimentos com relação a disciplina Sistema de Banco de Dados I da Universidade de Brasília (UnB), através da implementação de um jogo inspirado em Monster Hunter World.
 
 ## Equipe
 
