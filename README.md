@@ -17,3 +17,13 @@ Este repositório servirá para aprofundarmos e trabalharmos os conhecimentos co
         <td align="center"><a href="https://github.com/lucassouzs"><img style="border-radius: 50%;" src="https://avatars.githubusercontent.com/u/98030825?v=4" width="100px;" alt=""/><br /><sub><b>Lucas Ribeiro</b></sub></a><br />
   </tr>
 </table>
+
+## Entregas
+- Módulo 1
+    - [Diagrama entidade-relacionamento](https://github.com/SBD1/2023.2-Monster-Hunter-World/blob/main/docs/diagrama-entidade-relacionamento.md)
+    - [Mapeamento do MER pro modelo relacional](https://github.com/SBD1/2023.2-Monster-Hunter-World/blob/main/docs/mapeamento-mer-relacional.md)
+    - [Dicionário de dados](https://github.com/SBD1/2023.2-Monster-Hunter-World/blob/main/docs/dicionario-de-dados.md)
+
+## Apresentações
+- [Módulo 1]()
+   
