@@ -1,88 +1,113 @@
-# Diagrama de Entidade-Relacionamento para o Jogo "Spider-Man: Miles Morales"
-Este documento descreve o diagrama de entidade-relacionamento (DER) elaborado para o jogo "Spider-Man: Miles Morales", que servirá como base para nosso trabalho na disciplina de Sistemas de Banco de Dados 1. O objetivo é modelar as entidades e suas relações no contexto do jogo para facilitar o armazenamento e gerenciamento dos dados relacionados.
+# Diagrama de Entidade-Relacionamento para o Jogo "Monster Hunter World"
+Este documento descreve o diagrama de entidade-relacionamento (DER) elaborado para o jogo "Monster Hunter World", que servirá como base para nosso trabalho na disciplina de Sistemas de Banco de Dados 1. O objetivo é modelar as entidades e suas relações no contexto do jogo para facilitar o armazenamento e gerenciamento dos dados relacionados.
 
 ## Diagrama Entidade Relacionamento
-![DER](https://github.com/SBD1/2023.2-Spider-Man-Miles-Morales/blob/main/docs/imagens/DER_SPIDER-MAN_V1.png?raw=true)
+![DER](#)
 <font size="3"><p style="text-align: center">Fonte: Autores.</p></font>
 
-## Descrição das Entidades
 
-1. **Mapa**:
-   - Descreve a representação gráfica da cidade de Nova York no contexto do jogo, incluindo seus diferentes bairros e locais.
+## Entidades e Relacionamentos
 
-2. **Bairro**:
-   - Representa uma subdivisão da cidade de Nova York no jogo, cada uma com características únicas e missões específicas.
+### Mapa
 
-3. **Local**:
-   - Refere-se a um ponto específico dentro de um bairro ou área do jogo, onde atividades, missões ou eventos podem ocorrer.
+- *Descrição:* Um local jogável onde as missões ocorrem.
+- *Relacionamentos:* Possui regiões; as missões ocorrem no mapa.
 
-4. **Personagem**:
-   - Engloba os protagonistas jogáveis e outros personagens interativos do jogo, como Miles Morales (o Homem-Aranha) e outros heróis ou aliados.
+### Região
 
-5. **PC (Personagem Controlado)**:
-   - Indica personagens controlados diretamente pelo jogador, como Miles Morales (o Homem-Aranha), cujas ações e decisões são influenciadas pelo jogador.
+- *Descrição:* Uma parte distinta de um mapa com características específicas.
+- *Relacionamentos:* Está em um mapa; possui NPCs e Amigato; o NPC está em uma região.
 
-6. **NPC (Personagem Não Controlado)**:
-   - Refere-se a personagens não controlados pelo jogador, como habitantes da cidade, inimigos ou aliados.
+### Amigato
 
-7. **Missão**:
-   - Representa uma tarefa ou objetivo que o jogador deve realizar durante o jogo, muitas vezes associada a uma batalha contra um inimigo.
+- *Descrição:* Um companheiro controlado pelo jogo ou jogador para auxiliar na caça.
+- *Relacionamentos:* Está em uma região; o PC possui um Amigato; utiliza equipamento.
 
-9. **Traje**:
-   - Representa as diferentes roupas ou trajes que o personagem pode usar, cada um podendo oferecer habilidades ao jogador.
+### PC (Personagem Jogável)
 
-10. **Colecionável**:
-    - Refere-se a itens colecionáveis no jogo, como tokens, cartões ou outros objetos espalhados pelo ambiente, cada um associado ao desbloqueio de um traje.
+- *Descrição:* O personagem controlado pelo jogador.
+- *Relacionamentos:* Está em uma região; possui Amigato e Inventário; realiza missões.
 
-11. **Habilidade**:
-    - Engloba as ações ou capacidades especiais que o personagem pode adquirir ou aprimorar ao longo do jogo, proporcionando vantagens em combate.
+### NPC (Personagem Não Jogável)
 
-12. **Fase**:
-    - Diz respeito às fases que o PC deve realizar durante o jogo para conseguir vencer.
+- *Descrição:* Personagens controlados pelo jogo, não controlados pelo jogador.
+- *Relacionamentos:* Está em uma região; possui loja e forja; dá missões.
 
-## Relacionamentos
+### Equipamento
 
-- **Mapa (possui) Bairro**:
-  - Indica que um mapa possui vários bairros, fornecendo uma relação de propriedade entre essas entidades.
+- *Descrição:* Itens que o PC e o Amigato podem usar para a caça.
+- *Relacionamentos:* É guardado no inventário; criado na forja; vendido na loja; usado pelo Amigato.
 
-- **Bairro (possui) Local**:
-  - Estabelece a relação de propriedade entre um bairro e vários locais dentro dele.
+### Arma (Tipo de Equipamento)
 
-- **Local (leva_em) Local**:
-  - Representa a conexão entre diferentes locais, indicando a possibilidade de se mover de um local para outro.
+- *Descrição:* Equipamento usado para atacar monstros.
+- *Relacionamentos:* É um tipo de equipamento.
 
-- **Local (possui) Personagem**:
-  - Reflete a relação entre um local e os personagens que estão presentes nele.
+### Armadura (Tipo de Equipamento)
 
-- **Personagem (é) PC**:
-  - Indica que um personagem é controlado diretamente pelo jogador, sendo o protagonista jogável.
+- *Descrição:* Equipamento usado para proteger o PC contra danos dos monstros.
+- *Relacionamentos:* É um tipo de equipamento.
 
-- **Personagem (é) NPC**:
-  - Representa que um personagem é não controlado diretamente pelo jogador, sendo controlado pela inteligência artificial ou parte da narrativa.
+### Amuleto (Tipo de Equipamento)
 
-- **PC (enfrenta) NPC**:
-  - Descreve a relação de enfrentamento entre o personagem controlado pelo jogador e personagens não controlados.
-  
-- **PC (guarda) Traje**:
-  - Demonstra que um personagem controlável pode guardar diferentes trajes.
+- *Descrição:* Equipamento que confere habilidades ao PC.
+- *Relacionamentos:* É um tipo de equipamento; possui habilidades.
 
-- **PC (guarda) Colecionável**:
-  - Indica que o personagem controlável pode armazenar itens colecionáveis encontrados no jogo.
+### Ferramenta (Tipo de Equipamento)
 
-- **Colecionável (libera) Traje**:
-  - Reflete que a coleta de determinados itens colecionáveis pode desbloquear novos trajes para o personagem.
+- *Descrição:* Equipamento especial usado para várias funções durante a caça.
+- *Relacionamentos:* É um tipo de equipamento.
 
-- **Traje (libera) Habilidade**:
-  - Mostra a relação entre um traje adquirido e as habilidades específicas que ele pode proporcionar ao personagem.
+### Habilidade
 
-- **PC (ganha) Habilidade**:
-  - Indica que o PC ganhou uma habilidade através de um traje.
-  - 
-- **NPC (possui) Habilidade**:
-  - Indica que o NPC possui determinada habilidade.
- 
-- **Fase (é realizada) PC**:
-  - Indica que a fase foi realizada pelo PC.
+- *Descrição:* Habilidades especiais que podem ser conferidas pelo amuleto ou armadura.
+- *Relacionamentos:* É possuído pela armadura e amuleto.
+
+### Itens
+
+- *Descrição:* Diversos objetos úteis no jogo, como poções e armadilhas.
+- *Relacionamentos:* São guardados no inventário; usados para criar equipamento na forja; dropados pela instância do monstro.
+
+### Inventário
+
+- *Descrição:* Espaço onde o PC guarda equipamentos e itens.
+- *Relacionamentos:* Guarda equipamentos e itens.
+
+### Loja
+
+- *Descrição:* Local onde os jogadores podem comprar equipamentos.
+- *Relacionamentos:* Possuída pelo NPC; vende equipamento.
+
+### Forja
+
+- *Descrição:* Local onde os jogadores podem criar equipamentos.
+- *Relacionamentos:* Possuída pelo NPC; cria equipamento; usa itens.
+
+### Fala
+
+- *Descrição:* Diálogos entre personagens.
+- *Relacionamentos:* É pré-requisito para etapas da missão.
+
+### Monstro
+
+- *Descrição:* Criaturas que os jogadores caçam no jogo.
+- *Relacionamentos:* Possui instância do monstro; é um pré-requisito para etapas da missão.
+
+### Missão
+
+- *Descrição:* Tarefas ou objetivos que os jogadores devem completar.
+- *Relacionamentos:* Ocorre em um mapa; possui etapas da missão; é dado pelo NPC; é um pré-requisito para outras missões.
+
+### EtapaMissão
+
+- *Descrição:* Parte de uma missão que precisa ser completada.
+- *Relacionamentos:* Precisa de uma fala e de um monstro.
+
+### InstanciaMonstro
+
+- *Descrição:* Versão específica de um monstro encontrada durante uma missão.
+- *Relacionamentos:* Dropa itens.
+
     
 
     
