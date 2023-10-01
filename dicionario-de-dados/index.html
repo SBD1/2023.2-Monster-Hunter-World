@@ -4081,14 +4081,68 @@
 </table>
 <h2 id="tabela-monstro">Tabela: Monstro</h2>
 <h3 id="descricao-tabela-que-armazenara-os-dados-do-monstro">Descrição: Tabela que armazenará os dados do Monstro.</h3>
-<p>| Nome Variável | Descrição                                   | Tipo de Dado | Tamanho | Restrições de Domínio |
-| IdMonstro | :----------------------------------------: | :----------: | :-----: | :-------------------: |
-| IdAmigato         | Número de identificação do Monstro.            | Int      |         | PK                    |
-| Nome          | Nome do Monstro.                      | Varchar | 64                 | Not null               |
-| Elemento       | Inteiro correspondente ao elemento do monstro.   | Int  |                    | Default              |
-| AtacaMonstros       | Booleano para saber se o monstro ataca outros monstros   | Boolean  |                   | Not null/Check              |
-| AlcanceHostilidade       | Alcance da hostilidade do monstro.   | Int  |                    | Default              |
-| Tipo       | Inteiro correspondente ao tipo do monstro.   | Int  |                    | Default              |</p>
+<table>
+<thead>
+<tr>
+<th>Nome Variável</th>
+<th>Descrição</th>
+<th>Tipo de Dado</th>
+<th>Tamanho</th>
+<th>Restrições de Domínio</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>IdMonstro</td>
+<td>Número de identificação do Monstro.</td>
+<td>Int</td>
+<td></td>
+<td>PK</td>
+</tr>
+<tr>
+<td>IdAmigato</td>
+<td>Número de identificação do Monstro.</td>
+<td>Int</td>
+<td></td>
+<td>Not Null</td>
+</tr>
+<tr>
+<td>Nome</td>
+<td>Nome do Monstro.</td>
+<td>Varchar</td>
+<td>64</td>
+<td>Not Null</td>
+</tr>
+<tr>
+<td>Elemento</td>
+<td>Inteiro correspondente ao elemento do Monstro.</td>
+<td>Int</td>
+<td></td>
+<td>Default</td>
+</tr>
+<tr>
+<td>AtacaMonstros</td>
+<td>Booleano para saber se o monstro ataca outros monstros.</td>
+<td>Boolean</td>
+<td></td>
+<td>Not Null, Check</td>
+</tr>
+<tr>
+<td>AlcanceHostilidade</td>
+<td>Alcance da hostilidade do Monstro.</td>
+<td>Int</td>
+<td></td>
+<td>Default</td>
+</tr>
+<tr>
+<td>Tipo</td>
+<td>Inteiro correspondente ao tipo do Monstro.</td>
+<td>Int</td>
+<td></td>
+<td>Default</td>
+</tr>
+</tbody>
+</table>
 <h2 id="tabela-instanciamonstro">Tabela: InstanciaMonstro</h2>
 <h3 id="descricao-tabela-que-armazenara-os-dados-da-instancia-do-monstro">Descrição: Tabela que armazenará os dados da Instancia do Monstro.</h3>
 <h4 id="observacoes-essa-tabela-possui-uma-chave-estrangeira-da-tabela-monstro">Observações: Essa tabela possui uma chave estrangeira da tabela Monstro.</h4>
