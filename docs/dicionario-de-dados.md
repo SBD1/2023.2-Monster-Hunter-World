@@ -104,14 +104,16 @@
 
 ## Tabela: Monstro
 ### Descrição: Tabela que armazenará os dados do Monstro.
-| Nome Variável | Descrição                                   | Tipo de Dado | Tamanho | Restrições de Domínio |
-| IdMonstro | :----------------------------------------: | :----------: | :-----: | :-------------------: |
-| IdAmigato         | Número de identificação do Monstro.            | Int      |         | PK                    |
-| Nome          | Nome do Monstro.                      | Varchar | 64                 | Not null               |
-| Elemento       | Inteiro correspondente ao elemento do monstro.   | Int  |                    | Default              |
-| AtacaMonstros       | Booleano para saber se o monstro ataca outros monstros   | Boolean  |                   | Not null/Check              |
-| AlcanceHostilidade       | Alcance da hostilidade do monstro.   | Int  |                    | Default              |
-| Tipo       | Inteiro correspondente ao tipo do monstro.   | Int  |                    | Default              |
+| Nome Variável      | Descrição                                                   | Tipo de Dado | Tamanho | Restrições de Domínio       |
+|--------------------|-------------------------------------------------------------|--------------|---------|---------------------------|
+| IdMonstro           | Número de identificação do Monstro.                          | Int          |         | PK                        |
+| IdAmigato           | Número de identificação do Monstro.                          | Int          |         | Not Null                  |
+| Nome                | Nome do Monstro.                                           | Varchar      | 64      | Not Null                  |
+| Elemento            | Inteiro correspondente ao elemento do Monstro.              | Int          |         | Default                   |
+| AtacaMonstros       | Booleano para saber se o monstro ataca outros monstros.      | Boolean      |         | Not Null, Check           |
+| AlcanceHostilidade  | Alcance da hostilidade do Monstro.                           | Int          |         | Default                   |
+| Tipo                | Inteiro correspondente ao tipo do Monstro.                   | Int          |         | Default                   |
+
 
 
 ## Tabela: InstanciaMonstro
