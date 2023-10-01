@@ -2,7 +2,7 @@
 Este documento descreve o diagrama de entidade-relacionamento (DER) elaborado para o jogo "Monster Hunter World", que servirá como base para nosso trabalho na disciplina de Sistemas de Banco de Dados 1. O objetivo é modelar as entidades e suas relações no contexto do jogo para facilitar o armazenamento e gerenciamento dos dados relacionados.
 
 ## Diagrama Entidade Relacionamento
-![DER](#)
+![DER](https://github.com/SBD1/2023.2-Monster-Hunter-World/blob/main/docs/imagens/DER.png?raw=true)
 <font size="3"><p style="text-align: center">Fonte: Autores.</p></font>
 
 
