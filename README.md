@@ -25,5 +25,5 @@ Este repositório servirá para aprofundarmos e trabalharmos os conhecimentos co
     - [Dicionário de dados](https://github.com/SBD1/2023.2-Monster-Hunter-World/blob/main/docs/dicionario-de-dados.md)
 
 ## Apresentações
-- [Módulo 1]()
+- [Módulo 1](https://unbbr-my.sharepoint.com/:v:/g/personal/211063149_aluno_unb_br/EZMSun3UQ4JEqEoEa4H_HUYBgKvWdvKDfzN-Mr9kkcnI3Q?e=m2EhVo&nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZyIsInJlZmVycmFsQXBwUGxhdGZvcm0iOiJXZWIiLCJyZWZlcnJhbE1vZGUiOiJ2aWV3In19)
    
