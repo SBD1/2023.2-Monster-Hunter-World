@@ -89,7 +89,7 @@ CREATE TABLE FalaPreReq (
 -- Tabela Monstro
 CREATE TABLE Monstro (
     IdMonstro serial PRIMARY KEY,
-    IdAmigato int NOT NULL,
+    IdAmigato int,
     Nome varchar(64) NOT NULL,
     Elemento varchar(32),
     AtacaMonstros boolean NOT NULL CHECK (AtacaMonstros IN (true, false)),
