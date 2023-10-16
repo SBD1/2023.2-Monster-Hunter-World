@@ -31,10 +31,10 @@ CREATE TABLE NPC (
     Nome varchar(64) NOT NULL,
     x bigint DEFAULT 0,
     y bigint DEFAULT 0,
-    Descricao varchar(256) DEFAULT '',
-    Funcao varchar(64) DEFAULT '',
-    Raca varchar(32) DEFAULT '',
-    Genero varchar(16) DEFAULT ''
+    Descricao varchar(256),
+    Funcao varchar(64),
+    Raca varchar(32),
+    Genero varchar(16)
 );
 
 -- Tabela PC
@@ -44,15 +44,15 @@ CREATE TABLE PC (
     Nome varchar(64) NOT NULL,
     x bigint DEFAULT 0,
     y bigint DEFAULT 0,
-    Ranque int DEFAULT 0,
-    Vida int DEFAULT 0,
-    Vigor int DEFAULT 0,
+    Ranque int DEFAULT 1,
+    Vida int DEFAULT 500,
+    Vigor int DEFAULT 200,
     Afinidade int DEFAULT 0,
     Dinheiro int DEFAULT 0,
-    Genero varchar(16) DEFAULT '',
-    CorPele varchar(16) DEFAULT '',
-    CorCabelo varchar(16) DEFAULT '',
-    CorOlho varchar(16) DEFAULT '',
+    Genero varchar(16),
+    CorPele varchar(16) DEFAULT '#FFFFFF',
+    CorCabelo varchar(16) DEFAULT '#000000',
+    CorOlho varchar(16) DEFAULT '#000000',
     TipoCabelo int DEFAULT 0,
     TipoOlho int DEFAULT 0
 );
@@ -65,9 +65,9 @@ CREATE TABLE Amigato (
     Nome varchar(64) NOT NULL,
     x bigint DEFAULT 0,
     y bigint DEFAULT 0,
-    Nivel int DEFAULT 0,
+    Nivel int DEFAULT 1,
     Status int DEFAULT 0,
-    Vida int DEFAULT 0
+    Vida int DEFAULT 100
 );
 
 
@@ -75,7 +75,7 @@ CREATE TABLE Amigato (
 CREATE TABLE Fala (
     IdFala serial PRIMARY KEY,
     NPC int REFERENCES NPC(IdNPC),
-    Fala varchar(256) DEFAULT '',
+    Fala varchar(256),
     Repetivel boolean NOT NULL CHECK (Repetivel IN (true, false))
 );
 
@@ -91,7 +91,7 @@ CREATE TABLE Monstro (
     IdMonstro serial PRIMARY KEY,
     IdAmigato int NOT NULL,
     Nome varchar(64) NOT NULL,
-    Elemento int DEFAULT 0,
+    Elemento varchar(32),
     AtacaMonstros boolean NOT NULL CHECK (AtacaMonstros IN (true, false)),
     AlcanceHostilidade int DEFAULT 0,
     Tipo int DEFAULT 0
@@ -102,10 +102,10 @@ CREATE TABLE InstanciaMonstro (
     IdInstanciaMonstro serial PRIMARY KEY,
     Monstro int REFERENCES Monstro(IdMonstro),
     Status int DEFAULT 0,
-    Vida int DEFAULT 0,
+    Vida int DEFAULT 100,
     Tamanho int DEFAULT 0,
-    Nivel int DEFAULT 0,
-    Ataque int DEFAULT 0
+    Nivel int DEFAULT 1,
+    Ataque int DEFAULT 100
 );
 
 -- Tabela RegiaoMonstro
@@ -130,15 +130,15 @@ CREATE TABLE Missao (
     Mapa int REFERENCES Mapa(IdMapa),
     NPC int REFERENCES NPC(IdNPC),
     Nome varchar(64) NOT NULL,
-    Nivel int DEFAULT 0,
+    Nivel int DEFAULT 1,
     Tipo int DEFAULT 0,
     Cliente varchar(64) NOT NULL,
-    Descricao varchar(256) DEFAULT '',
-    MaximoDesmaios int DEFAULT 0,
-    Tempo int DEFAULT 0,
+    Descricao varchar(256),
+    MaximoDesmaios int DEFAULT 3,
+    Tempo int DEFAULT 40,
     Premio int DEFAULT 0,
-    Resumo varchar(128) DEFAULT '',
-    RanqueMinimo int DEFAULT 0
+    Resumo varchar(128),
+    RanqueMinimo int DEFAULT 1
 );
 
 
@@ -155,7 +155,7 @@ CREATE TABLE EtapaMissao (
     Missao int REFERENCES Missao(IdMissao),
     Nome varchar(64) NOT NULL,
     Status int DEFAULT 0,
-    Descricao varchar(256) DEFAULT ''
+    Descricao varchar(256)
 );
 
 -- Tabela EtapaMonstro
@@ -163,7 +163,7 @@ CREATE TABLE EtapaMonstro (
     IdEtapaMonstro serial PRIMARY KEY,
     EtapaMissao int REFERENCES EtapaMissao(IdEtapaMissao),
     Monstro int REFERENCES Monstro(IdMonstro),
-    Quantidade int DEFAULT 0
+    Quantidade int DEFAULT 1
 );
 
 -- Tabela EtapaFala
@@ -185,7 +185,7 @@ CREATE TABLE RealizaMissao (
 CREATE TABLE Inventario (
     IdInventario serial PRIMARY KEY,
     PC int REFERENCES PC(IdPlayer),
-    CapacidadeMaxima int DEFAULT 0
+    CapacidadeMaxima int DEFAULT 20
 );
 
 -- Tabela Loja
@@ -206,10 +206,10 @@ CREATE TABLE Forja (
 CREATE TABLE Item (
     IdItem serial PRIMARY KEY,
     Nome varchar(64) NOT NULL,
-    Raridade int DEFAULT 0,
+    Raridade int DEFAULT 1,
     Tipo int DEFAULT 0,
-    Funcao varchar(64) DEFAULT '',
-    Descricao varchar(256) DEFAULT '',
+    Funcao varchar(64),
+    Descricao varchar(256),
     ValorVenda int DEFAULT 0,
     CustoCompra int DEFAULT 0
 );
@@ -240,15 +240,15 @@ CREATE TABLE UsaItem (
 CREATE TABLE Arma (
     IdArma serial PRIMARY KEY,
     Nome varchar(64) NOT NULL,
-    Nivel int DEFAULT 0,
-    Raridade int DEFAULT 0,
+    Nivel int DEFAULT 1,
+    Raridade int DEFAULT 1,
     CustoCompra int DEFAULT 0,
     ValorVenda int DEFAULT 0,
-    Descricao varchar(256) DEFAULT '',
+    Descricao varchar(256),
     Tipo int DEFAULT 0,
     Ataque int DEFAULT 0,
     Afiacao int DEFAULT 0,
-    Elemento varchar(32) DEFAULT '',
+    Elemento varchar(32),
     ValorElemento int DEFAULT 0
 );
 
@@ -291,11 +291,11 @@ CREATE TABLE CriaArma (
 CREATE TABLE Armadura (
     IdArmadura serial PRIMARY KEY,
     Nome varchar(64) NOT NULL,
-    Nivel int DEFAULT 0,
-    Raridade int DEFAULT 0,
+    Nivel int DEFAULT 1,
+    Raridade int DEFAULT 1,
     CustoCompra int DEFAULT 0,
     ValorVenda int DEFAULT 0,
-    Descricao varchar(256) DEFAULT '',
+    Descricao varchar(256),
     Tipo int DEFAULT 0,
     Defesa int DEFAULT 0,
     Fogo int DEFAULT 0,
@@ -345,11 +345,11 @@ CREATE TABLE CriaArmadura (
 CREATE TABLE Amuleto (
     IdAmuleto serial PRIMARY KEY,
     Nome varchar(64) NOT NULL,
-    Nivel int DEFAULT 0,
-    Raridade int DEFAULT 0,
+    Nivel int DEFAULT 1,
+    Raridade int DEFAULT 1,
     CustoCompra int DEFAULT 0,
     ValorVenda int DEFAULT 0,
-    Descricao varchar(256) DEFAULT '',
+    Descricao varchar(256),
     Tipo int DEFAULT 0,
     Melhoria int DEFAULT 0
 );
@@ -393,15 +393,15 @@ CREATE TABLE CriaAmuleto (
 CREATE TABLE Ferramenta (
     IdFerramenta serial PRIMARY KEY,
     Nome varchar(64) NOT NULL,
-    Nivel int DEFAULT 0,
-    Raridade int DEFAULT 0,
+    Nivel int DEFAULT 1,
+    Raridade int DEFAULT 1,
     CustoCompra int DEFAULT 0,
     ValorVenda int DEFAULT 0,
-    Descricao varchar(256) DEFAULT '',
+    Descricao varchar(256),
     Tipo int DEFAULT 0,
-    Funcao varchar(64) DEFAULT '',
-    TempoEfeito int DEFAULT 0,
-    TempoRecarga int DEFAULT 0
+    Funcao varchar(64),
+    TempoEfeito int DEFAULT 20,
+    TempoRecarga int DEFAULT 10
 );
 
 -- Tabela GuardaFerramenta
@@ -437,8 +437,8 @@ CREATE TABLE Habilidade (
     IdHabilidade serial PRIMARY KEY,
     Nome varchar(64) NOT NULL,
     Nivel int DEFAULT 0,
-    Descricao varchar(256) DEFAULT '',
-    Funcao varchar(64) DEFAULT ''
+    Descricao varchar(256),
+    Funcao varchar(64)
 );
 
 -- Tabela HabilidadeAmuleto
