@@ -247,3 +247,242 @@ INSERT INTO EtapaMissao (Missao, Nome, Descricao)
 VALUES (6, 'Localize o Anjanath', 'Rastreie o Anjanath e encontre sua localização atual.'),
        (6, 'Prepare-se para a batalha', 'Aprimore suas armas e equipamentos para o confronto com o Anjanath.'),
        (6, 'Derrote os Anjanaths', 'Desafie os Anjanaths e elimine a ameaça da região.');
+
+-- ETAPA MONSTRO
+
+-- Etapa para o Monstro "Grande Jagras"
+INSERT INTO EtapaMonstro (EtapaMissao, Monstro, Quantidade)
+VALUES (1, 1, 1),
+       (2, 1, 1),
+       (3, 1, 1);
+
+-- Etapa para o Monstro "Kulu-Ya-Ku"
+INSERT INTO EtapaMonstro (EtapaMissao, Monstro, Quantidade)
+VALUES (4, 2, 1),
+       (5, 2, 1),
+       (6, 2, 1);
+
+-- Etapa para o Monstro "Barroth"
+INSERT INTO EtapaMonstro (EtapaMissao, Monstro, Quantidade)
+VALUES (7, 3, 1),
+       (8, 3, 1),
+       (9, 3, 1);
+
+-- Etapa para o Monstro "Jyuratodus"
+INSERT INTO EtapaMonstro (EtapaMissao, Monstro, Quantidade)
+VALUES (10, 4, 1),
+       (11, 4, 1),
+       (12, 4, 1);
+
+-- Etapa para o Monstro "Rathalos"
+INSERT INTO EtapaMonstro (EtapaMissao, Monstro, Quantidade)
+VALUES (13, 5, 1),
+       (14, 5, 1),
+       (15, 5, 1);
+
+-- Etapa para o Monstro "Anjanath"
+INSERT INTO EtapaMonstro (EtapaMissao, Monstro, Quantidade)
+VALUES (16, 6, 1),
+       (17, 6, 1),
+       (18, 6, 1);
+
+-- ETAPA FALA
+
+-- Etapas de Fala para a missão "Caça ao Grande Jagras"
+INSERT INTO EtapaFala (EtapaMissao, Fala)
+VALUES 
+    (1, 11),
+    (2, 12),
+    (3, 12);
+
+-- Etapas de Fala para a missão "Caça ao Kulu-Ya-Ku"
+INSERT INTO EtapaFala (EtapaMissao, Fala)
+VALUES 
+    (4, 13),
+    (5, 14),
+    (6, 14);
+
+-- Etapas de Fala para a missão "Caça ao Barroth"
+INSERT INTO EtapaFala (EtapaMissao, Fala)
+VALUES 
+    (7, 15),
+    (8, 16),
+    (9, 16);
+
+-- Etapas de Fala para a missão "Caça ao Jyuratodus"
+INSERT INTO EtapaFala (EtapaMissao, Fala)
+VALUES 
+    (10, 17),
+    (11, 18),
+    (12, 18);
+
+-- Etapas de Fala para a missão "Caça ao Rathalos"
+INSERT INTO EtapaFala (EtapaMissao, Fala)
+VALUES 
+    (13, 19),
+    (14, 20),
+    (15, 20);
+
+-- Etapas de Fala para a missão "Caça ao Anjanath"
+INSERT INTO EtapaFala (EtapaMissao, Fala)
+VALUES 
+    (16, 21),
+    (17, 22),
+    (18, 22);
+
+-- LOJA
+
+INSERT INTO Loja (NPC, Tipo)
+VALUES (3, 1),
+       (9, 1);
+
+-- FORJA
+
+INSERT INTO Forja (NPC, Tipo)
+VALUES (4, 1);
+
+-- ITEM
+
+-- Item "Poção"
+INSERT INTO Item (Nome, Raridade, Tipo, Funcao, Descricao, ValorVenda, CustoCompra)
+VALUES ('Poção', 1, 0, 'Restaura uma pequena quantidade de saúde.', 'A Poção é uma mistura medicinal de ingredientes naturais, que ao ser consumida, restaura gradualmente a saúde do caçador, vital para sobreviver às batalhas contra monstros formidáveis no mundo do jogo.', 8, 66);
+
+-- Item 'Espeto para churrasco'
+INSERT INTO Item (Nome, Raridade, Tipo, Funcao, Descricao, ValorVenda, CustoCompra)
+VALUES ('Espeto para churrasco', 4, 0, 'Grelha carnes e vegetais em churrascos.', 'Espeto para churrasco: utensílio longo e afiado, usado para espetar carnes e legumes, permitindo grelhá-los uniformemente sobre chamas ou brasas durante churrascos, realçando o sabor com deliciosos aromas defumados.', 0, NULL);
+
+-- Item 'Nulberry'
+INSERT INTO Item (Nome, Raridade, Tipo, Funcao, Descricao, ValorVenda, CustoCompra)
+VALUES ('Nulberry', 2, 0, 'Remove efeitos negativos em Monster Hunter.', 'Nulberry em Monster Hunter: World é um fruto que remove efeitos negativos como veneno e paralisia, permitindo aos caçadores manterem-se saudáveis e ágeis durante as batalhas, aumentando as chances de sobrevivência e sucesso nas caçadas.', 120, NULL);
+
+-- Item 'Pólvora Nível 1'
+INSERT INTO Item (Nome, Raridade, Tipo, Funcao, Descricao, ValorVenda, CustoCompra)
+VALUES ('Pólvora Nível 1', 1, 0, 'Aumenta poder de munição em armas.', 'Pólvora de Nível 1 é uma variante de pólvora que, quando usada em munição, aumenta a potência explosiva, proporcionando maior dano e impacto durante combates, essencial para estratégias avançadas e derrotar inimigos poderosos.', 1, 8);
+
+-- Item 'Binóculos'
+INSERT INTO Item (Nome, Raridade, Tipo, Funcao, Descricao, ValorVenda, CustoCompra)
+VALUES ('Binóculos', 1, 0, 'Permite ver mais longe e observar à distância.', 'Binóculos são dispositivos ópticos que ampliam a visão, permitindo observação detalhada de objetos distantes. Usados em atividades como observação de pássaros, caça ou esportes, oferecem maior clareza e zoom, facilitando a visualização de detalhes.', 5, 50);
+
+-- Item 'Might Seed'
+INSERT INTO Item (Nome, Raridade, Tipo, Funcao, Descricao, ValorVenda, CustoCompra)
+VALUES ('Might Seed', 2, 0, 'Fortalece temporariamente seus ataques quando ingerido.', 'Planta que, quando consumida, concede temporariamente um aumento de força ao personagem. É um item estratégico usado em batalhas intensas para maximizar o dano infligido aos inimigos, sendo valioso para jogadores que buscam vantagem tática.', 140, NULL);
+
+-- Item 'Frasco vazio'
+INSERT INTO Item (Nome, Raridade, Tipo, Funcao, Descricao, ValorVenda, CustoCompra)
+VALUES ('Frasco vazio', 1, 0, 'Armazena líquidos ou ingredientes.', 'Um frasco vazio regularmente velho. Nada mais nada menos.', 1, 5);
+
+-- Item 'Carne crua'
+INSERT INTO Item (Nome, Raridade, Tipo, Funcao, Descricao, ValorVenda, CustoCompra)
+VALUES ('Carne crua', 1, 0, 'Ingrediente para cozinhar ou alimentar.', 'Carne esculpida de um monstro. Pode ser cozido, combinado ou usado para montar uma armadilha.', 5, 10);
+
+-- Item 'Bife Bem Passado'
+INSERT INTO Item (Nome, Raridade, Tipo, Funcao, Descricao, ValorVenda, CustoCompra)
+VALUES ('Bife Bem Passado', 2, 0, 'Carne grelhada totalmente cozida.', 'Fornece um aumento moderado à sua resistência e a mantém no máximo por um período mais longo. Carne bem feita!', 48, NULL);
+
+-- Itens que dropam dos Monstros
+
+INSERT INTO Item (Nome, Raridade, Tipo, Funcao, Descricao, ValorVenda, CustoCompra)
+VALUES 
+    ('Escama de Grande Jagras', 1, 0, 'Material para crafting', 'Uma escama resistente do Grande Jagras.', 50, 10),
+    ('Pena de Kulu-Ya-Ku', 1, 0, 'Material para crafting', 'Uma pena bonita do Kulu-Ya-Ku.', 60, 15),
+    ('Concha de Barroth', 1, 0, 'Material para crafting', 'Uma concha resistente do Barroth.', 70, 20),
+    ('Escama de Jyuratodus', 1, 0, 'Material para crafting', 'Uma escama escorregadia do Jyuratodus.', 80, 25),
+    ('Garra de Rathalos', 2, 0, 'Material para crafting', 'Uma garra afiada do Rathalos.', 200, 50),
+    ('Dente de Anjanath', 2, 0, 'Material para crafting', 'Um dente impressionante do Anjanath.', 180, 45);
+
+-- DROPA ITEM
+
+INSERT INTO DropaItem (Monstro, Item)
+VALUES 
+    (1, 10),
+    (2, 11),
+    (3, 12),
+    (4, 13),
+    (5, 14),
+    (6, 15);
+
+-- ARMA
+
+-- Arma Espada Grande
+INSERT INTO Arma (Nome, Nivel, Raridade, CustoCompra, ValorVenda, Descricao, Tipo, Ataque, Afiacao, Elemento, ValorElemento)
+VALUES ('Espada Grande', 1, 6, 12000, 6000, 'Uma poderosa espada forjada a partir dos ossos de um Dragão Ancião. Extremamente afiada e capaz de causar danos devastadores.', 0, 980, 120, 'Dragão', 250);
+
+-- Arma Lâminas Duplas
+INSERT INTO Arma (Nome, Nivel, Raridade, CustoCompra, ValorVenda, Descricao, Tipo, Ataque, Afiacao, Elemento, ValorElemento)
+VALUES ('Lâminas Duplas', 1, 2, 800, 400, 'Um par de lâminas leves e rápidas, ideais para ataques rápidos e precisos. Perfeitas para caçadores ágeis que gostam de dançar ao redor de seus inimigos.', 0, 150, 60, 'Fogo', 20);
+
+-- Arma Martelo
+INSERT INTO Arma (Nome, Nivel, Raridade, CustoCompra, ValorVenda, Descricao, Tipo, Ataque, Afiacao, Elemento, ValorElemento)
+VALUES ('Martelo', 1, 3, 1000, 500, 'Um poderoso martelo de caça, projetado para esmagar os ossos dos monstros. Ideal para caçadores que preferem ataques contundentes e impactantes.', 0, 180, 80, 'Trovão', 15);
+
+-- Arma Chifre de Caça
+INSERT INTO Arma (Nome, Nivel, Raridade, CustoCompra, ValorVenda, Descricao, Tipo, Ataque, Afiacao, Elemento, ValorElemento)
+VALUES ('Chifre de Caça', 1, 3, 1200, 600, 'Um Chifre de Caça elegante e poderoso, capaz de tocar melodias encantadoras para fortalecer os aliados e enfraquecer os inimigos. Uma escolha ideal para caçadores que preferem apoiar suas equipes.', 0, 150, 70, 'Nenhum', 0);
+
+-- Arma Lâmina Carregada
+INSERT INTO Arma (Nome, Nivel, Raridade, CustoCompra, ValorVenda, Descricao, Tipo, Ataque, Afiacao, Elemento, ValorElemento)
+VALUES ('Lâmina Carregada', 1, 3, 1500, 750, 'Uma Lâmina Carregada poderosa e versátil, capaz de alternar entre espada e escudo e uma lâmina carregada para ataques devastadores. Ideal para caçadores que desejam flexibilidade no campo de batalha.', 0, 160, 70, 'Fogo', 15);
+
+-- Arma Glaive de Inseto
+INSERT INTO Arma (Nome, Nivel, Raridade, CustoCompra, ValorVenda, Descricao, Tipo, Ataque, Afiacao, Elemento, ValorElemento)
+VALUES ('Glaive de Inseto', 1, 2, 1800, 900, 'Uma Glaive de Inseto ágil e mortal, equipada com um inseto controlado que pode extrair essências dos monstros para fortalecer o caçador. Perfeita para caçadores que apreciam combate aéreo e versatilidade.', 0, 140, 60, 'Venenoso', 10);
+
+-- Arma Arco
+INSERT INTO Arma (Nome, Nivel, Raridade, CustoCompra, ValorVenda, Descricao, Tipo, Ataque, Afiacao, Elemento, ValorElemento)
+VALUES ('Arco', 1, 2, 2000, 1000, 'Um Arco habilmente projetado para disparar uma variedade de flechas, desde flechas de perfuração até flechas elementais. Perfeito para caçadores que preferem ataques à distância e precisão.', 0, 120, 50, 'Água', 12);
+
+-- Arma Besta Pesada
+INSERT INTO Arma (Nome, Nivel, Raridade, CustoCompra, ValorVenda, Descricao, Tipo, Ataque, Afiacao, Elemento, ValorElemento)
+VALUES ('Besta Pesada', 1, 3, 2500, 1250, 'Uma Besta Pesada poderosa e pesada, capaz de disparar grandes projéteis e munições especializadas para causar danos massivos aos monstros. Ideal para caçadores que preferem atirar de longe e causar explosões impressionantes.', 0, 160, 40, 'Explosão', 20);
+
+-- VENDE ARMA
+
+INSERT INTO VendeArma (Loja, Arma)
+VALUES 
+    (2, 4),
+    (2, 5),
+    (2, 6),
+    (2, 7),
+    (2, 8);
+
+-- CRIA ARMA
+
+INSERT INTO CriaArma (Forja, Arma)
+VALUES 
+    (1, 1),
+    (1, 2),
+    (1, 3);
+
+-- ARMADURA
+    
+-- Armadura Conjunto de Armadura de Liga
+INSERT INTO Armadura (Nome, Nivel, Raridade, CustoCompra, ValorVenda, Descricao, Tipo, Defesa, Fogo, Agua, Raio, Gelo, Dragao)
+VALUES ('Conjunto de Armadura de Liga', 1, 2, 2500, 1250, 'Uma armadura excepcionalmente resistente, criada a partir dos materiais mais robustos da natureza. Projetada para oferecer proteção incomparável sem sacrificar a mobilidade, ela representa a harmonia entre tecnologia e natureza.', 0, 40, 10, 5, -10, -10, 5);
+
+-- Armadura Conjunto de Armadura Anja
+INSERT INTO Armadura (Nome, Nivel, Raridade, CustoCompra, ValorVenda, Descricao, Tipo, Defesa, Fogo, Agua, Raio, Gelo, Dragao)
+VALUES ('Conjunto de Armadura Anja', 1, 3, 7500, 3750, 'Uma armadura impressionante, forjada a partir dos formidáveis materiais do Anjanath, uma fera temível. Com uma fusão de escamas resistentes e ossos robustos, esta armadura oferece uma defesa excepcional contra os mais poderosos ataques.', 0, 100, 15, -15, -5, -5, 0);
+
+-- Armadura Conjunto de Armadura Baan
+INSERT INTO Armadura (Nome, Nivel, Raridade, CustoCompra, ValorVenda, Descricao, Tipo, Defesa, Fogo, Agua, Raio, Gelo, Dragao)
+VALUES ('Conjunto de Armadura Baan', 1, 3, 7500, 3750, 'Uma armadura formidável feita a partir dos materiais resistentes do Barroth e Banbaro, incorporando sua robustez e resistência. As placas duras e ossos densos oferecem uma defesa excepcional contra ataques poderosos.', 0, 120, 0, 10, 0, -5, -10);
+
+-- Armadura Conjunto de Armadura Barroth
+INSERT INTO Armadura (Nome, Nivel, Raridade, CustoCompra, ValorVenda, Descricao, Tipo, Defesa, Fogo, Agua, Raio, Gelo, Dragao)
+VALUES ('Conjunto de Armadura Barroth', 1, 2, 2500, 1250, 'Uma imponente armadura confeccionada com os materiais resistentes do Barroth, uma criatura poderosa. Suas placas de carapaça e ossos maciços oferecem uma defesa robusta contra os ataques mais ferozes das bestas.', 0, 70, -15, -5, 15, -5, 0);
+
+-- Armadura Conjunto de Armadura Flor de Cerejeira
+INSERT INTO Armadura (Nome, Nivel, Raridade, CustoCompra, ValorVenda, Descricao, Tipo, Defesa, Fogo, Agua, Raio, Gelo, Dragao)
+VALUES ('Conjunto de Armadura Flor de Cerejeira', 1, 3, 7500, 3750, 'Uma armadura encantadora e elegante, adornada com flores e detalhes que evocam a beleza da natureza. Criada a partir de materiais delicados, mas surpreendentemente resistentes, essa armadura oferece uma defesa sólida sem sacrificar a graça.', 0, 90, 5, 5, 20, 5, 5);
+
+-- Armadura Conjunto de Armadura de Ossos
+INSERT INTO Armadura (Nome, Nivel, Raridade, CustoCompra, ValorVenda, Descricao, Tipo, Defesa, Fogo, Agua, Raio, Gelo, Dragao)
+VALUES ('Conjunto de Armadura de Ossos', 1, 1, 1000, 500, 'Uma armadura primitiva feita de ossos de criaturas poderosas. Apesar de sua aparência sinistra, oferece defesa sólida contra ataques ferozes. Cada peça é robusta e elaborada com detalhes cuidadosos, proporcionando proteção excepcional aos caçadores.', 0, 30, 10, 0, 10, 0, 10);
+
+-- Armadura Conjunto de Armadura Brigada
+INSERT INTO Armadura (Nome, Nivel, Raridade, CustoCompra, ValorVenda, Descricao, Tipo, Defesa, Fogo, Agua, Raio, Gelo, Dragao)
+VALUES ('Conjunto de Armadura Brigada', 1, 4, 15000, 7500, 'Uma armadura militar sofisticada e impressionante, projetada para caçadores que valorizam tanto a proteção quanto a elegância. Fabricada com materiais resistentes, esta armadura oferece defesa sólida contra os ataques mais ferozes das criaturas.', 0, 140, 5, 0, 10, 0, 10);
+
+-- Armadura Conjunto de Armadura de Malha de Corrente
+INSERT INTO Armadura (Nome, Nivel, Raridade, CustoCompra, ValorVenda, Descricao, Tipo, Defesa, Fogo, Agua, Raio, Gelo, Dragao)
+VALUES ('Conjunto de Armadura de Malha de Corrente', 1, 1, 500, 250, 'Uma armadura clássica feita de anéis de metal entrelaçados, oferecendo proteção sólida e flexibilidade. Projetada para equilibrar resistência e mobilidade, é uma escolha popular para caçadores que valorizam versatilidade em combate.', 0, 10, 0, 10, 0, 0, 0);
