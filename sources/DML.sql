@@ -486,3 +486,107 @@ VALUES ('Conjunto de Armadura Brigada', 1, 4, 15000, 7500, 'Uma armadura militar
 -- Armadura Conjunto de Armadura de Malha de Corrente
 INSERT INTO Armadura (Nome, Nivel, Raridade, CustoCompra, ValorVenda, Descricao, Tipo, Defesa, Fogo, Agua, Raio, Gelo, Dragao)
 VALUES ('Conjunto de Armadura de Malha de Corrente', 1, 1, 500, 250, 'Uma armadura clássica feita de anéis de metal entrelaçados, oferecendo proteção sólida e flexibilidade. Projetada para equilibrar resistência e mobilidade, é uma escolha popular para caçadores que valorizam versatilidade em combate.', 0, 10, 0, 10, 0, 0, 0);
+
+-- VendeArmadura
+INSERT INTO VendeArmadura (Loja, Armadura)
+VALUES
+  (1, 1),
+  (1, 2),
+  (1, 3), 
+  (1, 4); 
+  
+  -- CriaArmadura
+INSERT INTO CriaArmadura (Forja, Armadura)
+VALUES
+  (1, 1), 
+  (1, 2), 
+  (2, 3), 
+  (2, 4); 
+  
+  -- Amuleto de Defesa
+INSERT INTO Amuleto (Nome, Nivel, Raridade, CustoCompra, ValorVenda, Descricao, Tipo, Melhoria)
+VALUES ('Amuleto de Defesa', 1, 3, 100, 50, 'Aumenta a defesa do caçador.', 'Defesa', 0);
+
+-- Amuleto de Ataque
+INSERT INTO Amuleto (Nome, Nivel, Raridade, CustoCompra, ValorVenda, Descricao, Tipo, Melhoria)
+VALUES ('Amuleto de Ataque', 1, 2, 120, 60, 'Aumenta o poder de ataque do caçador.', 'Ataque', 0);
+
+-- Amuleto da Vida
+INSERT INTO Amuleto (Nome, Nivel, Raridade, CustoCompra, ValorVenda, Descricao, Tipo, Melhoria)
+VALUES ('Amuleto da Vida', 1, 4, 150, 75, 'Aumenta a vida máxima do caçador.', 'Vida', 0);
+
+-- Amuleto de Sorte
+INSERT INTO Amuleto (Nome, Nivel, Raridade, CustoCompra, ValorVenda, Descricao, Tipo, Melhoria)
+VALUES ('Amuleto de Sorte', 2, 5, 200, 100, 'Aumenta a chance de obter itens raros.', 'Sorte', 0);
+
+-- VendeAmuleto
+INSERT INTO VendeAmuleto (Loja, Amuleto)
+VALUES
+  (1, 1), 
+  (1, 2), 
+  (2, 3), 
+  (2, 4); 
+
+-- CriaAmuleto
+INSERT INTO CriaAmuleto (Forja, Amuleto)
+VALUES
+  (1, 1), 
+  (1, 2), 
+  (2, 3), 
+  (2, 4); 
+  
+  -- Manta de Vitalidade
+INSERT INTO Ferramenta (Nome, Nivel, Raridade, CustoCompra, ValorVenda, Descricao, Tipo, Funcao, TempoEfeito, TempoRecarga)
+VALUES ('Manta de Vitalidade', 1, 3, 100, 50, 'Restaura a vida do caçador e aliados.', 'Manta', 'Recuperação', 60, 300);
+
+-- Pedra de Amolar
+INSERT INTO Ferramenta (Nome, Nivel, Raridade, CustoCompra, ValorVenda, Descricao, Tipo, Funcao, TempoEfeito, TempoRecarga)
+VALUES ('Pedra de Amolar', 1, 2, 50, 25, 'Afia a arma do caçador para melhorar o corte.', 'Afiação', 'Amolar', 0, 0);
+
+-- Manto de Camuflagem
+INSERT INTO Ferramenta (Nome, Nivel, Raridade, CustoCompra, ValorVenda, Descricao, Tipo, Funcao, TempoEfeito, TempoRecarga)
+VALUES ('Manto de Camuflagem', 2, 4, 200, 100, 'Torna o caçador invisível para monstros.', 'Manta', 'Camuflagem', 90, 420);
+
+-- Poção de Energia
+INSERT INTO Ferramenta (Nome, Nivel, Raridade, CustoCompra, ValorVenda, Descricao, Tipo, Funcao, TempoEfeito, TempoRecarga)
+VALUES ('Poção de Energia', 1, 1, 20, 10, 'Recupera a resistência do caçador.', 'Poção', 'Energia', 60, 120);
+
+-- Vende Ferramenta
+INSERT INTO VendeFerramenta (Loja, Ferramenta)
+VALUES
+  (1, 1), 
+  (2, 2), 
+  (1, 3), 
+  (2, 4); 
+
+-- Habilidade de Ataque
+INSERT INTO Habilidade (Nome, Nivel, Descricao, Funcao)
+VALUES ('Habilidade de Ataque', 1, 'Aumenta o poder de ataque do caçador.', 'Ataque');
+
+-- Habilidade de Defesa
+INSERT INTO Habilidade (Nome, Nivel, Descricao, Funcao)
+VALUES ('Habilidade de Defesa', 1, 'Aumenta a defesa do caçador.', 'Defesa');
+
+-- Habilidade de Cura
+INSERT INTO Habilidade (Nome, Nivel, Descricao, Funcao)
+VALUES ('Habilidade de Cura', 1, 'Permite ao caçador curar-se mais eficazmente.', 'Cura');
+
+-- Habilidade de Camuflagem
+INSERT INTO Habilidade (Nome, Nivel, Descricao, Funcao)
+VALUES ('Habilidade de Camuflagem', 2, 'Torna o caçador menos visível para monstros.', 'Camuflagem');
+
+-- HabilidadeAmuleto
+INSERT INTO HabilidadeAmuleto (Amuleto, Habilidade)
+VALUES
+  (2, 1), 
+  (1, 2), 
+  (3, 3), 
+  (4, 4); 
+
+-- HabilidadeArmadura
+INSERT INTO HabilidadeArmadura (Armadura, Habilidade)
+VALUES
+  (1, 3), 
+  (2, 4), 
+  (3, 2), 
+  (4, 1); 
