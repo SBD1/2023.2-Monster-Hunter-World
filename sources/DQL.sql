@@ -1,5 +1,6 @@
 -- Informações do PC
 SELECT * FROM pc
+WHERE IdPlayer = 1;
 
 -- Missões realizadas pelo pc
 SELECT M.nome AS NomeMissao
