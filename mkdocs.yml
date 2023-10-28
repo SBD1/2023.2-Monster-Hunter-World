@@ -1,0 +1,54 @@
+repo_url: https://github.com/SBD1/2023.2-Monster-Hunter-World
+repo_name: 2023.2-Monster-Hunter-World
+
+site_name: Monster Hunter World
+nav:
+  - Home: index.md
+  - Módulo 1:
+    - Diagrama Entidade Relacionamento: modulo 1/diagrama-entidade-relacionamento.md
+    - Mapeamento do DER para o Modelo Relacional: modulo 1/mapeamento-mer-relacional.md
+    - Dicionário de Dados: modulo 1/dicionario-de-dados.md
+  - Módulo 2:
+    - Normalização: modulo 2/normalizacao.md
+    - DDL (Data Definition Language): modulo 2/ddl.md
+    - DML (Data Manipulation Language): modulo 2/dml.md
+    - DQL (Data Query Language): modulo 2/dql.md
+    - Álgebra Relacional: modulo 2/algebra-relacional.md
+  
+theme:
+  name: material
+  features:
+    - navigation.instant
+    - navigation.tracking
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.top
+    - navigation.footer
+  palette:
+theme:
+  name: material
+  features:
+    - navigation.instant
+    - navigation.tracking
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.top
+    - navigation.footer
+  palette:
+    - scheme: slate
+      toggle:
+        icon: material/weather-night
+        name: Mudar para o modo escuro
+      primary: grey
+      accent: green
+
+    - scheme: default
+      toggle:
+        icon: material/weather-sunny
+        name: Mudar para o modo claro
+      primary: grey
+      accent: lime
+  favicon: imagens/mhw-logo.png
+  logo: imagens/mhw-logo.png
+
+  language: pt-BR
