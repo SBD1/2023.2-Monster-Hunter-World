@@ -1,31 +1,34 @@
 -- Informações do PC
 SELECT * FROM pc
-WHERE IdPlayer = 1;
+WHERE IdPlayer = 1; -- Aqui a gente substitui pelo id do player desejado.
 
 -- Missões realizadas pelo pc
 SELECT M.nome AS NomeMissao
 FROM missao M
 JOIN realizamissao RM ON M.IdMissao = RM.Missao
 JOIN pc P ON RM.PC = P.IdPlayer
-WHERE RM.Status = 1;
+WHERE RM.Status = 1 AND P.IdPlayer = 1; -- Aqui a gente substitui pelo id do player desejado.
 
 -- Itens do PC
 SELECT I.nome
 FROM Item I
 JOIN GuardaItem GI ON I.IdItem = GI.Item
-JOIN Inventario INV ON INV.IdInventario = GI.Inventario;
+JOIN Inventario INV ON INV.IdInventario = GI.Inventario
+WHERE INV.IdInventario = 1; -- Aqui a gente substitui pelo id do inventario do player desejado.
 
 -- Armas do PC
 SELECT A.nome
 FROM Arma A
 JOIN GuardaArma GA ON A.IdArma = GA.Arma
-JOIN Inventario INV ON INV.IdInventario = GA.Inventario;
+JOIN Inventario INV ON INV.IdInventario = GA.Inventario
+WHERE INV.IdInventario = 1; -- Aqui a gente substitui pelo id do inventario do player desejado.
 
 -- Armaduras do PC
 SELECT AR.nome
 FROM Armadura AR
 JOIN GuardaArmadura GAR ON AR.IdArmadura = GAR.Armadura
-JOIN Inventario INV ON INV.IdInventario = GAR.Inventario;
+JOIN Inventario INV ON INV.IdInventario = GAR.Inventario
+WHERE INV.IdInventario = 1; -- Aqui a gente substitui pelo id do inventario do player desejado.
 
 -- Armaduras que tem raridade maior ou igual a 5
 SELECT *
