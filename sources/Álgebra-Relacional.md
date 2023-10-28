@@ -1,4 +1,4 @@
-## Álgebra Relacional das consultas existentes em 
+## Álgebra Relacional das consultas existentes nas nossas [consultas](sources/DQL.sql)
 
 Listar todas as armaduras de raridade 5 ou superior:
 ```
