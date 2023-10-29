@@ -472,7 +472,7 @@
         
   
   <span class="md-ellipsis">
-    Normalização
+    Dependências Funcionais e Normalização
   </span>
   
 
@@ -669,7 +669,7 @@
 
 <h1 id="algebra-relacional">Algebra Relacional</h1>
 <p>A álgebra relacional é uma linguagem de consulta procedural, ou seja, o usuário especifica quais operações devem ser realizadas sobre os dados e como elas devem ser feitas. A álgebra relacional é composta por um conjunto de operadores que atuam sobre relações e produzem outras relações como resultado. </p>
-<h2 id="expressoes-da-algebra-relacional-relacionadas-as-nossas-consultas">Expressões da álgebra relacional relacionadas às nossas <a href="#">consultas</a></h2>
+<h2 id="expressoes-da-algebra-relacional-relacionadas-as-nossas-consultas">Expressões da álgebra relacional relacionadas às nossas <a href="https://sbd1.github.io/2023.2-Monster-Hunter-World/modulo%202/dql/">consultas</a></h2>
 <p>Informações do PC</p>
 <pre><code>σ(IdPlayer = 1)(PC)
 </code></pre>
@@ -685,20 +685,35 @@
 <p>Armaduras do PC</p>
 <pre><code>ArmaduraNome ← π(nome)(σ(IdInventario = 1 (Armadura ⨝(IdArmadura = Armadura) (GuardaArmadura ⨝(Inventario = IdInventario) Inventario)))
 </code></pre>
-<p>Listar todas as armaduras de raridade 5 ou superior:</p>
+<p>Listar todas as armaduras de raridade 5 ou superior</p>
 <pre><code>Armadura_Raridade_5 = σ(Raridade &gt;= 5)(Armadura)
 </code></pre>
-<p>Mostrar todas as lojas que vendem ferramentas de cura:</p>
+<p>Mostrar todas as lojas que vendem ferramentas de cura</p>
 <pre><code>Lojas_Vendem_Cura = π(L.Nome, F.Nome) (σ(F.Funcao = 'Cura')(Loja ⨝ VendeFerramenta ⨝ Ferramenta))
 </code></pre>
-<p>Listar todos os amuletos guardados por um jogador específico:</p>
+<p>Listar todos os amuletos guardados por um jogador específico</p>
 <pre><code>Amuletos_Guardados_Jogador = π(A.Nome)(Amuleto ⨝ GuardaAmuleto ⨝ σ(Inventario = 1)(Inventario))
 </code></pre>
-<p>Calcular o custo total de todas as ferramentas vendidas por uma loja:</p>
+<p>Calcular o custo total de todas as ferramentas vendidas por uma loja</p>
 <pre><code>Custo_Total_Loja = π(L.Nome, CustoTotal) (Loja ⨝ (π(L.IdLoja, SUM(F.CustoCompra) AS CustoTotal)(VendeFerramenta ⨝ Ferramenta))
 </code></pre>
-<p>Listar as habilidades associadas a uma armadura específica:</p>
+<p>Listar as habilidades associadas a uma armadura específica</p>
 <pre><code>Habilidades_Armadura_1 = π(H.Nome)(Habilidade ⨝ HabilidadeArmadura ⨝ σ(Armadura = 1)(Armadura))
+</code></pre>
+<p>Listar todas as missões e suas etapas</p>
+<pre><code>πNome,Descricao(σMissao=1(EtapaMissao))
+</code></pre>
+<p>Mostrar os itens que dropam de cada monstro</p>
+<pre><code>πMonstro.Nome,Item.Nome,Item.Descricao(σMonstro.IdMonstro=DropaItem.Monstro∧DropaItem.Item=Item.IdItem(Monstro⋈DropaItem⋈Item))
+</code></pre>
+<p>Listar as falas associadas a cada etapa de missão</p>
+<pre><code>πMissao.Nome,EtapaMissao.Nome,EtapaFala.Fala(σMissao.IdMissao=EtapaMissao.Missao∧EtapaMissao.IdEtapaMissao=EtapaFala.EtapaMissao(Missao⋈EtapaMissao⋈EtapaFala))
+</code></pre>
+<p>Listar as armas disponíveis em cada loja</p>
+<pre><code>πLoja.IdLoja,Arma.Nome,Arma.Descricao(σLoja.IdLoja=VendeArma.Loja∧VendeArma.Arma=Arma.IdArma(Loja⋈VendeArma⋈Arma))
+</code></pre>
+<p>Listar todas as missões e o número total de etapas em cada uma delas</p>
+<pre><code>γMissao.IdMissao,Missao.Nome,COUNT(EtapaMissao.IdEtapaMissao(Missao⋈Missao.IdMissao=EtapaMissao.MissaoEtapaMissao)
 </code></pre>
 
 

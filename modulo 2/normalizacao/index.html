@@ -20,7 +20,7 @@
     
     
       
-        <title>Normalização - Monster Hunter World</title>
+        <title>Dependências Funcionais e Normalização - Monster Hunter World</title>
       
     
     
@@ -74,6 +74,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#normalizacao-dos-dados-de-acordo-com-as-tabelas-existentes-no-nosso-modelo-relacional" class="md-skip">
+          Pular para conteúdo
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -105,7 +110,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Normalização
+              Dependências Funcionais e Normalização
             
           </span>
         </div>
@@ -472,15 +477,406 @@
       
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Dependências Funcionais e Normalização
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
   <span class="md-ellipsis">
-    Normalização
+    Dependências Funcionais e Normalização
   </span>
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Índice">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Índice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#normalizacao-dos-dados-de-acordo-com-as-tabelas-existentes-no-nosso-modelo-relacional" class="md-nav__link">
+    Normalização dos dados de acordo com as tabelas existentes no nosso modelo relacional.
+  </a>
+  
+    <nav class="md-nav" aria-label="Normalização dos dados de acordo com as tabelas existentes no nosso modelo relacional.">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tabela-mapa-normalizacao-ate-a-3a-forma-normal-3nf" class="md-nav__link">
+    Tabela Mapa - Normalização até a 3ª Forma Normal (3NF)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tabela-regiao-normalizacao-ate-a-3a-forma-normal-3nf" class="md-nav__link">
+    Tabela Regiao - Normalização até a 3ª Forma Normal (3NF)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tabela-npc-normalizacao-ate-a-3a-forma-normal-3nf" class="md-nav__link">
+    Tabela NPC - Normalização até a 3ª Forma Normal (3NF)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tabela-pc-normalizacao-ate-a-3a-forma-normal-3nf" class="md-nav__link">
+    Tabela PC - Normalização até a 3ª Forma Normal (3NF)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tabela-amigato-normalizacao-ate-a-3a-forma-normal-3nf" class="md-nav__link">
+    Tabela Amigato - Normalização até a 3ª Forma Normal (3NF)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tabela-fala-normalizacao-ate-a-3a-forma-normal-3nf" class="md-nav__link">
+    Tabela Fala - Normalização até a 3ª Forma Normal (3NF)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tabela-falaprereq-normalizacao-ate-a-3a-forma-normal-3nf" class="md-nav__link">
+    Tabela FalaPreReq - Normalização até a 3ª Forma Normal (3NF)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tabela-monstro-normalizacao-ate-a-3a-forma-normal-3nf" class="md-nav__link">
+    Tabela Monstro - Normalização até a 3ª Forma Normal (3NF)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tabela-instanciamonstro-normalizacao-ate-a-3a-forma-normal-3nf" class="md-nav__link">
+    Tabela InstanciaMonstro - Normalização até a 3ª Forma Normal (3NF)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tabela-regiaomonstro-normalizacao-ate-a-3a-forma-normal-3nf" class="md-nav__link">
+    Tabela RegiaoMonstro - Normalização até a 3ª Forma Normal (3NF)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tabela-atacamonstro-normalizacao-ate-a-3a-forma-normal-3nf" class="md-nav__link">
+    Tabela AtacaMonstro - Normalização até a 3ª Forma Normal (3NF)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tabela-missao-normalizacao-ate-a-3a-forma-normal-3nf" class="md-nav__link">
+    Tabela Missao - Normalização até a 3ª Forma Normal (3NF)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tabela-missaoprereq-normalizacao-ate-a-3a-forma-normal-3nf" class="md-nav__link">
+    Tabela MissaoPreReq - Normalização até a 3ª Forma Normal (3NF)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tabela-etapamissao-normalizacao-ate-a-3a-forma-normal-3nf" class="md-nav__link">
+    Tabela EtapaMissao - Normalização até a 3ª Forma Normal (3NF)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tabela-etapamonstro-normalizacao-ate-a-3a-forma-normal-3nf" class="md-nav__link">
+    Tabela EtapaMonstro - Normalização até a 3ª Forma Normal (3NF)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tabela-etapafala-normalizacao-ate-a-3a-forma-normal-3nf" class="md-nav__link">
+    Tabela EtapaFala - Normalização até a 3ª Forma Normal (3NF)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tabela-realizamissao-normalizacao-ate-a-3a-forma-normal-3nf" class="md-nav__link">
+    Tabela RealizaMissao - Normalização até a 3ª Forma Normal (3NF)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tabela-inventario-normalizacao-ate-a-3a-forma-normal-3nf" class="md-nav__link">
+    Tabela Inventario - Normalização até a 3ª Forma Normal (3NF)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tabela-loja-normalizacao-ate-a-3a-forma-normal-3nf" class="md-nav__link">
+    Tabela Loja - Normalização até a 3ª Forma Normal (3NF)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tabela-forja-normalizacao-ate-a-3a-forma-normal-3nf" class="md-nav__link">
+    Tabela Forja - Normalização até a 3ª Forma Normal (3NF)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tabela-item-normalizacao-ate-a-3a-forma-normal-3nf" class="md-nav__link">
+    Tabela Item - Normalização até a 3ª Forma Normal (3NF)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tabela-dropaitem-normalizacao-ate-a-3a-forma-normal-3nf" class="md-nav__link">
+    Tabela DropaItem - Normalização até a 3ª Forma Normal (3NF)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tabela-guardaitem-normalizacao-ate-a-3a-forma-normal-3nf" class="md-nav__link">
+    Tabela GuardaItem - Normalização até a 3ª Forma Normal (3NF)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tabela-usaitem-normalizacao-ate-a-3a-forma-normal-3nf" class="md-nav__link">
+    Tabela UsaItem - Normalização até a 3ª Forma Normal (3NF)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tabela-arma-normalizacao-ate-a-3a-forma-normal-3nf" class="md-nav__link">
+    Tabela Arma - Normalização até a 3ª Forma Normal (3NF)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tabela-guardaarma-normalizacao-ate-a-3a-forma-normal-3nf" class="md-nav__link">
+    Tabela GuardaArma - Normalização até a 3ª Forma Normal (3NF)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tabela-utilizaarma-normalizacao-ate-a-3a-forma-normal-3nf" class="md-nav__link">
+    Tabela UtilizaArma - Normalização até a 3ª Forma Normal (3NF)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tabela-amigatoarma-normalizacao-ate-a-3a-forma-normal-3nf" class="md-nav__link">
+    Tabela AmigatoArma - Normalização até a 3ª Forma Normal (3NF)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tabela-vendearma-normalizacao-ate-a-3a-forma-normal-3nf" class="md-nav__link">
+    Tabela VendeArma - Normalização até a 3ª Forma Normal (3NF)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tabela-criaarma-normalizacao-ate-a-3a-forma-normal-3nf" class="md-nav__link">
+    Tabela CriaArma - Normalização até a 3ª Forma Normal (3NF)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tabela-armadura-normalizacao-ate-a-3a-forma-normal-3nf" class="md-nav__link">
+    Tabela Armadura - Normalização até a 3ª Forma Normal (3NF)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tabela-guardaarmadura-normalizacao-ate-a-3a-forma-normal-3nf" class="md-nav__link">
+    Tabela GuardaArmadura - Normalização até a 3ª Forma Normal (3NF)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tabela-utilizaarmadura-normalizacao-ate-a-3a-forma-normal-3nf" class="md-nav__link">
+    Tabela UtilizaArmadura - Normalização até a 3ª Forma Normal (3NF)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tabela-amigatoarmadura-normalizacao-ate-a-3a-forma-normal-3nf" class="md-nav__link">
+    Tabela AmigatoArmadura - Normalização até a 3ª Forma Normal (3NF)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tabela-vendearmadura-normalizacao-ate-a-3a-forma-normal-3nf" class="md-nav__link">
+    Tabela VendeArmadura - Normalização até a 3ª Forma Normal (3NF)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tabela-criaarmadura-normalizacao-ate-a-3a-forma-normal-3nf" class="md-nav__link">
+    Tabela CriaArmadura - Normalização até a 3ª Forma Normal (3NF)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tabela-amuleto-normalizacao-ate-a-3a-forma-normal-3nf" class="md-nav__link">
+    Tabela Amuleto - Normalização até a 3ª Forma Normal (3NF)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tabela-guardaamuleto-normalizacao-ate-a-3a-forma-normal-3nf" class="md-nav__link">
+    Tabela GuardaAmuleto - Normalização até a 3ª Forma Normal (3NF)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tabela-utilizaamuleto-normalizacao-ate-a-3a-forma-normal-3nf" class="md-nav__link">
+    Tabela UtilizaAmuleto - Normalização até a 3ª Forma Normal (3NF)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tabela-amigatoamuleto-normalizacao-ate-a-3a-forma-normal-3nf" class="md-nav__link">
+    Tabela AmigatoAmuleto - Normalização até a 3ª Forma Normal (3NF)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tabela-vendeamuleto-normalizacao-ate-a-3a-forma-normal-3nf" class="md-nav__link">
+    Tabela VendeAmuleto - Normalização até a 3ª Forma Normal (3NF)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tabela-criaamuleto-normalizacao-ate-a-3a-forma-normal-3nf" class="md-nav__link">
+    Tabela CriaAmuleto - Normalização até a 3ª Forma Normal (3NF)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tabela-ferramenta-normalizacao-ate-a-3a-forma-normal-3nf" class="md-nav__link">
+    Tabela Ferramenta - Normalização até a 3ª Forma Normal (3NF)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tabela-guardaferramenta-normalizacao-ate-a-3a-forma-normal-3nf" class="md-nav__link">
+    Tabela GuardaFerramenta - Normalização até a 3ª Forma Normal (3NF)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tabela-utilizaferramenta-normalizacao-ate-a-3a-forma-normal-3nf" class="md-nav__link">
+    Tabela UtilizaFerramenta - Normalização até a 3ª Forma Normal (3NF)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tabela-amigatoferramenta-normalizacao-ate-a-3a-forma-normal-3nf" class="md-nav__link">
+    Tabela AmigatoFerramenta - Normalização até a 3ª Forma Normal (3NF)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tabela-vendeferramenta-normalizacao-ate-a-3a-forma-normal-3nf" class="md-nav__link">
+    Tabela VendeFerramenta - Normalização até a 3ª Forma Normal (3NF)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tabela-habilidade-normalizacao-ate-a-3a-forma-normal-3nf" class="md-nav__link">
+    Tabela Habilidade - Normalização até a 3ª Forma Normal (3NF)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tabela-habilidadeamuleto-normalizacao-ate-a-3a-forma-normal-3nf" class="md-nav__link">
+    Tabela HabilidadeAmuleto - Normalização até a 3ª Forma Normal (3NF)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tabela-habilidadearmadura-normalizacao-ate-a-3a-forma-normal-3nf" class="md-nav__link">
+    Tabela HabilidadeArmadura - Normalização até a 3ª Forma Normal (3NF)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -592,6 +988,377 @@
   
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Índice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#normalizacao-dos-dados-de-acordo-com-as-tabelas-existentes-no-nosso-modelo-relacional" class="md-nav__link">
+    Normalização dos dados de acordo com as tabelas existentes no nosso modelo relacional.
+  </a>
+  
+    <nav class="md-nav" aria-label="Normalização dos dados de acordo com as tabelas existentes no nosso modelo relacional.">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tabela-mapa-normalizacao-ate-a-3a-forma-normal-3nf" class="md-nav__link">
+    Tabela Mapa - Normalização até a 3ª Forma Normal (3NF)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tabela-regiao-normalizacao-ate-a-3a-forma-normal-3nf" class="md-nav__link">
+    Tabela Regiao - Normalização até a 3ª Forma Normal (3NF)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tabela-npc-normalizacao-ate-a-3a-forma-normal-3nf" class="md-nav__link">
+    Tabela NPC - Normalização até a 3ª Forma Normal (3NF)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tabela-pc-normalizacao-ate-a-3a-forma-normal-3nf" class="md-nav__link">
+    Tabela PC - Normalização até a 3ª Forma Normal (3NF)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tabela-amigato-normalizacao-ate-a-3a-forma-normal-3nf" class="md-nav__link">
+    Tabela Amigato - Normalização até a 3ª Forma Normal (3NF)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tabela-fala-normalizacao-ate-a-3a-forma-normal-3nf" class="md-nav__link">
+    Tabela Fala - Normalização até a 3ª Forma Normal (3NF)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tabela-falaprereq-normalizacao-ate-a-3a-forma-normal-3nf" class="md-nav__link">
+    Tabela FalaPreReq - Normalização até a 3ª Forma Normal (3NF)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tabela-monstro-normalizacao-ate-a-3a-forma-normal-3nf" class="md-nav__link">
+    Tabela Monstro - Normalização até a 3ª Forma Normal (3NF)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tabela-instanciamonstro-normalizacao-ate-a-3a-forma-normal-3nf" class="md-nav__link">
+    Tabela InstanciaMonstro - Normalização até a 3ª Forma Normal (3NF)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tabela-regiaomonstro-normalizacao-ate-a-3a-forma-normal-3nf" class="md-nav__link">
+    Tabela RegiaoMonstro - Normalização até a 3ª Forma Normal (3NF)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tabela-atacamonstro-normalizacao-ate-a-3a-forma-normal-3nf" class="md-nav__link">
+    Tabela AtacaMonstro - Normalização até a 3ª Forma Normal (3NF)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tabela-missao-normalizacao-ate-a-3a-forma-normal-3nf" class="md-nav__link">
+    Tabela Missao - Normalização até a 3ª Forma Normal (3NF)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tabela-missaoprereq-normalizacao-ate-a-3a-forma-normal-3nf" class="md-nav__link">
+    Tabela MissaoPreReq - Normalização até a 3ª Forma Normal (3NF)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tabela-etapamissao-normalizacao-ate-a-3a-forma-normal-3nf" class="md-nav__link">
+    Tabela EtapaMissao - Normalização até a 3ª Forma Normal (3NF)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tabela-etapamonstro-normalizacao-ate-a-3a-forma-normal-3nf" class="md-nav__link">
+    Tabela EtapaMonstro - Normalização até a 3ª Forma Normal (3NF)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tabela-etapafala-normalizacao-ate-a-3a-forma-normal-3nf" class="md-nav__link">
+    Tabela EtapaFala - Normalização até a 3ª Forma Normal (3NF)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tabela-realizamissao-normalizacao-ate-a-3a-forma-normal-3nf" class="md-nav__link">
+    Tabela RealizaMissao - Normalização até a 3ª Forma Normal (3NF)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tabela-inventario-normalizacao-ate-a-3a-forma-normal-3nf" class="md-nav__link">
+    Tabela Inventario - Normalização até a 3ª Forma Normal (3NF)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tabela-loja-normalizacao-ate-a-3a-forma-normal-3nf" class="md-nav__link">
+    Tabela Loja - Normalização até a 3ª Forma Normal (3NF)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tabela-forja-normalizacao-ate-a-3a-forma-normal-3nf" class="md-nav__link">
+    Tabela Forja - Normalização até a 3ª Forma Normal (3NF)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tabela-item-normalizacao-ate-a-3a-forma-normal-3nf" class="md-nav__link">
+    Tabela Item - Normalização até a 3ª Forma Normal (3NF)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tabela-dropaitem-normalizacao-ate-a-3a-forma-normal-3nf" class="md-nav__link">
+    Tabela DropaItem - Normalização até a 3ª Forma Normal (3NF)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tabela-guardaitem-normalizacao-ate-a-3a-forma-normal-3nf" class="md-nav__link">
+    Tabela GuardaItem - Normalização até a 3ª Forma Normal (3NF)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tabela-usaitem-normalizacao-ate-a-3a-forma-normal-3nf" class="md-nav__link">
+    Tabela UsaItem - Normalização até a 3ª Forma Normal (3NF)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tabela-arma-normalizacao-ate-a-3a-forma-normal-3nf" class="md-nav__link">
+    Tabela Arma - Normalização até a 3ª Forma Normal (3NF)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tabela-guardaarma-normalizacao-ate-a-3a-forma-normal-3nf" class="md-nav__link">
+    Tabela GuardaArma - Normalização até a 3ª Forma Normal (3NF)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tabela-utilizaarma-normalizacao-ate-a-3a-forma-normal-3nf" class="md-nav__link">
+    Tabela UtilizaArma - Normalização até a 3ª Forma Normal (3NF)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tabela-amigatoarma-normalizacao-ate-a-3a-forma-normal-3nf" class="md-nav__link">
+    Tabela AmigatoArma - Normalização até a 3ª Forma Normal (3NF)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tabela-vendearma-normalizacao-ate-a-3a-forma-normal-3nf" class="md-nav__link">
+    Tabela VendeArma - Normalização até a 3ª Forma Normal (3NF)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tabela-criaarma-normalizacao-ate-a-3a-forma-normal-3nf" class="md-nav__link">
+    Tabela CriaArma - Normalização até a 3ª Forma Normal (3NF)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tabela-armadura-normalizacao-ate-a-3a-forma-normal-3nf" class="md-nav__link">
+    Tabela Armadura - Normalização até a 3ª Forma Normal (3NF)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tabela-guardaarmadura-normalizacao-ate-a-3a-forma-normal-3nf" class="md-nav__link">
+    Tabela GuardaArmadura - Normalização até a 3ª Forma Normal (3NF)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tabela-utilizaarmadura-normalizacao-ate-a-3a-forma-normal-3nf" class="md-nav__link">
+    Tabela UtilizaArmadura - Normalização até a 3ª Forma Normal (3NF)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tabela-amigatoarmadura-normalizacao-ate-a-3a-forma-normal-3nf" class="md-nav__link">
+    Tabela AmigatoArmadura - Normalização até a 3ª Forma Normal (3NF)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tabela-vendearmadura-normalizacao-ate-a-3a-forma-normal-3nf" class="md-nav__link">
+    Tabela VendeArmadura - Normalização até a 3ª Forma Normal (3NF)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tabela-criaarmadura-normalizacao-ate-a-3a-forma-normal-3nf" class="md-nav__link">
+    Tabela CriaArmadura - Normalização até a 3ª Forma Normal (3NF)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tabela-amuleto-normalizacao-ate-a-3a-forma-normal-3nf" class="md-nav__link">
+    Tabela Amuleto - Normalização até a 3ª Forma Normal (3NF)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tabela-guardaamuleto-normalizacao-ate-a-3a-forma-normal-3nf" class="md-nav__link">
+    Tabela GuardaAmuleto - Normalização até a 3ª Forma Normal (3NF)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tabela-utilizaamuleto-normalizacao-ate-a-3a-forma-normal-3nf" class="md-nav__link">
+    Tabela UtilizaAmuleto - Normalização até a 3ª Forma Normal (3NF)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tabela-amigatoamuleto-normalizacao-ate-a-3a-forma-normal-3nf" class="md-nav__link">
+    Tabela AmigatoAmuleto - Normalização até a 3ª Forma Normal (3NF)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tabela-vendeamuleto-normalizacao-ate-a-3a-forma-normal-3nf" class="md-nav__link">
+    Tabela VendeAmuleto - Normalização até a 3ª Forma Normal (3NF)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tabela-criaamuleto-normalizacao-ate-a-3a-forma-normal-3nf" class="md-nav__link">
+    Tabela CriaAmuleto - Normalização até a 3ª Forma Normal (3NF)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tabela-ferramenta-normalizacao-ate-a-3a-forma-normal-3nf" class="md-nav__link">
+    Tabela Ferramenta - Normalização até a 3ª Forma Normal (3NF)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tabela-guardaferramenta-normalizacao-ate-a-3a-forma-normal-3nf" class="md-nav__link">
+    Tabela GuardaFerramenta - Normalização até a 3ª Forma Normal (3NF)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tabela-utilizaferramenta-normalizacao-ate-a-3a-forma-normal-3nf" class="md-nav__link">
+    Tabela UtilizaFerramenta - Normalização até a 3ª Forma Normal (3NF)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tabela-amigatoferramenta-normalizacao-ate-a-3a-forma-normal-3nf" class="md-nav__link">
+    Tabela AmigatoFerramenta - Normalização até a 3ª Forma Normal (3NF)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tabela-vendeferramenta-normalizacao-ate-a-3a-forma-normal-3nf" class="md-nav__link">
+    Tabela VendeFerramenta - Normalização até a 3ª Forma Normal (3NF)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tabela-habilidade-normalizacao-ate-a-3a-forma-normal-3nf" class="md-nav__link">
+    Tabela Habilidade - Normalização até a 3ª Forma Normal (3NF)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tabela-habilidadeamuleto-normalizacao-ate-a-3a-forma-normal-3nf" class="md-nav__link">
+    Tabela HabilidadeAmuleto - Normalização até a 3ª Forma Normal (3NF)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tabela-habilidadearmadura-normalizacao-ate-a-3a-forma-normal-3nf" class="md-nav__link">
+    Tabela HabilidadeArmadura - Normalização até a 3ª Forma Normal (3NF)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -608,9 +1375,537 @@
   
 
 
-  <h1>Normalização</h1>
+  <h1>Dependências Funcionais e Normalização</h1>
 
-
+<h2 id="normalizacao-dos-dados-de-acordo-com-as-tabelas-existentes-no-nosso-modelo-relacional">Normalização dos dados de acordo com as tabelas existentes no nosso <a href="https://github.com/SBD1/2023.2-Monster-Hunter-World/blob/main/docs/modulo%201/mapeamento-mer-relacional.md">modelo relacional</a>.</h2>
+<h3 id="tabela-mapa-normalizacao-ate-a-3a-forma-normal-3nf">Tabela Mapa - Normalização até a 3ª Forma Normal (3NF)</h3>
+<p>A tabela "Mapa" foi normalizada até a 3ª Forma Normal (3NF) com base nas dependências funcionais identificadas. A seguir, descrevemos as etapas de normalização realizadas:</p>
+<p><strong>Dependências Funcionais:</strong>
+- "IdMapa" é a chave primária, e, portanto, todos os outros atributos dependem funcionalmente dele.
+- "Nome," "TamanhoX," "TamanhoY," e "Descricao" não têm dependências funcionais entre si, pois são atributos independentes.</p>
+<p><strong>1. 1ª Forma Normal (1NF):</strong> A tabela já estava na 1NF, uma vez que cada atributo contém apenas valores atômicos e não repetidos, e "IdMapa" é a chave primária.</p>
+<p><strong>2. 2ª Forma Normal (2NF):</strong> A 2NF não se aplica a esta tabela, pois não há chaves primárias compostas.</p>
+<p><strong>3. 3ª Forma Normal (3NF):</strong> A tabela está na 3NF, uma vez que as dependências funcionais identificadas foram tratadas. Cada atributo é diretamente dependente da chave primária "IdMapa".</p>
+<p>Não há necessidade de continuar a normalização para a 4ª Forma Normal (4NF) ou a Forma Normal de Boyce-Codd (BCNF) nesta tabela, uma vez que não foram identificadas dependências funcionais adicionais.</p>
+<p>Este é o estado final da normalização da tabela "Mapa".</p>
+<h3 id="tabela-regiao-normalizacao-ate-a-3a-forma-normal-3nf">Tabela Regiao - Normalização até a 3ª Forma Normal (3NF)</h3>
+<p>A tabela "Regiao" foi normalizada até a 3ª Forma Normal (3NF) com base nas dependências funcionais identificadas. A seguir, descrevemos as etapas de normalização realizadas:</p>
+<p><strong>Dependências Funcionais:</strong>
+- "IdRegiao" é a chave primária, e, portanto, todos os outros atributos dependem funcionalmente dele.
+- "Mapa" é uma chave estrangeira que se relaciona com a tabela "Mapa", estabelecendo uma dependência funcional em relação a "IdRegiao" para criar a relação.</p>
+<p><strong>1. 1ª Forma Normal (1NF):</strong> A tabela já estava na 1NF, uma vez que cada atributo contém apenas valores atômicos e não repetidos, e "IdRegiao" é a chave primária.</p>
+<p><strong>2. 2ª Forma Normal (2NF):</strong> A 2NF não se aplica a esta tabela, pois não há chaves primárias compostas.</p>
+<p><strong>3. 3ª Forma Normal (3NF):</strong> A tabela está na 3NF, uma vez que as dependências funcionais identificadas foram tratadas. Cada atributo é diretamente dependente da chave primária "IdRegiao". A presença da chave estrangeira "Mapa" não afeta a normalização, pois está relacionada a outra tabela.</p>
+<p>Não há necessidade de continuar a normalização para a 4ª Forma Normal (4NF) ou a Forma Normal de Boyce-Codd (BCNF) nesta tabela, uma vez que não foram identificadas dependências funcionais adicionais.</p>
+<p>Este é o estado final da normalização da tabela "Regiao".</p>
+<h3 id="tabela-npc-normalizacao-ate-a-3a-forma-normal-3nf">Tabela NPC - Normalização até a 3ª Forma Normal (3NF)</h3>
+<p>A tabela "NPC" foi normalizada até a 3ª Forma Normal (3NF) com base nas dependências funcionais identificadas. A seguir, descrevemos as etapas de normalização realizadas:</p>
+<p><strong>Dependências Funcionais:</strong>
+- "IdNPC" é a chave primária, e, portanto, todos os outros atributos dependem funcionalmente dele.
+- "Regiao" é uma chave estrangeira que se relaciona com a tabela "Regiao," estabelecendo uma dependência funcional em relação a "IdNPC" para criar a relação.</p>
+<p><strong>1. 1ª Forma Normal (1NF):</strong> A tabela já estava na 1NF, uma vez que cada atributo contém apenas valores atômicos e não repetidos, e "IdNPC" é a chave primária.</p>
+<p><strong>2. 2ª Forma Normal (2NF):</strong> A 2NF não se aplica a esta tabela, pois não há chaves primárias compostas.</p>
+<p><strong>3. 3ª Forma Normal (3NF):</strong> A tabela está na 3NF, uma vez que as dependências funcionais identificadas foram tratadas. Cada atributo é diretamente dependente da chave primária "IdNPC." A presença da chave estrangeira "Regiao" não afeta a normalização, pois está relacionada a outra tabela.</p>
+<p>Não há necessidade de continuar a normalização para a 4ª Forma Normal (4NF) ou a Forma Normal de Boyce-Codd (BCNF) nesta tabela, uma vez que não foram identificadas dependências funcionais adicionais.</p>
+<p>Este é o estado final da normalização da tabela "NPC."</p>
+<h3 id="tabela-pc-normalizacao-ate-a-3a-forma-normal-3nf">Tabela PC - Normalização até a 3ª Forma Normal (3NF)</h3>
+<p>A tabela "PC" foi normalizada até a 3ª Forma Normal (3NF) com base nas dependências funcionais identificadas. A seguir, descrevemos as etapas de normalização realizadas:</p>
+<p><strong>Dependências Funcionais:</strong>
+- "IdPlayer" é a chave primária, e, portanto, todos os outros atributos dependem funcionalmente dele.
+- "Regiao" é uma chave estrangeira que se relaciona com a tabela "Regiao," estabelecendo uma dependência funcional em relação a "IdPlayer" para criar a relação.</p>
+<p><strong>1. 1ª Forma Normal (1NF):</strong> A tabela já estava na 1NF, uma vez que cada atributo contém apenas valores atômicos e não repetidos, e "IdPlayer" é a chave primária.</p>
+<p><strong>2. 2ª Forma Normal (2NF):</strong> A 2NF não se aplica a esta tabela, pois não há chaves primárias compostas.</p>
+<p><strong>3. 3ª Forma Normal (3NF):</strong> A tabela está na 3NF, uma vez que as dependências funcionais identificadas foram tratadas. Cada atributo é diretamente dependente da chave primária "IdPlayer." A presença da chave estrangeira "Regiao" não afeta a normalização, pois está relacionada a outra tabela.</p>
+<p>Não há necessidade de continuar a normalização para a 4ª Forma Normal (4NF) ou a Forma Normal de Boyce-Codd (BCNF) nesta tabela, uma vez que não foram identificadas dependências funcionais adicionais.</p>
+<p>Este é o estado final da normalização da tabela "PC."</p>
+<h3 id="tabela-amigato-normalizacao-ate-a-3a-forma-normal-3nf">Tabela Amigato - Normalização até a 3ª Forma Normal (3NF)</h3>
+<p>A tabela "Amigato" foi normalizada até a 3ª Forma Normal (3NF) com base nas dependências funcionais identificadas. A seguir, descrevemos as etapas de normalização realizadas:</p>
+<p><strong>Dependências Funcionais:</strong>
+- "IdAmigato" é a chave primária, e, portanto, todos os outros atributos dependem funcionalmente dele.
+- "Regiao" é uma chave estrangeira que se relaciona com a tabela "Regiao," estabelecendo uma dependência funcional em relação a "IdAmigato" para criar a relação.
+- "PC" é uma chave estrangeira que se relaciona com a tabela "PC," estabelecendo uma dependência funcional em relação a "IdAmigato" para criar a relação.</p>
+<p><strong>1. 1ª Forma Normal (1NF):</strong> A tabela já estava na 1NF, uma vez que cada atributo contém apenas valores atômicos e não repetidos, e "IdAmigato" é a chave primária.</p>
+<p><strong>2. 2ª Forma Normal (2NF):</strong> A 2NF não se aplica a esta tabela, pois não há chaves primárias compostas.</p>
+<p><strong>3. 3ª Forma Normal (3NF):</strong> A tabela está na 3NF, uma vez que as dependências funcionais identificadas foram tratadas. Cada atributo é diretamente dependente da chave primária "IdAmigato." A presença das chaves estrangeiras "Regiao" e "PC" não afeta a normalização, pois estão relacionadas a outras tabelas.</p>
+<p>Não há necessidade de continuar a normalização para a 4ª Forma Normal (4NF) ou a Forma Normal de Boyce-Codd (BCNF) nesta tabela, uma vez que não foram identificadas dependências funcionais adicionais.</p>
+<p>Este é o estado final da normalização da tabela "Amigato."</p>
+<h3 id="tabela-fala-normalizacao-ate-a-3a-forma-normal-3nf">Tabela Fala - Normalização até a 3ª Forma Normal (3NF)</h3>
+<p>A tabela "Fala" foi normalizada até a 3ª Forma Normal (3NF) com base nas dependências funcionais identificadas. A seguir, descrevemos as etapas de normalização realizadas:</p>
+<p><strong>Dependências Funcionais:</strong>
+- "IdFala" é a chave primária, e, portanto, todos os outros atributos dependem funcionalmente dele.
+- "NPC" é uma chave estrangeira que se relaciona com a tabela "NPC," estabelecendo uma dependência funcional em relação a "IdFala" para criar a relação.</p>
+<p><strong>1. 1ª Forma Normal (1NF):</strong> A tabela já estava na 1NF, uma vez que cada atributo contém apenas valores atômicos e não repetidos, e "IdFala" é a chave primária.</p>
+<p><strong>2. 2ª Forma Normal (2NF):</strong> A 2NF não se aplica a esta tabela, pois não há chaves primárias compostas.</p>
+<p><strong>3. 3ª Forma Normal (3NF):</strong> A tabela está na 3NF, uma vez que as dependências funcionais identificadas foram tratadas. Cada atributo é diretamente dependente da chave primária "IdFala." A presença da chave estrangeira "NPC" não afeta a normalização, pois está relacionada a outra tabela.</p>
+<p>Não há necessidade de continuar a normalização para a 4ª Forma Normal (4NF) ou a Forma Normal de Boyce-Codd (BCNF) nesta tabela, uma vez que não foram identificadas dependências funcionais adicionais.</p>
+<p>Este é o estado final da normalização da tabela "Fala."</p>
+<h3 id="tabela-falaprereq-normalizacao-ate-a-3a-forma-normal-3nf">Tabela FalaPreReq - Normalização até a 3ª Forma Normal (3NF)</h3>
+<p>A tabela "FalaPreReq" foi normalizada até a 3ª Forma Normal (3NF) com base nas dependências funcionais identificadas. A seguir, descrevemos as etapas de normalização realizadas:</p>
+<p><strong>Dependências Funcionais:</strong>
+- "IdFalaPreReq" é a chave primária, e, portanto, todos os outros atributos dependem funcionalmente dele.
+- "FalaPreReq" é uma chave estrangeira que se relaciona com a tabela "Fala," estabelecendo uma dependência funcional em relação a "IdFalaPreReq" para criar a relação.
+- "Fala" é uma chave estrangeira que se relaciona com a tabela "Fala," estabelecendo uma dependência funcional em relação a "IdFalaPreReq" para criar a relação.</p>
+<p><strong>1. 1ª Forma Normal (1NF):</strong> A tabela já estava na 1NF, uma vez que cada atributo contém apenas valores atômicos e não repetidos, e "IdFalaPreReq" é a chave primária.</p>
+<p><strong>2. 2ª Forma Normal (2NF):</strong> A 2NF não se aplica a esta tabela, pois não há chaves primárias compostas.</p>
+<p><strong>3. 3ª Forma Normal (3NF):</strong> A tabela está na 3NF, uma vez que as dependências funcionais identificadas foram tratadas. Cada atributo é diretamente dependente da chave primária "IdFalaPreReq." As chaves estrangeiras "FalaPreReq" e "Fala" não afetam a normalização, pois estão relacionadas a outras tabelas.</p>
+<p>Não há necessidade de continuar a normalização para a 4ª Forma Normal (4NF) ou a Forma Normal de Boyce-Codd (BCNF) nesta tabela, uma vez que não foram identificadas dependências funcionais adicionais.</p>
+<p>Este é o estado final da normalização da tabela "FalaPreReq."</p>
+<h3 id="tabela-monstro-normalizacao-ate-a-3a-forma-normal-3nf">Tabela Monstro - Normalização até a 3ª Forma Normal (3NF)</h3>
+<p>A tabela "Monstro" foi normalizada até a 3ª Forma Normal (3NF) com base nas dependências funcionais identificadas. A seguir, descrevemos as etapas de normalização realizadas:</p>
+<p><strong>Dependências Funcionais:</strong>
+- "IdMonstro" é a chave primária, e, portanto, todos os outros atributos dependem funcionalmente dele.
+- "IdAmigato" é uma chave estrangeira que se relaciona com a tabela "Amigato," estabelecendo uma dependência funcional em relação a "IdMonstro" para criar a relação.</p>
+<p><strong>1. 1ª Forma Normal (1NF):</strong> A tabela já estava na 1NF, uma vez que cada atributo contém apenas valores atômicos e não repetidos, e "IdMonstro" é a chave primária.</p>
+<p><strong>2. 2ª Forma Normal (2NF):</strong> A 2NF não se aplica a esta tabela, pois não há chaves primárias compostas.</p>
+<p><strong>3. 3ª Forma Normal (3NF):</strong> A tabela está na 3NF, uma vez que as dependências funcionais identificadas foram tratadas. Cada atributo é diretamente dependente da chave primária "IdMonstro." A presença da chave estrangeira "IdAmigato" não afeta a normalização, pois está relacionada a outra tabela.</p>
+<p>Não há necessidade de continuar a normalização para a 4ª Forma Normal (4NF) ou a Forma Normal de Boyce-Codd (BCNF) nesta tabela, uma vez que não foram identificadas dependências funcionais adicionais.</p>
+<p>Este é o estado final da normalização da tabela "Monstro."</p>
+<h3 id="tabela-instanciamonstro-normalizacao-ate-a-3a-forma-normal-3nf">Tabela InstanciaMonstro - Normalização até a 3ª Forma Normal (3NF)</h3>
+<p>A tabela "InstanciaMonstro" foi normalizada até a 3ª Forma Normal (3NF) com base nas dependências funcionais identificadas. A seguir, descrevemos as etapas de normalização realizadas:</p>
+<p><strong>Dependências Funcionais:</strong>
+- "IdInstanciaMonstro" é a chave primária, e, portanto, todos os outros atributos dependem funcionalmente dele.
+- "Monstro" é uma chave estrangeira que se relaciona com a tabela "Monstro," estabelecendo uma dependência funcional em relação a "IdInstanciaMonstro" para criar a relação.</p>
+<p><strong>1. 1ª Forma Normal (1NF):</strong> A tabela já estava na 1NF, uma vez que cada atributo contém apenas valores atômicos e não repetidos, e "IdInstanciaMonstro" é a chave primária.</p>
+<p><strong>2. 2ª Forma Normal (2NF):</strong> A 2NF não se aplica a esta tabela, pois não há chaves primárias compostas.</p>
+<p><strong>3. 3ª Forma Normal (3NF):</strong> A tabela está na 3NF, uma vez que as dependências funcionais identificadas foram tratadas. Cada atributo é diretamente dependente da chave primária "IdInstanciaMonstro." A presença da chave estrangeira "Monstro" não afeta a normalização, pois está relacionada a outra tabela.</p>
+<p>Não há necessidade de continuar a normalização para a 4ª Forma Normal (4NF) ou a Forma Normal de Boyce-Codd (BCNF) nesta tabela, uma vez que não foram identificadas dependências funcionais adicionais.</p>
+<p>Este é o estado final da normalização da tabela "InstanciaMonstro."</p>
+<h3 id="tabela-regiaomonstro-normalizacao-ate-a-3a-forma-normal-3nf">Tabela RegiaoMonstro - Normalização até a 3ª Forma Normal (3NF)</h3>
+<p>A tabela "RegiaoMonstro" foi normalizada até a 3ª Forma Normal (3NF) com base nas dependências funcionais identificadas. A seguir, descrevemos as etapas de normalização realizadas:</p>
+<p><strong>Dependências Funcionais:</strong>
+- "IdRegiaoMonstro" é a chave primária, e, portanto, todos os outros atributos dependem funcionalmente dele.
+- "Regiao" é uma chave estrangeira que se relaciona com a tabela "Regiao," estabelecendo uma dependência funcional em relação a "IdRegiaoMonstro" para criar a relação.
+- "Monstro" é uma chave estrangeira que se relaciona com a tabela "Monstro," estabelecendo uma dependência funcional em relação a "IdRegiaoMonstro" para criar a relação.</p>
+<p><strong>1. 1ª Forma Normal (1NF):</strong> A tabela já estava na 1NF, uma vez que cada atributo contém apenas valores atômicos e não repetidos, e "IdRegiaoMonstro" é a chave primária.</p>
+<p><strong>2. 2ª Forma Normal (2NF):</strong> A 2NF não se aplica a esta tabela, pois não há chaves primárias compostas.</p>
+<p><strong>3. 3ª Forma Normal (3NF):</strong> A tabela está na 3NF, uma vez que as dependências funcionais identificadas foram tratadas. Cada atributo é diretamente dependente da chave primária "IdRegiaoMonstro." As chaves estrangeiras "Regiao" e "Monstro" não afetam a normalização, pois estão relacionadas a outras tabelas.</p>
+<p>Não há necessidade de continuar a normalização para a 4ª Forma Normal (4NF) ou a Forma Normal de Boyce-Codd (BCNF) nesta tabela, uma vez que não foram identificadas dependências funcionais adicionais.</p>
+<p>Este é o estado final da normalização da tabela "RegiaoMonstro."</p>
+<h3 id="tabela-atacamonstro-normalizacao-ate-a-3a-forma-normal-3nf">Tabela AtacaMonstro - Normalização até a 3ª Forma Normal (3NF)</h3>
+<p>A tabela "AtacaMonstro" foi normalizada até a 3ª Forma Normal (3NF) com base nas dependências funcionais identificadas. A seguir, descrevemos as etapas de normalização realizadas:</p>
+<p><strong>Dependências Funcionais:</strong>
+- "IdAtacaMonstro" é a chave primária, e, portanto, todos os outros atributos dependem funcionalmente dele.
+- "PC" é uma chave estrangeira que se relaciona com a tabela "PC," estabelecendo uma dependência funcional em relação a "IdAtacaMonstro" para criar a relação.
+- "Monstro" é uma chave estrangeira que se relaciona com a tabela "Monstro," estabelecendo uma dependência funcional em relação a "IdAtacaMonstro" para criar a relação.</p>
+<p><strong>1. 1ª Forma Normal (1NF):</strong> A tabela já estava na 1NF, uma vez que cada atributo contém apenas valores atômicos e não repetidos, e "IdAtacaMonstro" é a chave primária.</p>
+<p><strong>2. 2ª Forma Normal (2NF):</strong> A 2NF não se aplica a esta tabela, pois não há chaves primárias compostas.</p>
+<p><strong>3. 3ª Forma Normal (3NF):</strong> A tabela está na 3NF, uma vez que as dependências funcionais identificadas foram tratadas. Cada atributo é diretamente dependente da chave primária "IdAtacaMonstro." As chaves estrangeiras "PC" e "Monstro" não afetam a normalização, pois estão relacionadas a outras tabelas.</p>
+<p>Não há necessidade de continuar a normalização para a 4ª Forma Normal (4NF) ou a Forma Normal de Boyce-Codd (BCNF) nesta tabela, uma vez que não foram identificadas dependências funcionais adicionais.</p>
+<p>Este é o estado final da normalização da tabela "AtacaMonstro."</p>
+<h3 id="tabela-missao-normalizacao-ate-a-3a-forma-normal-3nf">Tabela Missao - Normalização até a 3ª Forma Normal (3NF)</h3>
+<p>A tabela "Missao" foi normalizada até a 3ª Forma Normal (3NF) com base nas dependências funcionais identificadas. A seguir, descrevemos as etapas de normalização realizadas:</p>
+<p><strong>Dependências Funcionais:</strong>
+- "IdMissao" é a chave primária, e, portanto, todos os outros atributos dependem funcionalmente dele.
+- "Mapa" é uma chave estrangeira que se relaciona com a tabela "Mapa," estabelecendo uma dependência funcional em relação a "IdMissao" para criar a relação.
+- "NPC" é uma chave estrangeira que se relaciona com a tabela "NPC," estabelecendo uma dependência funcional em relação a "IdMissao" para criar a relação.</p>
+<p><strong>1. 1ª Forma Normal (1NF):</strong> A tabela já estava na 1NF, uma vez que cada atributo contém apenas valores atômicos e não repetidos, e "IdMissao" é a chave primária.</p>
+<p><strong>2. 2ª Forma Normal (2NF):</strong> A 2NF não se aplica a esta tabela, pois não há chaves primárias compostas.</p>
+<p><strong>3. 3ª Forma Normal (3NF):</strong> A tabela está na 3NF, uma vez que as dependências funcionais identificadas foram tratadas. Cada atributo é diretamente dependente da chave primária "IdMissao." As chaves estrangeiras "Mapa" e "NPC" não afetam a normalização, pois estão relacionadas a outras tabelas.</p>
+<p>Não há necessidade de continuar a normalização para a 4ª Forma Normal (4NF) ou a Forma Normal de Boyce-Codd (BCNF) nesta tabela, uma vez que não foram identificadas dependências funcionais adicionais.</p>
+<p>Este é o estado final da normalização da tabela "Missao."</p>
+<h3 id="tabela-missaoprereq-normalizacao-ate-a-3a-forma-normal-3nf">Tabela MissaoPreReq - Normalização até a 3ª Forma Normal (3NF)</h3>
+<p>A tabela "MissaoPreReq" foi normalizada até a 3ª Forma Normal (3NF) com base nas dependências funcionais identificadas. A seguir, descrevemos as etapas de normalização realizadas:</p>
+<p><strong>Dependências Funcionais:</strong>
+- "IdMissaoPreReq" é a chave primária, e, portanto, todos os outros atributos dependem funcionalmente dele.
+- "MissaoPreReq" é uma chave estrangeira que se relaciona com a tabela "Missao," estabelecendo uma dependência funcional em relação a "IdMissaoPreReq" para criar a relação.
+- "Missao" é uma chave estrangeira que se relaciona com a tabela "Missao," estabelecendo uma dependência funcional em relação a "IdMissaoPreReq" para criar a relação.</p>
+<p><strong>1. 1ª Forma Normal (1NF):</strong> A tabela já estava na 1NF, uma vez que cada atributo contém apenas valores atômicos e não repetidos, e "IdMissaoPreReq" é a chave primária.</p>
+<p><strong>2. 2ª Forma Normal (2NF):</strong> A 2NF não se aplica a esta tabela, pois não há chaves primárias compostas.</p>
+<p><strong>3. 3ª Forma Normal (3NF):</strong> A tabela está na 3NF, uma vez que as dependências funcionais identificadas foram tratadas. Cada atributo é diretamente dependente da chave primária "IdMissaoPreReq." As chaves estrangeiras "MissaoPreReq" e "Missao" não afetam a normalização, pois estão relacionadas a outras tabelas.</p>
+<p>Não há necessidade de continuar a normalização para a 4ª Forma Normal (4NF) ou a Forma Normal de Boyce-Codd (BCNF) nesta tabela, uma vez que não foram identificadas dependências funcionais adicionais.</p>
+<p>Este é o estado final da normalização da tabela "MissaoPreReq."</p>
+<h3 id="tabela-etapamissao-normalizacao-ate-a-3a-forma-normal-3nf">Tabela EtapaMissao - Normalização até a 3ª Forma Normal (3NF)</h3>
+<p>A tabela "EtapaMissao" foi normalizada até a 3ª Forma Normal (3NF) com base nas dependências funcionais identificadas. A seguir, descrevemos as etapas de normalização realizadas:</p>
+<p><strong>Dependências Funcionais:</strong>
+- "IdEtapaMissao" é a chave primária, e, portanto, todos os outros atributos dependem funcionalmente dele.
+- "Missao" é uma chave estrangeira que se relaciona com a tabela "Missao," estabelecendo uma dependência funcional em relação a "IdEtapaMissao" para criar a relação.</p>
+<p><strong>1. 1ª Forma Normal (1NF):</strong> A tabela já estava na 1NF, uma vez que cada atributo contém apenas valores atômicos e não repetidos, e "IdEtapaMissao" é a chave primária.</p>
+<p><strong>2. 2ª Forma Normal (2NF):</strong> A 2NF não se aplica a esta tabela, pois não há chaves primárias compostas.</p>
+<p><strong>3. 3ª Forma Normal (3NF):</strong> A tabela está na 3NF, uma vez que as dependências funcionais identificadas foram tratadas. Cada atributo é diretamente dependente da chave primária "IdEtapaMissao." A chave estrangeira "Missao" não afeta a normalização, pois está relacionada a outra tabela.</p>
+<p>Não há necessidade de continuar a normalização para a 4ª Forma Normal (4NF) ou a Forma Normal de Boyce-Codd (BCNF) nesta tabela, uma vez que não foram identificadas dependências funcionais adicionais.</p>
+<p>Este é o estado final da normalização da tabela "EtapaMissao."</p>
+<h3 id="tabela-etapamonstro-normalizacao-ate-a-3a-forma-normal-3nf">Tabela EtapaMonstro - Normalização até a 3ª Forma Normal (3NF)</h3>
+<p>A tabela "EtapaMonstro" foi normalizada até a 3ª Forma Normal (3NF) com base nas dependências funcionais identificadas. A seguir, descrevemos as etapas de normalização realizadas:</p>
+<p><strong>Dependências Funcionais:</strong>
+- "IdEtapaMonstro" é a chave primária, e, portanto, todos os outros atributos dependem funcionalmente dele.
+- "EtapaMissao" é uma chave estrangeira que se relaciona com a tabela "EtapaMissao," estabelecendo uma dependência funcional em relação a "IdEtapaMonstro" para criar a relação.
+- "Monstro" é uma chave estrangeira que se relaciona com a tabela "Monstro," estabelecendo uma dependência funcional em relação a "IdEtapaMonstro" para criar a relação.</p>
+<p><strong>1. 1ª Forma Normal (1NF):</strong> A tabela já estava na 1NF, uma vez que cada atributo contém apenas valores atômicos e não repetidos, e "IdEtapaMonstro" é a chave primária.</p>
+<p><strong>2. 2ª Forma Normal (2NF):</strong> A 2NF não se aplica a esta tabela, pois não há chaves primárias compostas.</p>
+<p><strong>3. 3ª Forma Normal (3NF):</strong> A tabela está na 3NF, uma vez que as dependências funcionais identificadas foram tratadas. Cada atributo é diretamente dependente da chave primária "IdEtapaMonstro." As chaves estrangeiras "EtapaMissao" e "Monstro" não afetam a normalização, pois estão relacionadas a outras tabelas.</p>
+<p>Não há necessidade de continuar a normalização para a 4ª Forma Normal (4NF) ou a Forma Normal de Boyce-Codd (BCNF) nesta tabela, uma vez que não foram identificadas dependências funcionais adicionais.</p>
+<p>Este é o estado final da normalização da tabela "EtapaMonstro."</p>
+<h3 id="tabela-etapafala-normalizacao-ate-a-3a-forma-normal-3nf">Tabela EtapaFala - Normalização até a 3ª Forma Normal (3NF)</h3>
+<p>A tabela "EtapaFala" foi normalizada até a 3ª Forma Normal (3NF) com base nas dependências funcionais identificadas. A seguir, descrevemos as etapas de normalização realizadas:</p>
+<p><strong>Dependências Funcionais:</strong>
+- "IdEtapaFala" é a chave primária, e, portanto, todos os outros atributos dependem funcionalmente dele.
+- "EtapaMissao" é uma chave estrangeira que se relaciona com a tabela "EtapaMissao," estabelecendo uma dependência funcional em relação a "IdEtapaFala" para criar a relação.
+- "Fala" é uma chave estrangeira que se relaciona com a tabela "Fala," estabelecendo uma dependência funcional em relação a "IdEtapaFala" para criar a relação.</p>
+<p><strong>1. 1ª Forma Normal (1NF):</strong> A tabela já estava na 1NF, uma vez que cada atributo contém apenas valores atômicos e não repetidos, e "IdEtapaFala" é a chave primária.</p>
+<p><strong>2. 2ª Forma Normal (2NF):</strong> A 2NF não se aplica a esta tabela, pois não há chaves primárias compostas.</p>
+<p><strong>3. 3ª Forma Normal (3NF):</strong> A tabela está na 3NF, uma vez que as dependências funcionais identificadas foram tratadas. Cada atributo é diretamente dependente da chave primária "IdEtapaFala." As chaves estrangeiras "EtapaMissao" e "Fala" não afetam a normalização, pois estão relacionadas a outras tabelas.</p>
+<p>Não há necessidade de continuar a normalização para a 4ª Forma Normal (4NF) ou a Forma Normal de Boyce-Codd (BCNF) nesta tabela, uma vez que não foram identificadas dependências funcionais adicionais.</p>
+<p>Este é o estado final da normalização da tabela "EtapaFala."</p>
+<h3 id="tabela-realizamissao-normalizacao-ate-a-3a-forma-normal-3nf">Tabela RealizaMissao - Normalização até a 3ª Forma Normal (3NF)</h3>
+<p>A tabela "RealizaMissao" foi normalizada até a 3ª Forma Normal (3NF) com base nas dependências funcionais identificadas. A seguir, descrevemos as etapas de normalização realizadas:</p>
+<p><strong>Dependências Funcionais:</strong>
+- "IdRealizaMissao" é a chave primária, e, portanto, todos os outros atributos dependem funcionalmente dele.
+- "Missao" é uma chave estrangeira que se relaciona com a tabela "Missao," estabelecendo uma dependência funcional em relação a "IdRealizaMissao" para criar a relação.
+- "PC" é uma chave estrangeira que se relaciona com a tabela "PC," estabelecendo uma dependência funcional em relação a "IdRealizaMissao" para criar a relação.</p>
+<p><strong>1. 1ª Forma Normal (1NF):</strong> A tabela já estava na 1NF, uma vez que cada atributo contém apenas valores atômicos e não repetidos, e "IdRealizaMissao" é a chave primária.</p>
+<p><strong>2. 2ª Forma Normal (2NF):</strong> A 2NF não se aplica a esta tabela, pois não há chaves primárias compostas.</p>
+<p><strong>3. 3ª Forma Normal (3NF):</strong> A tabela está na 3NF, uma vez que as dependências funcionais identificadas foram tratadas. Cada atributo é diretamente dependente da chave primária "IdRealizaMissao." As chaves estrangeiras "Missao" e "PC" não afetam a normalização, pois estão relacionadas a outras tabelas.</p>
+<p>Não há necessidade de continuar a normalização para a 4ª Forma Normal (4NF) ou a Forma Normal de Boyce-Codd (BCNF) nesta tabela, uma vez que não foram identificadas dependências funcionais adicionais.</p>
+<p>Este é o estado final da normalização da tabela "RealizaMissao."</p>
+<h3 id="tabela-inventario-normalizacao-ate-a-3a-forma-normal-3nf">Tabela Inventario - Normalização até a 3ª Forma Normal (3NF)</h3>
+<p>A tabela "Inventario" foi normalizada até a 3ª Forma Normal (3NF) com base nas dependências funcionais identificadas. A seguir, descrevemos as etapas de normalização realizadas:</p>
+<p><strong>Dependências Funcionais:</strong>
+- "IdInventario" é a chave primária, e, portanto, todos os outros atributos dependem funcionalmente dele.
+- "PC" é uma chave estrangeira que se relaciona com a tabela "PC," estabelecendo uma dependência funcional em relação a "IdInventario" para criar a relação.</p>
+<p><strong>1. 1ª Forma Normal (1NF):</strong> A tabela já estava na 1NF, uma vez que cada atributo contém apenas valores atômicos e não repetidos, e "IdInventario" é a chave primária.</p>
+<p><strong>2. 2ª Forma Normal (2NF):</strong> A 2NF não se aplica a esta tabela, pois não há chaves primárias compostas.</p>
+<p><strong>3. 3ª Forma Normal (3NF):</strong> A tabela está na 3NF, uma vez que as dependências funcionais identificadas foram tratadas. Cada atributo é diretamente dependente da chave primária "IdInventario." A chave estrangeira "PC" não afeta a normalização, pois está relacionada a outra tabela.</p>
+<p>Não há necessidade de continuar a normalização para a 4ª Forma Normal (4NF) ou a Forma Normal de Boyce-Codd (BCNF) nesta tabela, uma vez que não foram identificadas dependências funcionais adicionais.</p>
+<p>Este é o estado final da normalização da tabela "Inventario."</p>
+<h3 id="tabela-loja-normalizacao-ate-a-3a-forma-normal-3nf">Tabela Loja - Normalização até a 3ª Forma Normal (3NF)</h3>
+<p>A tabela "Loja" foi normalizada até a 3ª Forma Normal (3NF) com base nas dependências funcionais identificadas. A seguir, descrevemos as etapas de normalização realizadas:</p>
+<p><strong>Dependências Funcionais:</strong>
+- "IdLoja" é a chave primária, e, portanto, todos os outros atributos dependem funcionalmente dele.
+- "NPC" é uma chave estrangeira que se relaciona com a tabela "NPC," estabelecendo uma dependência funcional em relação a "IdLoja" para criar a relação.</p>
+<p><strong>1. 1ª Forma Normal (1NF):</strong> A tabela já estava na 1NF, uma vez que cada atributo contém apenas valores atômicos e não repetidos, e "IdLoja" é a chave primária.</p>
+<p><strong>2. 2ª Forma Normal (2NF):</strong> A 2NF não se aplica a esta tabela, pois não há chaves primárias compostas.</p>
+<p><strong>3. 3ª Forma Normal (3NF):</strong> A tabela está na 3NF, uma vez que as dependências funcionais identificadas foram tratadas. Cada atributo é diretamente dependente da chave primária "IdLoja." A chave estrangeira "NPC" não afeta a normalização, pois está relacionada a outra tabela.</p>
+<p>Não há necessidade de continuar a normalização para a 4ª Forma Normal (4NF) ou a Forma Normal de Boyce-Codd (BCNF) nesta tabela, uma vez que não foram identificadas dependências funcionais adicionais.</p>
+<p>Este é o estado final da normalização da tabela "Loja."</p>
+<h3 id="tabela-forja-normalizacao-ate-a-3a-forma-normal-3nf">Tabela Forja - Normalização até a 3ª Forma Normal (3NF)</h3>
+<p>A tabela "Forja" foi normalizada até a 3ª Forma Normal (3NF) com base nas dependências funcionais identificadas. A seguir, descrevemos as etapas de normalização realizadas:</p>
+<p><strong>Dependências Funcionais:</strong>
+- "IdForja" é a chave primária, e, portanto, todos os outros atributos dependem funcionalmente dele.
+- "NPC" é uma chave estrangeira que se relaciona com a tabela "NPC," estabelecendo uma dependência funcional em relação a "IdForja" para criar a relação.</p>
+<p><strong>1. 1ª Forma Normal (1NF):</strong> A tabela já estava na 1NF, uma vez que cada atributo contém apenas valores atômicos e não repetidos, e "IdForja" é a chave primária.</p>
+<p><strong>2. 2ª Forma Normal (2NF):</strong> A 2NF não se aplica a esta tabela, pois não há chaves primárias compostas.</p>
+<p><strong>3. 3ª Forma Normal (3NF):</strong> A tabela está na 3NF, uma vez que as dependências funcionais identificadas foram tratadas. Cada atributo é diretamente dependente da chave primária "IdForja." A chave estrangeira "NPC" não afeta a normalização, pois está relacionada a outra tabela.</p>
+<p>Não há necessidade de continuar a normalização para a 4ª Forma Normal (4NF) ou a Forma Normal de Boyce-Codd (BCNF) nesta tabela, uma vez que não foram identificadas dependências funcionais adicionais.</p>
+<p>Este é o estado final da normalização da tabela "Forja."</p>
+<h3 id="tabela-item-normalizacao-ate-a-3a-forma-normal-3nf">Tabela Item - Normalização até a 3ª Forma Normal (3NF)</h3>
+<p>A tabela "Item" foi normalizada até a 3ª Forma Normal (3NF) com base nas dependências funcionais identificadas. A seguir, descrevemos as etapas de normalização realizadas:</p>
+<p><strong>Dependências Funcionais:</strong>
+- "IdItem" é a chave primária, e, portanto, todos os outros atributos dependem funcionalmente dele. Os atributos como "Nome," "Raridade," "Tipo," "Funcao," "Descricao," "ValorVenda," e "CustoCompra" dependem funcionalmente de "IdItem."</p>
+<p><strong>1. 1ª Forma Normal (1NF):</strong> A tabela já estava na 1NF, uma vez que cada atributo contém apenas valores atômicos e não repetidos, e "IdItem" é a chave primária.</p>
+<p><strong>2. 2ª Forma Normal (2NF):</strong> A 2NF não se aplica a esta tabela, pois não há chaves primárias compostas.</p>
+<p><strong>3. 3ª Forma Normal (3NF):</strong> A tabela está na 3NF, uma vez que as dependências funcionais identificadas foram tratadas. Cada atributo é diretamente dependente da chave primária "IdItem."</p>
+<p>Não há necessidade de continuar a normalização para a 4ª Forma Normal (4NF) ou a Forma Normal de Boyce-Codd (BCNF) nesta tabela, uma vez que não foram identificadas dependências funcionais adicionais.</p>
+<p>Este é o estado final da normalização da tabela "Item."</p>
+<h3 id="tabela-dropaitem-normalizacao-ate-a-3a-forma-normal-3nf">Tabela DropaItem - Normalização até a 3ª Forma Normal (3NF)</h3>
+<p>A tabela "DropraItem" foi normalizada até a 3ª Forma Normal (3NF) com base nas dependências funcionais identificadas. A seguir, descrevemos as etapas de normalização realizadas:</p>
+<p><strong>Dependências Funcionais:</strong>
+- "IdDropaItem" é a chave primária, e, portanto, todos os outros atributos dependem funcionalmente dele.
+- "Monstro" é uma chave estrangeira que se relaciona com a tabela "InstanciaMonstro," estabelecendo uma dependência funcional em relação a "IdDropaItem" para criar a relação.
+- "Item" é uma chave estrangeira que se relaciona com a tabela "Item," estabelecendo uma dependência funcional em relação a "IdDropaItem" para criar a relação.</p>
+<p><strong>1. 1ª Forma Normal (1NF):</strong> A tabela já estava na 1NF, uma vez que cada atributo contém apenas valores atômicos e não repetidos, e "IdDropaItem" é a chave primária.</p>
+<p><strong>2. 2ª Forma Normal (2NF):</strong> A 2NF não se aplica a esta tabela, pois não há chaves primárias compostas.</p>
+<p><strong>3. 3ª Forma Normal (3NF):</strong> A tabela está na 3NF, uma vez que as dependências funcionais identificadas foram tratadas. Cada atributo é diretamente dependente da chave primária "IdDropaItem." As chaves estrangeiras "Monstro" e "Item" não afetam a normalização, pois estão relacionadas a outras tabelas.</p>
+<p>Não há necessidade de continuar a normalização para a 4ª Forma Normal (4NF) ou a Forma Normal de Boyce-Codd (BCNF) nesta tabela, uma vez que não foram identificadas dependências funcionais adicionais.</p>
+<p>Este é o estado final da normalização da tabela "DropraItem."</p>
+<h3 id="tabela-guardaitem-normalizacao-ate-a-3a-forma-normal-3nf">Tabela GuardaItem - Normalização até a 3ª Forma Normal (3NF)</h3>
+<p>A tabela "GuardaItem" foi normalizada até a 3ª Forma Normal (3NF) com base nas dependências funcionais identificadas. A seguir, descrevemos as etapas de normalização realizadas:</p>
+<p><strong>Dependências Funcionais:</strong>
+- "IdGuardaItem" é a chave primária, e, portanto, todos os outros atributos dependem funcionalmente dele.
+- "Inventario" é uma chave estrangeira que se relaciona com a tabela "Inventario," estabelecendo uma dependência funcional em relação a "IdGuardaItem" para criar a relação.
+- "Item" é uma chave estrangeira que se relaciona com a tabela "Item," estabelecendo uma dependência funcional em relação a "IdGuardaItem" para criar a relação.</p>
+<p><strong>1. 1ª Forma Normal (1NF):</strong> A tabela já estava na 1NF, uma vez que cada atributo contém apenas valores atômicos e não repetidos, e "IdGuardaItem" é a chave primária.</p>
+<p><strong>2. 2ª Forma Normal (2NF):</strong> A 2NF não se aplica a esta tabela, pois não há chaves primárias compostas.</p>
+<p><strong>3. 3ª Forma Normal (3NF):</strong> A tabela está na 3NF, uma vez que as dependências funcionais identificadas foram tratadas. Cada atributo é diretamente dependente da chave primária "IdGuardaItem." As chaves estrangeiras "Inventario" e "Item" não afetam a normalização, pois estão relacionadas a outras tabelas.</p>
+<p>Não há necessidade de continuar a normalização para a 4ª Forma Normal (4NF) ou a Forma Normal de Boyce-Codd (BCNF) nesta tabela, uma vez que não foram identificadas dependências funcionais adicionais.</p>
+<p>Este é o estado final da normalização da tabela "GuardaItem."</p>
+<h3 id="tabela-usaitem-normalizacao-ate-a-3a-forma-normal-3nf">Tabela UsaItem - Normalização até a 3ª Forma Normal (3NF)</h3>
+<p>A tabela "UsaItem" foi normalizada até a 3ª Forma Normal (3NF) com base nas dependências funcionais identificadas. A seguir, descrevemos as etapas de normalização realizadas:</p>
+<p><strong>Dependências Funcionais:</strong>
+- "IdUsaItem" é a chave primária, e, portanto, todos os outros atributos dependem funcionalmente dele.
+- "Forja" é uma chave estrangeira que se relaciona com a tabela "Forja," estabelecendo uma dependência funcional em relação a "IdUsaItem" para criar a relação.
+- "Item" é uma chave estrangeira que se relaciona com a tabela "Item," estabelecendo uma dependência funcional em relação a "IdUsaItem" para criar a relação.</p>
+<p><strong>1. 1ª Forma Normal (1NF):</strong> A tabela já estava na 1NF, uma vez que cada atributo contém apenas valores atômicos e não repetidos, e "IdUsaItem" é a chave primária.</p>
+<p><strong>2. 2ª Forma Normal (2NF):</strong> A 2NF não se aplica a esta tabela, pois não há chaves primárias compostas.</p>
+<p><strong>3. 3ª Forma Normal (3NF):</strong> A tabela está na 3NF, uma vez que as dependências funcionais identificadas foram tratadas. Cada atributo é diretamente dependente da chave primária "IdUsaItem." As chaves estrangeiras "Forja" e "Item" não afetam a normalização, pois estão relacionadas a outras tabelas.</p>
+<p>Não há necessidade de continuar a normalização para a 4ª Forma Normal (4NF) ou a Forma Normal de Boyce-Codd (BCNF) nesta tabela, uma vez que não foram identificadas dependências funcionais adicionais.</p>
+<p>Este é o estado final da normalização da tabela "UsaItem."</p>
+<h3 id="tabela-arma-normalizacao-ate-a-3a-forma-normal-3nf">Tabela Arma - Normalização até a 3ª Forma Normal (3NF)</h3>
+<p>A tabela "Arma" foi normalizada até a 3ª Forma Normal (3NF) com base nas dependências funcionais identificadas. A seguir, descrevemos as etapas de normalização realizadas:</p>
+<p><strong>Dependências Funcionais:</strong>
+- "IdArma" é a chave primária, e, portanto, todos os outros atributos dependem funcionalmente dele. Os atributos como "Nome," "Nivel," "Raridade," "CustoCompra," "ValorVenda," "Descricao," "Tipo," "Ataque," "Afiacao," "Elemento," e "ValorElemento" dependem funcionalmente de "IdArma."</p>
+<p><strong>1. 1ª Forma Normal (1NF):</strong> A tabela já estava na 1NF, uma vez que cada atributo contém apenas valores atômicos e não repetidos, e "IdArma" é a chave primária.</p>
+<p><strong>2. 2ª Forma Normal (2NF):</strong> A 2NF não se aplica a esta tabela, pois não há chaves primárias compostas.</p>
+<p><strong>3. 3ª Forma Normal (3NF):</strong> A tabela está na 3NF, uma vez que as dependências funcionais identificadas foram tratadas. Cada atributo é diretamente dependente da chave primária "IdArma."</p>
+<p>Não há necessidade de continuar a normalização para a 4ª Forma Normal (4NF) ou a Forma Normal de Boyce-Codd (BCNF) nesta tabela, uma vez que não foram identificadas dependências funcionais adicionais.</p>
+<p>Este é o estado final da normalização da tabela "Arma."</p>
+<h3 id="tabela-guardaarma-normalizacao-ate-a-3a-forma-normal-3nf">Tabela GuardaArma - Normalização até a 3ª Forma Normal (3NF)</h3>
+<p>A tabela "GuardaArma" foi normalizada até a 3ª Forma Normal (3NF) com base nas dependências funcionais identificadas. A seguir, descrevemos as etapas de normalização realizadas:</p>
+<p><strong>Dependências Funcionais:</strong>
+- "IdGuardaArma" é a chave primária, e, portanto, todos os outros atributos dependem funcionalmente dele.
+- "Inventario" é uma chave estrangeira que se relaciona com a tabela "Inventario," estabelecendo uma dependência funcional em relação a "IdGuardaArma" para criar a relação.
+- "Arma" é uma chave estrangeira que se relaciona com a tabela "Arma," estabelecendo uma dependência funcional em relação a "IdGuardaArma" para criar a relação.</p>
+<p><strong>1. 1ª Forma Normal (1NF):</strong> A tabela já estava na 1NF, uma vez que cada atributo contém apenas valores atômicos e não repetidos, e "IdGuardaArma" é a chave primária.</p>
+<p><strong>2. 2ª Forma Normal (2NF):</strong> A 2NF não se aplica a esta tabela, pois não há chaves primárias compostas.</p>
+<p><strong>3. 3ª Forma Normal (3NF):</strong> A tabela está na 3NF, uma vez que as dependências funcionais identificadas foram tratadas. Cada atributo é diretamente dependente da chave primária "IdGuardaArma." As chaves estrangeiras "Inventario" e "Arma" não afetam a normalização, pois estão relacionadas a outras tabelas.</p>
+<p>Não há necessidade de continuar a normalização para a 4ª Forma Normal (4NF) ou a Forma Normal de Boyce-Codd (BCNF) nesta tabela, uma vez que não foram identificadas dependências funcionais adicionais.</p>
+<p>Este é o estado final da normalização da tabela "GuardaArma."</p>
+<h3 id="tabela-utilizaarma-normalizacao-ate-a-3a-forma-normal-3nf">Tabela UtilizaArma - Normalização até a 3ª Forma Normal (3NF)</h3>
+<p>A tabela "UtilizaArma" foi normalizada até a 3ª Forma Normal (3NF) com base nas dependências funcionais identificadas. A seguir, descrevemos as etapas de normalização realizadas:</p>
+<p><strong>Dependências Funcionais:</strong>
+- "IdUtilizaArma" é a chave primária, e, portanto, todos os outros atributos dependem funcionalmente dele.
+- "PC" é uma chave estrangeira que se relaciona com a tabela "PC," estabelecendo uma dependência funcional em relação a "IdUtilizaArma" para criar a relação.
+- "Arma" é uma chave estrangeira que se relaciona com a tabela "Arma," estabelecendo uma dependência funcional em relação a "IdUtilizaArma" para criar a relação.</p>
+<p><strong>1. 1ª Forma Normal (1NF):</strong> A tabela já estava na 1NF, uma vez que cada atributo contém apenas valores atômicos e não repetidos, e "IdUtilizaArma" é a chave primária.</p>
+<p><strong>2. 2ª Forma Normal (2NF):</strong> A 2NF não se aplica a esta tabela, pois não há chaves primárias compostas.</p>
+<p><strong>3. 3ª Forma Normal (3NF):</strong> A tabela está na 3NF, uma vez que as dependências funcionais identificadas foram tratadas. Cada atributo é diretamente dependente da chave primária "IdUtilizaArma." As chaves estrangeiras "PC" e "Arma" não afetam a normalização, pois estão relacionadas a outras tabelas.</p>
+<p>Não há necessidade de continuar a normalização para a 4ª Forma Normal (4NF) ou a Forma Normal de Boyce-Codd (BCNF) nesta tabela, uma vez que não foram identificadas dependências funcionais adicionais.</p>
+<p>Este é o estado final da normalização da tabela "UtilizaArma."</p>
+<h3 id="tabela-amigatoarma-normalizacao-ate-a-3a-forma-normal-3nf">Tabela AmigatoArma - Normalização até a 3ª Forma Normal (3NF)</h3>
+<p>A tabela "AmigatoArma" foi normalizada até a 3ª Forma Normal (3NF) com base nas dependências funcionais identificadas. A seguir, descrevemos as etapas de normalização realizadas:</p>
+<p><strong>Dependências Funcionais:</strong>
+- "IdAmigatoArma" é a chave primária, e, portanto, todos os outros atributos dependem funcionalmente dele.
+- "Amigato" é uma chave estrangeira que se relaciona com a tabela "Amigato," estabelecendo uma dependência funcional em relação a "IdAmigatoArma" para criar a relação.
+- "Arma" é uma chave estrangeira que se relaciona com a tabela "Arma," estabelecendo uma dependência funcional em relação a "IdAmigatoArma" para criar a relação.</p>
+<p><strong>1. 1ª Forma Normal (1NF):</strong> A tabela já estava na 1NF, uma vez que cada atributo contém apenas valores atômicos e não repetidos, e "IdAmigatoArma" é a chave primária.</p>
+<p><strong>2. 2ª Forma Normal (2NF):</strong> A 2NF não se aplica a esta tabela, pois não há chaves primárias compostas.</p>
+<p><strong>3. 3ª Forma Normal (3NF):</strong> A tabela está na 3NF, uma vez que as dependências funcionais identificadas foram tratadas. Cada atributo é diretamente dependente da chave primária "IdAmigatoArma." As chaves estrangeiras "Amigato" e "Arma" não afetam a normalização, pois estão relacionadas a outras tabelas.</p>
+<p>Não há necessidade de continuar a normalização para a 4ª Forma Normal (4NF) ou a Forma Normal de Boyce-Codd (BCNF) nesta tabela, uma vez que não foram identificadas dependências funcionais adicionais.</p>
+<p>Este é o estado final da normalização da tabela "AmigatoArma."</p>
+<h3 id="tabela-vendearma-normalizacao-ate-a-3a-forma-normal-3nf">Tabela VendeArma - Normalização até a 3ª Forma Normal (3NF)</h3>
+<p>A tabela "VendeArma" foi normalizada até a 3ª Forma Normal (3NF) com base nas dependências funcionais identificadas. A seguir, descrevemos as etapas de normalização realizadas:</p>
+<p><strong>Dependências Funcionais:</strong>
+- "IdVendeArma" é a chave primária, e, portanto, todos os outros atributos dependem funcionalmente dele.
+- "Loja" é uma chave estrangeira que se relaciona com a tabela "Loja," estabelecendo uma dependência funcional em relação a "IdVendeArma" para criar a relação.
+- "Arma" é uma chave estrangeira que se relaciona com a tabela "Arma," estabelecendo uma dependência funcional em relação a "IdVendeArma" para criar a relação.</p>
+<p><strong>1. 1ª Forma Normal (1NF):</strong> A tabela já estava na 1NF, uma vez que cada atributo contém apenas valores atômicos e não repetidos, e "IdVendeArma" é a chave primária.</p>
+<p><strong>2. 2ª Forma Normal (2NF):</strong> A 2NF não se aplica a esta tabela, pois não há chaves primárias compostas.</p>
+<p><strong>3. 3ª Forma Normal (3NF):</strong> A tabela está na 3NF, uma vez que as dependências funcionais identificadas foram tratadas. Cada atributo é diretamente dependente da chave primária "IdVendeArma." As chaves estrangeiras "Loja" e "Arma" não afetam a normalização, pois estão relacionadas a outras tabelas.</p>
+<p>Não há necessidade de continuar a normalização para a 4ª Forma Normal (4NF) ou a Forma Normal de Boyce-Codd (BCNF) nesta tabela, uma vez que não foram identificadas dependências funcionais adicionais.</p>
+<p>Este é o estado final da normalização da tabela "VendeArma."</p>
+<h3 id="tabela-criaarma-normalizacao-ate-a-3a-forma-normal-3nf">Tabela CriaArma - Normalização até a 3ª Forma Normal (3NF)</h3>
+<p>A tabela "CriaArma" foi normalizada até a 3ª Forma Normal (3NF) com base nas dependências funcionais identificadas. A seguir, descrevemos as etapas de normalização realizadas:</p>
+<p><strong>Dependências Funcionais:</strong>
+- "IdCriaArma" é a chave primária, e, portanto, todos os outros atributos dependem funcionalmente dele.
+- "Forja" é uma chave estrangeira que se relaciona com a tabela "Forja," estabelecendo uma dependência funcional em relação a "IdCriaArma" para criar a relação.
+- "Arma" é uma chave estrangeira que se relaciona com a tabela "Arma," estabelecendo uma dependência funcional em relação a "IdCriaArma" para criar a relação.</p>
+<p><strong>1. 1ª Forma Normal (1NF):</strong> A tabela já estava na 1NF, uma vez que cada atributo contém apenas valores atômicos e não repetidos, e "IdCriaArma" é a chave primária.</p>
+<p><strong>2. 2ª Forma Normal (2NF):</strong> A 2NF não se aplica a esta tabela, pois não há chaves primárias compostas.</p>
+<p><strong>3. 3ª Forma Normal (3NF):</strong> A tabela está na 3NF, uma vez que as dependências funcionais identificadas foram tratadas. Cada atributo é diretamente dependente da chave primária "IdCriaArma." As chaves estrangeiras "Forja" e "Arma" não afetam a normalização, pois estão relacionadas a outras tabelas.</p>
+<p>Não há necessidade de continuar a normalização para a 4ª Forma Normal (4NF) ou a Forma Normal de Boyce-Codd (BCNF) nesta tabela, uma vez que não foram identificadas dependências funcionais adicionais.</p>
+<p>Este é o estado final da normalização da tabela "CriaArma."</p>
+<h3 id="tabela-armadura-normalizacao-ate-a-3a-forma-normal-3nf">Tabela Armadura - Normalização até a 3ª Forma Normal (3NF)</h3>
+<p>A tabela "Armadura" foi normalizada até a 3ª Forma Normal (3NF) com base nas dependências funcionais identificadas. A seguir, descrevemos as etapas de normalização realizadas:</p>
+<p><strong>Dependências Funcionais:</strong>
+- "IdArmadura" é a chave primária, e, portanto, todos os outros atributos dependem funcionalmente dele. Os atributos como "Nome," "Nivel," "Raridade," "CustoCompra," "ValorVenda," "Descricao," "Tipo," "Defesa," "Fogo," "Agua," "Raio," "Gelo," e "Dragao" dependem funcionalmente de "IdArmadura."</p>
+<p><strong>1. 1ª Forma Normal (1NF):</strong> A tabela já estava na 1NF, uma vez que cada atributo contém apenas valores atômicos e não repetidos, e "IdArmadura" é a chave primária.</p>
+<p><strong>2. 2ª Forma Normal (2NF):</strong> A 2NF não se aplica a esta tabela, pois não há chaves primárias compostas.</p>
+<p><strong>3. 3ª Forma Normal (3NF):</strong> A tabela está na 3NF, uma vez que as dependências funcionais identificadas foram tratadas. Cada atributo é diretamente dependente da chave primária "IdArmadura."</p>
+<p>Não há necessidade de continuar a normalização para a 4ª Forma Normal (4NF) ou a Forma Normal de Boyce-Codd (BCNF) nesta tabela, uma vez que não foram identificadas dependências funcionais adicionais.</p>
+<p>Este é o estado final da normalização da tabela "Armadura."</p>
+<h3 id="tabela-guardaarmadura-normalizacao-ate-a-3a-forma-normal-3nf">Tabela GuardaArmadura - Normalização até a 3ª Forma Normal (3NF)</h3>
+<p>A tabela "GuardaArmadura" foi normalizada até a 3ª Forma Normal (3NF) com base nas dependências funcionais identificadas. A seguir, descrevemos as etapas de normalização realizadas:</p>
+<p><strong>Dependências Funcionais:</strong>
+- "IdGuardaArmadura" é a chave primária, e, portanto, todos os outros atributos dependem funcionalmente dele.
+- "Inventario" é uma chave estrangeira que se relaciona com a tabela "Inventario," estabelecendo uma dependência funcional em relação a "IdGuardaArmadura" para criar a relação.
+- "Armadura" é uma chave estrangeira que se relaciona com a tabela "Armadura," estabelecendo uma dependência funcional em relação a "IdGuardaArmadura" para criar a relação.</p>
+<p><strong>1. 1ª Forma Normal (1NF):</strong> A tabela já estava na 1NF, uma vez que cada atributo contém apenas valores atômicos e não repetidos, e "IdGuardaArmadura" é a chave primária.</p>
+<p><strong>2. 2ª Forma Normal (2NF):</strong> A 2NF não se aplica a esta tabela, pois não há chaves primárias compostas.</p>
+<p><strong>3. 3ª Forma Normal (3NF):</strong> A tabela está na 3NF, uma vez que as dependências funcionais identificadas foram tratadas. Cada atributo é diretamente dependente da chave primária "IdGuardaArmadura." As chaves estrangeiras "Inventario" e "Armadura" não afetam a normalização, pois estão relacionadas a outras tabelas.</p>
+<p>Não há necessidade de continuar a normalização para a 4ª Forma Normal (4NF) ou a Forma Normal de Boyce-Codd (BCNF) nesta tabela, uma vez que não foram identificadas dependências funcionais adicionais.</p>
+<p>Este é o estado final da normalização da tabela "GuardaArmadura."</p>
+<h3 id="tabela-utilizaarmadura-normalizacao-ate-a-3a-forma-normal-3nf">Tabela UtilizaArmadura - Normalização até a 3ª Forma Normal (3NF)</h3>
+<p>A tabela "UtilizaArmadura" foi normalizada até a 3ª Forma Normal (3NF) com base nas dependências funcionais identificadas. A seguir, descrevemos as etapas de normalização realizadas:</p>
+<p><strong>Dependências Funcionais:</strong>
+- "IdUtilizaArmadura" é a chave primária, e, portanto, todos os outros atributos dependem funcionalmente dele.
+- "PC" é uma chave estrangeira que se relaciona com a tabela "PC," estabelecendo uma dependência funcional em relação a "IdUtilizaArmadura" para criar a relação.
+- "Armadura" é uma chave estrangeira que se relaciona com a tabela "Armadura," estabelecendo uma dependência funcional em relação a "IdUtilizaArmadura" para criar a relação.</p>
+<p><strong>1. 1ª Forma Normal (1NF):</strong> A tabela já estava na 1NF, uma vez que cada atributo contém apenas valores atômicos e não repetidos, e "IdUtilizaArmadura" é a chave primária.</p>
+<p><strong>2. 2ª Forma Normal (2NF):</strong> A 2NF não se aplica a esta tabela, pois não há chaves primárias compostas.</p>
+<p><strong>3. 3ª Forma Normal (3NF):</strong> A tabela está na 3NF, uma vez que as dependências funcionais identificadas foram tratadas. Cada atributo é diretamente dependente da chave primária "IdUtilizaArmadura." As chaves estrangeiras "PC" e "Armadura" não afetam a normalização, pois estão relacionadas a outras tabelas.</p>
+<p>Não há necessidade de continuar a normalização para a 4ª Forma Normal (4NF) ou a Forma Normal de Boyce-Codd (BCNF) nesta tabela, uma vez que não foram identificadas dependências funcionais adicionais.</p>
+<p>Este é o estado final da normalização da tabela "UtilizaArmadura."</p>
+<h3 id="tabela-amigatoarmadura-normalizacao-ate-a-3a-forma-normal-3nf">Tabela AmigatoArmadura - Normalização até a 3ª Forma Normal (3NF)</h3>
+<p>A tabela "AmigatoArmadura" foi normalizada até a 3ª Forma Normal (3NF) com base nas dependências funcionais identificadas. A seguir, descrevemos as etapas de normalização realizadas:</p>
+<p><strong>Dependências Funcionais:</strong>
+- "IdAmigatoArmadura" é a chave primária, e, portanto, todos os outros atributos dependem funcionalmente dele.
+- "Amigato" é uma chave estrangeira que se relaciona com a tabela "Amigato," estabelecendo uma dependência funcional em relação a "IdAmigatoArmadura" para criar a relação.
+- "Armadura" é uma chave estrangeira que se relaciona com a tabela "Armadura," estabelecendo uma dependência funcional em relação a "IdAmigatoArmadura" para criar a relação.</p>
+<p><strong>1. 1ª Forma Normal (1NF):</strong> A tabela já estava na 1NF, uma vez que cada atributo contém apenas valores atômicos e não repetidos, e "IdAmigatoArmadura" é a chave primária.</p>
+<p><strong>2. 2ª Forma Normal (2NF):</strong> A 2NF não se aplica a esta tabela, pois não há chaves primárias compostas.</p>
+<p><strong>3. 3ª Forma Normal (3NF):</strong> A tabela está na 3NF, uma vez que as dependências funcionais identificadas foram tratadas. Cada atributo é diretamente dependente da chave primária "IdAmigatoArmadura." As chaves estrangeiras "Amigato" e "Armadura" não afetam a normalização, pois estão relacionadas a outras tabelas.</p>
+<p>Não há necessidade de continuar a normalização para a 4ª Forma Normal (4NF) ou a Forma Normal de Boyce-Codd (BCNF) nesta tabela, uma vez que não foram identificadas dependências funcionais adicionais.</p>
+<p>Este é o estado final da normalização da tabela "AmigatoArmadura."</p>
+<h3 id="tabela-vendearmadura-normalizacao-ate-a-3a-forma-normal-3nf">Tabela VendeArmadura - Normalização até a 3ª Forma Normal (3NF)</h3>
+<p>A tabela "VendeArmadura" foi normalizada até a 3ª Forma Normal (3NF) com base nas dependências funcionais identificadas. A seguir, descrevemos as etapas de normalização realizadas:</p>
+<p><strong>Dependências Funcionais:</strong>
+- "IdVendeArmadura" é a chave primária, e, portanto, todos os outros atributos dependem funcionalmente dele.
+- "Loja" é uma chave estrangeira que se relaciona com a tabela "Loja," estabelecendo uma dependência funcional em relação a "IdVendeArmadura" para criar a relação.
+- "Armadura" é uma chave estrangeira que se relaciona com a tabela "Armadura," estabelecendo uma dependência funcional em relação a "IdVendeArmadura" para criar a relação.</p>
+<p><strong>1. 1ª Forma Normal (1NF):</strong> A tabela já estava na 1NF, uma vez que cada atributo contém apenas valores atômicos e não repetidos, e "IdVendeArmadura" é a chave primária.</p>
+<p><strong>2. 2ª Forma Normal (2NF):</strong> A 2NF não se aplica a esta tabela, pois não há chaves primárias compostas.</p>
+<p><strong>3. 3ª Forma Normal (3NF):</strong> A tabela está na 3NF, uma vez que as dependências funcionais identificadas foram tratadas. Cada atributo é diretamente dependente da chave primária "IdVendeArmadura." As chaves estrangeiras "Loja" e "Armadura" não afetam a normalização, pois estão relacionadas a outras tabelas.</p>
+<p>Não há necessidade de continuar a normalização para a 4ª Forma Normal (4NF) ou a Forma Normal de Boyce-Codd (BCNF) nesta tabela, uma vez que não foram identificadas dependências funcionais adicionais.</p>
+<p>Este é o estado final da normalização da tabela "VendeArmadura."</p>
+<h3 id="tabela-criaarmadura-normalizacao-ate-a-3a-forma-normal-3nf">Tabela CriaArmadura - Normalização até a 3ª Forma Normal (3NF)</h3>
+<p>A tabela "CriaArmadura" foi normalizada até a 3ª Forma Normal (3NF) com base nas dependências funcionais identificadas. A seguir, descrevemos as etapas de normalização realizadas:</p>
+<p><strong>Dependências Funcionais:</strong>
+- "IdCriaArmadura" é a chave primária, e, portanto, todos os outros atributos dependem funcionalmente dele.
+- "Forja" é uma chave estrangeira que se relaciona com a tabela "Forja," estabelecendo uma dependência funcional em relação a "IdCriaArmadura" para criar a relação.
+- "Armadura" é uma chave estrangeira que se relaciona com a tabela "Armadura," estabelecendo uma dependência funcional em relação a "IdCriaArmadura" para criar a relação.</p>
+<p><strong>1. 1ª Forma Normal (1NF):</strong> A tabela já estava na 1NF, uma vez que cada atributo contém apenas valores atômicos e não repetidos, e "IdCriaArmadura" é a chave primária.</p>
+<p><strong>2. 2ª Forma Normal (2NF):</strong> A 2NF não se aplica a esta tabela, pois não há chaves primárias compostas.</p>
+<p><strong>3. 3ª Forma Normal (3NF):</strong> A tabela está na 3NF, uma vez que as dependências funcionais identificadas foram tratadas. Cada atributo é diretamente dependente da chave primária "IdCriaArmadura." As chaves estrangeiras "Forja" e "Armadura" não afetam a normalização, pois estão relacionadas a outras tabelas.</p>
+<p>Não há necessidade de continuar a normalização para a 4ª Forma Normal (4NF) ou a Forma Normal de Boyce-Codd (BCNF) nesta tabela, uma vez que não foram identificadas dependências funcionais adicionais.</p>
+<p>Este é o estado final da normalização da tabela "CriaArmadura."</p>
+<h3 id="tabela-amuleto-normalizacao-ate-a-3a-forma-normal-3nf">Tabela Amuleto - Normalização até a 3ª Forma Normal (3NF)</h3>
+<p>A tabela "Amuleto" foi normalizada até a 3ª Forma Normal (3NF). A seguir, descrevemos as etapas de normalização realizadas:</p>
+<p><strong>Dependências Funcionais:</strong>
+- "IdAmuleto" é a chave primária, e, portanto, todos os outros atributos dependem funcionalmente dele.</p>
+<p><strong>1. 1ª Forma Normal (1NF):</strong> A tabela já estava na 1NF, uma vez que cada atributo contém apenas valores atômicos e não repetidos, e "IdAmuleto" é a chave primária.</p>
+<p><strong>2. 2ª Forma Normal (2NF):</strong> A 2NF não se aplica a esta tabela, pois não há chaves primárias compostas.</p>
+<p><strong>3. 3ª Forma Normal (3NF):</strong> A tabela está na 3NF. Os atributos não primários não têm dependências transitivas e são diretamente dependentes da chave primária "IdAmuleto." Não foram identificadas dependências funcionais adicionais que justifiquem uma normalização mais profunda.</p>
+<p>Não há necessidade de continuar a normalização para a 4ª Forma Normal (4NF) ou a Forma Normal de Boyce-Codd (BCNF) nesta tabela, uma vez que não foram identificadas dependências funcionais adicionais.</p>
+<p>Este é o estado final da normalização da tabela "Amuleto."</p>
+<h3 id="tabela-guardaamuleto-normalizacao-ate-a-3a-forma-normal-3nf">Tabela GuardaAmuleto - Normalização até a 3ª Forma Normal (3NF)</h3>
+<p>A tabela "GuardaAmuleto" foi normalizada até a 3ª Forma Normal (3NF) com base nas dependências funcionais identificadas. A seguir, descrevemos as etapas de normalização realizadas:</p>
+<p><strong>Dependências Funcionais:</strong>
+- "IdGuardaAmuleto" é a chave primária, e, portanto, todos os outros atributos dependem funcionalmente dele.
+- "Inventario" é uma chave estrangeira que se relaciona com a tabela "Inventario," estabelecendo uma dependência funcional em relação a "IdGuardaAmuleto" para criar a relação.
+- "Amuleto" é uma chave estrangeira que se relaciona com a tabela "Amuleto," estabelecendo uma dependência funcional em relação a "IdGuardaAmuleto" para criar a relação.</p>
+<p><strong>1. 1ª Forma Normal (1NF):</strong> A tabela já estava na 1NF, uma vez que cada atributo contém apenas valores atômicos e não repetidos, e "IdGuardaAmuleto" é a chave primária.</p>
+<p><strong>2. 2ª Forma Normal (2NF):</strong> A 2NF não se aplica a esta tabela, pois não há chaves primárias compostas.</p>
+<p><strong>3. 3ª Forma Normal (3NF):</strong> A tabela está na 3NF. Os atributos não primários não têm dependências transitivas e são diretamente dependentes da chave primária "IdGuardaAmuleto." As chaves estrangeiras "Inventario" e "Amuleto" não afetam a normalização, pois estão relacionadas a outras tabelas.</p>
+<p>Não há necessidade de continuar a normalização para a 4ª Forma Normal (4NF) ou a Forma Normal de Boyce-Codd (BCNF) nesta tabela, uma vez que não foram identificadas dependências funcionais adicionais.</p>
+<p>Este é o estado final da normalização da tabela "GuardaAmuleto."</p>
+<h3 id="tabela-utilizaamuleto-normalizacao-ate-a-3a-forma-normal-3nf">Tabela UtilizaAmuleto - Normalização até a 3ª Forma Normal (3NF)</h3>
+<p>A tabela "UtilizaAmuleto" foi normalizada até a 3ª Forma Normal (3NF) com base nas dependências funcionais identificadas. A seguir, descrevemos as etapas de normalização realizadas:</p>
+<p><strong>Dependências Funcionais:</strong>
+- "IdUtilizaAmuleto" é a chave primária, e, portanto, todos os outros atributos dependem funcionalmente dele.
+- "PC" é uma chave estrangeira que se relaciona com a tabela "PC," estabelecendo uma dependência funcional em relação a "IdUtilizaAmuleto" para criar a relação.
+- "Amuleto" é uma chave estrangeira que se relaciona com a tabela "Amuleto," estabelecendo uma dependência funcional em relação a "IdUtilizaAmuleto" para criar a relação.</p>
+<p><strong>1. 1ª Forma Normal (1NF):</strong> A tabela já estava na 1NF, uma vez que cada atributo contém apenas valores atômicos e não repetidos, e "IdUtilizaAmuleto" é a chave primária.</p>
+<p><strong>2. 2ª Forma Normal (2NF):</strong> A 2NF não se aplica a esta tabela, pois não há chaves primárias compostas.</p>
+<p><strong>3. 3ª Forma Normal (3NF):</strong> A tabela está na 3NF. Os atributos não primários não têm dependências transitivas e são diretamente dependentes da chave primária "IdUtilizaAmuleto." As chaves estrangeiras "PC" e "Amuleto" não afetam a normalização, pois estão relacionadas a outras tabelas.</p>
+<p>Não há necessidade de continuar a normalização para a 4ª Forma Normal (4NF) ou a Forma Normal de Boyce-Codd (BCNF) nesta tabela, uma vez que não foram identificadas dependências funcionais adicionais.</p>
+<p>Este é o estado final da normalização da tabela "UtilizaAmuleto."</p>
+<h3 id="tabela-amigatoamuleto-normalizacao-ate-a-3a-forma-normal-3nf">Tabela AmigatoAmuleto - Normalização até a 3ª Forma Normal (3NF)</h3>
+<p>A tabela "AmigatoAmuleto" foi normalizada até a 3ª Forma Normal (3NF) com base nas dependências funcionais identificadas. A seguir, descrevemos as etapas de normalização realizadas:</p>
+<p><strong>Dependências Funcionais:</strong>
+- "IdAmigatoAmuleto" é a chave primária, e, portanto, todos os outros atributos dependem funcionalmente dele.
+- "Amigato" é uma chave estrangeira que se relaciona com a tabela "Amigato," estabelecendo uma dependência funcional em relação a "IdAmigatoAmuleto" para criar a relação.
+- "Amuleto" é uma chave estrangeira que se relaciona com a tabela "Amuleto," estabelecendo uma dependência funcional em relação a "IdAmigatoAmuleto" para criar a relação.</p>
+<p><strong>1. 1ª Forma Normal (1NF):</strong> A tabela já estava na 1NF, uma vez que cada atributo contém apenas valores atômicos e não repetidos, e "IdAmigatoAmuleto" é a chave primária.</p>
+<p><strong>2. 2ª Forma Normal (2NF):</strong> A 2NF não se aplica a esta tabela, pois não há chaves primárias compostas.</p>
+<p><strong>3. 3ª Forma Normal (3NF):</strong> A tabela está na 3NF. Os atributos não primários não têm dependências transitivas e são diretamente dependentes da chave primária "IdAmigatoAmuleto." As chaves estrangeiras "Amigato" e "Amuleto" não afetam a normalização, pois estão relacionadas a outras tabelas.</p>
+<p>Não há necessidade de continuar a normalização para a 4ª Forma Normal (4NF) ou a Forma Normal de Boyce-Codd (BCNF) nesta tabela, uma vez que não foram identificadas dependências funcionais adicionais.</p>
+<p>Este é o estado final da normalização da tabela "AmigatoAmuleto."</p>
+<h3 id="tabela-vendeamuleto-normalizacao-ate-a-3a-forma-normal-3nf">Tabela VendeAmuleto - Normalização até a 3ª Forma Normal (3NF)</h3>
+<p>A tabela "VendeAmuleto" foi normalizada até a 3ª Forma Normal (3NF) com base nas dependências funcionais identificadas. A seguir, descrevemos as etapas de normalização realizadas:</p>
+<p><strong>Dependências Funcionais:</strong>
+- "IdVendeAmuleto" é a chave primária, e, portanto, todos os outros atributos dependem funcionalmente dele.
+- "Loja" é uma chave estrangeira que se relaciona com a tabela "Loja," estabelecendo uma dependência funcional em relação a "IdVendeAmuleto" para criar a relação.
+- "Amuleto" é uma chave estrangeira que se relaciona com a tabela "Amuleto," estabelecendo uma dependência funcional em relação a "IdVendeAmuleto" para criar a relação.</p>
+<p><strong>1. 1ª Forma Normal (1NF):</strong> A tabela já estava na 1NF, uma vez que cada atributo contém apenas valores atômicos e não repetidos, e "IdVendeAmuleto" é a chave primária.</p>
+<p><strong>2. 2ª Forma Normal (2NF):</strong> A 2NF não se aplica a esta tabela, pois não há chaves primárias compostas.</p>
+<p><strong>3. 3ª Forma Normal (3NF):</strong> A tabela está na 3NF. Os atributos não primários não têm dependências transitivas e são diretamente dependentes da chave primária "IdVendeAmuleto." As chaves estrangeiras "Loja" e "Amuleto" não afetam a normalização, pois estão relacionadas a outras tabelas.</p>
+<p>Não há necessidade de continuar a normalização para a 4ª Forma Normal (4NF) ou a Forma Normal de Boyce-Codd (BCNF) nesta tabela, uma vez que não foram identificadas dependências funcionais adicionais.</p>
+<p>Este é o estado final da normalização da tabela "VendeAmuleto."</p>
+<h3 id="tabela-criaamuleto-normalizacao-ate-a-3a-forma-normal-3nf">Tabela CriaAmuleto - Normalização até a 3ª Forma Normal (3NF)</h3>
+<p>A tabela "CriaAmuleto" foi normalizada até a 3ª Forma Normal (3NF) com base nas dependências funcionais identificadas. A seguir, descrevemos as etapas de normalização realizadas:</p>
+<p><strong>Dependências Funcionais:</strong>
+- "IdCriaAmuleto" é a chave primária, e, portanto, todos os outros atributos dependem funcionalmente dele.
+- "Forja" é uma chave estrangeira que se relaciona com a tabela "Forja," estabelecendo uma dependência funcional em relação a "IdCriaAmuleto" para criar a relação.
+- "Amuleto" é uma chave estrangeira que se relaciona com a tabela "Amuleto," estabelecendo uma dependência funcional em relação a "IdCriaAmuleto" para criar a relação.</p>
+<p><strong>1. 1ª Forma Normal (1NF):</strong> A tabela já estava na 1NF, uma vez que cada atributo contém apenas valores atômicos e não repetidos, e "IdCriaAmuleto" é a chave primária.</p>
+<p><strong>2. 2ª Forma Normal (2NF):</strong> A 2NF não se aplica a esta tabela, pois não há chaves primárias compostas.</p>
+<p><strong>3. 3ª Forma Normal (3NF):</strong> A tabela está na 3NF. Os atributos não primários não têm dependências transitivas e são diretamente dependentes da chave primária "IdCriaAmuleto." As chaves estrangeiras "Forja" e "Amuleto" não afetam a normalização, pois estão relacionadas a outras tabelas.</p>
+<p>Não há necessidade de continuar a normalização para a 4ª Forma Normal (4NF) ou a Forma Normal de Boyce-Codd (BCNF) nesta tabela, uma vez que não foram identificadas dependências funcionais adicionais.</p>
+<p>Este é o estado final da normalização da tabela "CriaAmuleto."</p>
+<h3 id="tabela-ferramenta-normalizacao-ate-a-3a-forma-normal-3nf">Tabela Ferramenta - Normalização até a 3ª Forma Normal (3NF)</h3>
+<p>A tabela "Ferramenta" foi normalizada até a 3ª Forma Normal (3NF) com base nas dependências funcionais identificadas. A seguir, descrevemos as etapas de normalização realizadas:</p>
+<p><strong>Dependências Funcionais:</strong>
+- "IdFerramenta" é a chave primária, e, portanto, todos os outros atributos dependem funcionalmente dele.</p>
+<p><strong>1. 1ª Forma Normal (1NF):</strong> A tabela já estava na 1NF, uma vez que cada atributo contém apenas valores atômicos e não repetidos, e "IdFerramenta" é a chave primária.</p>
+<p><strong>2. 2ª Forma Normal (2NF):</strong> A 2NF não se aplica a esta tabela, pois não há chaves primárias compostas.</p>
+<p><strong>3. 3ª Forma Normal (3NF):</strong> A tabela está na 3NF. Os atributos não primários não têm dependências transitivas e são diretamente dependentes da chave primária "IdFerramenta."</p>
+<p>Não há necessidade de continuar a normalização para a 4ª Forma Normal (4NF) ou a Forma Normal de Boyce-Codd (BCNF) nesta tabela, uma vez que não foram identificadas dependências funcionais adicionais.</p>
+<p>Este é o estado final da normalização da tabela "Ferramenta."</p>
+<h3 id="tabela-guardaferramenta-normalizacao-ate-a-3a-forma-normal-3nf">Tabela GuardaFerramenta - Normalização até a 3ª Forma Normal (3NF)</h3>
+<p>A tabela "GuardaFerramenta" foi normalizada até a 3ª Forma Normal (3NF) com base nas dependências funcionais identificadas. A seguir, descrevemos as etapas de normalização realizadas:</p>
+<p><strong>Dependências Funcionais:</strong>
+- "IdGuardaFerramenta" é a chave primária, e, portanto, todos os outros atributos dependem funcionalmente dele.
+- "Inventario" é uma chave estrangeira que se relaciona com a tabela "Inventario," estabelecendo uma dependência funcional em relação a "IdGuardaFerramenta" para criar a relação.
+- "Ferramenta" é uma chave estrangeira que se relaciona com a tabela "Ferramenta," estabelecendo uma dependência funcional em relação a "IdGuardaFerramenta" para criar a relação.</p>
+<p><strong>1. 1ª Forma Normal (1NF):</strong> A tabela já estava na 1NF, uma vez que cada atributo contém apenas valores atômicos e não repetidos, e "IdGuardaFerramenta" é a chave primária.</p>
+<p><strong>2. 2ª Forma Normal (2NF):</strong> A 2NF não se aplica a esta tabela, pois não há chaves primárias compostas.</p>
+<p><strong>3. 3ª Forma Normal (3NF):</strong> A tabela está na 3NF. Os atributos não primários não têm dependências transitivas e são diretamente dependentes da chave primária "IdGuardaFerramenta." As chaves estrangeiras "Inventario" e "Ferramenta" não afetam a normalização, pois estão relacionadas a outras tabelas.</p>
+<p>Não há necessidade de continuar a normalização para a 4ª Forma Normal (4NF) ou a Forma Normal de Boyce-Codd (BCNF) nesta tabela, uma vez que não foram identificadas dependências funcionais adicionais.</p>
+<p>Este é o estado final da normalização da tabela "GuardaFerramenta."</p>
+<h3 id="tabela-utilizaferramenta-normalizacao-ate-a-3a-forma-normal-3nf">Tabela UtilizaFerramenta - Normalização até a 3ª Forma Normal (3NF)</h3>
+<p>A tabela "UtilizaFerramenta" foi normalizada até a 3ª Forma Normal (3NF) com base nas dependências funcionais identificadas. A seguir, descrevemos as etapas de normalização realizadas:</p>
+<p><strong>Dependências Funcionais:</strong>
+- "IdUtilizaFerramenta" é a chave primária, e, portanto, todos os outros atributos dependem funcionalmente dele.
+- "PC" é uma chave estrangeira que se relaciona com a tabela "PC," estabelecendo uma dependência funcional em relação a "IdUtilizaFerramenta" para criar a relação.
+- "Ferramenta" é uma chave estrangeira que se relaciona com a tabela "Ferramenta," estabelecendo uma dependência funcional em relação a "IdUtilizaFerramenta" para criar a relação.</p>
+<p><strong>1. 1ª Forma Normal (1NF):</strong> A tabela já estava na 1NF, uma vez que cada atributo contém apenas valores atômicos e não repetidos, e "IdUtilizaFerramenta" é a chave primária.</p>
+<p><strong>2. 2ª Forma Normal (2NF):</strong> A 2NF não se aplica a esta tabela, pois não há chaves primárias compostas.</p>
+<p><strong>3. 3ª Forma Normal (3NF):</strong> A tabela está na 3NF. Os atributos não primários não têm dependências transitivas e são diretamente dependentes da chave primária "IdUtilizaFerramenta." As chaves estrangeiras "PC" e "Ferramenta" não afetam a normalização, pois estão relacionadas a outras tabelas.</p>
+<p>Não há necessidade de continuar a normalização para a 4ª Forma Normal (4NF) ou a Forma Normal de Boyce-Codd (BCNF) nesta tabela, uma vez que não foram identificadas dependências funcionais adicionais.</p>
+<p>Este é o estado final da normalização da tabela "UtilizaFerramenta."</p>
+<h3 id="tabela-amigatoferramenta-normalizacao-ate-a-3a-forma-normal-3nf">Tabela AmigatoFerramenta - Normalização até a 3ª Forma Normal (3NF)</h3>
+<p>A tabela "AmigatoFerramenta" foi normalizada até a 3ª Forma Normal (3NF) com base nas dependências funcionais identificadas. A seguir, descrevemos as etapas de normalização realizadas:</p>
+<p><strong>Dependências Funcionais:</strong>
+- "IdAmigatoFerramenta" é a chave primária, e, portanto, todos os outros atributos dependem funcionalmente dele.
+- "Amigato" é uma chave estrangeira que se relaciona com a tabela "Amigato," estabelecendo uma dependência funcional em relação a "IdAmigatoFerramenta" para criar a relação.
+- "Ferramenta" é uma chave estrangeira que se relaciona com a tabela "Ferramenta," estabelecendo uma dependência funcional em relação a "IdAmigatoFerramenta" para criar a relação.</p>
+<p><strong>1. 1ª Forma Normal (1NF):</strong> A tabela já estava na 1NF, uma vez que cada atributo contém apenas valores atômicos e não repetidos, e "IdAmigatoFerramenta" é a chave primária.</p>
+<p><strong>2. 2ª Forma Normal (2NF):</strong> A 2NF não se aplica a esta tabela, pois não há chaves primárias compostas.</p>
+<p><strong>3. 3ª Forma Normal (3NF):</strong> A tabela está na 3NF. Os atributos não primários não têm dependências transitivas e são diretamente dependentes da chave primária "IdAmigatoFerramenta." As chaves estrangeiras "Amigato" e "Ferramenta" não afetam a normalização, pois estão relacionadas a outras tabelas.</p>
+<p>Não há necessidade de continuar a normalização para a 4ª Forma Normal (4NF) ou a Forma Normal de Boyce-Codd (BCNF) nesta tabela, uma vez que não foram identificadas dependências funcionais adicionais.</p>
+<p>Este é o estado final da normalização da tabela "AmigatoFerramenta."</p>
+<h3 id="tabela-vendeferramenta-normalizacao-ate-a-3a-forma-normal-3nf">Tabela VendeFerramenta - Normalização até a 3ª Forma Normal (3NF)</h3>
+<p>A tabela "VendeFerramenta" foi normalizada até a 3ª Forma Normal (3NF) com base nas dependências funcionais identificadas. A seguir, descrevemos as etapas de normalização realizadas:</p>
+<p><strong>Dependências Funcionais:</strong>
+- "IdVendeFerramenta" é a chave primária, e, portanto, todos os outros atributos dependem funcionalmente dele.
+- "Loja" é uma chave estrangeira que se relaciona com a tabela "Loja," estabelecendo uma dependência funcional em relação a "IdVendeFerramenta" para criar a relação.
+- "Ferramenta" é uma chave estrangeira que se relaciona com a tabela "Ferramenta," estabelecendo uma dependência funcional em relação a "IdVendeFerramenta" para criar a relação.</p>
+<p><strong>1. 1ª Forma Normal (1NF):</strong> A tabela já estava na 1NF, uma vez que cada atributo contém apenas valores atômicos e não repetidos, e "IdVendeFerramenta" é a chave primária.</p>
+<p><strong>2. 2ª Forma Normal (2NF):</strong> A 2NF não se aplica a esta tabela, pois não há chaves primárias compostas.</p>
+<p><strong>3. 3ª Forma Normal (3NF):</strong> A tabela está na 3NF. Os atributos não primários não têm dependências transitivas e são diretamente dependentes da chave primária "IdVendeFerramenta." As chaves estrangeiras "Loja" e "Ferramenta" não afetam a normalização, pois estão relacionadas a outras tabelas.</p>
+<p>Não há necessidade de continuar a normalização para a 4ª Forma Normal (4NF) ou a Forma Normal de Boyce-Codd (BCNF) nesta tabela, uma vez que não foram identificadas dependências funcionais adicionais.</p>
+<p>Este é o estado final da normalização da tabela "VendeFerramenta."</p>
+<h3 id="tabela-habilidade-normalizacao-ate-a-3a-forma-normal-3nf">Tabela Habilidade - Normalização até a 3ª Forma Normal (3NF)</h3>
+<p>A tabela "Habilidade" foi normalizada até a 3ª Forma Normal (3NF) com base nas dependências funcionais identificadas. A seguir, descrevemos as etapas de normalização realizadas:</p>
+<p><strong>Dependências Funcionais:</strong>
+- "IdHabilidade" é a chave primária, e, portanto, todos os outros atributos dependem funcionalmente dele.</p>
+<p><strong>1. 1ª Forma Normal (1NF):</strong> A tabela já estava na 1NF, uma vez que cada atributo contém apenas valores atômicos e não repetidos, e "IdHabilidade" é a chave primária.</p>
+<p><strong>2. 2ª Forma Normal (2NF):</strong> A 2NF não se aplica a esta tabela, pois não há chaves primárias compostas.</p>
+<p><strong>3. 3ª Forma Normal (3NF):</strong> A tabela está na 3NF. Os atributos não primários não têm dependências transitivas e são diretamente dependentes da chave primária "IdHabilidade."</p>
+<p>Não há necessidade de continuar a normalização para a 4ª Forma Normal (4NF) ou a Forma Normal de Boyce-Codd (BCNF) nesta tabela, uma vez que não foram identificadas dependências funcionais adicionais.</p>
+<p>Este é o estado final da normalização da tabela "Habilidade."
+.</p>
+<h3 id="tabela-habilidadeamuleto-normalizacao-ate-a-3a-forma-normal-3nf">Tabela HabilidadeAmuleto - Normalização até a 3ª Forma Normal (3NF)</h3>
+<p>A tabela "HabilidadeAmuleto" foi normalizada até a 3ª Forma Normal (3NF) com base nas dependências funcionais identificadas. A seguir, descrevemos as etapas de normalização realizadas:</p>
+<p><strong>Dependências Funcionais:</strong>
+- "IdHabilidadeAmuleto" é a chave primária, e, portanto, todos os outros atributos dependem funcionalmente dele.
+- "Amuleto" é uma chave estrangeira que se relaciona com a tabela "Amuleto," estabelecendo uma dependência funcional em relação a "IdHabilidadeAmuleto" para criar a relação.
+- "Habilidade" é uma chave estrangeira que se relaciona com a tabela "Habilidade," estabelecendo uma dependência funcional em relação a "IdHabilidadeAmuleto" para criar a relação.</p>
+<p><strong>1. 1ª Forma Normal (1NF):</strong> A tabela já estava na 1NF, uma vez que cada atributo contém apenas valores atômicos e não repetidos, e "IdHabilidadeAmuleto" é a chave primária.</p>
+<p><strong>2. 2ª Forma Normal (2NF):</strong> A 2NF não se aplica a esta tabela, pois não há chaves primárias compostas.</p>
+<p><strong>3. 3ª Forma Normal (3NF):</strong> A tabela está na 3NF. Os atributos não primários não têm dependências transitivas e são diretamente dependentes da chave primária "IdHabilidadeAmuleto." As chaves estrangeiras "Amuleto" e "Habilidade" não afetam a normalização, pois estão relacionadas a outras tabelas.</p>
+<p>Não há necessidade de continuar a normalização para a 4ª Forma Normal (4NF) ou a Forma Normal de Boyce-Codd (BCNF) nesta tabela, uma vez que não foram identificadas dependências funcionais adicionais.</p>
+<p>Este é o estado final da normalização da tabela "HabilidadeAmuleto."</p>
+<h3 id="tabela-habilidadearmadura-normalizacao-ate-a-3a-forma-normal-3nf">Tabela HabilidadeArmadura - Normalização até a 3ª Forma Normal (3NF)</h3>
+<p>A tabela "HabilidadeArmadura" foi normalizada até a 3ª Forma Normal (3NF) com base nas dependências funcionais identificadas. A seguir, descrevemos as etapas de normalização realizadas:</p>
+<p><strong>Dependências Funcionais:</strong>
+- "IdHabilidadeArmadura" é a chave primária, e, portanto, todos os outros atributos dependem funcionalmente dele.
+- "Armadura" é uma chave estrangeira que se relaciona com a tabela "Armadura," estabelecendo uma dependência funcional em relação a "IdHabilidadeArmadura" para criar a relação.
+- "Habilidade" é uma chave estrangeira que se relaciona com a tabela "Habilidade," estabelecendo uma dependência funcional em relação a "IdHabilidadeArmadura" para criar a relação.</p>
+<p><strong>1. 1ª Forma Normal (1NF):</strong> A tabela já estava na 1NF, uma vez que cada atributo contém apenas valores atômicos e não repetidos, e "IdHabilidadeArmadura" é a chave primária.</p>
+<p><strong>2. 2ª Forma Normal (2NF):</strong> A 2NF não se aplica a esta tabela, pois não há chaves primárias compostas.</p>
+<p><strong>3. 3ª Forma Normal (3NF):</strong> A tabela está na 3NF. Os atributos não primários não têm dependências transitivas e são diretamente dependentes da chave primária "IdHabilidadeArmadura." As chaves estrangeiras "Armadura" e "Habilidade" não afetam a normalização, pois estão relacionadas a outras tabelas.</p>
+<p>Não há necessidade de continuar a normalização para a 4ª Forma Normal (4NF) ou a Forma Normal de Boyce-Codd (BCNF) nesta tabela, uma vez que não foram identificadas dependências funcionais adicionais.</p>
+<p>Este é o estado final da normalização da tabela "HabilidadeArmadura."</p>
 
 
 
