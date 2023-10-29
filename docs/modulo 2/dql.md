@@ -71,4 +71,33 @@ SELECT H.Nome AS NomeHabilidade
 FROM Habilidade AS H
 JOIN HabilidadeArmadura AS HA ON H.IdHabilidade = HA.Habilidade
 WHERE HA.Armadura = 1; -- Aqui a gente substitui pelo id da armadura desejada.
+
+-- Listar todas as missões e suas etapas
+SELECT Nome, Descricao
+FROM EtapaMissao
+WHERE Missao = 1;
+
+-- Mostrar os itens que dropam de cada monstro
+SELECT Monstro.Nome AS NomeMonstro, Item.Nome AS NomeItem, Item.Descricao AS DescricaoItem
+FROM Monstro
+JOIN DropaItem ON Monstro.IdMonstro = DropaItem.Monstro
+JOIN Item ON DropaItem.Item = Item.IdItem;
+
+-- Listar as falas associadas a cada etapa de missão
+SELECT Missao.Nome AS NomeMissao, EtapaMissao.Nome AS NomeEtapa, EtapaFala.Fala AS Fala
+FROM Missao
+JOIN EtapaMissao ON Missao.IdMissao = EtapaMissao.Missao
+JOIN EtapaFala ON EtapaMissao.IdEtapaMissao = EtapaFala.EtapaMissao;
+
+-- Listar as armas disponíveis em cada loja
+SELECT Loja.IdLoja AS NomeLoja, Arma.Nome AS NomeArma, Arma.Descricao AS DescricaoArma
+FROM Loja
+JOIN VendeArma ON Loja.IdLoja = VendeArma.Loja
+JOIN Arma ON VendeArma.Arma = Arma.IdArma;
+
+-- Listar todas as missões e o número total de etapas em cada uma delas
+SELECT Missao.Nome AS NomeMissao, COUNT(EtapaMissao.IdEtapaMissao) AS NumeroEtapas
+FROM Missao
+LEFT JOIN EtapaMissao ON Missao.IdMissao = EtapaMissao.Missao
+GROUP BY Missao.IdMissao, Missao.Nome;
 ```

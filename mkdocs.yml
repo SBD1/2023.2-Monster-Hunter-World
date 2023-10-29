@@ -9,7 +9,7 @@ nav:
     - Mapeamento do DER para o Modelo Relacional: modulo 1/mapeamento-mer-relacional.md
     - Dicionário de Dados: modulo 1/dicionario-de-dados.md
   - Módulo 2:
-    - Normalização: modulo 2/normalizacao.md
+    - Dependências Funcionais e Normalização: modulo 2/normalizacao.md
     - DDL (Data Definition Language): modulo 2/ddl.md
     - DML (Data Manipulation Language): modulo 2/dml.md
     - DQL (Data Query Language): modulo 2/dql.md
