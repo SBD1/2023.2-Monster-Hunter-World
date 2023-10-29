@@ -32,4 +32,5 @@ Este repositório servirá para aprofundarmos e trabalharmos os conhecimentos co
 
 ## Apresentações
 - [Módulo 1](https://unbbr-my.sharepoint.com/:v:/g/personal/211063149_aluno_unb_br/EZMSun3UQ4JEqEoEa4H_HUYBgKvWdvKDfzN-Mr9kkcnI3Q?e=m2EhVo&nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZyIsInJlZmVycmFsQXBwUGxhdGZvcm0iOiJXZWIiLCJyZWZlcnJhbE1vZGUiOiJ2aWV3In19)
+- [Módulo 2](https://unbbr-my.sharepoint.com/personal/211063149_aluno_unb_br/_layouts/15/stream.aspx?id=%2Fpersonal%2F211063149%5Faluno%5Funb%5Fbr%2FDocuments%2FGrava%C3%A7%C3%B5es%2FGrava%C3%A7%C3%A3o%20%2D%20SBD1%20%2D%20M%C3%B3dulo%202%2D20231029%5F154516%2DGrava%C3%A7%C3%A3o%20de%20Reuni%C3%A3o%2Emp4&ga=1&referrer=StreamWebApp%2EWeb&referrerScenario=AddressBarCopied%2Eview)
    
