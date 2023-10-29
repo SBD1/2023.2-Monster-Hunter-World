@@ -20,15 +20,15 @@ Este repositório servirá para aprofundarmos e trabalharmos os conhecimentos co
 
 ## Entregas
 - Módulo 1
-    - [Diagrama entidade-relacionamento](https://github.com/SBD1/2023.2-Monster-Hunter-World/blob/main/docs/diagrama-entidade-relacionamento.md)
-    - [Mapeamento do MER pro modelo relacional](https://github.com/SBD1/2023.2-Monster-Hunter-World/blob/main/docs/mapeamento-mer-relacional.md)
-    - [Dicionário de dados](https://github.com/SBD1/2023.2-Monster-Hunter-World/blob/main/docs/dicionario-de-dados.md)
+    - [Diagrama entidade-relacionamento](https://sbd1.github.io/2023.2-Monster-Hunter-World/modulo%201/diagrama-entidade-relacionamento/)
+    - [Mapeamento do MER pro modelo relacional](https://sbd1.github.io/2023.2-Monster-Hunter-World/modulo%201/mapeamento-mer-relacional/)
+    - [Dicionário de dados](https://sbd1.github.io/2023.2-Monster-Hunter-World/modulo%201/dicionario-de-dados/)
 - Módulo 2
-    - [Normalização]()
-    - [Data Manipulation Language]()
-    - [Data Definition Language]()
-    - [Data Query Language]()
-    - [Álgebra relacional]()
+    - [Dependências Funcionais e Normalização](https://sbd1.github.io/2023.2-Monster-Hunter-World/modulo%202/normalizacao/)
+    - [Data Manipulation Language](https://sbd1.github.io/2023.2-Monster-Hunter-World/modulo%202/dml/)
+    - [Data Definition Language](https://sbd1.github.io/2023.2-Monster-Hunter-World/modulo%202/ddl/)
+    - [Data Query Language](https://sbd1.github.io/2023.2-Monster-Hunter-World/modulo%202/dql/)
+    - [Álgebra relacional](https://sbd1.github.io/2023.2-Monster-Hunter-World/modulo%202/algebra-relacional/)
 
 ## Apresentações
 - [Módulo 1](https://unbbr-my.sharepoint.com/:v:/g/personal/211063149_aluno_unb_br/EZMSun3UQ4JEqEoEa4H_HUYBgKvWdvKDfzN-Mr9kkcnI3Q?e=m2EhVo&nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZyIsInJlZmVycmFsQXBwUGxhdGZvcm0iOiJXZWIiLCJyZWZlcnJhbE1vZGUiOiJ2aWV3In19)
