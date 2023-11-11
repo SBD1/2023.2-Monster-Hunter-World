@@ -1,11 +1,5 @@
--- Criacao do Banco
-CREATE DATABASE MonsterHunter;
-
--- Selecao do Banco
-\c MonsterHunter;
-
 -- Tabela Mapa
-CREATE TABLE Mapa (
+CREATE TABLE IF NOT EXISTS Mapa (
     IdMapa serial PRIMARY KEY,
     Nome varchar(64) NOT NULL,
     TamanhoX bigint NOT NULL,
@@ -14,7 +8,7 @@ CREATE TABLE Mapa (
 );
 
 -- Tabela Regiao
-CREATE TABLE Regiao (
+CREATE TABLE IF NOT EXISTS Regiao (
     IdRegiao serial PRIMARY KEY,
     Mapa int REFERENCES Mapa(IdMapa),
     Nome varchar(64) NOT NULL,
@@ -25,7 +19,7 @@ CREATE TABLE Regiao (
 );
 
 -- Tabela NPC
-CREATE TABLE NPC (
+CREATE TABLE IF NOT EXISTS NPC (
     IdNPC serial PRIMARY KEY,
     Regiao int REFERENCES Regiao(IdRegiao),
     Nome varchar(64) NOT NULL,
@@ -38,7 +32,7 @@ CREATE TABLE NPC (
 );
 
 -- Tabela PC
-CREATE TABLE PC (
+CREATE TABLE IF NOT EXISTS PC (
     IdPlayer serial PRIMARY KEY,
     Regiao int REFERENCES Regiao(IdRegiao),
     Nome varchar(64) NOT NULL,
@@ -58,7 +52,7 @@ CREATE TABLE PC (
 );
 
 -- Tabela Amigato
-CREATE TABLE Amigato (
+CREATE TABLE IF NOT EXISTS Amigato (
     IdAmigato serial PRIMARY KEY,
     Regiao int REFERENCES Regiao(IdRegiao),
     PC int REFERENCES PC(IdPlayer),
@@ -72,7 +66,7 @@ CREATE TABLE Amigato (
 
 
 -- Tabela Fala
-CREATE TABLE Fala (
+CREATE TABLE IF NOT EXISTS Fala (
     IdFala serial PRIMARY KEY,
     NPC int REFERENCES NPC(IdNPC),
     Fala varchar(256),
@@ -80,14 +74,14 @@ CREATE TABLE Fala (
 );
 
 -- Tabela FalaPreReq
-CREATE TABLE FalaPreReq (
+CREATE TABLE IF NOT EXISTS FalaPreReq (
     IdFalaPreReq serial PRIMARY KEY,
     FalaPreReq int REFERENCES Fala(IdFala),
     Fala int REFERENCES Fala(IdFala)
 );
 
 -- Tabela Monstro
-CREATE TABLE Monstro (
+CREATE TABLE IF NOT EXISTS Monstro (
     IdMonstro serial PRIMARY KEY,
     IdAmigato int,
     Nome varchar(64) NOT NULL,
@@ -98,7 +92,7 @@ CREATE TABLE Monstro (
 );
 
 -- Tabela InstanciaMonstro
-CREATE TABLE InstanciaMonstro (
+CREATE TABLE IF NOT EXISTS InstanciaMonstro (
     IdInstanciaMonstro serial PRIMARY KEY,
     Monstro int REFERENCES Monstro(IdMonstro),
     Status int DEFAULT 0,
@@ -109,14 +103,14 @@ CREATE TABLE InstanciaMonstro (
 );
 
 -- Tabela RegiaoMonstro
-CREATE TABLE RegiaoMonstro (
+CREATE TABLE IF NOT EXISTS RegiaoMonstro (
     IdRegiaoMonstro serial PRIMARY KEY,
     Regiao int REFERENCES Regiao(IdRegiao),
     Monstro int REFERENCES Monstro(IdMonstro)
 );
 
 -- Tabela AtacaMonstro
-CREATE TABLE AtacaMonstro (
+CREATE TABLE IF NOT EXISTS AtacaMonstro (
     IdAtacaMonstro serial PRIMARY KEY,
     PC int REFERENCES PC(IdPlayer),
     Monstro int REFERENCES Monstro(IdMonstro),
@@ -124,8 +118,15 @@ CREATE TABLE AtacaMonstro (
     Horario timestamp DEFAULT current_timestamp
 );
 
+-- Tabela Forja
+CREATE TABLE IF NOT EXISTS Forja (
+    IdForja serial PRIMARY KEY,
+    NPC int REFERENCES NPC(IdNPC),
+    Tipo int DEFAULT 0
+);
+
 -- Tabela Missao
-CREATE TABLE Missao (
+CREATE TABLE IF NOT EXISTS Missao (
     IdMissao serial PRIMARY KEY,
     Mapa int REFERENCES Mapa(IdMapa),
     NPC int REFERENCES NPC(IdNPC),
@@ -143,14 +144,14 @@ CREATE TABLE Missao (
 
 
 -- Tabela MissaoPreReq
-CREATE TABLE MissaoPreReq (
+CREATE TABLE IF NOT EXISTS MissaoPreReq (
     IdMissaoPreReq serial PRIMARY KEY,
     MissaoPreReq int REFERENCES Missao(IdMissao),
     Missao int REFERENCES Missao(IdMissao)
 );
 
 -- Tabela EtapaMissao
-CREATE TABLE EtapaMissao (
+CREATE TABLE IF NOT EXISTS EtapaMissao (
     IdEtapaMissao serial PRIMARY KEY,
     Missao int REFERENCES Missao(IdMissao),
     Nome varchar(64) NOT NULL,
@@ -159,7 +160,7 @@ CREATE TABLE EtapaMissao (
 );
 
 -- Tabela EtapaMonstro
-CREATE TABLE EtapaMonstro (
+CREATE TABLE IF NOT EXISTS EtapaMonstro (
     IdEtapaMonstro serial PRIMARY KEY,
     EtapaMissao int REFERENCES EtapaMissao(IdEtapaMissao),
     Monstro int REFERENCES Monstro(IdMonstro),
@@ -167,14 +168,14 @@ CREATE TABLE EtapaMonstro (
 );
 
 -- Tabela EtapaFala
-CREATE TABLE EtapaFala (
+CREATE TABLE IF NOT EXISTS EtapaFala (
     IdEtapaFala serial PRIMARY KEY,
     EtapaMissao int REFERENCES EtapaMissao(IdEtapaMissao),
     Fala int REFERENCES Fala(IdFala)
 );
 
 -- Tabela RealizaMissao
-CREATE TABLE RealizaMissao (
+CREATE TABLE IF NOT EXISTS RealizaMissao (
     IdRealizaMissao serial PRIMARY KEY,
     Missao int REFERENCES Missao(IdMissao),
     PC int REFERENCES PC(IdPlayer),
@@ -182,28 +183,22 @@ CREATE TABLE RealizaMissao (
 );
 
 -- Tabela Inventario
-CREATE TABLE Inventario (
+CREATE TABLE IF NOT EXISTS Inventario (
     IdInventario serial PRIMARY KEY,
     PC int REFERENCES PC(IdPlayer),
     CapacidadeMaxima int DEFAULT 20
 );
 
 -- Tabela Loja
-CREATE TABLE Loja (
+CREATE TABLE IF NOT EXISTS Loja (
     IdLoja serial PRIMARY KEY,
     NPC int REFERENCES NPC(IdNPC),
     Tipo int DEFAULT 0
 );
 
--- Tabela Forja
-CREATE TABLE Forja (
-    IdForja serial PRIMARY KEY,
-    NPC int REFERENCES NPC(IdNPC),
-    Tipo int DEFAULT 0
-);
 
 -- Tabela Item
-CREATE TABLE Item (
+CREATE TABLE IF NOT EXISTS Item (
     IdItem serial PRIMARY KEY,
     Nome varchar(64) NOT NULL,
     Raridade int DEFAULT 1,
@@ -215,7 +210,7 @@ CREATE TABLE Item (
 );
 
 -- Tabela DropaItem
-CREATE TABLE DropaItem (
+CREATE TABLE IF NOT EXISTS DropaItem (
     IdDropaItem serial PRIMARY KEY,
     Monstro int REFERENCES InstanciaMonstro(IdInstanciaMonstro),
     Item int REFERENCES Item(IdItem)
@@ -223,21 +218,21 @@ CREATE TABLE DropaItem (
 
 
 -- Tabela GuardaItem
-CREATE TABLE GuardaItem (
+CREATE TABLE IF NOT EXISTS GuardaItem (
     IdGuardaItem serial PRIMARY KEY,
     Inventario int REFERENCES Inventario(IdInventario),
     Item int REFERENCES Item(IdItem)
 );
 
 -- Tabela UsaItem
-CREATE TABLE UsaItem (
+CREATE TABLE IF NOT EXISTS UsaItem (
     IdUsaItem serial PRIMARY KEY,
     Forja int REFERENCES Forja(IdForja),
     Item int REFERENCES Item(IdItem)
 );
 
 -- Tabela Arma
-CREATE TABLE Arma (
+CREATE TABLE IF NOT EXISTS Arma (
     IdArma serial PRIMARY KEY,
     Nome varchar(64) NOT NULL,
     Nivel int DEFAULT 1,
@@ -253,42 +248,42 @@ CREATE TABLE Arma (
 );
 
 -- Tabela GuardaArma
-CREATE TABLE GuardaArma (
+CREATE TABLE IF NOT EXISTS GuardaArma (
     IdGuardaArma serial PRIMARY KEY,
     Inventario int REFERENCES Inventario(IdInventario),
     Arma int REFERENCES Arma(IdArma)
 );
 
 -- Tabela UtilizaArma
-CREATE TABLE UtilizaArma (
+CREATE TABLE IF NOT EXISTS UtilizaArma (
     IdUtilizaArma serial PRIMARY KEY,
     PC int REFERENCES PC(IdPlayer),
     Arma int REFERENCES Arma(IdArma)
 );
 
 -- Tabela AmigatoArma
-CREATE TABLE AmigatoArma (
+CREATE TABLE IF NOT EXISTS AmigatoArma (
     IdAmigatoArma serial PRIMARY KEY,
     Amigato int REFERENCES Amigato(IdAmigato),
     Arma int REFERENCES Arma(IdArma)
 );
 
 -- Tabela VendeArma
-CREATE TABLE VendeArma (
+CREATE TABLE IF NOT EXISTS VendeArma (
     IdVendeArma serial PRIMARY KEY,
     Loja int REFERENCES Loja(IdLoja),
     Arma int REFERENCES Arma(IdArma)
 );
 
 -- Tabela CriaArma
-CREATE TABLE CriaArma (
+CREATE TABLE IF NOT EXISTS CriaArma (
     IdCriaArma serial PRIMARY KEY,
     Forja int REFERENCES Forja(IdForja),
     Arma int REFERENCES Arma(IdArma)
 );
 
 -- Tabela Armadura
-CREATE TABLE Armadura (
+CREATE TABLE IF NOT EXISTS Armadura (
     IdArmadura serial PRIMARY KEY,
     Nome varchar(64) NOT NULL,
     Nivel int DEFAULT 1,
@@ -306,28 +301,28 @@ CREATE TABLE Armadura (
 );
 
 -- Tabela GuardaArmadura
-CREATE TABLE GuardaArmadura (
+CREATE TABLE IF NOT EXISTS GuardaArmadura (
     IdGuardaArmadura serial PRIMARY KEY,
     Inventario int REFERENCES Inventario(IdInventario),
     Armadura int REFERENCES Armadura(IdArmadura)
 );
 
 -- Tabela UtilizaArmadura
-CREATE TABLE UtilizaArmadura (
+CREATE TABLE IF NOT EXISTS UtilizaArmadura (
     IdUtilizaArmadura serial PRIMARY KEY,
     PC int REFERENCES PC(IdPlayer),
     Armadura int REFERENCES Armadura(IdArmadura)
 );
 
 -- Tabela AmigatoArmadura
-CREATE TABLE AmigatoArmadura (
+CREATE TABLE IF NOT EXISTS AmigatoArmadura (
     IdAmigatoArmadura serial PRIMARY KEY,
     Amigato int REFERENCES Amigato(IdAmigato),
     Armadura int REFERENCES Armadura(IdArmadura)
 );
 
 -- Tabela VendeArmadura
-CREATE TABLE VendeArmadura (
+CREATE TABLE IF NOT EXISTS VendeArmadura (
     IdVendeArmadura serial PRIMARY KEY,
     Loja int REFERENCES Loja(IdLoja),
     Armadura int REFERENCES Armadura(IdArmadura)
@@ -335,14 +330,14 @@ CREATE TABLE VendeArmadura (
 
 
 -- Tabela CriaArmadura
-CREATE TABLE CriaArmadura (
+CREATE TABLE IF NOT EXISTS CriaArmadura (
     IdCriaArmadura serial PRIMARY KEY,
     Forja int REFERENCES Forja(IdForja),
     Armadura int REFERENCES Armadura(IdArmadura)
 );
 
 -- Tabela Amuleto
-CREATE TABLE Amuleto (
+CREATE TABLE IF NOT EXISTS Amuleto (
     IdAmuleto serial PRIMARY KEY,
     Nome varchar(64) NOT NULL,
     Nivel int DEFAULT 1,
@@ -355,42 +350,42 @@ CREATE TABLE Amuleto (
 );
 
 -- Tabela GuardaAmuleto
-CREATE TABLE GuardaAmuleto (
+CREATE TABLE IF NOT EXISTS GuardaAmuleto (
     IdGuardaAmuleto serial PRIMARY KEY,
     Inventario int REFERENCES Inventario(IdInventario),
     Amuleto int REFERENCES Amuleto(IdAmuleto)
 );
 
 -- Tabela UtilizaAmuleto
-CREATE TABLE UtilizaAmuleto (
+CREATE TABLE IF NOT EXISTS UtilizaAmuleto (
     IdUtilizaAmuleto serial PRIMARY KEY,
     PC int REFERENCES PC(IdPlayer),
     Amuleto int REFERENCES Amuleto(IdAmuleto)
 );
 
 -- Tabela AmigatoAmuleto
-CREATE TABLE AmigatoAmuleto (
+CREATE TABLE IF NOT EXISTS AmigatoAmuleto (
     IdAmigatoAmuleto serial PRIMARY KEY,
     Amigato int REFERENCES Amigato(IdAmigato),
     Amuleto int REFERENCES Amuleto(IdAmuleto)
 );
 
 -- Tabela VendeAmuleto
-CREATE TABLE VendeAmuleto (
+CREATE TABLE IF NOT EXISTS VendeAmuleto (
     IdVendeAmuleto serial PRIMARY KEY,
     Loja int REFERENCES Loja(IdLoja),
     Amuleto int REFERENCES Amuleto(IdAmuleto)
 );
 
 -- Tabela CriaAmuleto
-CREATE TABLE CriaAmuleto (
+CREATE TABLE IF NOT EXISTS CriaAmuleto (
     IdCriaAmuleto serial PRIMARY KEY,
     Forja int REFERENCES Forja(IdForja),
     Amuleto int REFERENCES Amuleto(IdAmuleto)
 );
 
 -- Tabela Ferramenta
-CREATE TABLE Ferramenta (
+CREATE TABLE IF NOT EXISTS Ferramenta (
     IdFerramenta serial PRIMARY KEY,
     Nome varchar(64) NOT NULL,
     Nivel int DEFAULT 1,
@@ -405,35 +400,35 @@ CREATE TABLE Ferramenta (
 );
 
 -- Tabela GuardaFerramenta
-CREATE TABLE GuardaFerramenta (
+CREATE TABLE IF NOT EXISTS GuardaFerramenta (
     IdGuardaFerramenta serial PRIMARY KEY,
     Inventario int REFERENCES Inventario(IdInventario),
     Ferramenta int REFERENCES Ferramenta(IdFerramenta)
 );
 
 -- Tabela UtilizaFerramenta
-CREATE TABLE UtilizaFerramenta (
+CREATE TABLE IF NOT EXISTS UtilizaFerramenta (
     IdUtilizaFerramenta serial PRIMARY KEY,
     PC int REFERENCES PC(IdPlayer),
     Ferramenta int REFERENCES Ferramenta(IdFerramenta)
 );
 
 -- Tabela AmigatoFerramenta
-CREATE TABLE AmigatoFerramenta (
+CREATE TABLE IF NOT EXISTS AmigatoFerramenta (
     IdAmigatoFerramenta serial PRIMARY KEY,
     Amigato int REFERENCES Amigato(IdAmigato),
     Ferramenta int REFERENCES Ferramenta(IdFerramenta)
 );
 
 -- Tabela VendeFerramenta
-CREATE TABLE VendeFerramenta (
+CREATE TABLE IF NOT EXISTS VendeFerramenta (
     IdVendeFerramenta serial PRIMARY KEY,
     Loja int REFERENCES Loja(IdLoja),
     Ferramenta int REFERENCES Ferramenta(IdFerramenta)
 );
 
 -- Tabela Habilidade
-CREATE TABLE Habilidade (
+CREATE TABLE IF NOT EXISTS Habilidade (
     IdHabilidade serial PRIMARY KEY,
     Nome varchar(64) NOT NULL,
     Nivel int DEFAULT 0,
@@ -442,14 +437,14 @@ CREATE TABLE Habilidade (
 );
 
 -- Tabela HabilidadeAmuleto
-CREATE TABLE HabilidadeAmuleto (
+CREATE TABLE IF NOT EXISTS HabilidadeAmuleto (
     IdHabilidadeAmuleto serial PRIMARY KEY,
     Amuleto int REFERENCES Amuleto(IdAmuleto),
     Habilidade int REFERENCES Habilidade(IdHabilidade)
 );
 
 -- Tabela HabilidadeArmadura
-CREATE TABLE HabilidadeArmadura (
+CREATE TABLE IF NOT EXISTS HabilidadeArmadura (
     IdHabilidadeArmadura serial PRIMARY KEY,
     Armadura int REFERENCES Armadura(IdArmadura),
     Habilidade int REFERENCES Habilidade(IdHabilidade)
