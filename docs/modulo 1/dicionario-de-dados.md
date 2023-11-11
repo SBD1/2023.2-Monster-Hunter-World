@@ -6,9 +6,7 @@
 | Nome Variável | Descrição                            | Tipo de Dado | Tamanho | Restrições de Domínio |
 | :-----------: | :----------------------------------: | :-----: | :----------------: | :-------------------: |
 | IdMapa        | Número de identificação do mapa.     | Int     |                   | PK                    |
-| Nome          | Nome do mapa.                        | Varchar | 64                 | Not null               |
-| TamanhoX       | Tamanho horizontal do mapa.                     | Bigint  |                    | Not null               |
-| TamanhoY       | Tamanho vertical do mapa.                     | Bigint  |                    | Not null               |
+| nome          | Nome do mapa.                        | Varchar | 64                 | Not null               |
 | descricao     | Descrição do mapa.                   | Varchar | 256                 | Not null               |
 
 ## Tabela: Regiao
@@ -21,11 +19,16 @@
 | IdRegiao      | Número de identificação da região.  | Int     |                   | PK                    |
 | Mapa        | Número de identificação do mapa.         | Int     |                 | FK                    |
 | Nome          | Nome da região.                      | Varchar | 64                 | Not null               |
-| xInicio       | Coordenada x do início da região.   | Bigint  |                    | Not null               |
-| yInicio       | Coordenada y do início da região.   | Bigint  |                    | Not null               |
-| xFim          | Coordenada x do fim da região.      | Bigint  |                    | Not null               |
-| yFim          | Coordenada y do fim da região.      | Bigint  |                
 
+
+## Tabela: LevaEm
+### Descrição: Tabela que armazenará os dados de que região leva até outra região.
+#### Observações: Essa tabela possui duas chaves estrangeiras para a tabela região.
+
+| Nome Variável | Descrição                                   | Tipo de Dado | Tamanho | Restrições de Domínio |
+| :-----------: | :----------------------------------------: | :----------: | :-----: | :-------------------: |
+| RegiaoOrigem        | Região de origem           | Int      |         | PK FK                    |
+| RegiaoDestino        | Região de destino        | Int     |                 | PK FK                    |
 
 ## Tabela: NPC
 ### Descrição: Tabela que armazenará os dados do NPC (Personagem Não-Jogavel).
@@ -35,8 +38,6 @@
 | IdNPC         | Número de identificação do NPC.            | Int      |         | PK                    |
 | Regiao        | Número de identificação da Regiao.         | Int     |                 | FK                    |
 | Nome          | Nome do NPC.                      | Varchar | 64                 | Not null               |
-| x       | Coordenada x onde o npc está localizado.   | Bigint  |                    | Default              |
-| y       | Coordenada y onde o npc está localizado.   | Bigint  |                    | Default              |
 | Descricao       | Descricao sobre o npc.   | Varchar  | 256                   | Default              |
 | Funcao       | Funcao que o npc exerce.   | Varchar  | 64                   | Default              |
 | Raca       | Raça do NPC.   | Varchar  | 32                   | Default              |
@@ -51,8 +52,6 @@
 | IdPlayer         | Número de identificação do PC.            | Int      |         | PK                    |
 | Regiao        | Número de identificação da Regiao.         | Int     |                 | FK                    |
 | Nome          | Nome do PC.                      | Varchar | 64                 | Not null               |
-| x       | Coordenada x onde o npc está localizado.   | Bigint  |                    | Default              |
-| y       | Coordenada y onde o npc está localizado.   | Bigint  |                    | Default              |
 | Ranque       | Ranque do PC.   | Int  |                    | Default              |
 | Vida       | Pontos de vida do PC.   | Int  |                    | Default              |
 | Vigor       | Pontos de vigor do PC.   | Int  |                    | Default              |
@@ -73,9 +72,7 @@
 | IdAmigato         | Número de identificação do Amigato.            | Int      |         | PK                    |
 | Regiao        | Número de identificação da Regiao.         | Int     |                 | FK                    |
 | PC        | Número de identificação do PC.         | Int     |                 | FK                    |
-| Nome          | Nome do Amigato.                      | Varchar | 64                 | Not null               |
-| x       | Coordenada x onde o npc está localizado.   | Bigint  |                    | Default              |
-| y       | Coordenada y onde o npc está localizado.   | Bigint  |                    | Default              |
+| Nome          | Nome do Amigato.                      | Varchar | 64                 | Not null               |Bigint  |                    | Default              |
 | Nivel       | Nivel do Amigato.   | Int  |                    | Default              |
 | Status       | Status do Amigato.   | Int  |                    | Default              |
 | Vida       | Pontos de vida do Amigato.   | Int  |                    | Default              |
@@ -107,7 +104,6 @@
 | Nome Variável      | Descrição                                                   | Tipo de Dado | Tamanho | Restrições de Domínio       |
 |--------------------|-------------------------------------------------------------|--------------|---------|---------------------------|
 | IdMonstro           | Número de identificação do Monstro.                          | Int          |         | PK                        |
-| IdAmigato           | Número de identificação do Monstro.                          | Int          |         | Not Null                  |
 | Nome                | Nome do Monstro.                                           | Varchar      | 64      | Not Null                  |
 | Elemento            | Inteiro correspondente ao elemento do Monstro.              | Int          |         | Default                   |
 | AtacaMonstros       | Booleano para saber se o monstro ataca outros monstros.      | Boolean      |         | Not Null, Check           |
@@ -149,7 +145,59 @@
 | Dano       | Valor do Dano.   | Int  |                    | Default              |
 | Horario     | Quando o ataque ocorreu.   | Timestamp  |                    | Default              |
 
+## Tabela: Equipamento
+### Descrição: Tabela que armazenará a categoria de cada equipamento.
+#### Observações: sem observações.
 
+| Nome Variável | Descrição                                   | Tipo de Dado | Tamanho | Restrições de Domínio |
+| :-----------: | :----------------------------------------: | :----------: | :-----: | :-------------------: |
+| IdEquipamento        | Número de identificação da Equipamento           | Int      |         | PK                    |
+| Categoria       | Número da categoria do equipamento (1 a 4)        | Int     |                 |                 |
+
+## Tabela: UtilizaEquipamento
+### Descrição: Tabela que registra equipamento utilizado pelo PC.
+#### Observações: essa tabela possui uma chave estrangeira pra tabela equipamentos e uma pra tabela PC.
+
+| Nome Variável     | Descrição                                     | Tipo de Dado | Tamanho | Restrições de Domínio |
+| :---------------: | :------------------------------------------: | :----------: | :-----: | :-------------------: |
+| IdEquipamento  | Número de identificação do registro do equipamento | Int |         | PK        FK            |
+| IdPC     | Número de identificação do player que utiliza o equipamento | Int      |         | PK FK |
+
+## Tabela: GuardaEquipamento
+### Descrição: Tabela que registra equipamento equipamentos guardados no inventário.
+#### Observações: essa tabela possui uma chave estrangeira pra tabela equipamentos e uma pra tabela Inventario.
+
+| Nome Variável     | Descrição                                     | Tipo de Dado | Tamanho | Restrições de Domínio |
+| :---------------: | :------------------------------------------: | :----------: | :-----: | :-------------------: |
+| IdEquipamento  | Número de identificação do registro do equipamento | Int |         | PK        FK            |
+| IdInventario     | Número de identificação do inventario que guarda o equipamento | Int      |         | PK FK |
+
+## Tabela: CriaEquipamento
+### Descrição: Tabela que registra qual forja cria qual equipamento.
+#### Observações: essa tabela possui uma chave estrangeira pra tabela equipamentos e uma pra tabela Forja.
+
+| Nome Variável     | Descrição                                     | Tipo de Dado | Tamanho | Restrições de Domínio |
+| :---------------: | :------------------------------------------: | :----------: | :-----: | :-------------------: |
+| IdEquipamento  | Número de identificação do registro do equipamento | Int |         | PK        FK            |
+| IdInventario     | Número de identificação da forja que cria o equipamento. | Int      |         | PK FK |
+
+## Tabela: VendeEquipamento
+### Descrição: Tabela que registra qual loja vende qual equipamento.
+#### Observações: essa tabela possui uma chave estrangeira pra tabela equipamentos e uma pra tabela Loja.
+
+| Nome Variável     | Descrição                                     | Tipo de Dado | Tamanho | Restrições de Domínio |
+| :---------------: | :------------------------------------------: | :----------: | :-----: | :-------------------: |
+| IdEquipamento  | Número de identificação do registro do equipamento | Int |         | PK        FK            |
+| IdLoja    | Número de identificação da loja que vende o equipamento. | Int      |         | PK FK |
+
+## Tabela: AmigatoEquipamento
+### Descrição: Tabela que registra equipamento utilizado por amigato.
+#### Observações: essa tabela possui uma chave estrangeira pra tabela equipamentos e uma pra tabela Amigato.
+
+| Nome Variável     | Descrição                                     | Tipo de Dado | Tamanho | Restrições de Domínio |
+| :---------------: | :------------------------------------------: | :----------: | :-----: | :-------------------: |
+| IdEquipamento  | Número de identificação do registro do equipamento | Int |         | PK        FK            |
+| IdAmigato    | Número do amigato que utiliza o equipamento | Int      |         | PK FK |
 
 ## Tabela: Missao
 ### Descrição: Tabela que armazenará os dados das missões.
@@ -179,6 +227,7 @@
 | IdMissaoPreReq         | Número de identificação da relação de pré-requisito da missão.            | Int      |         | PK                    |
 | MissaoPreReq        | Número de identificação da missão que é pré-requisito.         | Int     |                 | FK                    |
 | Missao        | Número de identificação da missão que tem pré-requisito.         | Int     |                 | FK                    |
+
 
 
 ## Tabela: EtapaMissao
@@ -254,7 +303,7 @@
 ### Descrição: Tabela que armazenará os dados dos itens do jogo.
 | Nome Variável | Descrição                                   | Tipo de Dado | Tamanho | Restrições de Domínio |
 | :-----------: | :----------------------------------------: | :----------: | :-----: | :-------------------: |
-| IdItem         | Número de identificação do Item.            | Int      |         | PK                    |
+| IdItem         | Número de identificação do Item.            | Int      |         | PK         FK            |
 | Nome        |  Nome do item.         | Varchar | 64                 | Not null               |
 | Raridade        | Nível de raridade do item.         | Int     |                 | Default                    |
 | Tipo        | Tipo de item (Consumível, Munição, Material).         | Int     |                 | Default                    |
@@ -271,15 +320,6 @@
 | IdDropaItem         | Número de identificação da relação de dropar item.            | Int      |         | PK                    |
 | Monstro        | Númer de identificação da instancia do monstro que dropa o item.         | Int     |                 | FK                    |
 | Item        | Número de identificação do item que é dropado.         | Int     |                 | FK                    |
-
-## Tabela: GuardaItem
-### Descrição: Tabela que armazenará os dados dos itens guardados em um inventario.
-#### Observações: Essa tabela possui uma chave estrangeira da tabela Item e uma em Inventario.
-| Nome Variável | Descrição                                   | Tipo de Dado | Tamanho | Restrições de Domínio |
-| :-----------: | :----------------------------------------: | :----------: | :-----: | :-------------------: |
-| IdGuardaItem         | Número de identificação da relação guardar item.            | Int      |         | PK                    |
-| Inventario        | Número de identificação do Inventário.         | Int     |                 | FK                    |
-| Item        | Número de identificação do Item.         | Int     |                 | FK                    |
 
 ## Tabela: UsaItem
 ### Descrição: Tabela que armazenará os dados dos itens utilizados para forja de equipamentos.
@@ -308,52 +348,6 @@
 | Elemento        | Elemento da arma.         | Varchar     |  32               | Default                    |
 | ValorElemento        | Valor do elemento da arma.         | Int     |                 | Default                    |
 
-## Tabela: GuardaArma
-### Descrição: Tabela que armazenará os dados das armas guardados em um inventario.
-#### Observações: Essa tabela possui uma chave estrangeira da tabela Arma e uma em Inventario.
-| Nome Variável | Descrição                                   | Tipo de Dado | Tamanho | Restrições de Domínio |
-| :-----------: | :----------------------------------------: | :----------: | :-----: | :-------------------: |
-| IdGuardaArma         | Número de identificação da relação guardar arma.            | Int      |         | PK                    |
-| Inventario        | Número de identificação do Inventário.         | Int     |                 | FK                    |
-| Arma        | Número de identificação da arma.         | Int     |                 | FK                    |
-
-## Tabela: UtilizaArma
-### Descrição: Tabela que armazenará os dados das armas utilizadas por um PC.
-#### Observações: Essa tabela possui uma chave estrangeira da tabela Arma e uma em PC.
-| Nome Variável | Descrição                                   | Tipo de Dado | Tamanho | Restrições de Domínio |
-| :-----------: | :----------------------------------------: | :----------: | :-----: | :-------------------: |
-| IdUtilizaArma         | Número de identificação da relação utilizar arma.            | Int      |         | PK                    |
-| PC        | Número de identificação do PC.         | Int     |                 | FK                    |
-| Arma        | Número de identificação da arma.         | Int     |                 | FK                    |
-
-## Tabela: AmigatoArma
-### Descrição: Tabela que armazenará os dados das armas utilizadas por um Amigato.
-#### Observações: Essa tabela possui uma chave estrangeira da tabela Arma e uma em Amigato.
-| Nome Variável | Descrição                                   | Tipo de Dado | Tamanho | Restrições de Domínio |
-| :-----------: | :----------------------------------------: | :----------: | :-----: | :-------------------: |
-| IdAmigatoArma         | Número de identificação da relação do amigato utilizar arma.            | Int      |         | PK                    |
-| Amigato        | Número de identificação do Amigato.         | Int     |                 | FK                    |
-| Arma        | Número de identificação da arma.         | Int     |                 | FK                    |
-
-
-## Tabela: VendeArma
-### Descrição: Tabela que armazenará os dados das armas vendidas em uma loja.
-#### Observações: Essa tabela possui uma chave estrangeira da tabela Arma e uma em Loja.
-| Nome Variável | Descrição                                   | Tipo de Dado | Tamanho | Restrições de Domínio |
-| :-----------: | :----------------------------------------: | :----------: | :-----: | :-------------------: |
-| IdVendeArma         | Número de identificação da relação vender arma.            | Int      |         | PK                    |
-| Loja        | Número de identificação do Loja.    | Int     |                 | FK                    |
-| Arma        | Número de identificação do arma.         | Int     |                 | FK                    |
-
-
-## Tabela: CriaArma
-### Descrição: Tabela que armazenará os dados das armas criadas em uma forja.
-#### Observações: Essa tabela possui uma chave estrangeira da tabela Arma e uma em Forja.
-| Nome Variável | Descrição                                   | Tipo de Dado | Tamanho | Restrições de Domínio |
-| :-----------: | :----------------------------------------: | :----------: | :-----: | :-------------------: |
-| IdCriaArma         | Número de identificação da relação criar arma.            | Int      |         | PK                    |
-| Forja        | Número de identificação da forja.         | Int     |                 | FK                    |
-| Arma        | Número de identificação da arma.         | Int     |                 | FK                    |
 
 ## Tabela: Armadura
 ### Descrição: Tabela que armazenará os dados das armaduras do jogo.
@@ -374,52 +368,6 @@
 | Gelo        | Acrescimo de defesa de gelo a armadura.         | Int     |                 | Default                    |
 | Dragao        | Acrescimo de defesa de dragão a armadura.         | Int     |                 | Default                    |
 
-## Tabela: GuardaArmadura
-### Descrição: Tabela que armazenará os dados das armaduras guardados em um inventario.
-#### Observações: Essa tabela possui uma chave estrangeira da tabela Armadura e uma em Inventario.
-| Nome Variável | Descrição                                   | Tipo de Dado | Tamanho | Restrições de Domínio |
-| :-----------: | :----------------------------------------: | :----------: | :-----: | :-------------------: |
-| IdGuardaArmadura         | Número de identificação da relação guardar armadura.            | Int      |         | PK                    |
-| Inventario        | Número de identificação do Inventário.         | Int     |                 | FK                    |
-| Armadura        | Número de identificação da armadura.         | Int     |                 | FK                    |
-
-## Tabela: UtilizaArmadura
-### Descrição: Tabela que armazenará os dados das armaduras utilizadas por um PC.
-#### Observações: Essa tabela possui uma chave estrangeira da tabela Armadura e uma em PC.
-| Nome Variável | Descrição                                   | Tipo de Dado | Tamanho | Restrições de Domínio |
-| :-----------: | :----------------------------------------: | :----------: | :-----: | :-------------------: |
-| IdUtilizaArmadura         | Número de identificação da relação utilizar armadura.            | Int      |         | PK                    |
-| PC        | Número de identificação do PC.         | Int     |                 | FK                    |
-| Armadura        | Número de identificação da armadura.         | Int     |                 | FK                    |
-
-## Tabela: AmigatoArmadura
-### Descrição: Tabela que armazenará os dados das armaduras utilizadas por um Amigato.
-#### Observações: Essa tabela possui uma chave estrangeira da tabela Armadura e uma em Amigato.
-| Nome Variável | Descrição                                   | Tipo de Dado | Tamanho | Restrições de Domínio |
-| :-----------: | :----------------------------------------: | :----------: | :-----: | :-------------------: |
-| IdAmigatoArmadura         | Número de identificação da relação do amigato utilizar armadura.            | Int      |         | PK                    |
-| Amigato        | Número de identificação do Amigato.         | Int     |                 | FK                    |
-| Armadura        | Número de identificação da armadura.         | Int     |                 | FK                    |
-
-
-## Tabela: VendeArmadura
-### Descrição: Tabela que armazenará os dados das armaduras vendidas em uma loja.
-#### Observações: Essa tabela possui uma chave estrangeira da tabela Armadura e uma em Loja.
-| Nome Variável | Descrição                                   | Tipo de Dado | Tamanho | Restrições de Domínio |
-| :-----------: | :----------------------------------------: | :----------: | :-----: | :-------------------: |
-| IdVendeArmadura         | Número de identificação da relação vender armadura.            | Int      |         | PK                    |
-| Loja        | Número de identificação do Loja.    | Int     |                 | FK                    |
-| Armadura        | Número de identificação do armadura.         | Int     |                 | FK                    |
-
-
-## Tabela: CriaArmadura
-### Descrição: Tabela que armazenará os dados das armaduras criadas em uma forja.
-#### Observações: Essa tabela possui uma chave estrangeira da tabela Armadura e uma em Forja.
-| Nome Variável | Descrição                                   | Tipo de Dado | Tamanho | Restrições de Domínio |
-| :-----------: | :----------------------------------------: | :----------: | :-----: | :-------------------: |
-| IdCriaArmadura         | Número de identificação da relação criar armadura.            | Int      |         | PK                    |
-| Forja        | Número de identificação da forja.         | Int     |                 | FK                    |
-| Armadura        | Número de identificação da armadura.         | Int     |                 | FK                    |
 
 
 ## Tabela: Amuleto
@@ -436,52 +384,6 @@
 | Tipo        | Tipo de amuleto (Defesa, Ataque, Vida, etc).         | Int     |                 | Default                    |
 | Melhoria        | Número de melhoria do amuleto.         | Int     |                 | Default                    |
 
-## Tabela: GuardaAmuleto
-### Descrição: Tabela que armazenará os dados dos amuletos guardados em um inventario.
-#### Observações: Essa tabela possui uma chave estrangeira da tabela Amuleto e uma em Inventario.
-| Nome Variável | Descrição                                   | Tipo de Dado | Tamanho | Restrições de Domínio |
-| :-----------: | :----------------------------------------: | :----------: | :-----: | :-------------------: |
-| IdGuardaAmuleto         | Número de identificação da relação guardar amuleto.            | Int      |         | PK                    |
-| Inventario        | Número de identificação do Inventário.         | Int     |                 | FK                    |
-| Amuleto        | Número de identificação do amuleto.         | Int     |                 | FK                    |
-
-## Tabela: UtilizaAmuleto
-### Descrição: Tabela que armazenará os dados dos amuletos utilizadas por um PC.
-#### Observações: Essa tabela possui uma chave estrangeira da tabela Amuleto e uma em PC.
-| Nome Variável | Descrição                                   | Tipo de Dado | Tamanho | Restrições de Domínio |
-| :-----------: | :----------------------------------------: | :----------: | :-----: | :-------------------: |
-| IdUtilizaAmuleto         | Número de identificação da relação utilizar amuleto.            | Int      |         | PK                    |
-| PC        | Número de identificação do PC.         | Int     |                 | FK                    |
-| Amuleto        | Número de identificação do amuleto.         | Int     |                 | FK                    |
-
-## Tabela: AmigatoAmuleto
-### Descrição: Tabela que armazenará os dados dos amuletos utilizadas por um Amigato.
-#### Observações: Essa tabela possui uma chave estrangeira da tabela Amuleto e uma em Amigato.
-| Nome Variável | Descrição                                   | Tipo de Dado | Tamanho | Restrições de Domínio |
-| :-----------: | :----------------------------------------: | :----------: | :-----: | :-------------------: |
-| IdAmigatoAmuleto         | Número de identificação da relação do amigato utilizar amuleto.            | Int      |         | PK                    |
-| Amigato        | Número de identificação do Amigato.         | Int     |                 | FK                    |
-| Amuleto        | Número de identificação do amuleto.         | Int     |                 | FK                    |
-
-
-## Tabela: VendeAmuleto
-### Descrição: Tabela que armazenará os dados dos amuletos vendidas em uma loja.
-#### Observações: Essa tabela possui uma chave estrangeira da tabela Amuleto e uma em Loja.
-| Nome Variável | Descrição                                   | Tipo de Dado | Tamanho | Restrições de Domínio |
-| :-----------: | :----------------------------------------: | :----------: | :-----: | :-------------------: |
-| IdVendeAmuleto         | Número de identificação da relação vender amuleto.            | Int      |         | PK                    |
-| Loja        | Número de identificação do Loja.    | Int     |                 | FK                    |
-| Amuleto        | Número de identificação do amuleto.         | Int     |                 | FK                    |
-
-
-## Tabela: CriaAmuleto
-### Descrição: Tabela que armazenará os dados dos amuletos criadas em uma forja.
-#### Observações: Essa tabela possui uma chave estrangeira da tabela Amuleto e uma em Forja.
-| Nome Variável | Descrição                                   | Tipo de Dado | Tamanho | Restrições de Domínio |
-| :-----------: | :----------------------------------------: | :----------: | :-----: | :-------------------: |
-| IdCriaAmuleto         | Número de identificação da relação criar amuleto.            | Int      |         | PK                    |
-| Forja        | Número de identificação da forja.         | Int     |                 | FK                    |
-| Amuleto        | Número de identificação do amuleto.         | Int     |                 | FK                    |
 
 ## Tabela: Ferramenta
 ### Descrição: Tabela que armazenará os dados dos ataques de um personagem a um monstro.
@@ -499,52 +401,6 @@
 | TempoEfeito        | Tempo de duração do efeito da ferramenta.         | Int     |                 | Default                    |
 | TempoRecarga        | Tempo de recarga do efeito da ferramenta.         | Int     |                 | Default                    |
 
-## Tabela: GuardaFerramenta
-### Descrição: Tabela que armazenará os dados das ferramentas guardados em um inventario.
-#### Observações: Essa tabela possui uma chave estrangeira da tabela Ferramenta e uma em Inventario.
-| Nome Variável | Descrição                                   | Tipo de Dado | Tamanho | Restrições de Domínio |
-| :-----------: | :----------------------------------------: | :----------: | :-----: | :-------------------: |
-| IdGuardaFerramenta         | Número de identificação da relação guardar ferramenta.            | Int      |         | PK                    |
-| Inventario        | Número de identificação do Inventário.         | Int     |                 | FK                    |
-| Ferramenta        | Número de identificação da ferramenta.         | Int     |                 | FK                    |
-
-## Tabela: UtilizaFerramenta
-### Descrição: Tabela que armazenará os dados das ferramentas utilizadas por um PC.
-#### Observações: Essa tabela possui uma chave estrangeira da tabela Ferramenta e uma em PC.
-| Nome Variável | Descrição                                   | Tipo de Dado | Tamanho | Restrições de Domínio |
-| :-----------: | :----------------------------------------: | :----------: | :-----: | :-------------------: |
-| IdUtilizaFerramenta         | Número de identificação da relação utilizar ferramenta.            | Int      |         | PK                    |
-| PC        | Número de identificação do PC.         | Int     |                 | FK                    |
-| Ferramenta        | Número de identificação da ferramenta.         | Int     |                 | FK                    |
-
-## Tabela: AmigatoFerramenta
-### Descrição: Tabela que armazenará os dados das ferramentas utilizadas por um Amigato.
-#### Observações: Essa tabela possui uma chave estrangeira da tabela Ferramenta e uma em Amigato.
-| Nome Variável | Descrição                                   | Tipo de Dado | Tamanho | Restrições de Domínio |
-| :-----------: | :----------------------------------------: | :----------: | :-----: | :-------------------: |
-| IdAmigatoFerramenta         | Número de identificação da relação do amigato utilizar ferramenta.            | Int      |         | PK                    |
-| Amigato        | Número de identificação do Amigato.         | Int     |                 | FK                    |
-| Ferramenta        | Número de identificação da ferramenta.         | Int     |                 | FK                    |
-
-
-## Tabela: VendeFerramenta
-### Descrição: Tabela que armazenará os dados das ferramentas vendidas em uma loja.
-#### Observações: Essa tabela possui uma chave estrangeira da tabela Ferramenta e uma em Loja.
-| Nome Variável | Descrição                                   | Tipo de Dado | Tamanho | Restrições de Domínio |
-| :-----------: | :----------------------------------------: | :----------: | :-----: | :-------------------: |
-| IdVendeFerramenta         | Número de identificação da relação vender ferramenta.            | Int      |         | PK                    |
-| Loja        | Número de identificação do Loja.    | Int     |                 | FK                    |
-| Ferramenta        | Número de identificação do ferramenta.         | Int     |                 | FK                    |
-
-
-## Tabela: CriaFerramenta
-### Descrição: Tabela que armazenará os dados das ferramentas criadas em uma forja.
-#### Observações: Essa tabela possui uma chave estrangeira da tabela Ferramenta e uma em Forja.
-| Nome Variável | Descrição                                   | Tipo de Dado | Tamanho | Restrições de Domínio |
-| :-----------: | :----------------------------------------: | :----------: | :-----: | :-------------------: |
-| IdCriaFerramenta         | Número de identificação da relação criar ferramenta.            | Int      |         | PK                    |
-| Forja        | Número de identificação da forja.         | Int     |                 | FK                    |
-| Ferramenta        | Número de identificação da ferramenta.         | Int     |                 | FK                    |
 
 ## Tabela: Habilidade
 ### Descrição: Tabela que armazenará os dados das habilidades do jogo.
