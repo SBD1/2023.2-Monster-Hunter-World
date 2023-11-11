@@ -14,10 +14,10 @@ Na figura 1, é possível ver a primeira versão do modelo relacional. Para visu
 
 <font size="3"><p style="text-align: center">Fonte: Autores.</p></font>
 
-Na figura 2, é possível ver a segunda versão do modelo relacional. Para visualizar a imagem em alta resulução, clique [aqui](#).
+Na figura 2, é possível ver a segunda versão do modelo relacional. Para visualizar a imagem em alta resulução, clique [aqui](https://raw.githubusercontent.com/SBD1/2023.2-Monster-Hunter-World/main/docs/imagens/monsterhunter-v2.drawio.png).
 
 <font size="3"><p style="text-align: center">Figura 2: Modelo relacional - versão 2.</p></font>
 
-![MER2](#)
+![MER2](https://github.com/SBD1/2023.2-Monster-Hunter-World/blob/main/docs/imagens/monsterhunter-v2.drawio.png?raw=true)
 
 <font size="3"><p style="text-align: center">Fonte: Autores.</p></font>
