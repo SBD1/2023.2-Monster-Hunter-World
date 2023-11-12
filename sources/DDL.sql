@@ -10,6 +10,8 @@ CREATE TABLE IF NOT EXISTS Mapa (
 -- Tabela Regiao
 CREATE TABLE IF NOT EXISTS Regiao (
     IdRegiao serial PRIMARY KEY,
+    Nome varchar(64) NOT NULL,
+    Descricao varchar(256) NOT NULL,
     Mapa int REFERENCES Mapa(IdMapa)
 );
 
