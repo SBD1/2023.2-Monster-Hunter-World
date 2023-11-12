@@ -11,11 +11,11 @@ Na figura 1, é possível ver a primeira versão do Diagrama Entidade Relacionam
 
 <font size="3"><p style="text-align: center">Fonte: Autores.</p></font>
 
-Na figura 2, é possível ver a segunda versão do Diagrama Entidade Relacionamento. Para visualizar a imagem em alta resolução, clique [aqui](https://raw.githubusercontent.com/SBD1/2023.2-Monster-Hunter-World/main/docs/imagens/DER2.png).
+Na figura 2, é possível ver a segunda versão do Diagrama Entidade Relacionamento. Para visualizar a imagem em alta resolução, clique [aqui](https://raw.githubusercontent.com/SBD1/2023.2-Monster-Hunter-World/main/docs/imagens/DER_MonsterHunter_V2.png).
 
 <font size="3"><p style="text-align: center">Figura 2: Diagrama entidade relacionamento - versão 2.</p></font>
 
-![DER2]()
+![DER2](https://github.com/SBD1/2023.2-Monster-Hunter-World/blob/main/docs/imagens/DER_MonsterHunter_V2.png?raw=true)
 
 <font size="3"><p style="text-align: center">Fonte: Autores.</p></font>
 ## Entidades e Relacionamentos
