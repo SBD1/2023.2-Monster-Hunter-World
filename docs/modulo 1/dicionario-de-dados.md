@@ -19,6 +19,7 @@
 | IdRegiao      | Número de identificação da região.  | Int     |                   | PK                    |
 | Mapa        | Número de identificação do mapa.         | Int     |                 | FK                    |
 | Nome          | Nome da região.                      | Varchar | 64                 | Not null               |
+| descricao     | Descrição do mapa.                   | Varchar | 256                 | Not null               |
 
 
 ## Tabela: LevaEm
