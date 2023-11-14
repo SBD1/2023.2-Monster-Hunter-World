@@ -9,36 +9,31 @@ A Data Manipulation Language (DML) é uma categoria de comandos em sistemas de g
 No módulo 2, após a etapa de DDL, populamos todas as tabelas no nosso banco de dados, através dos seguintes comandos SQL:
 
 ```
--- MAPA
-INSERT INTO Mapa (Nome, TamanhoX, TamanhoY, Descricao)
-VALUES ('Floresta Antiga', 1000, 1000, 'Mapa exuberante com uma diversidade de ambientes, incluindo densas florestas e áreas abertas.');
+INSERT INTO Mapa (Nome, Descricao) VALUES
+('Astera Archipelago', 'Um conjunto de ilhas exóticas, do misterioso Bosque Sombrio ao árido Deserto Flamejante, cada uma repleta de monstros desafiadores e ecossistemas únicos. Navegue pelas águas entre as ilhas, enfrentando perigos e descobrindo tesouros em sua busca pela supremacia como caçador.');
 
--- REGIÕES
-INSERT INTO Regiao (Mapa, Nome, xInicio, yInicio, xFim, yFim)
-VALUES (1, 'Área Central', 0, 0, 500, 500),
-       (1, 'Área Noroeste', 0, 500, 250, 1000),
-       (1, 'Área Norte', 500, 500, 1000, 1000),
-       (1, 'Área Sudoeste', 0, 0, 500, 500),
-       (1, 'Área Sudeste', 500, 0, 1000, 500);
+INSERT INTO Regiao (Mapa, Nome) VALUES
+(1, 'Floresta Sombria'),
+(1, 'Deserto Ardente'),
+(1, 'Montanhas Geladas'),
+(1, 'Planícies Trovejantes'),
+(1, 'Selva Misteriosa'),
+(1, 'Cavernas Obscuras');
 
+INSERT INTO LevaEm (RegiaoOrigem, RegiaoDestino) VALUES
+(1, 6), (1, 2), (6, 5), (6, 1), (5, 6), (5, 2), (5, 4), (2, 1), (2, 5), (2, 3), (3, 2), (3, 4), (4, 5), (4, 3);
 
--- NPCS
-
-INSERT INTO NPC (Regiao, Nome, x, y, Descricao, Funcao, Raca, Genero)
-VALUES 
-    (1, 'Excursionista (The Handler)', 150, 150, 'Sua fiel parceira durante a jornada, fornece informações e auxilia na gerência de missões.', 'Assistente de Campo', 'Humano', 'Feminino'),
-    (1, 'Comandante', 300, 300, 'Oferece missões principais e informações cruciais sobre a história do jogo.', 'Líder da Comissão', 'Humano', 'Masculino'),
-    (2, 'Gerente de Acampamento', 50, 850, 'Fornece serviços relacionados ao acampamento, como viagens rápidas e gerenciamento de equipamentos.', 'Administrador de Campo', 'Humano', 'Masculino'),
-    (2, 'Mestre de Forja (The Smithy)', 150, 850, 'Gerencia a forja e melhoria de equipamentos.', 'Ferreiro', 'Humano', 'Masculino'),
-    (3, 'Capitão', 500, 750, 'Fornece informações sobre as atividades de campo e expedições.', 'Oficial de Campo', 'Humano', 'Masculino'),
-    (3, 'Botânico', 600, 750, 'Permite o cultivo de plantas e criação de itens.', 'Agricultor', 'Humano', 'Masculino'),
-    (4, 'Chefe dos Pesquisadores', 50, 50, 'Oferece informações detalhadas sobre a fauna e os monstros da região.', 'Pesquisador Chefe', 'Humano', 'Masculino'),
-    (4, 'Feiticeira (Provisions Manager)', 150, 50, 'Gerencia o Cofre e o Gerenciador de Itens, fornecendo itens e provisões.', 'Gerente de Provisões', 'Humano', 'Feminino'),
-    (5, 'Comerciante', 850, 50, 'Vende itens e provisões essenciais para sua jornada.', 'Comerciante Ambulante', 'Humano', 'Masculino'),
-    (5, 'Excursionista (The Handler)', 750, 50, 'Acompanha você ao longo da história, fornecendo informações e auxiliando na gerência de missões.', 'Assistente de Campo', 'Humano', 'Feminino');
-
-
--- FALAS
+INSERT INTO NPC (Regiao, Nome, Descricao, Funcao, Raca, Genero) VALUES 
+(1, 'Excursionista (The Handler)', 'Sua fiel parceira durante a jornada, fornece informações e auxilia na gerência de missões.', 'Assistente de Campo', 'Humano', 'Feminino'),
+(1, 'Comandante', 'Oferece missões principais e informações cruciais sobre a história do jogo.', 'Líder da Comissão', 'Humano', 'Masculino'),
+(2, 'Gerente de Acampamento', 'Fornece serviços relacionados ao acampamento, como viagens rápidas e gerenciamento de equipamentos.', 'Administrador de Campo', 'Humano', 'Masculino'),
+(2, 'Mestre de Forja (The Smithy)', 'Gerencia a forja e melhoria de equipamentos.', 'Ferreiro', 'Humano', 'Masculino'),
+(3, 'Capitão', 'Fornece informações sobre as atividades de campo e expedições.', 'Oficial de Campo', 'Humano', 'Masculino'),
+(3, 'Botânico', 'Permite o cultivo de plantas e criação de itens.', 'Agricultor', 'Humano', 'Masculino'),
+(4, 'Chefe dos Pesquisadores', 'Oferece informações detalhadas sobre a fauna e os monstros da região.', 'Pesquisador Chefe', 'Humano', 'Masculino'),
+(4, 'Feiticeira (Provisions Manager)', 'Gerencia o Cofre e o Gerenciador de Itens, fornecendo itens e provisões.', 'Gerente de Provisões', 'Humano', 'Feminino'),
+(5, 'Comerciante', 'Vende itens e provisões essenciais para sua jornada.', 'Comerciante Ambulante', 'Humano', 'Masculino'),
+(5, 'Excursionista (The Handler)', 'Acompanha você ao longo da história, fornecendo informações e auxiliando na gerência de missões.', 'Assistente de Campo', 'Humano', 'Feminino');
 
 INSERT INTO Fala (NPC, Fala, Repetivel)
 VALUES 
@@ -96,7 +91,6 @@ VALUES (11, 12), -- Caça ao Grande Jagras
        (19, 20), -- Caça ao Rathalos
        (21, 22); -- Caça ao Anjanath
 
-
 -- MONSTROS
 
 INSERT INTO Monstro (IdAmigato, Nome, Elemento, AtacaMonstros, AlcanceHostilidade, Tipo)
@@ -107,7 +101,6 @@ VALUES
     (NULL, 'Jyuratodus', 'None', true, 0, 0),
     (NULL, 'Rathalos', 'Fogo', true, 0, 0),
     (NULL, 'Anjanath', 'Fogo', true, 0, 0);
-
 
 -- INSTANCIAS MONSTROS
 
@@ -145,44 +138,49 @@ VALUES
     (6, 0, 100, 0, 1, 100),
     (6, 0, 100, 0, 1, 100);
 
-
 -- REGIAO MONSTRO
 
--- Área Central (Região 1)
+-- Floresta Sombria (Região 1)
 INSERT INTO RegiaoMonstro (Regiao, Monstro)
 VALUES 
     (1, 1),
     (1, 2),
     (1, 3);
 
--- Área Noroeste (Região 2)
+-- Deserto Ardente (Região 2)
 INSERT INTO RegiaoMonstro (Regiao, Monstro)
 VALUES 
     (2, 2),
     (2, 3),
     (2, 4);
 
--- Área Norte (Região 3)
+-- Montanhas Geladas (Região 3)
 INSERT INTO RegiaoMonstro (Regiao, Monstro)
 VALUES 
     (3, 4),
     (3, 5),
     (3, 6);
 
--- Área Sudoeste (Região 4)
+-- Planícies Trovejantes (Região 4)
 INSERT INTO RegiaoMonstro (Regiao, Monstro)
 VALUES 
     (4, 1),
     (4, 4),
     (4, 5);
 
--- Área Sudeste (Região 5)
+-- Selva Misteriosa (Região 5)
 INSERT INTO RegiaoMonstro (Regiao, Monstro)
 VALUES 
     (5, 2),
     (5, 5),
     (5, 6);
-
+	
+-- Cavernas Obscuras (Região 6)
+INSERT INTO RegiaoMonstro (Regiao, Monstro)
+VALUES 
+    (6, 1),
+    (6, 4),
+    (6, 6);
 
 -- MISSÕES
 
@@ -210,6 +208,8 @@ VALUES (1, 2, 'Caça ao Rathalos', 5, 0, 'Capitão', 'Um Rathalos ameaça a segu
 INSERT INTO Missao (Mapa, NPC, Nome, Nivel, Tipo, Cliente, Descricao, MaximoDesmaios, Tempo, Premio, Resumo, RanqueMinimo)
 VALUES (1, 1, 'Caça ao Anjanath', 6, 0, 'Comerciante', 'Um Anjanath está representando uma ameaça à região. Sua tarefa é eliminar esse monstro e restaurar a paz.', 3, 60, 300, 'Derrote o Anjanath', 6);
 
+INSERT INTO MissaoPreReq (MissaoPreReq, Missao) VALUES
+(1, 2), (2, 3), (3, 1);
 
 -- MISSÕES PRÉ-REQ
 
@@ -412,6 +412,7 @@ VALUES
     (5, 14),
     (6, 15);
 
+
 -- ARMA
 
 -- Arma Espada Grande
@@ -463,7 +464,7 @@ VALUES
     (1, 1),
     (1, 2),
     (1, 3);
-
+	
 -- ARMADURA
     
 -- Armadura Conjunto de Armadura de Liga
@@ -514,7 +515,7 @@ VALUES
   (2, 3), 
   (2, 4); 
   
-  -- Amuleto de Defesa
+-- Amuleto de Defesa
 INSERT INTO Amuleto (Nome, Nivel, Raridade, CustoCompra, ValorVenda, Descricao, Tipo, Melhoria)
 VALUES ('Amuleto de Defesa', 1, 3, 100, 50, 'Aumenta a defesa do caçador.', 'Defesa', 0);
 
@@ -546,7 +547,7 @@ VALUES
   (2, 3), 
   (2, 4); 
   
-  -- Manta de Vitalidade
+-- Manta de Vitalidade
 INSERT INTO Ferramenta (Nome, Nivel, Raridade, CustoCompra, ValorVenda, Descricao, Tipo, Funcao, TempoEfeito, TempoRecarga)
 VALUES ('Manta de Vitalidade', 1, 3, 100, 50, 'Restaura a vida do caçador e aliados.', 'Manta', 'Recuperação', 60, 300);
 
@@ -569,6 +570,11 @@ VALUES
   (2, 2), 
   (1, 3), 
   (2, 4); 
+
+INSERT INTO Habilidade (Nome, Nivel, Descricao, Funcao) VALUES
+('Curandeiro', 1, 'Aumenta a eficácia de itens de cura.', 'Suporte'),
+('Atirador', 2, 'Aumenta a precisão de ataques à distância.', 'Ofensiva'),
+('Escapista', 3, 'Aumenta a velocidade de movimento ao fugir de monstros.', 'Defensiva');
 
 -- Habilidade de Ataque
 INSERT INTO Habilidade (Nome, Nivel, Descricao, Funcao)
@@ -601,4 +607,5 @@ VALUES
   (2, 4), 
   (3, 2), 
   (4, 1); 
+
 ```
