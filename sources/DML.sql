@@ -274,7 +274,34 @@ INSERT INTO Ferramenta (IdFerramenta, Nome, Nivel, Raridade, CustoCompra, ValorV
     (25, 'Ghillie Mantle', 1, 1, 40, 20, 'Camufla o caçador, tornando-o temporariamente invisível para os monstros.', 5, 'Invisibilidade', 60, 40),
     (26, 'Bomba de Fumaça', 1, 1, 15, 8, 'Cria uma nuvem de fumaça que oculta o caçador dos monstros.', 6, 'Invisibilidade', 30, 15);
 
--- Itens que dropam dos Monstros
+
+-- VENDE EQUIPAMENTO
+
+INSERT INTO VendeEquipamento (Loja, Equipamento) VALUES
+    (1, 7),
+    (1, 8),
+    (1, 9),
+    (1, 10),
+    (1, 11),
+    (1, 12),
+    (1, 17),
+    (1, 18),
+    (1, 19),
+    (1, 20),
+    (1, 21),
+    (1, 22),
+    (1, 23),
+    (1, 24),
+    (1, 25),
+    (1, 26);
+
+-- CRIA EQUIPAMENTO
+
+INSERT INTO CriaEquipamento (Forja, Equipamento) VALUES
+    (1, 13),
+    (1, 14),
+    (1, 15),
+    (1, 16);
 
 -- DROPA ITEM
 
