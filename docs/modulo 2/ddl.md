@@ -13,6 +13,8 @@ A Linguagem de Definição de Dados (DDL), ou Data Definition Language, é uma c
 No módulo 2, criamos todas as tabelas do banco de dados do nosso projeto, baseado no jogo Monster Hunter World, que ficou da seguinte forma:
 
 ```
+BEGIN;
+
 -- Tabela Mapa
 CREATE TABLE IF NOT EXISTS Mapa (
     IdMapa serial PRIMARY KEY,
@@ -23,14 +25,19 @@ CREATE TABLE IF NOT EXISTS Mapa (
 -- Tabela Regiao
 CREATE TABLE IF NOT EXISTS Regiao (
     IdRegiao serial PRIMARY KEY,
-    Mapa int REFERENCES Mapa(IdMapa),
-    Nome varchar(64) NOT NULL
+    Nome varchar(64) NOT NULL,
+    Descricao varchar(256) NOT NULL,
+    Mapa int REFERENCES Mapa(IdMapa)
 );
 
+-- Tabela LevaEm
 CREATE TABLE IF NOT EXISTS LevaEm (
-    RegiaoOrigem int PRIMARY KEY REFERENCES Regiao(IdRegiao),
-    RegiaoDestino int PRIMARY KEY REFERENCES Regiao(IdRegiao)
-)
+    RegiaoOrigem int,
+    RegiaoDestino int,
+    PRIMARY KEY (RegiaoOrigem, RegiaoDestino),
+    FOREIGN KEY (RegiaoOrigem) REFERENCES Regiao(IdRegiao),
+    FOREIGN KEY (RegiaoDestino) REFERENCES Regiao(IdRegiao)
+);
 
 -- Tabela NPC
 CREATE TABLE IF NOT EXISTS NPC (
@@ -71,7 +78,6 @@ CREATE TABLE IF NOT EXISTS Amigato (
     Status int DEFAULT 0,
     Vida int DEFAULT 100
 );
-
 
 -- Tabela Fala
 CREATE TABLE IF NOT EXISTS Fala (
@@ -149,7 +155,6 @@ CREATE TABLE IF NOT EXISTS Missao (
     RanqueMinimo int DEFAULT 1
 );
 
-
 -- Tabela MissaoPreReq
 CREATE TABLE IF NOT EXISTS MissaoPreReq (
     IdMissaoPreReq serial PRIMARY KEY,
@@ -206,42 +211,42 @@ CREATE TABLE IF NOT EXISTS Loja (
 -- Tabela Equipamento
 CREATE TABLE IF NOT EXISTS Equipamento (
     IdEquipamento serial PRIMARY KEY,
-    Categoria int DEFAULT 0
+    Categoria int DEFAULT 1
 );
 
 -- Tabela UtilizaEquipamento
 CREATE TABLE IF NOT EXISTS UtilizaEquipamento (
-    PC int PRIMARY KEY REFERENCES PC(IdPlayer),
-    Equipamento int PRIMARY KEY REFERENCES Equipamento(IdEquipamento)
+    PC int REFERENCES PC(IdPlayer),
+    Equipamento int REFERENCES Equipamento(IdEquipamento)
 );
 
 -- Tabela GuardaEquipamento
 CREATE TABLE IF NOT EXISTS GuardaEquipamento (
-    Inventario int PRIMARY KEY REFERENCES Inventario(IdInventario),
-    Equipamento int PRIMARY KEY REFERENCES Equipamento(IdEquipamento)
+    Inventario int REFERENCES Inventario(IdInventario),
+    Equipamento int REFERENCES Equipamento(IdEquipamento)
 );
 
 -- Tabela CriaEquipamento
 CREATE TABLE IF NOT EXISTS CriaEquipamento (
-    Forja int PRIMARY KEY REFERENCES Forja(IdForja),
-    Equipamento int PRIMARY KEY REFERENCES Equipamento(IdEquipamento)
+    Forja int REFERENCES Forja(IdForja),
+    Equipamento int REFERENCES Equipamento(IdEquipamento)
 );
 
 -- Tabela VendeEquipamento
 CREATE TABLE IF NOT EXISTS VendeEquipamento (
-    Loja int PRIMARY KEY REFERENCES Loja(IdLoja),
-    Equipamento int PRIMARY KEY REFERENCES Equipamento(IdEquipamento)
+    Loja int REFERENCES Loja(IdLoja),
+    Equipamento int REFERENCES Equipamento(IdEquipamento)
 );
 
 -- TABELA AmigatoEquipamento
 CREATE TABLE IF NOT EXISTS AmigatoEquipamento (
-    Amigato int PRIMARY KEY REFERENCES Amigato(IdAmigato),
-    Equipamento int PRIMARY KEY REFERENCES Equipamento(IdEquipamento)
+    Amigato int REFERENCES Amigato(IdAmigato),
+    Equipamento int REFERENCES Equipamento(IdEquipamento)
 );
 
 -- Tabela Item
 CREATE TABLE IF NOT EXISTS Item (
-    IdItem serial PRIMARY KEY REFERENCES Equipamento(IdEquipamento),
+    IdItem PRIMARY KEY,
     Nome varchar(64) NOT NULL,
     Raridade int DEFAULT 1,
     Tipo int DEFAULT 0,
@@ -260,7 +265,7 @@ CREATE TABLE IF NOT EXISTS DropaItem (
 
 -- Tabela Arma
 CREATE TABLE IF NOT EXISTS Arma (
-    IdArma serial PRIMARY KEY REFERENCES Equipamento(IdEquipamento),
+    IdArma PRIMARY KEY,
     Nome varchar(64) NOT NULL,
     Nivel int DEFAULT 1,
     Raridade int DEFAULT 1,
@@ -276,7 +281,7 @@ CREATE TABLE IF NOT EXISTS Arma (
 
 -- Tabela Armadura
 CREATE TABLE IF NOT EXISTS Armadura (
-    IdArmadura serial PRIMARY KEY REFERENCES Equipamento(IdEquipamento),
+    IdArmadura PRIMARY KEY,
     Nome varchar(64) NOT NULL,
     Nivel int DEFAULT 1,
     Raridade int DEFAULT 1,
@@ -294,7 +299,7 @@ CREATE TABLE IF NOT EXISTS Armadura (
 
 -- Tabela Amuleto
 CREATE TABLE IF NOT EXISTS Amuleto (
-    IdAmuleto serial PRIMARY KEY REFERENCES Equipamento(IdEquipamento),
+    IdAmuleto PRIMARY KEY,
     Nome varchar(64) NOT NULL,
     Nivel int DEFAULT 1,
     Raridade int DEFAULT 1,
@@ -307,7 +312,7 @@ CREATE TABLE IF NOT EXISTS Amuleto (
 
 -- Tabela Ferramenta
 CREATE TABLE IF NOT EXISTS Ferramenta (
-    IdFerramenta serial PRIMARY KEY REFERENCES Equipamento(IdEquipamento),
+    IdFerramenta PRIMARY KEY,
     Nome varchar(64) NOT NULL,
     Nivel int DEFAULT 1,
     Raridade int DEFAULT 1,
@@ -342,4 +347,6 @@ CREATE TABLE IF NOT EXISTS HabilidadeArmadura (
     Armadura int REFERENCES Armadura(IdArmadura),
     Habilidade int REFERENCES Habilidade(IdHabilidade)
 );
+
+COMMIT;
 ```
