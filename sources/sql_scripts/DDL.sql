@@ -332,5 +332,3 @@ CREATE TABLE IF NOT EXISTS HabilidadeArmadura (
     Armadura int REFERENCES Armadura(IdArmadura),
     Habilidade int REFERENCES Habilidade(IdHabilidade)
 );
-
-COMMIT;
