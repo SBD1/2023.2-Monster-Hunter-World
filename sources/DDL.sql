@@ -231,7 +231,7 @@ CREATE TABLE IF NOT EXISTS AmigatoEquipamento (
 
 -- Tabela Item
 CREATE TABLE IF NOT EXISTS Item (
-    IdItem PRIMARY KEY,
+    IdItem serial PRIMARY KEY,
     Nome varchar(64) NOT NULL,
     Raridade int DEFAULT 1,
     Tipo int DEFAULT 0,
@@ -250,7 +250,7 @@ CREATE TABLE IF NOT EXISTS DropaItem (
 
 -- Tabela Arma
 CREATE TABLE IF NOT EXISTS Arma (
-    IdArma PRIMARY KEY,
+    IdArma serial PRIMARY KEY,
     Nome varchar(64) NOT NULL,
     Nivel int DEFAULT 1,
     Raridade int DEFAULT 1,
@@ -266,7 +266,7 @@ CREATE TABLE IF NOT EXISTS Arma (
 
 -- Tabela Armadura
 CREATE TABLE IF NOT EXISTS Armadura (
-    IdArmadura PRIMARY KEY,
+    IdArmadura serial PRIMARY KEY,
     Nome varchar(64) NOT NULL,
     Nivel int DEFAULT 1,
     Raridade int DEFAULT 1,
@@ -284,7 +284,7 @@ CREATE TABLE IF NOT EXISTS Armadura (
 
 -- Tabela Amuleto
 CREATE TABLE IF NOT EXISTS Amuleto (
-    IdAmuleto PRIMARY KEY,
+    IdAmuleto serial PRIMARY KEY,
     Nome varchar(64) NOT NULL,
     Nivel int DEFAULT 1,
     Raridade int DEFAULT 1,
@@ -297,7 +297,7 @@ CREATE TABLE IF NOT EXISTS Amuleto (
 
 -- Tabela Ferramenta
 CREATE TABLE IF NOT EXISTS Ferramenta (
-    IdFerramenta PRIMARY KEY,
+    IdFerramenta serial PRIMARY KEY,
     Nome varchar(64) NOT NULL,
     Nivel int DEFAULT 1,
     Raridade int DEFAULT 1,

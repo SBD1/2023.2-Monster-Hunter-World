@@ -1,4 +1,4 @@
-version: '3'
+version: '3.3'
 
 services:
   project:
@@ -17,4 +17,17 @@ services:
       POSTGRES_HOST: ${DB_HOST}
       POSTGRES_PORT: ${DB_PORT}
     ports:
-      - "5432:5432"
+      - "${DB_PORT}:${DB_PORT}"
+
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_SERVER_HOST: db  
+      PGADMIN_SERVER_PORT: ${DB_PORT}
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD}
+      PGADMIN_LISTEN_PORT: ${PGADMIN_LISTEN_PORT}
+    ports:
+      - "${PGADMIN_LISTEN_PORT}:${PGADMIN_LISTEN_PORT}"
+    depends_on:
+      - db
