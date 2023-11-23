@@ -137,7 +137,8 @@ CREATE TABLE IF NOT EXISTS Missao (
     Tempo int DEFAULT 40,
     Premio int DEFAULT 0,
     Resumo varchar(128),
-    RanqueMinimo int DEFAULT 1
+    RanqueMinimo int DEFAULT 1,
+    Status VARCHAR(20) DEFAULT 'nao iniciada'
 );
 
 -- Tabela MissaoPreReq
