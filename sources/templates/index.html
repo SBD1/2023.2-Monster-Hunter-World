@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{page.name}}</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-image: url("{{ url_for('static', filename=page.background) }}"); 
+            background-size: cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            text-align: center; 
+        }
+
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background-color: rgba(0, 0, 0, 0.3);
+            z-index: -1;
+        }
+        
+        h1 {
+            color: #ffffff; /* Cor do texto */
+            font-size: 36px;
+        }
+
+        .button-container {
+            margin-top: 20px;
+            background-color: rgba(0,0,0,0.7);
+            border-radius: 60px;
+            display: flex;
+            flex-direction: column;
+            padding:40px;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .custom-button {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            text-align: center;
+            text-decoration: none;
+            cursor: pointer;
+            color: #FFF; 
+            background: radial-gradient(circle, #065cac, #011242); 
+            border: 1px solid #fff; 
+            border-radius: 5px; 
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        .logo-container{
+            width: 80%;
+            margin:auto;
+        }
+
+        .color-input {
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #fff; /* Borda branca */
+            border-radius: 5px; /* Borda arredondada */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra */
+        }
+
+        .color-input-wrapper {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            width: 50%;
+            text-align: center;
+            justify-content: center;
+            text-decoration: none;
+            color: #FFF; 
+            background: radial-gradient(circle, #065cac, #011242); 
+            border: 1px solid #fff; 
+            border-radius: 5px; 
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .input-block {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            width: 50%;
+            text-align: center;
+            justify-content: center;
+            text-decoration: none;
+            color: #FFF; 
+            background: #000; 
+            border: 1px solid #fff; 
+            border-radius: 5px; 
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .color-block{
+            width: 80%;
+            height: 30px; 
+            border: none; 
+            border-radius: 0px; 
+            outline: none;
+            cursor: pointer;
+            background-color: #000;
+            margin: auto;
+        }
+        .color-input{
+            display: none;
+        }
+        .input-container{
+            display: flex;
+            flex-direction: row;
+            padding: 10px 20px;
+            font-size: 16px;
+            text-align: center;
+            justify-content: center;
+            text-decoration: none;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            color: #FFF; 
+        }
+        .input-container label{
+            font-size: 24px;
+            font-weight: bold;
+            text-align: center;
+            text-decoration: none;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            color: #FFF; 
+            margin-right: auto;
+            margin-left: 0px;
+            margin-top: auto;
+            margin-bottom: auto;
+        }
+    </style>
+    
+</head>
+<body>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+          const colorInputs = document.querySelectorAll('.color-input');
+          const colorBlocks = document.querySelectorAll('.color-block');
+    
+          colorInputs.forEach((input, index) => {
+            input.addEventListener('input', () => {
+              const selectedColor = input.value;
+              colorBlocks[index].style.backgroundColor = selectedColor;
+            });
+          });
+          colorBlocks.forEach((block, index) => {
+            block.addEventListener('click', () => {
+                colorInputs[index].click();
+            });
+          });
+        });
+    </script>
+    <div class="button-container">
+        <img class="logo-container" src="{{ url_for('static', filename='logo.png') }}"/>
+        <h1>{{page.name}}</h1>
+
+        {% for element in page.content %}
+            {% if element.type == 'button' %}
+                <a class="custom-button" href="/{{element.action}}">{{element.text}}</a>
+            {% endif %}
+            {% if element.type == 'input' %}
+                <div class="input-container">
+                    <label>{{element.text}}</label>
+                    <input type="text" class="input-block"/>
+                </div>
+            {% endif %}
+            {% if element.type == 'number' %}
+                <div class="input-container">
+                    <label>{{element.text}}</label>
+                    <input type="number" class="input-block"/>
+                </div>
+            {% endif %}
+            {% if element.type == 'color' %}
+                <div class="input-container">
+                    <label>{{element.text}}</label>
+                    <div class="color-input-wrapper">
+                        <div class="color-block"></div>
+                        <input type="color" class="color-input" id="colorInput">
+                    </div>
+                </div>
+            {% endif %}
+            {% if element.type == 'text' %}
+                <div class="input-container">
+                    <label>{{element.text}}</label>
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+</body>
+</html>
