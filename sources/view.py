@@ -27,6 +27,7 @@ def pageCriarPersonagem():
                 "text":"Nome do Amigato:",
                 "name":"amigato"           
             },
+            {
                 "type":"button",
                 "text":"Confirmar",
                 "action":"criarPersonagem"           
