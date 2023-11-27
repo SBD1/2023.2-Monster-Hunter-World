@@ -45,12 +45,7 @@ CREATE TABLE IF NOT EXISTS PC (
     Vigor int DEFAULT 200,
     Afinidade int DEFAULT 0,
     Dinheiro int DEFAULT 0,
-    Genero varchar(16),
-    CorPele varchar(16) DEFAULT '#FFFFFF',
-    CorCabelo varchar(16) DEFAULT '#000000',
-    CorOlho varchar(16) DEFAULT '#000000',
-    TipoCabelo int DEFAULT 0,
-    TipoOlho int DEFAULT 0
+    Genero varchar(16)
 );
 
 -- Tabela Amigato
@@ -69,7 +64,8 @@ CREATE TABLE IF NOT EXISTS Fala (
     IdFala serial PRIMARY KEY,
     NPC int REFERENCES NPC(IdNPC),
     Fala varchar(256),
-    Repetivel boolean NOT NULL CHECK (Repetivel IN (true, false))
+    Repetivel boolean NOT NULL CHECK (Repetivel IN (true, false)),
+    FoiExecutado boolean NOT NULL CHECK (Repetivel IN (true, false))
 );
 
 -- Tabela FalaPreReq
@@ -140,6 +136,7 @@ CREATE TABLE IF NOT EXISTS Missao (
     RanqueMinimo int DEFAULT 1,
     Status VARCHAR(20) DEFAULT 'nao iniciada'
 );
+
 
 -- Tabela MissaoPreReq
 CREATE TABLE IF NOT EXISTS MissaoPreReq (

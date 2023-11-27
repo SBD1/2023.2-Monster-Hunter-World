@@ -1,4 +1,4 @@
-from models import *
+from .model import *
 
 def create_mapa(conn, mapa):
     try:
