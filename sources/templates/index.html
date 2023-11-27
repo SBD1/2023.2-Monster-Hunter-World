@@ -59,6 +59,21 @@
             margin-bottom: 10px;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
         }
+
+        .option-container {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            text-align: center;
+            text-decoration: none;
+            background: radial-gradient(circle, #065cac, #011242); 
+            border: 1px solid #fff; 
+            border-radius: 5px; 
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
         .logo-container{
             width: 80%;
             margin:auto;
@@ -197,6 +212,10 @@
                 <div class="input-container">
                     <label>{{element.text}}</label>
                 </div>
+            {% endif %}
+            {% if element.type == 'option' %}
+                <label>{{element.text}}</label>
+                <div class="option-container" href="/{{element.action}}">{{element.text}}</div>
             {% endif %}
         {% endfor %}
     </div>

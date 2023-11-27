@@ -2,7 +2,7 @@ import os
 import psycopg2
 from dotenv import load_dotenv
 from flask import Flask, render_template, request
-from .view import *
+from view import *
 
 load_dotenv()
 
@@ -82,6 +82,9 @@ def index():
     }
     return render_template('index.html',page=page)
 
+@app.route('/criarPersonagem')
+def routeCriaPersonagem():
+    return pageCriarPersonagem()
 
 @app.route('/usuario/<int:user_id>/<string:user_name>')
 def mostrar_usuario(user_id, user_name):

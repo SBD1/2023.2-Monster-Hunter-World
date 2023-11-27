@@ -1,5 +1,5 @@
-from .model import *
-from .controller import *
+from model import *
+from controller import *
 from flask import render_template, request
 
 def pageCriarPersonagem():
