@@ -107,6 +107,7 @@ if __name__ == "__main__":
         db_connection = wait_for_db()
         print("Conexão com o banco de dados estabelecida com sucesso.")
         execute_sql_file('sql_scripts/DDL.sql', db_connection)
+        execute_sql_file('sql_scripts/DML.sql', db_connection)
         print("Comandos DDL.sql executados com sucesso.")
     except Exception as e:
         print(f"Erro: {e}")
