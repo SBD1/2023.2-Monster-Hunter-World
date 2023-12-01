@@ -1,12 +1,11 @@
 import os
 import psycopg2
 from dotenv import load_dotenv
+import time
 from flask import Flask, render_template, request
 from view import *
 
 load_dotenv()
-
-app = Flask(__name__)
 
 
 db_username = os.getenv('DB_USERNAME')
@@ -46,6 +45,22 @@ def wait_for_db():
             time.sleep(retry_interval)
     else:
         raise Exception(f"Não foi possível estabelecer conexão com o banco de dados após {max_retries} tentativas.")
+
+
+try:
+    db_connection = wait_for_db()
+    print("Conexão com o banco de dados estabelecida com sucesso.")
+    execute_sql_file('sql_scripts/DDL.sql', db_connection)
+    print("Comandos DDL.sql executados com sucesso.")
+except Exception as e:
+    print(f"Erro: {e}")
+finally:
+    if 'db_connection' in locals():
+        db_connection.close()
+
+
+
+app = Flask(__name__)
 
 
 @app.route('/')
@@ -103,15 +118,4 @@ def mostrar_usuario_body():
 
 
 if __name__ == "__main__":
-    try:
-        db_connection = wait_for_db()
-        print("Conexão com o banco de dados estabelecida com sucesso.")
-        execute_sql_file('sql_scripts/DDL.sql', db_connection)
-        execute_sql_file('sql_scripts/DML.sql', db_connection)
-        print("Comandos DDL.sql executados com sucesso.")
-    except Exception as e:
-        print(f"Erro: {e}")
-    finally:
-        if 'db_connection' in locals():
-            db_connection.close()
     app.run(debug=True)

@@ -2,14 +2,14 @@ BEGIN;
 
 -- Tabela Mapa
 CREATE TABLE IF NOT EXISTS Mapa (
-    IdMapa PRIMARY KEY,
+    IdMapa serial PRIMARY KEY,
     Nome varchar(64) NOT NULL,
     Descricao varchar(600) NOT NULL
 );
 
 -- Tabela Regiao
 CREATE TABLE IF NOT EXISTS Regiao (
-    IdRegiao PRIMARY KEY,
+    IdRegiao serial PRIMARY KEY,
     Nome varchar(64) NOT NULL,
     Descricao varchar(600) NOT NULL,
     Mapa int REFERENCES Mapa(IdMapa)
@@ -26,7 +26,7 @@ CREATE TABLE IF NOT EXISTS LevaEm (
 
 -- Tabela NPC
 CREATE TABLE IF NOT EXISTS NPC (
-    IdNPC PRIMARY KEY,
+    IdNPC serial PRIMARY KEY,
     Regiao int REFERENCES Regiao(IdRegiao),
     Nome varchar(64) NOT NULL,
     Descricao varchar(600),
@@ -61,7 +61,7 @@ CREATE TABLE IF NOT EXISTS Amigato (
 
 -- Tabela Fala
 CREATE TABLE IF NOT EXISTS Fala (
-    IdFala PRIMARY KEY,
+    IdFala serial PRIMARY KEY,
     NPC int REFERENCES NPC(IdNPC),
     Fala varchar(500),
     Repetivel boolean NOT NULL CHECK (Repetivel IN (true, false)),
@@ -70,14 +70,14 @@ CREATE TABLE IF NOT EXISTS Fala (
 
 -- Tabela FalaPreReq
 CREATE TABLE IF NOT EXISTS FalaPreReq (
-    IdFalaPreReq PRIMARY KEY,
+    IdFalaPreReq serial PRIMARY KEY,
     FalaPreReq int REFERENCES Fala(IdFala),
     Fala int REFERENCES Fala(IdFala)
 );
 
 -- Tabela Monstro
 CREATE TABLE IF NOT EXISTS Monstro (
-    IdMonstro PRIMARY KEY,
+    IdMonstro serial PRIMARY KEY,
     Nome varchar(64) NOT NULL,
     Elemento varchar(32),
     AtacaMonstros boolean NOT NULL CHECK (AtacaMonstros IN (true, false)),
@@ -98,7 +98,7 @@ CREATE TABLE IF NOT EXISTS InstanciaMonstro (
 
 -- Tabela RegiaoMonstro
 CREATE TABLE IF NOT EXISTS RegiaoMonstro (
-    IdRegiaoMonstro PRIMARY KEY,
+    IdRegiaoMonstro serial PRIMARY KEY,
     Regiao int REFERENCES Regiao(IdRegiao),
     Monstro int REFERENCES Monstro(IdMonstro)
 );
@@ -114,14 +114,14 @@ CREATE TABLE IF NOT EXISTS AtacaMonstro (
 
 -- Tabela Forja
 CREATE TABLE IF NOT EXISTS Forja (
-    IdForja PRIMARY KEY,
+    IdForja serial PRIMARY KEY,
     NPC int REFERENCES NPC(IdNPC),
     Tipo int DEFAULT 0
 );
 
 -- Tabela Missao
 CREATE TABLE IF NOT EXISTS Missao (
-    IdMissao PRIMARY KEY,
+    IdMissao serial PRIMARY KEY,
     Mapa int REFERENCES Mapa(IdMapa),
     NPC int REFERENCES NPC(IdNPC),
     Nome varchar(64) NOT NULL,
@@ -140,14 +140,14 @@ CREATE TABLE IF NOT EXISTS Missao (
 
 -- Tabela MissaoPreReq
 CREATE TABLE IF NOT EXISTS MissaoPreReq (
-    IdMissaoPreReq PRIMARY KEY,
+    IdMissaoPreReq serial PRIMARY KEY,
     MissaoPreReq int REFERENCES Missao(IdMissao),
     Missao int REFERENCES Missao(IdMissao)
 );
 
 -- Tabela EtapaMissao
 CREATE TABLE IF NOT EXISTS EtapaMissao (
-    IdEtapaMissao PRIMARY KEY,
+    IdEtapaMissao serial PRIMARY KEY,
     Missao int REFERENCES Missao(IdMissao),
     Nome varchar(64) NOT NULL,
     Status int DEFAULT 0,
@@ -186,14 +186,14 @@ CREATE TABLE IF NOT EXISTS Inventario (
 
 -- Tabela Loja
 CREATE TABLE IF NOT EXISTS Loja (
-    IdLoja PRIMARY KEY,
+    IdLoja serial PRIMARY KEY,
     NPC int REFERENCES NPC(IdNPC),
     Tipo int DEFAULT 0
 );
 
 -- Tabela Equipamento
 CREATE TABLE IF NOT EXISTS Equipamento (
-    IdEquipamento PRIMARY KEY,
+    IdEquipamento serial PRIMARY KEY,
     Categoria int DEFAULT 1
 );
 
@@ -229,7 +229,7 @@ CREATE TABLE IF NOT EXISTS AmigatoEquipamento (
 
 -- Tabela Item
 CREATE TABLE IF NOT EXISTS Item (
-    IdItem PRIMARY KEY REFERENCES Equipamento(IdEquipamento),
+    IdItem int PRIMARY KEY REFERENCES Equipamento(IdEquipamento),
     Nome varchar(64) NOT NULL,
     Raridade int DEFAULT 1,
     Tipo int DEFAULT 0,
@@ -248,7 +248,7 @@ CREATE TABLE IF NOT EXISTS DropaItem (
 
 -- Tabela Arma
 CREATE TABLE IF NOT EXISTS Arma (
-    IdArma PRIMARY KEY REFERENCES Equipamento(IdEquipamento),
+    IdArma int PRIMARY KEY REFERENCES Equipamento(IdEquipamento),
     Nome varchar(64) NOT NULL,
     Nivel int DEFAULT 1,
     Raridade int DEFAULT 1,
@@ -264,7 +264,7 @@ CREATE TABLE IF NOT EXISTS Arma (
 
 -- Tabela Armadura
 CREATE TABLE IF NOT EXISTS Armadura (
-    IdArmadura PRIMARY KEY REFERENCES Equipamento(IdEquipamento),
+    IdArmadura int PRIMARY KEY REFERENCES Equipamento(IdEquipamento),
     Nome varchar(64) NOT NULL,
     Nivel int DEFAULT 1,
     Raridade int DEFAULT 1,
@@ -282,7 +282,7 @@ CREATE TABLE IF NOT EXISTS Armadura (
 
 -- Tabela Amuleto
 CREATE TABLE IF NOT EXISTS Amuleto (
-    IdAmuleto PRIMARY KEY REFERENCES Equipamento(IdEquipamento),
+    IdAmuleto int PRIMARY KEY REFERENCES Equipamento(IdEquipamento),
     Nome varchar(64) NOT NULL,
     Nivel int DEFAULT 1,
     Raridade int DEFAULT 1,
@@ -295,7 +295,7 @@ CREATE TABLE IF NOT EXISTS Amuleto (
 
 -- Tabela Ferramenta
 CREATE TABLE IF NOT EXISTS Ferramenta (
-    IdFerramenta PRIMARY KEY REFERENCES Equipamento(IdEquipamento),
+    IdFerramenta int PRIMARY KEY REFERENCES Equipamento(IdEquipamento),
     Nome varchar(64) NOT NULL,
     Nivel int DEFAULT 1,
     Raridade int DEFAULT 1,
@@ -310,7 +310,7 @@ CREATE TABLE IF NOT EXISTS Ferramenta (
 
 -- Tabela Habilidade
 CREATE TABLE IF NOT EXISTS Habilidade (
-    IdHabilidade PRIMARY KEY,
+    IdHabilidade serial PRIMARY KEY,
     Nome varchar(64) NOT NULL,
     Nivel int DEFAULT 0,
     Descricao varchar(600),
