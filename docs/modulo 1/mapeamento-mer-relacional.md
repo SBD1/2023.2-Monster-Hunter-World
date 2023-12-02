@@ -23,7 +23,7 @@ Na figura 2, é possível ver a segunda versão do modelo relacional. Para visua
 
 Na figura 3, é possível ver a terceira versão do modelo relacional. Para visualizar a imagem em alta resolução, clique [aqui](https://github.com/SBD1/2023.2-Monster-Hunter-World/blob/main/docs/imagens/mermhw.drawio.png).
 
-<font size="3"><p style="text-align: center">Figura 3: Modelo relacional - versão 2.</p></font>
+<font size="3"><p style="text-align: center">Figura 3: Modelo relacional - versão 3.</p></font>
 
 ![MER3](https://github.com/SBD1/2023.2-Monster-Hunter-World/blob/main/docs/imagens/mermhw.drawio.png)
 
