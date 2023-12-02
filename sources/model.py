@@ -27,7 +27,7 @@ class NPC:
         self.genero = genero
 
 class PC:
-    def __init__(self, id_player, regiao, nome, ranque, vida, vigor, afinidade, dinheiro, genero, cor_pele, cor_cabelo, cor_olho, tipo_cabelo, tipo_olho):
+    def __init__(self, id_player, regiao, nome, ranque, vida, vigor, afinidade, dinheiro, genero):
         self.id_player = id_player
         self.regiao = regiao
         self.nome = nome
@@ -37,11 +37,6 @@ class PC:
         self.afinidade = afinidade
         self.dinheiro = dinheiro
         self.genero = genero
-        self.cor_pele = cor_pele
-        self.cor_cabelo = cor_cabelo
-        self.cor_olho = cor_olho
-        self.tipo_cabelo = tipo_cabelo
-        self.tipo_olho = tipo_olho
 
 class Amigato:
     def __init__(self, id_amigato, regiao, pc, nome, nivel, status, vida):

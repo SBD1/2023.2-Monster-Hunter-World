@@ -4,7 +4,7 @@ from flask import render_template, request
 
 def pageCriarPersonagem():
     page={
-        "name":"Trabalho de SBD1 - 2023.2",
+        "name":"Crie seu personagem",
         "background":"mainBackground.jpg",
         "content":[
             {
@@ -15,12 +15,48 @@ def pageCriarPersonagem():
             {
                 "type":"options",
                 "text":"Arma:",
-                "name":"arma"           
+                "name":"arma",
+                "options":[
+                    {
+                        "text":"Espadão",
+                        "value":"espadao"
+                    },
+                    {
+                        "text":"Espada Longa",
+                        "value":"espada_longa"
+                    },
+                    {
+                        "text":"Espada e Escudo",
+                        "value":"espada_escudo"
+                    },
+                    {
+                        "text":"Duplas-lâminas",
+                        "value":"duplas_laminas"
+                    },
+                    {
+                        "text":"Martelo",
+                        "value":"martelo"
+                    },
+                    {
+                        "text":"Lança",
+                        "value":"lanca"
+                    }
+                ]      
             },
             {
                 "type":"options",
                 "text":"Genero:",
-                "name":"genero"           
+                "name":"genero",
+                "options":[
+                    {
+                        "text":"Masculino",
+                        "value":"masculino"
+                    },
+                    {
+                        "text":"Feminino",
+                        "value":"feminino"
+                    }
+                ]    
             },
             {
                 "type":"input",
@@ -30,11 +66,35 @@ def pageCriarPersonagem():
             {
                 "type":"button",
                 "text":"Confirmar",
+                "name":"personagem",
                 "action":"criarPersonagem"           
             },
         ]
     }
     return render_template('index.html',page=page)
+
+def pageListaPersonagem(pcList):
+    contentList=[]
+    for pc in pcList:
+        contentList.append({
+            "type":"button",
+            "text":"Nome: "+str(pc.nome)+" - Ranque: "+str(pc.ranque)+" - Genero: "+str(pc.genero),
+            "name":str(pc.nome)+str(pc.ranque)+str(pc.genero),
+            "action":str(pc.id_player)
+        })
+    contentList.append({
+                "type":"button",
+                "text":"Criar Personagem",
+                "name":"personagem",
+                "action":"criarPersonagem"           
+            })
+    page={
+        "name":"Escolha seu personagem",
+        "background":"mainBackground.jpg",
+        "content":contentList
+    }
+    return render_template('index.html',page=page)
+    
 
 def pageTutorial():
     page = {

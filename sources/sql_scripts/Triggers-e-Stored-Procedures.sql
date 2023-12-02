@@ -1,18 +1,3 @@
--- Trigger para que assim que for criado um PC, crie um amigato para ele:
-
-CREATE OR REPLACE FUNCTION criar_amigato_para_pc()
-RETURNS TRIGGER AS $$
-BEGIN
-    INSERT INTO Amigato (Regiao, PC, Nome, Nivel, Status, Vida)
-    VALUES (NEW.Regiao, NEW.IdPlayer, 'Amigato_' || NEW.Nome, 1, 0, 100);
-    RETURN NEW;
-END;
-$$ LANGUAGE plpgsql;
-
-CREATE TRIGGER trigger_cria_amigato
-AFTER INSERT ON PC
-FOR EACH ROW
-EXECUTE FUNCTION criar_amigato_para_pc();
 
 -- Trigger para atualizar automaticamente o status da missão:
 

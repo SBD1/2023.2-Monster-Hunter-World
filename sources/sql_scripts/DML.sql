@@ -313,7 +313,7 @@ INSERT INTO Habilidade (IdHabilidade, Nome, Nivel, Descricao, Funcao) VALUES
     (3, 'Furtividade', 1, 'Reduz a probabilidade de ser detectado por monstros.', 'Invisibilidade'),
     (4, 'Ataque Elementar', 1, 'Aumenta o dano dos ataques elementares.', 'Melhoria de Ataque'),
     (5, 'Resistência a Status', 1, 'Aumenta a resistência a efeitos adversos como veneno e paralisia.', 'Defesa Pessoal'),
-    (6, 'Rastreamento de Monstros', 1, 'Facilita o rastreamento de monstros no ambiente.', 'Exploração'),
+    (6, 'amigatoRastreamento de Monstros', 1, 'Facilita o rastreamento de monstros no ambiente.', 'Exploração'),
     (7, 'Foco', 1, 'Aumenta a rapidez com que a energia é carregada para habilidades especiais.', 'Melhoria de Habilidade'),
     (8, 'Vigor Ilimitado', 1, 'Aumenta a resistência e reduz o consumo de estamina.', 'Melhoria de Resistência');
 

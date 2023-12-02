@@ -275,9 +275,9 @@ def delete_npc(conn, id_npc):
 def create_pc(conn, pc):
     try:
         cursor = conn.cursor()
-        cursor.execute("INSERT INTO PC (Regiao, Nome, Ranque, Vida, Vigor, Afinidade, Dinheiro, Genero, CorPele, CorCabelo, CorOlho, TipoCabelo, TipoOlho) "
-                       "VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s) RETURNING IdPlayer;",
-                       (pc.regiao, pc.nome, pc.ranque, pc.vida, pc.vigor, pc.afinidade, pc.dinheiro, pc.genero, pc.cor_pele, pc.cor_cabelo, pc.cor_olho, pc.tipo_cabelo, pc.tipo_olho))
+        cursor.execute("INSERT INTO PC (Regiao, Nome, Ranque, Vida, Vigor, Afinidade, Dinheiro, Genero) "
+                       "VALUES (%s, %s, %s, %s, %s, %s, %s, %s) RETURNING IdPlayer;",
+                       (pc.regiao, pc.nome, pc.ranque, pc.vida, pc.vigor, pc.afinidade, pc.dinheiro, pc.genero))
         id_player = cursor.fetchone()[0]
         conn.commit()
         cursor.close()

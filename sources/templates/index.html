@@ -196,19 +196,24 @@
         .arrow-button-left::before {
             content: "";
         }
-        .option{
-            display: none;
-        }
     </style>
     
 </head>
 <body>
     <script>
+
+
+        function submitForm(action) {
+            document.getElementById('form-container').action="/"+action;
+            document.getElementById('form-container').submit();
+        }
+
         document.addEventListener('DOMContentLoaded', function () {
           const colorInputs = document.querySelectorAll('.color-input');
           const colorBlocks = document.querySelectorAll('.color-block');
           const optionValues = document.querySelectorAll('.options');
-          const selectedOptions = document.querySelectorAll('.option');
+          const selectedOptionsNumber = document.querySelectorAll('.selectedOptionNumber');
+          const selectedOptions = document.querySelectorAll('.selectedOption');
           const optionBlocks = document.querySelectorAll('.option-container');
           const optionArrowLeft = document.querySelectorAll('.arrow-button-left');
           const optionArrowRight = document.querySelectorAll('.arrow-button-right');
@@ -229,51 +234,53 @@
 
             optionArrowLeft.forEach((arrowLeft, index) => {
                 arrowLeft.addEventListener('click', () => {
-                    let selectedOption=parseInt(selectedOptions[index].value);
+                    let selectedOption=parseInt(selectedOptionsNumber[index].value);
                     if(selectedOption===0){
                         return;
                     }
                     else{
                         selectedOption--;
                         optionBlocks[index].textContent=JSON.parse(optionValues[index].value.replaceAll("'","\""))[selectedOption].text
+                        selectedOptions[index].value=JSON.parse(optionValues[index].value.replaceAll("'","\""))[selectedOption].value
                     }
-                    selectedOptions[index].value=selectedOption;
+                    selectedOptionsNumber[index].value=selectedOption;
                 });
             });
 
             optionArrowRight.forEach((arrowRight, index) => {
                 arrowRight.addEventListener('click', () => {
-                    let selectedOption=parseInt(selectedOptions[index].value);
-                    if(selectedOption===selectedOptions.length){
+                    let selectedOption=parseInt(selectedOptionsNumber[index].value);
+                    if(selectedOption===selectedOptionsNumber.length){
                         return;
                     }
                     else{
                         selectedOption++;
                         optionBlocks[index].textContent=JSON.parse(optionValues[index].value.replaceAll("'","\""))[selectedOption].text
+                        selectedOptions[index].value=JSON.parse(optionValues[index].value.replaceAll("'","\""))[selectedOption].value
                     }
-                    selectedOptions[index].value=selectedOption;
+                    selectedOptionsNumber[index].value=selectedOption;
                 });
             });
         });
     </script>
-    <div class="button-container">
+    <form  method="GET"  id="form-container" class="button-container">
         <img class="logo-container" src="{{ url_for('static', filename='logo.png') }}"/>
         <h1>{{page.name}}</h1>
 
         {% for element in page.content %}
             {% if element.type == 'button' %}
-                <a class="custom-button" href="/{{element.action}}">{{element.text}}</a>
+                <button class="custom-button" onClick="submitForm('{{element.action}}')">{{element.text}}</button>
             {% endif %}
             {% if element.type == 'input' %}
                 <div class="input-container">
                     <label>{{element.text}}</label>
-                    <input type="text" class="input-block"/>
+                    <input type="text" class="input-block" name="{{element.name}}"/>
                 </div>
             {% endif %}
             {% if element.type == 'number' %}
-                <div class="input-container">
+                <div class="input-container">e
                     <label>{{element.text}}</label>
-                    <input type="number" class="input-block"/>
+                    <input type="number" class="input-block" name="{{element.name}}"/>
                 </div>
             {% endif %}
             {% if element.type == 'color' %}
@@ -281,7 +288,7 @@
                     <label>{{element.text}}</label>
                     <div class="color-input-wrapper">
                         <div class="color-block"></div>
-                        <input type="color" class="color-input" id="colorInput">
+                        <input type="color" class="color-input" id="colorInput" name="{{element.name}}">
                     </div>
                 </div>
             {% endif %}
@@ -294,15 +301,16 @@
                 <div class="input-container">
                     <label>{{element.text}}</label>
                     <input class="options" type="hidden" value="{{element.options}}"/>
+                    <input class="selectedOptionNumber" type="hidden" value='0' />
+                    <input type="hidden" class="selectedOption" value='{{element.options[0].value}}' name="{{element.name}}" />
                     <button class="arrow-button-left"></button>
-                    <div class="option-container" href="/{{element.action}}">
-                        <input class="option" type="number" value='0' />
+                    <div class="option-container">
                         {{element.options[0].text}}
                     </div>
                     <button class="arrow-button-right"></button>
                 </div>
             {% endif %}
         {% endfor %}
-    </div>
+    </form>
 </body>
 </html>

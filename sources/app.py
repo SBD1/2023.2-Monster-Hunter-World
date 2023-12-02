@@ -2,8 +2,10 @@ import os
 import psycopg2
 from dotenv import load_dotenv
 import time
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect
 from view import *
+from model import *
+from controller import *
 
 load_dotenv()
 
@@ -13,6 +15,9 @@ db_password = os.getenv('DB_PASSWORD')
 db_host = os.getenv('DB_HOST')
 db_port = os.getenv('DB_PORT')
 db_name = os.getenv('DB_NAME')
+
+app = Flask(__name__)
+
 
 
 def execute_sql_file(filename, connection):
@@ -41,7 +46,7 @@ def wait_for_db():
             ) as connection:
                 return connection
         except psycopg2.OperationalError:
-            print(f"Tentativa {attempt} de {max_retries}: Conexão com o banco de dados falhou. Tentando novamente em {retry_interval} segundos.")
+            app.logger.info(f"Tentativa {attempt} de {max_retries}: Conexão com o banco de dados falhou. Tentando novamente em {retry_interval} segundos.")
             time.sleep(retry_interval)
     else:
         raise Exception(f"Não foi possível estabelecer conexão com o banco de dados após {max_retries} tentativas.")
@@ -49,18 +54,21 @@ def wait_for_db():
 
 try:
     db_connection = wait_for_db()
-    print("Conexão com o banco de dados estabelecida com sucesso.")
+    app.logger.info("Conexão com o banco de dados estabelecida com sucesso.")
     execute_sql_file('sql_scripts/DDL.sql', db_connection)
-    print("Comandos DDL.sql executados com sucesso.")
+    app.logger.info("Comandos DDL.sql executados com sucesso.")
+    if(read_all_mapas(db_connection)==[]):
+        execute_sql_file('sql_scripts/DML.sql', db_connection)
+        app.logger.info("Comandos DML.sql executados com sucesso.")
+        execute_sql_file('sql_scripts/Triggers-e-Stored-Procedures.sql', db_connection)
+        app.logger.info("Comandos Triggers-e-Stored-Procedures.sql executados com sucesso.")
 except Exception as e:
-    print(f"Erro: {e}")
+    app.logger.info(f"Erro: {e}")
 finally:
     if 'db_connection' in locals():
         db_connection.close()
 
 
-
-app = Flask(__name__)
 
 
 @app.route('/')
@@ -112,8 +120,41 @@ def index():
     return render_template('index.html',page=page)
 
 @app.route('/criarPersonagem')
-def routeCriaPersonagem():
-    return pageCriarPersonagem()
+def routeCriaPersonagem():   
+    nome = request.args.get('nome')
+    arma = request.args.get('arma')
+    genero = request.args.get('genero')
+    nome_amigato = request.args.get('amigato')
+
+    if nome and arma and genero and nome_amigato:
+        regiao=1
+        ranque=1
+        vida=100
+        vigor=30
+        afinidade=0
+        dinheiro=0
+        status=0
+        nivel=1
+        pc=PC(-1, regiao, nome, ranque, vida, vigor, afinidade, dinheiro, genero)
+        conn=wait_for_db()
+        pcId=int(create_pc(conn,pc))
+        amigato=Amigato(-1,regiao, pcId, nome_amigato, nivel, status, vida)
+        create_amigato(conn,amigato)
+        conn.close()
+        return redirect("/"+str(pcId))
+    else:
+
+       return pageCriarPersonagem() 
+
+@app.route('/listaPersonagem')
+def routeListaPersonagem():
+    conn=wait_for_db()
+    pcList=read_all_pcs(conn)
+    app.logger.info(pcList)
+    conn.close()
+    return pageListaPersonagem(pcList)
+
+    
 
 @app.route('/usuario/<int:user_id>/<string:user_name>')
 def mostrar_usuario(user_id, user_name):
