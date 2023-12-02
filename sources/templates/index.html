@@ -196,6 +196,9 @@
         .arrow-button-left::before {
             content: "";
         }
+        .option{
+            display: none;
+        }
     </style>
     
 </head>
@@ -205,6 +208,7 @@
           const colorInputs = document.querySelectorAll('.color-input');
           const colorBlocks = document.querySelectorAll('.color-block');
           const optionValues = document.querySelectorAll('.options');
+          const selectedOptions = document.querySelectorAll('.option');
           const optionBlocks = document.querySelectorAll('.option-container');
           const optionArrowLeft = document.querySelectorAll('.arrow-button-left');
           const optionArrowRight = document.querySelectorAll('.arrow-button-right');
@@ -225,14 +229,29 @@
 
             optionArrowLeft.forEach((arrowLeft, index) => {
                 arrowLeft.addEventListener('click', () => {
-                    console.log(JSON.parse(optionValues[index].value));
-                    optionBlocks[index].textContent="left";
+                    let selectedOption=parseInt(selectedOptions[index].value);
+                    if(selectedOption===0){
+                        return;
+                    }
+                    else{
+                        selectedOption--;
+                        optionBlocks[index].textContent=JSON.parse(optionValues[index].value.replaceAll("'","\""))[selectedOption].text
+                    }
+                    selectedOptions[index].value=selectedOption;
                 });
             });
 
             optionArrowRight.forEach((arrowRight, index) => {
                 arrowRight.addEventListener('click', () => {
-                    optionBlocks[index].textContent="right";
+                    let selectedOption=parseInt(selectedOptions[index].value);
+                    if(selectedOption===selectedOptions.length){
+                        return;
+                    }
+                    else{
+                        selectedOption++;
+                        optionBlocks[index].textContent=JSON.parse(optionValues[index].value.replaceAll("'","\""))[selectedOption].text
+                    }
+                    selectedOptions[index].value=selectedOption;
                 });
             });
         });
@@ -276,7 +295,10 @@
                     <label>{{element.text}}</label>
                     <input class="options" type="hidden" value="{{element.options}}"/>
                     <button class="arrow-button-left"></button>
-                    <div class="option-container" href="/{{element.action}}">{{element.text}}</div>
+                    <div class="option-container" href="/{{element.action}}">
+                        <input class="option" type="number" value='0' />
+                        {{element.options[0].text}}
+                    </div>
                     <button class="arrow-button-right"></button>
                 </div>
             {% endif %}
