@@ -115,7 +115,10 @@ def mostrar_usuario_body():
         return jsonify({'mensagem': f'ID do usuário: {user_id}, Nome do usuário: {user_name}'})
     else:
         return jsonify({'erro': 'Parâmetros inválidos'}), 400
-
+    
+@app.route('/tutorial')
+def routeTutorial():
+    return pageTutorial()
 
 if __name__ == "__main__":
     app.run(debug=True)
