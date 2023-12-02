@@ -64,6 +64,7 @@
             display: inline-block;
             padding: 10px 20px;
             font-size: 16px;
+            width: 40%;
             text-align: center;
             text-decoration: none;
             background: radial-gradient(circle, #065cac, #011242); 
@@ -157,6 +158,47 @@
             margin-top: auto;
             margin-bottom: auto;
         }
+
+        .arrow-button-right {
+            width: 0;
+            height: 0;
+            border: none;
+            background-color: #333; 
+            cursor: pointer;
+            padding: 10px;
+            clip-path: polygon(0% 0%, 100% 50%, 0% 100%); 
+            display: inline-block; 
+            margin: auto;
+            margin-right: 0px;
+            margin-left: 1%;
+            height: 100%;
+        }
+
+        .arrow-button-right::before {
+            content: "";
+        }
+
+        .arrow-button-left {
+            width: 0;
+            height: 0;
+            border: none;
+            background-color: #333; 
+            cursor: pointer;
+            padding: 10px;
+            clip-path: polygon(100% 0%, 0% 50%, 100% 100%);
+            display: inline-block; 
+            margin: auto;
+            margin-left: 0px;
+            margin-right: 1%;
+            height: 100%;
+        }
+
+        .arrow-button-left::before {
+            content: "";
+        }
+        .option{
+            display: none;
+        }
     </style>
     
 </head>
@@ -165,18 +207,53 @@
         document.addEventListener('DOMContentLoaded', function () {
           const colorInputs = document.querySelectorAll('.color-input');
           const colorBlocks = document.querySelectorAll('.color-block');
+          const optionValues = document.querySelectorAll('.options');
+          const selectedOptions = document.querySelectorAll('.option');
+          const optionBlocks = document.querySelectorAll('.option-container');
+          const optionArrowLeft = document.querySelectorAll('.arrow-button-left');
+          const optionArrowRight = document.querySelectorAll('.arrow-button-right');
     
-          colorInputs.forEach((input, index) => {
-            input.addEventListener('input', () => {
-              const selectedColor = input.value;
-              colorBlocks[index].style.backgroundColor = selectedColor;
+    
+    
+            colorInputs.forEach((input, index) => {
+                input.addEventListener('input', () => {
+                const selectedColor = input.value;
+                colorBlocks[index].style.backgroundColor = selectedColor;
+                });
             });
-          });
-          colorBlocks.forEach((block, index) => {
-            block.addEventListener('click', () => {
-                colorInputs[index].click();
+            colorBlocks.forEach((block, index) => {
+                block.addEventListener('click', () => {
+                    colorInputs[index].click();
+                });
+              });
+
+            optionArrowLeft.forEach((arrowLeft, index) => {
+                arrowLeft.addEventListener('click', () => {
+                    let selectedOption=parseInt(selectedOptions[index].value);
+                    if(selectedOption===0){
+                        return;
+                    }
+                    else{
+                        selectedOption--;
+                        optionBlocks[index].textContent=JSON.parse(optionValues[index].value.replaceAll("'","\""))[selectedOption].text
+                    }
+                    selectedOptions[index].value=selectedOption;
+                });
             });
-          });
+
+            optionArrowRight.forEach((arrowRight, index) => {
+                arrowRight.addEventListener('click', () => {
+                    let selectedOption=parseInt(selectedOptions[index].value);
+                    if(selectedOption===selectedOptions.length){
+                        return;
+                    }
+                    else{
+                        selectedOption++;
+                        optionBlocks[index].textContent=JSON.parse(optionValues[index].value.replaceAll("'","\""))[selectedOption].text
+                    }
+                    selectedOptions[index].value=selectedOption;
+                });
+            });
         });
     </script>
     <div class="button-container">
@@ -213,9 +290,17 @@
                     <label>{{element.text}}</label>
                 </div>
             {% endif %}
-            {% if element.type == 'option' %}
-                <label>{{element.text}}</label>
-                <div class="option-container" href="/{{element.action}}">{{element.text}}</div>
+            {% if element.type == 'options' %}
+                <div class="input-container">
+                    <label>{{element.text}}</label>
+                    <input class="options" type="hidden" value="{{element.options}}"/>
+                    <button class="arrow-button-left"></button>
+                    <div class="option-container" href="/{{element.action}}">
+                        <input class="option" type="number" value='0' />
+                        {{element.options[0].text}}
+                    </div>
+                    <button class="arrow-button-right"></button>
+                </div>
             {% endif %}
         {% endfor %}
     </div>

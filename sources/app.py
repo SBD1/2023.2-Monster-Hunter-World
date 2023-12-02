@@ -93,6 +93,20 @@ def index():
                 "text":"Confirmar",
                 "action":"criarPersonagem"           
             },
+            {
+                "type":"options",
+                "text":"Genero:",    
+                "options":[
+                    {
+                        "text":"Masculino",
+                        "value":"masculino"
+                    },
+                    {
+                        "text":"Feminino",
+                        "value":"feminino"
+                    }
+                ]
+            },
         ]
     }
     return render_template('index.html',page=page)
@@ -120,5 +134,16 @@ def mostrar_usuario_body():
 def routeTutorial():
     return pageTutorial()
 
+try:
+    db_connection = wait_for_db()
+    print("Conexão com o banco de dados estabelecida com sucesso.")
+    execute_sql_file('sql_scripts/DDL.sql', db_connection)
+    print("Comandos DDL.sql executados com sucesso.")
+except Exception as e:
+    print(f"Erro: {e}")
+finally:
+    if 'db_connection' in locals():
+        db_connection.close()
+        
 if __name__ == "__main__":
     app.run(debug=True)
