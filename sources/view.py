@@ -96,30 +96,38 @@ def pageListaPersonagem(pcList):
     return render_template('index.html',page=page)
     
 
-def pageTutorial(pcId):
+def pageTutorial(nome_player, pcId):
     page = {
         "name": "Área de Encontro",
         "background": "tutorialBackground.png",
         "content": [
             {
                 "type": "text",
-                "text": "Bem-vindo à Área de Encontro, --pegar da controller o nome!" 
+                "text": "Comandante:"
             },
             {
                 "type": "text",
-                "text": "Passo 1: Esta é a sua jornada. Seu personagem foi criado com sucesso!"
+                "text": "Saudações, caçador {}! Bem-vindo à Área de Encontro em Astera. Sou o Comandante e estou aqui para guiá-lo nesta jornada emocionante.".format(nome_player)
             },
             {
                 "type": "text",
-                "text": "Passo 2: Agora, você aprenderá as mecânicas do jogo."
+                "text": "Astera é a cidade principal e a base central de operações em Monster Hunter World."
             },
             {
                 "type": "text",
-                "text": "Passo 3: Explore o mundo, lute contra monstros e complete missões emocionantes."
+                "text": "Aqui em Astera você poderá se locomover livremente entre 3 regiões: A Área de Encontro, o Acampamento Base e o Centro de Recursos."
             },
             {
                 "type": "text",
-                "text": "Passo 4: Ao longo do caminho, você encontrará desafios e recompensas."
+                "text": "A Área de Encontro é um espaço dedicado a encontros e interações entre caçadores, enquanto o Acampamento Base oferece missões desafiadoras e empolgantes."
+            },
+            {
+                "type": "text",
+                "text": "Explore o Centro de Recursos em Astera, onde a Loja oferece equipamentos para fortalecer seu caçador. Na Forja, você pode aprimorar esses equipamentos para enfrentar ameaças ainda maiores."
+            },
+            {
+                "type": "text",
+                "text": "Prepare-se para desafios épicos e descubra o vasto mundo de Monster Hunter World. Boa caçada, {}. Que sua jornada seja repleta de glórias!".format(nome_player)
             },
             {
                 "type": "button",
@@ -128,7 +136,8 @@ def pageTutorial(pcId):
             },
         ]
     }
-    return render_template('index.html', page=page)
+    return render_template('index.html', page=page, nome_player=nome_player)
+
 
 
 def pageMovimentacao(pcId):

@@ -168,9 +168,10 @@ def mostrar_usuario_body():
     else:
         return jsonify({'erro': 'Parâmetros inválidos'}), 400
     
-@app.route('/tutorial')
+@app.route('/tutorial/<int:pcId>')
 def routeTutorial(pcId):
-    return pageTutorial(pcId)
+    nome = get_nome_player(wait_for_db(), pcId)
+    return pageTutorial(nome, pcId)
 
 @app.route('/movimentacao/<int:pcId>')
 def movimentacao(pcId):

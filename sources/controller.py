@@ -2415,3 +2415,19 @@ def get_dinheiro_player(conn, id_player):
     except Exception as e:
         print(f"Erro ao ler Player: {e}")
         return None
+    
+def get_nome_player(conn, id_player):
+    try:
+        cursor = conn.cursor()
+        cursor.execute("SELECT Nome FROM pc WHERE IdPlayer = %s;", (id_player,))
+        result = cursor.fetchone()
+        cursor.close()
+        if result:
+            return result[0]
+        else:
+            print("Player não encontrado.")
+            return None
+    except Exception as e:
+        print(f"Erro ao ler Player: {e}")
+        return None
+
