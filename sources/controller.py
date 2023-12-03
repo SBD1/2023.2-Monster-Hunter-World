@@ -2389,3 +2389,29 @@ def delete_habilidade_armadura(conn, id_habilidade_armadura):
     except Exception as e:
         conn.rollback()
         print(f"Erro ao excluir HabilidadeArmadura: {e}")
+
+def update_regiao_PC(conn, id_player, id_regiao):
+    try:
+        cursor = conn.cursor()
+        cursor.execute("UPDATE PC SET Regiao = %s WHERE IdPlayer = %s;", (id_regiao, id_player))
+        conn.commit()
+        cursor.close()
+        print("Região do Player atualizada com sucesso.")
+    except Exception as e:
+        conn.rollback()
+        print(f"Erro ao atualizar Região do Player: {e}")
+
+def get_dinheiro_player(conn, id_player):
+    try:
+        cursor = conn.cursor()
+        cursor.execute("SELECT Dinheiro FROM pc WHERE IdPlayer = %s;", (id_player,))
+        result = cursor.fetchone()
+        cursor.close()
+        if result:
+            return result[0]
+        else:
+            print("Player não encontrado.")
+            return None
+    except Exception as e:
+        print(f"Erro ao ler Player: {e}")
+        return None

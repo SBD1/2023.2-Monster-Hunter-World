@@ -127,7 +127,7 @@ def routeCriaPersonagem():
     nome_amigato = request.args.get('amigato')
 
     if nome and arma and genero and nome_amigato:
-        regiao=1
+        regiao=7
         ranque=1
         vida=100
         vigor=30
@@ -141,9 +141,8 @@ def routeCriaPersonagem():
         amigato=Amigato(-1,regiao, pcId, nome_amigato, nivel, status, vida)
         create_amigato(conn,amigato)
         conn.close()
-        return redirect("/"+str(pcId))
+        return routeTutorial(pcId=pcId)
     else:
-
        return pageCriarPersonagem() 
 
 @app.route('/listaPersonagem')
@@ -153,8 +152,6 @@ def routeListaPersonagem():
     app.logger.info(pcList)
     conn.close()
     return pageListaPersonagem(pcList)
-
-    
 
 @app.route('/usuario/<int:user_id>/<string:user_name>')
 def mostrar_usuario(user_id, user_name):
@@ -172,8 +169,32 @@ def mostrar_usuario_body():
         return jsonify({'erro': 'Parâmetros inválidos'}), 400
     
 @app.route('/tutorial')
-def routeTutorial():
-    return pageTutorial()
+def routeTutorial(pcId):
+    return pageTutorial(pcId)
+
+@app.route('/movimentacao/<int:pcId>')
+def movimentacao(pcId):
+    return pageMovimentacao(pcId)
+
+@app.route('/retornaCentroRecursos/<int:pcId>')
+def retornaCentroRecursos(pcId):
+    update_regiao_PC(wait_for_db(), pcId, 8)
+    return pageCentroRecursos(pcId)
+
+@app.route('/retornaAreaEncontro/<int:pcId>')
+def retornaAreaEncontro(pcId):
+    update_regiao_PC(wait_for_db(), pcId, 9)
+    return pageAreaEncontro(pcId)
+
+@app.route('/retornaLoja/<int:pcId>')
+def retornaLoja(pcId):
+    din = get_dinheiro_player(wait_for_db(), pcId)
+    return pageLoja(din, pcId)
+
+
+
+
+
 
 try:
     db_connection = wait_for_db()
