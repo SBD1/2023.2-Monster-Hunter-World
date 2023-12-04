@@ -22,7 +22,7 @@ Este jogo ainda está em fase inicial e não possui todas as funcionalidades imp
 
 <br>
 
-- Acesse ```localhost:8000/criarPersonagem``` e
+- Acesse ```localhost:8000/``` e
 
 ### BOM JOGO! 🎮
    
