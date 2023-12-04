@@ -52,5 +52,5 @@ Este repositório servirá para aprofundarmos e trabalharmos os conhecimentos co
 
 <br>
 
-- Acesse ```localhost:8000``` e **bom jogo!**
+- Acesse ```localhost:8000/criarPersonagem``` e **bom jogo!**
    
