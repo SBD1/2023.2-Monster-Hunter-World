@@ -29,8 +29,28 @@ Este repositório servirá para aprofundarmos e trabalharmos os conhecimentos co
     - [Data Definition Language](https://sbd1.github.io/2023.2-Monster-Hunter-World/modulo%202/ddl/)
     - [Data Query Language](https://sbd1.github.io/2023.2-Monster-Hunter-World/modulo%202/dql/)
     - [Álgebra relacional](https://sbd1.github.io/2023.2-Monster-Hunter-World/modulo%202/algebra-relacional/)
+- Módulo 3
+    - [Correções no DER: Versão 3](https://raw.githubusercontent.com/SBD1/2023.2-Monster-Hunter-World/main/docs/imagens/DER_MonsterHunter_V3.png)
+    - [Correções do mapeamento pro modelo relacional](https://raw.githubusercontent.com/SBD1/2023.2-Monster-Hunter-World/main/docs/imagens/mermhw.drawio.png)
+    - [Triggers e Procedures](https://github.com/SBD1/2023.2-Monster-Hunter-World/blob/main/sources/sql_scripts/Triggers-e-Stored-Procedures.sql)
+    - Partes iniciais do jogo
 
 ## Apresentações
 - [Módulo 1](https://unbbr-my.sharepoint.com/:v:/g/personal/211063149_aluno_unb_br/EZMSun3UQ4JEqEoEa4H_HUYBgKvWdvKDfzN-Mr9kkcnI3Q?e=m2EhVo&nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZyIsInJlZmVycmFsQXBwUGxhdGZvcm0iOiJXZWIiLCJyZWZlcnJhbE1vZGUiOiJ2aWV3In19)
 - [Módulo 2](https://unbbr-my.sharepoint.com/personal/211063149_aluno_unb_br/_layouts/15/stream.aspx?id=%2Fpersonal%2F211063149%5Faluno%5Funb%5Fbr%2FDocuments%2FGrava%C3%A7%C3%B5es%2FGrava%C3%A7%C3%A3o%20%2D%20SBD1%20%2D%20M%C3%B3dulo%202%2D20231029%5F154516%2DGrava%C3%A7%C3%A3o%20de%20Reuni%C3%A3o%2Emp4&ga=1&referrer=StreamWebApp%2EWeb&referrerScenario=AddressBarCopied%2Eview)
+
+## Como jogar
+
+- Clone o repositório através do comando ```git clone https://github.com/SBD1/2023.2-Monster-Hunter-World.git```
+- Abra o terminal dentro da pasta *sources* e digite o seguinte comando ```docker compose up --build``` ou ```sudo docker compose up --build```
+- Acesse o *Pgadmin* em ```localhost:5050```, e faça o login com o email *admin@admin.com* e a senha *123456*
+- Crie um servidor com os seguintes dados, sendo a senha *123456*:
+
+<br>
+
+![Configuração do servidor](https://raw.githubusercontent.com/SBD1/2023.2-Monster-Hunter-World/f526c0dcd4bed4bc5e2a080ed9698455fc6b8554/docs/imagens/config-servidor.png)
+
+<br>
+
+- Acesse ```localhost:8000``` e **bom jogo!**
    
