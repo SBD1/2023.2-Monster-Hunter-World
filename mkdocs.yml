@@ -16,6 +16,7 @@ nav:
     - Álgebra Relacional: modulo 2/algebra-relacional.md
   - Módulo 3:
     - Módulo 3: modulo 3/modulo3.md
+    - Triggers e Procedures: modulo 3/triggers-e-procedures.md
     - Como jogar: modulo 3/comojogar.md
   
 theme:

@@ -9,10 +9,10 @@
       
       
       
-        <link rel="prev" href="../../modulo%202/algebra-relacional/">
+        <link rel="prev" href="../modulo3/">
       
       
-        <link rel="next" href="../triggers-e-procedures/">
+        <link rel="next" href="../comojogar/">
       
       
       <link rel="icon" href="../../imagens/mhw-logo.png">
@@ -20,7 +20,7 @@
     
     
       
-        <title>Módulo 3 - Monster Hunter World</title>
+        <title>Triggers e Procedures - Monster Hunter World</title>
       
     
     
@@ -75,7 +75,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#modulo-3" class="md-skip">
+        <a href="#triggers-e-procedures" class="md-skip">
           Pular para conteúdo
         </a>
       
@@ -110,7 +110,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Módulo 3
+              Triggers e Procedures
             
           </span>
         </div>
@@ -265,7 +265,7 @@
     
     
       <li class="md-tabs__item md-tabs__item--active">
-        <a href="./" class="md-tabs__link">
+        <a href="../modulo3/" class="md-tabs__link">
           
   
   Módulo 3
@@ -627,6 +627,26 @@
                 
   
   
+  
+    <li class="md-nav__item">
+      <a href="../modulo3/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Módulo 3
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
     
   
   
@@ -638,28 +658,18 @@
         
       
       
-      <a href="./" class="md-nav__link md-nav__link--active">
-        
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
   
   <span class="md-ellipsis">
-    Módulo 3
+    Triggers e Procedures
   </span>
   
 
-      </a>
+          <span class="md-nav__icon md-icon"></span>
+        </label>
       
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../triggers-e-procedures/" class="md-nav__link">
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   <span class="md-ellipsis">
@@ -668,6 +678,40 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Índice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Índice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introducao" class="md-nav__link">
+    Introdução
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#triggers-e-procedures_1" class="md-nav__link">
+    Triggers e Procedures
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -720,6 +764,28 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Índice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introducao" class="md-nav__link">
+    Introdução
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#triggers-e-procedures_1" class="md-nav__link">
+    Triggers e Procedures
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -736,24 +802,364 @@
   
 
 
-<h1 id="modulo-3">Módulo 3</h1>
-<p>Neste módulo, foram realizadas correções no modelo entidade relacionamento e no mapeamento pro modelo relacional. A terceira versão de ambos os documentos estão disponíveis nos links abaixo:</p>
-<ul>
-<li><a href="https://raw.githubusercontent.com/SBD1/2023.2-Monster-Hunter-World/main/docs/imagens/DER_MonsterHunter_V3.png">Correções no DER: Versão 3</a></li>
-<li><a href="https://raw.githubusercontent.com/SBD1/2023.2-Monster-Hunter-World/main/docs/imagens/mermhw.drawio.png">Correções do mapeamento pro modelo relacional</a></li>
-</ul>
-<p>Além disso, foram criadas também alguns triggers e procedures que serão importantes para o nosso jogo, como por exemplo, a inclusão de um item no inventário do usuário. O arquivo com estas triggers e procedures está disponível abaixo:</p>
-<ul>
-<li><a href="https://github.com/SBD1/2023.2-Monster-Hunter-World/blob/main/sources/sql_scripts/Triggers-e-Stored-Procedures.sql">Triggers e Procedures</a></li>
-</ul>
-<p>Além disso, novas queries e outros scripts SQL foram criadas para o nosso jogo, elas estão disponíveis dentro do arquivo <em>controller</em> do nosso jogo, que pode ser encontrado no link abaixo:</p>
-<ul>
-<li><a href="https://github.com/SBD1/2023.2-Monster-Hunter-World/blob/main/sources/controller.py">Controller</a></li>
-</ul>
-<p>Também começamos a construir nosso jogo e sua interface gráfica. Para jogar esta versão inicial, acesse o tutorial abaixo:</p>
-<ul>
-<li><a href="https://sbd1.github.io/2023.2-Monster-Hunter-World/modulo%203/comojogar/">Tutorial</a></li>
-</ul>
+<h1 id="triggers-e-procedures">Triggers e Procedures</h1>
+<h2 id="introducao">Introdução</h2>
+<p>Triggers e stored procedures são componentes importantes em bancos de dados relacionais, como o MySQL, SQL Server, PostgreSQL, entre outros. Eles desempenham papéis distintos, mas ambos são utilizados para automação de tarefas e execução de lógica no banco de dados.</p>
+<h2 id="triggers-e-procedures_1">Triggers e Procedures</h2>
+<p>Abaixo, veja o código das triggers e procedures criadas para o nosso jogo:</p>
+<pre><code class="language-sql">
+-- Trigger para atualizar automaticamente o status da missão:
+
+CREATE OR REPLACE FUNCTION atualiza_status_missao()
+RETURNS TRIGGER AS $$
+DECLARE
+    total_etapas INT;
+    etapas_concluidas INT;
+BEGIN
+    SELECT COUNT(*) INTO total_etapas
+    FROM EtapaMissao
+    WHERE Missao = NEW.Missao;
+
+    SELECT COUNT(*) INTO etapas_concluidas
+    FROM EtapaMissao em
+    JOIN RealizaMissao rm ON em.IdEtapaMissao = rm.Missao
+    WHERE em.Missao = NEW.Missao AND em.Status = 1;
+
+    IF total_etapas = etapas_concluidas THEN
+        UPDATE Missao
+        SET Status = 1
+        WHERE IdMissao = NEW.Missao;
+    END IF;
+
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER trigger_atualiza_status_missao
+AFTER UPDATE ON EtapaMissao
+FOR EACH ROW
+EXECUTE FUNCTION atualiza_status_missao();
+
+-- Trigger para realizar a compra de um item por um jogador
+
+CREATE OR REPLACE FUNCTION realizar_compra(
+    jogador_id INT,
+    item_id INT,
+    quantidade INT
+) RETURNS VOID AS $$
+DECLARE
+    custo_total INT;
+BEGIN
+    SELECT (CustoCompra * quantidade)
+    INTO custo_total
+    FROM Item
+    WHERE IdItem = item_id;
+
+    IF (SELECT Dinheiro FROM PC WHERE IdPlayer = jogador_id) &gt;= custo_total THEN
+        INSERT INTO Inventario (PC, CapacidadeMaxima)
+        VALUES (jogador_id, 20)
+        ON CONFLICT (PC) DO NOTHING;
+
+        INSERT INTO InventarioItem (Inventario, Item, Quantidade)
+        VALUES (jogador_id, item_id, quantidade)
+        ON CONFLICT (Inventario, Item) DO UPDATE
+        SET Quantidade = InventarioItem.Quantidade + quantidade;
+
+        UPDATE PC
+        SET Dinheiro = Dinheiro - custo_total
+        WHERE IdPlayer = jogador_id;
+
+        RAISE NOTICE 'Compra realizada com sucesso!';
+    ELSE
+        RAISE EXCEPTION 'Dinheiro insuficiente para realizar a compra!';
+    END IF;
+END;
+$$ LANGUAGE plpgsql;
+EXECUTE FUNCTION criar_amigato_para_pc();
+
+-- Trigger para evolução de Amigato:
+
+CREATE OR REPLACE FUNCTION evolui_amigato()
+RETURNS TRIGGER AS $$
+BEGIN
+    UPDATE Amigato
+    SET Nivel = Nivel + 1
+    WHERE IdAmigato = NEW.Amigato AND NEW.Status = 1;
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER trig_evolui_amigato
+AFTER INSERT ON AtacaMonstro
+FOR EACH ROW
+EXECUTE FUNCTION evolui_amigato();
+
+-- Trigger para Recompensa Automática ao Vencer uma Missão:
+
+CREATE OR REPLACE FUNCTION recompensa_missao()
+RETURNS TRIGGER AS $$
+BEGIN
+    INSERT INTO GuardaItem (Inventario, Item)
+    SELECT NEW.PC, Item
+    FROM Missao
+        JOIN DropaItem ON Missao.IdMissao = DropaItem.Missao
+    WHERE NEW.Missao = Missao.IdMissao;
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER trig_recompensa_missao
+AFTER UPDATE ON RealizaMissao
+FOR EACH ROW
+WHEN (NEW.Status = 1)
+EXECUTE FUNCTION recompensa_missao();
+
+-- Trigger para atualizar status do amigato após uma missão bem-sucedida:
+
+CREATE OR REPLACE FUNCTION atualiza_status_amigato()
+RETURNS TRIGGER AS $$
+BEGIN
+    UPDATE Amigato
+    SET Status = 1
+    WHERE IdAmigato = NEW.Amigato AND NEW.Status = 1;
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER trig_atualiza_status_amigato
+AFTER UPDATE ON RealizaMissao
+FOR EACH ROW
+WHEN (NEW.Status = 1)
+EXECUTE FUNCTION atualiza_status_amigato();
+
+-- Procedure para atualizar o status da missão:
+
+CREATE OR REPLACE FUNCTION atualizar_status_missao(
+    p_missao_id INT,
+    p_novo_status INT
+)
+RETURNS VOID AS $$
+BEGIN
+    UPDATE Missao
+    SET Status = p_novo_status
+    WHERE IdMissao = p_missao_id;
+    RAISE NOTICE 'Status da missão atualizado com sucesso!';
+END;
+$$ LANGUAGE plpgsql;
+
+-- Procedure para conclusão de uma etapa da missão:
+
+CREATE OR REPLACE FUNCTION concluir_etapa_missao(
+    p_etapa_id INT
+)
+RETURNS VOID AS $$
+BEGIN
+    UPDATE EtapaMissao
+    SET Status = 1
+    WHERE IdEtapaMissao = p_etapa_id;
+    RAISE NOTICE 'Etapa de missão concluída com sucesso!';
+END;
+$$ LANGUAGE plpgsql;
+
+-- Procedure para Trocar de Armadura:
+
+CREATE OR REPLACE FUNCTION trocar_armadura(
+    p_player_id INT,
+    p_nova_armadura_id INT
+)
+RETURNS VOID AS $$
+BEGIN
+    IF NOT EXISTS (SELECT 1 FROM Armadura WHERE IdArmadura = p_nova_armadura_id) THEN
+        RAISE EXCEPTION 'Armadura não encontrada!';
+    END IF;
+
+    UPDATE PC
+    SET Armadura = p_nova_armadura_id
+    WHERE IdPlayer = p_player_id;
+
+    RAISE NOTICE 'Armadura trocada com sucesso!';
+END;
+$$ LANGUAGE plpgsql;
+
+-- Procedure para Comprar Item na Loja:
+
+CREATE OR REPLACE FUNCTION comprar_item_na_loja(
+    p_player_id INT,
+    p_loja_id INT,
+    p_item_id INT,
+    p_quantidade INT
+)
+RETURNS VOID AS $$
+BEGIN
+    IF NOT EXISTS (SELECT 1 FROM PC WHERE IdPlayer = p_player_id) THEN
+        RAISE EXCEPTION 'Jogador não encontrado!';
+    END IF;
+
+    IF NOT EXISTS (SELECT 1 FROM Loja WHERE IdLoja = p_loja_id) THEN
+        RAISE EXCEPTION 'Loja não encontrada!';
+    END IF;
+
+    IF NOT EXISTS (
+        SELECT 1
+        FROM VendeItem
+        WHERE Loja = p_loja_id
+          AND Item = p_item_id
+    ) THEN
+        RAISE EXCEPTION 'Item não disponível nesta loja!';
+    END IF;
+
+    DECLARE custo_total INT;
+    SELECT CustoCompra * p_quantidade INTO custo_total
+    FROM Item
+    WHERE IdItem = p_item_id;
+
+    IF NOT EXISTS (
+        SELECT 1
+        FROM PC
+        WHERE IdPlayer = p_player_id
+          AND Dinheiro &gt;= custo_total
+    ) THEN
+        RAISE EXCEPTION 'Dinheiro insuficiente para comprar o item!';
+    END IF;
+
+    INSERT INTO InventarioItem (Inventario, Item, Quantidade)
+    VALUES (p_player_id, p_item_id, p_quantidade)
+    ON CONFLICT (Inventario, Item) DO UPDATE
+    SET Quantidade = InventarioItem.Quantidade + p_quantidade;
+
+    UPDATE PC
+    SET Dinheiro = Dinheiro - custo_total
+    WHERE IdPlayer = p_player_id;
+
+    RAISE NOTICE 'Compra realizada com sucesso!';
+END;
+$$ LANGUAGE plpgsql;
+
+-- Procedure para Criar Nova Arma na Forja:
+
+CREATE OR REPLACE FUNCTION criar_nova_arma_na_forja(
+    p_forja_id INT,
+    p_tipo_arma INT,
+    p_nome VARCHAR(64),
+    p_nivel INT,
+    p_raridade INT,
+    p_custo_compra INT,
+    p_valor_venda INT,
+    p_descricao VARCHAR(256),
+    p_ataque INT,
+    p_afiacao INT,
+    p_elemento VARCHAR(32),
+    p_valor_elemento INT
+)
+RETURNS VOID AS $$
+BEGIN
+    IF NOT EXISTS (SELECT 1 FROM Forja WHERE IdForja = p_forja_id) THEN
+        RAISE EXCEPTION 'Forja não encontrada!';
+    END IF;
+
+    INSERT INTO Equipamento (Categoria)
+    VALUES (1)
+    RETURNING IdEquipamento INTO p_nova_arma_id;
+
+    INSERT INTO Arma (
+        IdArma, Nome, Nivel, Raridade, CustoCompra,
+        ValorVenda, Descricao, Tipo, Ataque, Afiacao,
+        Elemento, ValorElemento
+    )
+    VALUES (
+        p_nova_arma_id, p_nome, p_nivel, p_raridade, p_custo_compra,
+        p_valor_venda, p_descricao, p_tipo_arma, p_ataque, p_afiacao,
+        p_elemento, p_valor_elemento
+    );
+
+    INSERT INTO CriaEquipamento (Forja, Equipamento)
+    VALUES (p_forja_id, p_nova_arma_id);
+
+    RAISE NOTICE 'Nova arma criada na forja com sucesso!';
+END;
+$$ LANGUAGE plpgsql;
+
+-- Procedure para Adicionar Item ao Inventario de um Jogador:
+
+CREATE OR REPLACE FUNCTION adicionar_item_ao_inventario(
+    p_player_id INT,
+    p_item_id INT,
+    p_quantidade INT
+)
+RETURNS VOID AS $$
+BEGIN
+    IF NOT EXISTS (SELECT 1 FROM PC WHERE IdPlayer = p_player_id) THEN
+        RAISE EXCEPTION 'Jogador não encontrado!';
+    END IF;
+
+    IF NOT EXISTS (SELECT 1 FROM Item WHERE IdItem = p_item_id) THEN
+        RAISE EXCEPTION 'Item não encontrado!';
+    END IF;
+
+    INSERT INTO InventarioItem (Inventario, Item, Quantidade)
+    VALUES (p_player_id, p_item_id, p_quantidade)
+    ON CONFLICT (Inventario, Item) DO UPDATE
+    SET Quantidade = InventarioItem.Quantidade + p_quantidade;
+
+    RAISE NOTICE 'Item adicionado ao inventário com sucesso!';
+END;
+$$ LANGUAGE plpgsql;
+
+-- Procedure para Compra de Item:
+
+CREATE OR REPLACE FUNCTION comprar_item_na_loja(
+    p_player_id INT,
+    p_loja_id INT,
+    p_item_id INT,
+    p_quantidade INT
+)
+RETURNS VOID AS $$
+BEGIN
+    IF NOT EXISTS (SELECT 1 FROM PC WHERE IdPlayer = p_player_id) THEN
+        RAISE EXCEPTION 'Jogador não encontrado!';
+    END IF;
+
+    IF NOT EXISTS (SELECT 1 FROM Loja WHERE IdLoja = p_loja_id) THEN
+        RAISE EXCEPTION 'Loja não encontrada!';
+    END IF;
+
+    IF NOT EXISTS (
+        SELECT 1
+        FROM VendeItem
+        WHERE Loja = p_loja_id
+          AND Item = p_item_id
+    ) THEN
+        RAISE EXCEPTION 'Item não disponível nesta loja!';
+    END IF;
+
+    DECLARE custo_total INT;
+    SELECT CustoCompra * p_quantidade INTO custo_total
+    FROM Item
+    WHERE IdItem = p_item_id;
+
+    IF NOT EXISTS (
+        SELECT 1
+        FROM PC
+        WHERE IdPlayer = p_player_id
+          AND Dinheiro &gt;= custo_total
+    ) THEN
+        RAISE EXCEPTION 'Dinheiro insuficiente para comprar o item!';
+    END IF;
+
+    INSERT INTO InventarioItem (Inventario, Item, Quantidade)
+    VALUES (p_player_id, p_item_id, p_quantidade)
+    ON CONFLICT (Inventario, Item) DO UPDATE
+    SET Quantidade = InventarioItem.Quantidade + p_quantidade;
+
+    UPDATE PC
+    SET Dinheiro = Dinheiro - custo_total
+    WHERE IdPlayer = p_player_id;
+
+    RAISE NOTICE 'Compra realizada com sucesso!';
+END;
+$$ LANGUAGE plpgsql;
+
+</code></pre>
 
 
 
@@ -781,7 +1187,7 @@
       <nav class="md-footer__inner md-grid" aria-label="Rodapé" >
         
           
-          <a href="../../modulo%202/algebra-relacional/" class="md-footer__link md-footer__link--prev" aria-label="Anterior: Álgebra Relacional" rel="prev">
+          <a href="../modulo3/" class="md-footer__link md-footer__link--prev" aria-label="Anterior: Módulo 3" rel="prev">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
@@ -791,20 +1197,20 @@
                 Anterior
               </span>
               <div class="md-ellipsis">
-                Álgebra Relacional
+                Módulo 3
               </div>
             </div>
           </a>
         
         
           
-          <a href="../triggers-e-procedures/" class="md-footer__link md-footer__link--next" aria-label="Próximo: Triggers e Procedures" rel="next">
+          <a href="../comojogar/" class="md-footer__link md-footer__link--next" aria-label="Próximo: Como jogar" rel="next">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Próximo
               </span>
               <div class="md-ellipsis">
-                Triggers e Procedures
+                Como jogar
               </div>
             </div>
             <div class="md-footer__button md-icon">

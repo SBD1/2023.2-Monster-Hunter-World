@@ -15,4 +15,4 @@ Além disso, novas queries e outros scripts SQL foram criadas para o nosso jogo,
 
 Também começamos a construir nosso jogo e sua interface gráfica. Para jogar esta versão inicial, acesse o tutorial abaixo:
 
-- [Tutorial]()
+- [Tutorial](https://sbd1.github.io/2023.2-Monster-Hunter-World/modulo%203/comojogar/)
