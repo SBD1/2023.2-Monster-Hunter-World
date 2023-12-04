@@ -102,7 +102,7 @@ def routeCriaPersonagem():
         amigato=Amigato(-1,regiao, pcId, nome_amigato, nivel, status, vida)
         create_amigato(conn,amigato)
         conn.close()
-        return routeTutorial(pcId=pcId)
+        return redirect("/tutorial/"+str(pcId))
     else:
        return pageCriarPersonagem() 
     
