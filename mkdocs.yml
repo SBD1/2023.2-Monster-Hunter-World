@@ -14,6 +14,9 @@ nav:
     - DML (Data Manipulation Language): modulo 2/dml.md
     - DQL (Data Query Language): modulo 2/dql.md
     - Álgebra Relacional: modulo 2/algebra-relacional.md
+  - Módulo 3:
+    - Módulo 3: modulo 3/modulo3.md
+    - Como jogar: modulo 3/comojogar.md
   
 theme:
   name: material
