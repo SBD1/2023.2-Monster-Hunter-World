@@ -72,52 +72,13 @@ finally:
 
 
 @app.route('/')
-def index():
-    page={
-        "name":"Trabalho de SBD1 - 2023.2",
-        "background":"mainBackground.jpg",
-        "content":[
-            {
-                "type":"input",
-                "text":"Nome:",
-                "name":"name"           
-            },
-            {
-                "type":"number",
-                "text":"Quantidade:",
-                "name":"quantity"           
-            },
-            {
-                "type":"text",
-                "text":"Texto de teste",        
-            },
-            {
-                "type":"color",
-                "text":"Cor do Cabelo:",
-                "name":"HairColor"           
-            },
-            {
-                "type":"button",
-                "text":"Confirmar",
-                "action":"criarPersonagem"           
-            },
-            {
-                "type":"options",
-                "text":"Genero:",    
-                "options":[
-                    {
-                        "text":"Masculino",
-                        "value":"masculino"
-                    },
-                    {
-                        "text":"Feminino",
-                        "value":"feminino"
-                    }
-                ]
-            },
-        ]
-    }
-    return render_template('index.html',page=page)
+def routeListaPersonagem():
+    conn=wait_for_db()
+    pcList=read_all_pcs(conn)
+    app.logger.info(pcList)
+    conn.close()
+    return pageListaPersonagem(pcList)
+
 
 @app.route('/criarPersonagem')
 def routeCriaPersonagem():   
@@ -144,29 +105,6 @@ def routeCriaPersonagem():
         return routeTutorial(pcId=pcId)
     else:
        return pageCriarPersonagem() 
-
-@app.route('/listaPersonagem')
-def routeListaPersonagem():
-    conn=wait_for_db()
-    pcList=read_all_pcs(conn)
-    app.logger.info(pcList)
-    conn.close()
-    return pageListaPersonagem(pcList)
-
-@app.route('/usuario/<int:user_id>/<string:user_name>')
-def mostrar_usuario(user_id, user_name):
-    return f'ID do usuario: {user_id}, Nome do usuario: {user_name}'
-
-@app.route('/usuario', methods=['GET'])
-def mostrar_usuario_body():
-    data = request.get_json()
-    user_id = data.get('id', None)
-    user_name = data.get('nome', None)
-
-    if user_id is not None and user_name is not None:
-        return jsonify({'mensagem': f'ID do usuário: {user_id}, Nome do usuário: {user_name}'})
-    else:
-        return jsonify({'erro': 'Parâmetros inválidos'}), 400
     
 @app.route('/tutorial/<int:pcId>')
 def routeTutorial(pcId):
@@ -193,20 +131,17 @@ def retornaLoja(pcId):
     return pageLoja(din, pcId)
 
 
+@app.route('/regiao/<int:pcId>')
+def routeRegiao(pcId):
+    regiao =read_regiao_PC(wait_for_db(),pcId)
+    leva_em=read_leva_em(wait_for_db(),regiao.id_regiao)
+    return pageRegiao(regiao,leva_em, pcId)
+
+@app.route('/atualizaPCRegiao/<int:pcId>-<int:regiaoId>')
+def routeAtualizaRegiao(pcId,regiaoId):
+    update_regiao_PC(wait_for_db(), pcId, regiaoId)
+    return redirect("/regiao/"+str(pcId))
 
 
-
-
-try:
-    db_connection = wait_for_db()
-    print("Conexão com o banco de dados estabelecida com sucesso.")
-    execute_sql_file('sql_scripts/DDL.sql', db_connection)
-    print("Comandos DDL.sql executados com sucesso.")
-except Exception as e:
-    print(f"Erro: {e}")
-finally:
-    if 'db_connection' in locals():
-        db_connection.close()
-        
 if __name__ == "__main__":
     app.run(debug=True)

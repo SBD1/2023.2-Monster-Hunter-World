@@ -156,21 +156,24 @@ def create_leva_em(conn, leva_em):
         conn.rollback()
         print(f"Erro ao criar relacionamento LevaEm: {e}")
 
-def read_leva_em(conn, regiao_origem, regiao_destino):
+        
+
+def read_leva_em(conn, regiao_origem):
     try:
         cursor = conn.cursor()
-        cursor.execute("SELECT * FROM LevaEm WHERE RegiaoOrigem = %s AND RegiaoDestino = %s;",
-                       (regiao_origem, regiao_destino))
-        result = cursor.fetchone()
+        cursor.execute("SELECT Regiao.* FROM LevaEm INNER JOIN Regiao ON LevaEm.RegiaoDestino = Regiao.IdRegiao WHERE LevaEm.RegiaoOrigem = %s"%(regiao_origem))
+        result = cursor.fetchall()
         cursor.close()
         if result:
-            leva_em = LevaEm(*result)
-            return leva_em
+            regiao_list = [Regiao(*row) for row in result]
+            return regiao_list
         else:
             print("Relacionamento LevaEm não encontrado.")
-            return None
+            return []
     except Exception as e:
         print(f"Erro ao ler relacionamento LevaEm: {e}")
+
+    
 
 def read_all_leva_em(conn):
     try:
@@ -2400,6 +2403,19 @@ def update_regiao_PC(conn, id_player, id_regiao):
     except Exception as e:
         conn.rollback()
         print(f"Erro ao atualizar Região do Player: {e}")
+
+def read_regiao_PC(conn, id_player):
+    try:
+        pc=read_pc(conn,id_player)
+
+        regiao=read_regiao(conn,pc.regiao)
+
+        return(regiao)
+        
+    except Exception as e:
+        conn.rollback()
+        print(f"Erro ao Obter Região do Player: {e}")
+
 
 def get_dinheiro_player(conn, id_player):
     try:

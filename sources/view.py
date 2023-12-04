@@ -198,7 +198,7 @@ def pageAreaEncontro(pcId):
             {
                 "type":"button",
                 "text":"Área de Encontro",
-                "action":"retornaAreaEncontro"           
+                "action":"retornaAreaEncontro/{}".format(pcId)   
             }
         ]
     }
@@ -229,7 +229,7 @@ def pageLoja(dinheiro_player, pcId):
             {
                 "type":"button",
                 "text":"Voltar",
-                "action":"retornaCentroRecursos"           
+                "action":"retornaCentroRecursos/{}".format(pcId)
             }
         ]
     }
@@ -237,3 +237,19 @@ def pageLoja(dinheiro_player, pcId):
 
 
 
+def pageRegiao(regiao, leva_em, pcId):
+    buttons = [
+        {
+            "type": "button",
+            "text": regiao.nome,
+            "action": "atualizaPCRegiao/{}-{}".format(pcId, regiao.id_regiao)
+        } for regiao in leva_em
+    ]
+
+    page = {
+        "name": regiao.nome,
+        "background": "mainBackground.jpg",
+        "content":buttons  
+    }
+
+    return render_template('index.html', page=page)
