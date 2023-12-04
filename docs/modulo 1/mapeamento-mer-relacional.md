@@ -25,6 +25,6 @@ Na figura 3, é possível ver a terceira versão do modelo relacional. Para visu
 
 <font size="3"><p style="text-align: center">Figura 3: Modelo relacional - versão 3.</p></font>
 
-![MER3](https://github.com/SBD1/2023.2-Monster-Hunter-World/blob/main/docs/imagens/mermhw.drawio.png)
+![MER3](https://github.com/SBD1/2023.2-Monster-Hunter-World/blob/main/docs/imagens/mermhw.drawio.png?raw=true)
 
 <font size="3"><p style="text-align: center">Fonte: Autores.</p></font>
