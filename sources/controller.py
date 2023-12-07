@@ -2446,4 +2446,50 @@ def get_nome_player(conn, id_player):
     except Exception as e:
         print(f"Erro ao ler Player: {e}")
         return None
+    
+def get_nome_npc(conn, id_npc):
+    try:
+        cursor = conn.cursor()
+        cursor.execute("SELECT nome FROM npc WHERE idnpc = %s;", (id_npc,))
+        result = cursor.fetchone()
+        cursor.close()
+        if result:
+            return result[0]
+        else:
+            print("NPC não encontrado.")
+            return None
+    except Exception as e:
+        print(f"Erro ao ler NPC: {e}")
+        return None
+    
+def get_nome_mapa(conn, idmapa):
+    try:
+        cursor = conn.cursor()
+        cursor.execute("SELECT nome FROM mapa WHERE idmapa = %s;", (idmapa,))
+        result = cursor.fetchone()
+        cursor.close()
+        if result:
+            return result[0]
+        else:
+            print("Mapa não encontrado.")
+            return None
+    except Exception as e:
+        print(f"Erro ao ler Mapa: {e}")
+        return None
+    
+def get_nome_regiao(conn, idregiao):
+    try:
+        cursor = conn.cursor()
+        cursor.execute("SELECT nome FROM regiao WHERE idregiao = %s;", (idregiao,))
+        result = cursor.fetchone()
+        cursor.close()
+        if result:
+            return result[0]
+        else:
+            print("Região não encontrada.")
+            return None
+    except Exception as e:
+        print(f"Erro ao ler Região: {e}")
+        return None      
+
 

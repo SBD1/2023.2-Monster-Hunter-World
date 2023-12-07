@@ -109,7 +109,12 @@ def routeCriaPersonagem():
 @app.route('/tutorial/<int:pcId>')
 def routeTutorial(pcId):
     nome = get_nome_player(wait_for_db(), pcId)
-    return pageTutorial(nome, pcId)
+    npcNome = get_nome_npc(wait_for_db(), 1)
+    mapaNome = get_nome_mapa(wait_for_db(), 1)
+    regiaoAtualNome = get_nome_regiao(wait_for_db(), 9)
+    possivelRegiaoNome = get_nome_regiao(wait_for_db(), 7)
+    outraPossivelRegiaoNome = get_nome_regiao(wait_for_db(), 8)
+    return pageTutorial(nome, pcId, npcNome, mapaNome, regiaoAtualNome, possivelRegiaoNome, outraPossivelRegiaoNome)
 
 @app.route('/movimentacao/<int:pcId>')
 def movimentacao(pcId):
