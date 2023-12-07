@@ -135,6 +135,29 @@ def retornaLoja(pcId):
     din = get_dinheiro_player(wait_for_db(), pcId)
     return pageLoja(din, pcId)
 
+@app.route('/retornaForja/<int:pcId>')
+def retornaForja(pcId):
+    nomeFerreiro = get_nome_ferreiro(wait_for_db())
+    return pageForja(nomeFerreiro, pcId)
+
+@app.route('/retornaForjarEquipamento/<int:pcId>')
+def retornaForjarEquipamento(pcId):
+    falaFerreiro = get_fala_ferreiro(wait_for_db())
+    return pageForjarEquipamento(falaFerreiro, pcId)
+
+@app.route('/retornaForjarArmas/<int:pcId>')
+def retornaForjarArmas(pcId):
+    nomeArma7 = get_nome_arma(wait_for_db(), 7)
+    nomeArma9 = get_nome_arma(wait_for_db(), 9)
+    nomeArma10 = get_nome_arma(wait_for_db(), 10)
+    nomeArma11 = get_nome_arma(wait_for_db(), 11)
+    return pageForjarArmas(nomeArma7, nomeArma9, nomeArma10, nomeArma11, pcId)
+
+@app.route('/retornaForjarArmaduras/<int:pcId>')
+def retornaForjarArmaduras(pcId):
+    nomeArmadura14 = get_nome_armadura(wait_for_db(), 14)
+    nomeArmadura16 = get_nome_armadura(wait_for_db(), 16)
+    return pageForjarArmaduras(nomeArmadura14, nomeArmadura16, pcId)
 
 @app.route('/regiao/<int:pcId>')
 def routeRegiao(pcId):

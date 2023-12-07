@@ -253,3 +253,133 @@ def pageRegiao(regiao, leva_em, pcId):
     }
 
     return render_template('index.html', page=page)
+
+def pageForja(nomeFerreiro, pcId):
+    page = {
+        "name": "Forja",
+        "background": "forja.jpg",
+        "content": [
+            {
+                "type": "text",
+                "text": "Bem-vindo à Forja!"
+            },
+            {
+                "type": "text",
+                "text": "Eu sou o {}.".format(nomeFerreiro)  
+            },
+            {
+                "type": "text",
+                "text": "Transformo metal em armas e armaduras que definirão sua saga épica."
+            },
+            {
+                "type":"text",
+                "text":" Então, o que deseja fazer?"
+            },
+            {
+                "type":"button",
+                "text":"Forjar Equipamento",
+                "action":"retornaForjarEquipamento/{}".format(pcId)         
+            },
+            {
+                "type":"button",
+                "text":"Voltar",
+                "action":"retornaCentroRecursos/{}".format(pcId)
+            }
+        ]
+    }
+    return render_template('index.html', page=page, nomeFerreiro=nomeFerreiro)
+
+def pageForjarEquipamento(falaFerreiro, pcId):
+    page = {
+        "name": "Forjar Equipamento",
+        "background": "forja.jpg",
+        "content": [
+            {
+                "type": "text",
+                "text": "{}".format(falaFerreiro) 
+            },
+            {
+                "type":"button",
+                "text":"Armas",
+                "action":"retornaForjarArmas/{}".format(pcId)         
+            },
+            {
+                "type":"button",
+                "text":"Armaduras",
+                "action":"retornaForjarArmaduras/{}".format(pcId)         
+            },
+            {
+                "type":"button",
+                "text":"Voltar",
+                "action":"retornaForja/{}".format(pcId)
+            }
+        ]
+    }
+    return render_template('index.html', page=page, falaFerreiro=falaFerreiro)
+
+def pageForjarArmas(nomeArma7, nomeArma9, nomeArma10, nomeArma11, pcId):
+    page = {
+        "name": "Forjar Armas",
+        "background": "forja.jpg",
+        "content": [
+            {
+                "type": "text",
+                "text": "Qual arma deseja forjar?"
+            },
+            {
+                "type":"button",
+                "text":"{}".format(nomeArma7),
+                "action":"retornaForjarEspadaFerro/{}".format(pcId)         
+            },
+            
+            {
+                "type":"button",
+                "text":"{}".format(nomeArma9),
+                "action":"retornaForjarMachadoFerro/{}".format(pcId)         
+            },
+            {
+                "type":"button",
+                "text":"{}".format(nomeArma10),
+                "action":"retornaForjarEspadaEscudo/{}".format(pcId)         
+            },
+            {
+                "type":"button",
+                "text":"{}".format(nomeArma11),
+                "action":"retornaForjarLançaFerro/{}".format(pcId)         
+            },
+            {
+                "type":"button",
+                "text":"Voltar",
+                "action":"retornaForjarEquipamento/{}".format(pcId)
+            }
+        ]
+    }
+    return render_template('index.html', page=page, nomeArma7=nomeArma7, nomeArma9=nomeArma9, nomeArma10=nomeArma10, nomeArma11=nomeArma11)
+
+def pageForjarArmaduras(nomeArmadura14, nomeArmadura16, pcId):
+    page = {
+        "name": "Forjar Armaduras",
+        "background": "forja.jpg",
+        "content": [
+            {
+                "type": "text",
+                "text": "Qual armadura deseja forjar?"
+            },
+            {
+                "type":"button",
+                "text":"{}".format(nomeArmadura14),
+                "action":"retornaForjarLançaFerro/{}".format(pcId)         
+            },
+            {
+                "type":"button",
+                "text":"{}".format(nomeArmadura16),
+                "action":"retornaForjarLançaFerro/{}".format(pcId)         
+            },
+            {
+                "type":"button",
+                "text":"Voltar",
+                "action":"retornaForjarEquipamento/{}".format(pcId)
+            }
+        ]
+    }
+    return render_template('index.html', page=page, nomeArmadura14=nomeArmadura14, nomeArmadura16=nomeArmadura16)
