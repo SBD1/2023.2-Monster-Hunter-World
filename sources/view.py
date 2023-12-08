@@ -269,3 +269,93 @@ def pageRegiao(regiao, leva_em, npcs, monstros, pcId):
     }
 
     return render_template('index.html', page=page)
+
+
+def pageAssistente(pcId,npc,falas,missoes):
+    content = []
+
+    for fala in falas:
+        content.append({
+            
+            "type": "text",
+            "text": fala.fala
+            
+        })
+
+    for missao in missoes:
+        content.append({
+            "type": "button",
+            "text": "%s - Nível: %s"%(missao.nome,missao.nivel),
+            "action": "missao/{}-{}-{}".format(pcId,npc.id_npc,missao.id_missao)
+        })
+
+    content.append({
+            "type": "button",
+            "text": "voltar",
+            "action": "regiao/{}".format(pcId)
+        })
+
+    page = {
+        "name": npc.nome,
+        "background": "mainBackground.jpg",
+        "content":content  
+    }
+
+    return render_template('index.html', page=page)
+
+
+def pageMissao(pcId, npcId, missao, mapa):
+    content = []
+
+    content.append({
+        "type":"text",
+        "text":"Mapa: %s"%(mapa.nome)
+        })
+
+    content.append({
+        "type":"text",
+        "text":"Cliente: %s"%(missao.cliente)
+        })
+
+    content.append({
+        "type":"text",
+        "text":"Descricao: %s"%(missao.descricao)
+        })
+
+    content.append({
+        "type":"text",
+        "text":"Premio: %s z"%(missao.premio)
+        })
+
+    content.append({
+        "type":"text",
+        "text":"Máximo de desmaios: %s"%(missao.maximo_desmaios)
+        })
+
+    content.append({
+        "type":"text",
+        "text":"Tempo: %s min"%(missao.tempo)
+        })
+
+
+
+
+    content.append({
+            "type": "button",
+            "text": "Aceitar",
+            "action": "pegaMissao/{}-{}".format(pcId,missao.id_missao)
+        })
+
+    content.append({
+            "type": "button",
+            "text": "voltar",
+            "action": "assistente/{}-{}".format(pcId,npcId)
+        })
+
+    page = {
+        "name": "Missao: %s"%(missao.nome),
+        "background": "mainBackground.jpg",
+        "content":content  
+    }
+
+    return render_template('index.html', page=page)

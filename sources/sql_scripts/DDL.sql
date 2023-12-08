@@ -65,7 +65,7 @@ CREATE TABLE IF NOT EXISTS Fala (
     NPC int REFERENCES NPC(IdNPC),
     Fala varchar(500),
     Repetivel boolean NOT NULL CHECK (Repetivel IN (true, false)),
-    FoiExecutado boolean NOT NULL CHECK (Repetivel IN (true, false))
+    FoiExecutado boolean NOT NULL CHECK (FoiExecutado IN (true, false))
 );
 
 -- Tabela FalaPreReq
@@ -134,7 +134,6 @@ CREATE TABLE IF NOT EXISTS Missao (
     Premio int DEFAULT 0,
     Resumo varchar(128),
     RanqueMinimo int DEFAULT 1,
-    Status VARCHAR(20) DEFAULT 'nao iniciada'
 );
 
 

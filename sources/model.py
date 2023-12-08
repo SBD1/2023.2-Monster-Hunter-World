@@ -49,11 +49,12 @@ class Amigato:
         self.vida = vida
 
 class Fala:
-    def __init__(self, id_fala, npc, fala, repetivel):
+    def __init__(self, id_fala, npc, fala, repetivel,executado):
         self.id_fala = id_fala
         self.npc = npc
         self.fala = fala
         self.repetivel = repetivel
+        self.executado = executado
 
 class FalaPreReq:
     def __init__(self, id_fala_prereq, fala_prereq, fala):
