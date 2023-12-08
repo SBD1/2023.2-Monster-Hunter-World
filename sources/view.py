@@ -96,34 +96,34 @@ def pageListaPersonagem(pcList):
     return render_template('index.html',page=page)
     
 
-def pageTutorial(nome_player, pcId):
+def pageTutorial(nome_player, pcId, nome_npc, mapa_nome, regiaoAtualNome, possivelRegiaoNome, outraPossivelRegiaoNome):
     page = {
         "name": "Área de Encontro",
         "background": "tutorialBackground.png",
         "content": [
             {
                 "type": "text",
-                "text": "Comandante:"
+                "text": "{}:".format(nome_npc)
             },
             {
                 "type": "text",
-                "text": "Saudações, caçador {}! Bem-vindo à Área de Encontro em Astera. Sou o Comandante e estou aqui para guiá-lo nesta jornada emocionante.".format(nome_player)
+                "text": "Saudações, caçador {}! Bem-vindo à {} em {}. Sou o {} e estou aqui para guiá-lo nesta jornada emocionante.".format(nome_player, regiaoAtualNome, mapa_nome, nome_npc)
             },
             {
                 "type": "text",
-                "text": "Astera é a cidade principal e a base central de operações em Monster Hunter World."
+                "text": "{} é a cidade principal e a base central de operações em Monster Hunter World.".format(mapa_nome)
             },
             {
                 "type": "text",
-                "text": "Aqui em Astera você poderá se locomover livremente entre 3 regiões: A Área de Encontro, o Acampamento Base e o Centro de Recursos."
+                "text": "Aqui em {} você poderá se locomover livremente entre 3 regiões: A {}, o {} e o {}.".format(mapa_nome, regiaoAtualNome, possivelRegiaoNome, outraPossivelRegiaoNome)
             },
             {
                 "type": "text",
-                "text": "A Área de Encontro é um espaço dedicado a encontros e interações entre caçadores, enquanto o Acampamento Base oferece missões desafiadoras e empolgantes."
+                "text": "A {} é um espaço dedicado a encontros e interações entre caçadores, enquanto o {} oferece missões desafiadoras e empolgantes.".format(regiaoAtualNome, possivelRegiaoNome)
             },
             {
                 "type": "text",
-                "text": "Explore o Centro de Recursos em Astera, onde a Loja oferece equipamentos para fortalecer seu caçador. Na Forja, você pode aprimorar esses equipamentos para enfrentar ameaças ainda maiores."
+                "text": "Explore o {} em {}, onde a Loja oferece equipamentos para fortalecer seu caçador. Na Forja, você pode aprimorar esses equipamentos para enfrentar ameaças ainda maiores.".format(outraPossivelRegiaoNome, mapa_nome)
             },
             {
                 "type": "text",
@@ -136,7 +136,7 @@ def pageTutorial(nome_player, pcId):
             },
         ]
     }
-    return render_template('index.html', page=page, nome_player=nome_player)
+    return render_template('index.html', page=page, nome_player=nome_player, nome_npc=nome_npc, mapa_nome=mapa_nome, regiaoAtualNome=regiaoAtualNome, possivelRegiaoNome=possivelRegiaoNome, outraPossivelRegiaoNome=outraPossivelRegiaoNome)
 
 
 
