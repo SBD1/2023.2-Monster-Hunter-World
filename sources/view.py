@@ -80,7 +80,7 @@ def pageListaPersonagem(pcList):
             "type":"button",
             "text":"Nome: "+str(pc.nome)+" - Ranque: "+str(pc.ranque)+" - Genero: "+str(pc.genero),
             "name":str(pc.nome)+str(pc.ranque)+str(pc.genero),
-            "action":str(pc.id_player)
+            "action":"regiao/"+str(pc.id_player)
         })
     contentList.append({
                 "type":"button",
@@ -237,14 +237,30 @@ def pageLoja(dinheiro_player, pcId):
 
 
 
-def pageRegiao(regiao, leva_em, pcId):
-    buttons = [
-        {
+def pageRegiao(regiao, leva_em, npcs, monstros, pcId):
+    buttons = []
+
+    for npc in npcs:
+        buttons.append({
+            "type": "button",
+            "text": npc.nome,
+            "action": "{}/{}-{}".format(npc.funcao,pcId, npc.id_npc)
+        })
+
+    for monstro in monstros:
+        buttons.append({
+            "type": "button",
+            "text": monstro.nome,
+            "action": "monstros/{}-{}".format(pcId, monstro.id_monstro)
+        })
+
+    for regiao in leva_em:
+        buttons.append({
             "type": "button",
             "text": regiao.nome,
             "action": "atualizaPCRegiao/{}-{}".format(pcId, regiao.id_regiao)
-        } for regiao in leva_em
-    ]
+        })
+    
 
     page = {
         "name": regiao.nome,

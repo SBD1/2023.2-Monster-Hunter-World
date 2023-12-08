@@ -252,6 +252,22 @@ def read_all_npcs(conn):
         print(f"Erro ao ler todos os NPCs: {e}")
         return None
 
+def read_npc_regiao(conn, id_regiao):
+    try:
+        cursor = conn.cursor()
+        cursor.execute("SELECT * FROM NPC WHERE Regiao = %s;", (id_regiao,))
+        result = cursor.fetchall()
+        cursor.close()
+        if result:
+            regiao_list = [NPC(*row) for row in result]
+            return regiao_list
+        else:
+            print("NPCs não encontrados.")
+            return []
+    except Exception as e:
+        print(f"Erro ao ler NPC: {e}")
+        return None
+
 def update_npc(conn, npc):
     try:
         cursor = conn.cursor()
@@ -696,6 +712,22 @@ def read_regiao_monstro(conn, id_regiao_monstro):
             return None
     except Exception as e:
         print(f"Erro ao ler RegiaoMonstro: {e}")
+        return None
+
+def read_monstro_regiao(conn, id_regiao):
+    try:
+        cursor = conn.cursor()
+        cursor.execute("SELECT * FROM Monstro INNER JOIN RegiaoMonstro ON Monstro.IdMonstro = RegiaoMonstro.Monstro WHERE RegiaoMonstro.Regiao = %s;", (id_regiao,))
+        result = cursor.fetchall()
+        cursor.close()
+        if result:
+            regiao_list = [Monstro(*row) for row in result]
+            return regiao_list
+        else:
+            print("Monstros não encontrados.")
+            return []
+    except Exception as e:
+        print(f"Erro ao ler Monstro: {e}")
         return None
 
 def read_all_regioes_monstro(conn):

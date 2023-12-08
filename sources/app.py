@@ -134,8 +134,10 @@ def retornaLoja(pcId):
 @app.route('/regiao/<int:pcId>')
 def routeRegiao(pcId):
     regiao =read_regiao_PC(wait_for_db(),pcId)
+    npcs=read_npc_regiao(wait_for_db(),regiao.id_regiao)
+    monstros=read_monstro_regiao(wait_for_db(),regiao.id_regiao)
     leva_em=read_leva_em(wait_for_db(),regiao.id_regiao)
-    return pageRegiao(regiao,leva_em, pcId)
+    return pageRegiao(regiao,leva_em, npcs, monstros, pcId)
 
 @app.route('/atualizaPCRegiao/<int:pcId>-<int:regiaoId>')
 def routeAtualizaRegiao(pcId,regiaoId):
