@@ -252,6 +252,22 @@ def read_all_npcs(conn):
         print(f"Erro ao ler todos os NPCs: {e}")
         return None
 
+def read_npc_regiao(conn, id_regiao):
+    try:
+        cursor = conn.cursor()
+        cursor.execute("SELECT * FROM NPC WHERE Regiao = %s;", (id_regiao,))
+        result = cursor.fetchall()
+        cursor.close()
+        if result:
+            regiao_list = [NPC(*row) for row in result]
+            return regiao_list
+        else:
+            print("NPCs não encontrados.")
+            return []
+    except Exception as e:
+        print(f"Erro ao ler NPC: {e}")
+        return None
+
 def update_npc(conn, npc):
     try:
         cursor = conn.cursor()
@@ -448,6 +464,18 @@ def read_all_falas(conn):
     except Exception as e:
         print(f"Erro ao ler todas as Falas: {e}")
         return None
+
+def read_falas_npc(conn,id_npc):
+    cursor = conn.cursor()
+    cursor.execute("SELECT F.* FROM Fala F LEFT JOIN FalaPreReq FP ON F.IdFala = FP.Fala WHERE F.NPC = %s AND (F.Repetivel = true OR F.FoiExecutado = false) AND (FP.FalaPreReq IS NULL OR (SELECT FoiExecutado FROM Fala WHERE IdFala = FP.FalaPreReq) = true) ORDER BY IdFala;"%(id_npc))
+    results = cursor.fetchall()
+    falas = [Fala(*result) for result in results]
+    for fala in falas:
+        cursor.execute("CALL AtualizarFoiExecutadoParaItem(%s);"%(fala.id_fala))
+    cursor.close()
+    conn.commit()
+    return falas
+
 
 def update_fala(conn, fala):
     try:
@@ -698,6 +726,22 @@ def read_regiao_monstro(conn, id_regiao_monstro):
         print(f"Erro ao ler RegiaoMonstro: {e}")
         return None
 
+def read_monstro_regiao(conn, id_regiao):
+    try:
+        cursor = conn.cursor()
+        cursor.execute("SELECT Monstro.* FROM Monstro INNER JOIN RegiaoMonstro ON Monstro.IdMonstro = RegiaoMonstro.Monstro WHERE RegiaoMonstro.Regiao = %s;", (id_regiao,))
+        result = cursor.fetchall()
+        cursor.close()
+        if result:
+            regiao_list = [Monstro(*row) for row in result]
+            return regiao_list
+        else:
+            print("Monstros não encontrados.")
+            return []
+    except Exception as e:
+        print(f"Erro ao ler Monstro: {e}")
+        return []
+
 def read_all_regioes_monstro(conn):
     try:
         cursor = conn.cursor()
@@ -839,6 +883,20 @@ def read_all_missoes(conn):
     except Exception as e:
         print(f"Erro ao ler todas as Missoes: {e}")
         return None
+
+
+def read_missao_player(conn,id_player):
+    try:
+        cursor = conn.cursor()
+        cursor.execute("SELECT DISTINCT M.* FROM Missao M LEFT JOIN MissaoPreReq MP ON M.IdMissao = MP.Missao LEFT JOIN RealizaMissao RM ON M.IdMissao = RM.Missao WHERE MP.MissaoPreReq IS NULL OR (RM.Status = 5 AND MP.MissaoPreReq IN (SELECT Missao FROM RealizaMissao WHERE PC = %s AND Status = 5));"%(id_player))
+        results = cursor.fetchall()
+        cursor.close()
+        missoes = [Missao(*result) for result in results]
+        return missoes
+    except Exception as e:
+        print(f"Erro ao ler todas as Missoes: {e}")
+        return []
+
 
 def update_missao(conn, missao):
     try:
@@ -1123,15 +1181,13 @@ def delete_etapa_fala(conn, id_etapa_fala):
         conn.rollback()
         print(f"Erro ao excluir EtapaFala: {e}")
 
-def create_realiza_missao(conn, realiza_missao):
+def create_realiza_missao(conn, pc_id, missao_id):
     try:
         cursor = conn.cursor()
-        cursor.execute("INSERT INTO RealizaMissao (Missao, PC, Status) VALUES (%s, %s, %s) RETURNING IdRealizaMissao;",
-                       (realiza_missao.missao, realiza_missao.pc, realiza_missao.status))
-        id_realiza_missao = cursor.fetchone()[0]
+        cursor.execute("CALL PegarMissao(%s,%s);",
+                       (pc_id, missao_id))
         conn.commit()
         cursor.close()
-        return id_realiza_missao
     except Exception as e:
         conn.rollback()
         print(f"Erro ao criar RealizaMissao: {e}")

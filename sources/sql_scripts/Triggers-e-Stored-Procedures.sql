@@ -66,7 +66,6 @@ BEGIN
     END IF;
 END;
 $$ LANGUAGE plpgsql;
-EXECUTE FUNCTION criar_amigato_para_pc();
 
 -- Trigger para evolução de Amigato:
 
@@ -181,6 +180,9 @@ CREATE OR REPLACE FUNCTION comprar_item_na_loja(
     p_quantidade INT
 )
 RETURNS VOID AS $$
+DECLARE
+    custo_total INT;
+	custo_compra INT;
 BEGIN
     IF NOT EXISTS (SELECT 1 FROM PC WHERE IdPlayer = p_player_id) THEN
         RAISE EXCEPTION 'Jogador não encontrado!';
@@ -199,11 +201,15 @@ BEGIN
         RAISE EXCEPTION 'Item não disponível nesta loja!';
     END IF;
 
-    DECLARE custo_total INT;
-    SELECT CustoCompra * p_quantidade INTO custo_total
-    FROM Item
-    WHERE IdItem = p_item_id;
+	
+  	SELECT CustoCompra
+	INTO custo_compra
+	FROM Item
+	WHERE IdItem = p_item_id;
 
+	
+	custo_total=custo_compra * p_quantidade;
+	
     IF NOT EXISTS (
         SELECT 1
         FROM PC
@@ -227,7 +233,6 @@ END;
 $$ LANGUAGE plpgsql;
 
 -- Procedure para Criar Nova Arma na Forja:
-
 CREATE OR REPLACE FUNCTION criar_nova_arma_na_forja(
     p_forja_id INT,
     p_tipo_arma INT,
@@ -243,6 +248,8 @@ CREATE OR REPLACE FUNCTION criar_nova_arma_na_forja(
     p_valor_elemento INT
 )
 RETURNS VOID AS $$
+DECLARE
+    p_nova_arma_id INT;
 BEGIN
     IF NOT EXISTS (SELECT 1 FROM Forja WHERE IdForja = p_forja_id) THEN
         RAISE EXCEPTION 'Forja não encontrada!';
@@ -269,6 +276,7 @@ BEGIN
     RAISE NOTICE 'Nova arma criada na forja com sucesso!';
 END;
 $$ LANGUAGE plpgsql;
+
 
 -- Procedure para Adicionar Item ao Inventario de um Jogador:
 
@@ -305,6 +313,9 @@ CREATE OR REPLACE FUNCTION comprar_item_na_loja(
     p_quantidade INT
 )
 RETURNS VOID AS $$
+DECLARE 
+	custo_total INT;
+	custo_compra INT;
 BEGIN
     IF NOT EXISTS (SELECT 1 FROM PC WHERE IdPlayer = p_player_id) THEN
         RAISE EXCEPTION 'Jogador não encontrado!';
@@ -323,10 +334,12 @@ BEGIN
         RAISE EXCEPTION 'Item não disponível nesta loja!';
     END IF;
 
-    DECLARE custo_total INT;
-    SELECT CustoCompra * p_quantidade INTO custo_total
+    SELECT CustoCompra
+	INTO custo_compra
     FROM Item
     WHERE IdItem = p_item_id;
+	
+	custo_total=custo_compra * p_quantidade;
 
     IF NOT EXISTS (
         SELECT 1
@@ -349,3 +362,42 @@ BEGIN
     RAISE NOTICE 'Compra realizada com sucesso!';
 END;
 $$ LANGUAGE plpgsql;
+
+
+CREATE OR REPLACE PROCEDURE AtualizarFoiExecutadoParaItem(IN p_IdItem INT)
+LANGUAGE plpgsql
+AS $$
+BEGIN
+    UPDATE Fala
+    SET FoiExecutado = true
+    WHERE IdFala = p_IdItem;
+END;
+$$;
+
+
+CREATE OR REPLACE PROCEDURE PegarMissao(
+    p_user_id INT,
+    p_missao_id INT
+)
+LANGUAGE plpgsql
+AS $$
+DECLARE
+    v_regiao_destino INT;
+BEGIN
+    INSERT INTO RealizaMissao (Missao, PC, Status)
+    VALUES (p_missao_id, p_user_id, 1);
+
+    SELECT MIN(R.IdRegiao) INTO v_regiao_destino
+    FROM Missao M
+    JOIN Regiao R ON M.Mapa = R.Mapa
+    WHERE M.IdMissao = p_missao_id;
+
+    UPDATE PC
+    SET Regiao = v_regiao_destino
+    WHERE IdPlayer = p_user_id;
+
+    COMMIT;
+
+    RAISE NOTICE 'Missão obtida com sucesso!';
+END;
+$$;

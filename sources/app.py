@@ -139,14 +139,36 @@ def retornaLoja(pcId):
 @app.route('/regiao/<int:pcId>')
 def routeRegiao(pcId):
     regiao =read_regiao_PC(wait_for_db(),pcId)
+    npcs=read_npc_regiao(wait_for_db(),regiao.id_regiao)
+    monstros=read_monstro_regiao(wait_for_db(),regiao.id_regiao)
     leva_em=read_leva_em(wait_for_db(),regiao.id_regiao)
-    return pageRegiao(regiao,leva_em, pcId)
+    return pageRegiao(regiao,leva_em, npcs, monstros, pcId)
 
 @app.route('/atualizaPCRegiao/<int:pcId>-<int:regiaoId>')
 def routeAtualizaRegiao(pcId,regiaoId):
     update_regiao_PC(wait_for_db(), pcId, regiaoId)
     return redirect("/regiao/"+str(pcId))
 
+
+@app.route('/assistente/<int:pcId>-<int:npcId>')
+def routeAssistente(pcId,npcId):
+    npc=read_npc(wait_for_db(),npcId)
+    falas=read_falas_npc(wait_for_db(),npcId)
+    missoes=read_missao_player(wait_for_db(),pcId)
+    return pageAssistente(pcId,npc,falas,missoes)
+
+
+@app.route('/missao/<int:pcId>-<int:npcId>-<int:missaoId>')
+def routeMissao(pcId,npcId,missaoId):
+    missao=read_missao(wait_for_db(),missaoId)
+    mapa=read_mapa(wait_for_db(),missao.mapa)
+    return pageMissao(pcId,npcId,missao,mapa)
+
+
+@app.route('/pegaMissao/<int:pcId>-<int:missaoId>')
+def routePegaMissao(pcId,missaoId):
+    create_realiza_missao(wait_for_db(),pcId,missaoId)
+    return redirect("/regiao/"+str(pcId))
 
 if __name__ == "__main__":
     app.run(debug=True)

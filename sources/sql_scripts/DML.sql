@@ -22,7 +22,7 @@ INSERT INTO NPC (IdNPC, Regiao, Nome, Descricao, Funcao, Raca, Genero) VALUES
 (1, 7, 'Comandante', 'Explica a história do jogo ao player.', 'Líder da Comissão', 'Humano', 'Masculino'),
 (2, 8, 'Mestre de Forja (The Smithy)', 'Gerencia a forja e melhoria de equipamentos.', 'Ferreiro', 'Humano', 'Masculino'),
 (3, 8, 'Comerciante', 'Vende itens e provisões essenciais para sua jornada.', 'Comerciante Ambulante', 'Humano', 'Masculino'),
-(4, 9, 'A assistente', 'Fornece as principais informações sobre as missões.', 'Assistente de Campo', 'Humano', 'Feminino');
+(4, 9, 'A assistente', 'Fornece as principais informações sobre as missões.', 'assistente', 'Humano', 'Feminino');
 
 -- FALAS
 INSERT INTO Fala (IdFala, NPC, Fala, Repetivel, FoiExecutado)
