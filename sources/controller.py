@@ -2548,4 +2548,62 @@ def get_nome_regiao(conn, idregiao):
         print(f"Erro ao ler Região: {e}")
         return None      
 
+def get_nome_ferreiro(conn):
+    try:
+        cursor = conn.cursor()
+        cursor.execute("SELECT NPC.Nome AS NomeFerreiro FROM NPC JOIN Forja ON NPC.IdNPC = Forja.NPC WHERE NPC.IdNPC = 2;")
+        result = cursor.fetchone()
+        cursor.close()
+        if result:
+            return result[0]
+        else:
+            print("Ferreiro não encontrado.")
+            return None
+    except Exception as e:
+        print(f"Erro ao obter o nome do Ferreiro: {e}")
+        return None
+    
+def get_fala_ferreiro(conn):
+    try:
+        cursor = conn.cursor()
+        cursor.execute("SELECT F.Fala FROM Forja AS FJ JOIN NPC AS N ON FJ.NPC = N.IdNPC JOIN Fala AS F ON N.IdNPC = F.NPC WHERE FJ.IdForja = 1;")
+        result = cursor.fetchone()
+        cursor.close()
+        if result:
+            return result[0]
+        else:
+            print("Fala do Ferreiro não encontrada.")
+            return None
+    except Exception as e:
+        print(f"Erro ao obter a Fala do Ferreiro: {e}")
+        return None
+    
+def get_nome_arma(conn, idArma):
+    try:
+        cursor = conn.cursor()
+        cursor.execute("SELECT Nome FROM Arma WHERE IdArma = %s;", (idArma,))
+        result = cursor.fetchone()
+        cursor.close()
+        if result:
+            return result[0]
+        else:
+            print("Nome da Arma não encontrada.")
+            return None
+    except Exception as e:
+        print(f"Erro ao obter a Nome da Arma: {e}")
+        return None
 
+def get_nome_armadura(conn, idArmadura):
+    try:
+        cursor = conn.cursor()
+        cursor.execute("SELECT Nome FROM Armadura WHERE IdArmadura = %s;", (idArmadura,))
+        result = cursor.fetchone()
+        cursor.close()
+        if result:
+            return result[0]
+        else:
+            print("Nome da Armadura não encontrada.")
+            return None
+    except Exception as e:
+        print(f"Erro ao obter a Nome da Armadura: {e}")
+        return None
