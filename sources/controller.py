@@ -2607,22 +2607,7 @@ def get_nome_armadura(conn, idArmadura):
     except Exception as e:
         print(f"Erro ao obter a Nome da Armadura: {e}")
         return None
-    
-def get_nome_regiao(conn, idregiao):
-    try:
-        cursor = conn.cursor()
-        cursor.execute("SELECT nome FROM regiao WHERE idregiao = %s;", (idregiao,))
-        result = cursor.fetchone()
-        cursor.close()
-        if result:
-            return result[0]
-        else:
-            print("Região não encontrada.")
-            return None
-    except Exception as e:
-        print(f"Erro ao ler Região: {e}")
-        return None      
-    
+        
 def get_nome_armas(conn):
     try:
         cursor = conn.cursor()
