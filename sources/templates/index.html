@@ -33,15 +33,26 @@
             font-size: 36px;
         }
 
-        .button-container {
+        .form-container {
             margin-top: 20px;
             background-color: rgba(0,0,0,0.7);
             border-radius: 60px;
+            width: 50vw;
+            max-height: 70vh;
             display: flex;
             flex-direction: column;
             padding:40px;
             justify-content: center;
             text-align: center;
+        }
+
+        .content-container{
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+            width: 100%;
+            max-height: 40vh;
+            overflow-y: auto;
         }
 
         .custom-button {
@@ -76,7 +87,7 @@
         }
 
         .logo-container{
-            width: 80%;
+            width: 20vw;
             margin:auto;
         }
 
@@ -147,9 +158,10 @@
             color: #FFF; 
         }
         .input-container label{
+
             font-size: 24px;
             font-weight: bold;
-            text-align: center;
+            text-align: left;
             text-decoration: none;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
             color: #FFF; 
@@ -263,54 +275,58 @@
             });
         });
     </script>
-    <form  method="GET"  id="form-container" class="button-container">
+    <form  method="GET"  id="form-container" class="form-container">
         <img class="logo-container" src="{{ url_for('static', filename='logo.png') }}"/>
         <h1>{{page.name}}</h1>
-
-        {% for element in page.content %}
-            {% if element.type == 'button' %}
-                <button class="custom-button" onClick="submitForm('{{element.action}}')">{{element.text}}</button>
-            {% endif %}
-            {% if element.type == 'input' %}
-                <div class="input-container">
-                    <label>{{element.text}}</label>
-                    <input type="text" class="input-block" name="{{element.name}}"/>
-                </div>
-            {% endif %}
-            {% if element.type == 'number' %}
-                <div class="input-container">e
-                    <label>{{element.text}}</label>
-                    <input type="number" class="input-block" name="{{element.name}}"/>
-                </div>
-            {% endif %}
-            {% if element.type == 'color' %}
-                <div class="input-container">
-                    <label>{{element.text}}</label>
-                    <div class="color-input-wrapper">
-                        <div class="color-block"></div>
-                        <input type="color" class="color-input" id="colorInput" name="{{element.name}}">
+        <div class="content-container">
+            {% for element in page.content %}
+                {% if element.type == 'button' %}
+                    <button class="custom-button" onClick="submitForm('{{element.action}}')">{{element.text}}</button>
+                {% endif %}
+                {% if element.type == 'input' %}
+                    <div class="input-container">
+                        <label>{{element.text}}</label>
+                        <input type="text" class="input-block" name="{{element.name}}"/>
                     </div>
-                </div>
-            {% endif %}
-            {% if element.type == 'text' %}
-                <div class="input-container">
-                    <label>{{element.text}}</label>
-                </div>
-            {% endif %}
-            {% if element.type == 'options' %}
-                <div class="input-container">
-                    <label>{{element.text}}</label>
-                    <input class="options" type="hidden" value="{{element.options}}"/>
-                    <input class="selectedOptionNumber" type="hidden" value='0' />
-                    <input type="hidden" class="selectedOption" value='{{element.options[0].value}}' name="{{element.name}}" />
-                    <div class="arrow-button-left"></div>
-                    <div class="option-container">
-                        {{element.options[0].text}}
+                {% endif %}
+                {% if element.type == 'number' %}
+                    <div class="input-container">e
+                        <label>{{element.text}}</label>
+                        <input type="number" class="input-block" name="{{element.name}}"/>
                     </div>
-                    <div class="arrow-button-right"></div>
-                </div>
-            {% endif %}
-        {% endfor %}
+                {% endif %}
+                {% if element.type == 'color' %}
+                    <div class="input-container">
+                        <label>{{element.text}}</label>
+                        <div class="color-input-wrapper">
+                            <div class="color-block"></div>
+                            <input type="color" class="color-input" id="colorInput" name="{{element.name}}">
+                        </div>
+                    </div>
+                {% endif %}
+                {% if element.type == 'text' %}
+                    <div class="input-container">
+                        <label>{{element.text}}</label>
+                    </div>
+                {% endif %}
+                {% if element.type == 'hidden' %}
+                    <input type="hidden" value="{{element.value}}" name="{{element.name}}">
+                {% endif %}
+                {% if element.type == 'options' %}
+                    <div class="input-container">
+                        <label>{{element.text}}</label>
+                        <input class="options" type="hidden" value="{{element.options}}"/>
+                        <input class="selectedOptionNumber" type="hidden" value='0' />
+                        <input type="hidden" class="selectedOption" value='{{element.options[0].value}}' name="{{element.name}}" />
+                        <div class="arrow-button-left"></div>
+                        <div class="option-container">
+                            {{element.options[0].text}}
+                        </div>
+                        <div class="arrow-button-right"></div>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
     </form>
 </body>
 </html>

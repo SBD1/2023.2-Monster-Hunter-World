@@ -240,6 +240,22 @@ def read_npc(conn, id_npc):
         print(f"Erro ao ler NPC: {e}")
         return None
 
+def read_npc_function(conn, function):
+    try:
+        cursor = conn.cursor()
+        cursor.execute("SELECT * FROM NPC WHERE Funcao = '%s' ORDER BY IdNPC;"%(function))
+        result = cursor.fetchone()
+        cursor.close()
+        if result:
+            npc = NPC(*result)
+            return npc
+        else:
+            print("NPC não encontrado.")
+            return None
+    except Exception as e:
+        print(f"Erro ao ler NPC: {e}")
+        return None
+
 def read_all_npcs(conn):
     try:
         cursor = conn.cursor()
@@ -467,7 +483,15 @@ def read_all_falas(conn):
 
 def read_falas_npc(conn,id_npc):
     cursor = conn.cursor()
-    cursor.execute("SELECT F.* FROM Fala F LEFT JOIN FalaPreReq FP ON F.IdFala = FP.Fala WHERE F.NPC = %s AND (F.Repetivel = true OR F.FoiExecutado = false) AND (FP.FalaPreReq IS NULL OR (SELECT FoiExecutado FROM Fala WHERE IdFala = FP.FalaPreReq) = true) ORDER BY IdFala;"%(id_npc))
+    cursor.execute("""  SELECT F.* 
+                        FROM Fala F 
+                        LEFT JOIN FalaPreReq FP ON F.IdFala = FP.Fala 
+                        WHERE F.NPC = %s 
+                            AND (F.Repetivel = true OR F.FoiExecutado = false) 
+                            AND (FP.FalaPreReq IS NULL OR (SELECT FoiExecutado FROM Fala WHERE IdFala = FP.FalaPreReq) = true) 
+                            AND FP.FalaPreReq IS NULL
+                        ORDER BY IdFala;
+                        """%(id_npc))
     results = cursor.fetchall()
     falas = [Fala(*result) for result in results]
     for fala in falas:

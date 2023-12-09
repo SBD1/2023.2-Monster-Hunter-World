@@ -57,11 +57,11 @@ try:
     app.logger.info("Conexão com o banco de dados estabelecida com sucesso.")
     execute_sql_file('sql_scripts/DDL.sql', db_connection)
     app.logger.info("Comandos DDL.sql executados com sucesso.")
+    execute_sql_file('sql_scripts/Triggers-e-Stored-Procedures.sql', db_connection)
+    app.logger.info("Comandos Triggers-e-Stored-Procedures.sql executados com sucesso.")
     if(read_all_mapas(db_connection)==[]):
         execute_sql_file('sql_scripts/DML.sql', db_connection)
         app.logger.info("Comandos DML.sql executados com sucesso.")
-        execute_sql_file('sql_scripts/Triggers-e-Stored-Procedures.sql', db_connection)
-        app.logger.info("Comandos Triggers-e-Stored-Procedures.sql executados com sucesso.")
 except Exception as e:
     app.logger.info(f"Erro: {e}")
 finally:
@@ -103,40 +103,52 @@ def routeCriaPersonagem():
         create_amigato(conn,amigato)
         cria_inventario(conn,pcId)
         conn.close()
-        return redirect("/tutorial/"+str(pcId))
+        npc= read_npc_function(wait_for_db(), "tutorial")
+        return redirect("/tutorial/"+str(pcId)+"-"+str(npc.IdNPC)+"?firstTime=true")
     else:
        return pageCriarPersonagem() 
     
-@app.route('/tutorial/<int:pcId>')
-def routeTutorial(pcId):
+@app.route('/tutorial/<int:pcId>-<int:npcId>')
+def routeTutorial(pcId,npcId):
+    firstTime = request.args.get('firstTime')
     nome = get_nome_player(wait_for_db(), pcId)
-    npcNome = get_nome_npc(wait_for_db(), 1)
-    mapaNome = get_nome_mapa(wait_for_db(), 1)
-    regiaoAtualNome = get_nome_regiao(wait_for_db(), 9)
-    possivelRegiaoNome = get_nome_regiao(wait_for_db(), 7)
-    outraPossivelRegiaoNome = get_nome_regiao(wait_for_db(), 8)
-    return pageTutorial(nome, pcId, npcNome, mapaNome, regiaoAtualNome, possivelRegiaoNome, outraPossivelRegiaoNome)
+    npc= read_npc(wait_for_db(),npcId)
+    regiao=read_regiao(wait_for_db(),npc.regiao)
+    falas=read_falas_npc(wait_for_db(),npc.id_npc)
+    return pageTutorial(npc, pcId,regiao,falas,firstTime)
 
-@app.route('/movimentacao/<int:pcId>')
-def movimentacao(pcId):
-    update_regiao_PC(wait_for_db(), pcId, 7)
-    return pageMovimentacao(pcId)
-
-
-@app.route('/retornaAreaEncontro/<int:pcId>')
-def retornaAreaEncontro(pcId):
-    update_regiao_PC(wait_for_db(), pcId, 9)
-    return pageAreaEncontro(pcId)
 
 @app.route('/regiao/<int:pcId>')
 def routeRegiao(pcId):
     regiao =read_regiao_PC(wait_for_db(),pcId)
-    leva_em = read_leva_em(wait_for_db(), regiao.id_regiao)
-    return pageRegiao(regiao,leva_em, pcId)
+    npcs=read_npc_regiao(wait_for_db(),regiao.id_regiao)
+    monstros=read_monstro_regiao(wait_for_db(),regiao.id_regiao)
+    leva_em=read_leva_em(wait_for_db(),regiao.id_regiao)
+    return pageRegiao(regiao,leva_em, npcs, monstros, pcId)
 
-@app.route('/atualizaPCRegiao/<int:pcId>/<int:regiaoId>')
+
+@app.route('/atualizaPCRegiao/<int:pcId>-<int:regiaoId>')
 def atualizaPCRegiao(pcId,regiaoId):
     update_regiao_PC(wait_for_db(), pcId, regiaoId)
+    return redirect("/regiao/"+str(pcId))
+
+@app.route('/assistente/<int:pcId>-<int:npcId>')
+def routeAssistente(pcId,npcId):
+    npc=read_npc(wait_for_db(),npcId)
+    falas=read_falas_npc(wait_for_db(),npcId)
+    missoes=read_missao_player(wait_for_db(),pcId)
+    return pageAssistente(pcId,npc,falas,missoes)
+
+
+@app.route('/missao/<int:pcId>-<int:npcId>-<int:missaoId>')
+def routeMissao(pcId,npcId,missaoId):
+    missao=read_missao(wait_for_db(),missaoId)
+    mapa=read_mapa(wait_for_db(),missao.mapa)
+    return pageMissao(pcId,npcId,missao,mapa)
+
+@app.route('/pegaMissao/<int:pcId>-<int:missaoId>')
+def routePegaMissao(pcId,missaoId):
+    create_realiza_missao(wait_for_db(),pcId,missaoId)
     return redirect("/regiao/"+str(pcId))
 
 @app.route('/retornaLoja/<int:pcId>')
@@ -167,28 +179,6 @@ def retornaForjarArmaduras(pcId):
     nomeArmadura14 = get_nome_armadura(wait_for_db(), 14)
     nomeArmadura16 = get_nome_armadura(wait_for_db(), 16)
     return pageForjarArmaduras(nomeArmadura14, nomeArmadura16, pcId)
-
-@app.route('/assistente/<int:pcId>-<int:npcId>')
-def routeAssistente(pcId,npcId):
-    npc=read_npc(wait_for_db(),npcId)
-    falas=read_falas_npc(wait_for_db(),npcId)
-    missoes=read_missao_player(wait_for_db(),pcId)
-    return pageAssistente(pcId,npc,falas,missoes)
-
-
-@app.route('/missao/<int:pcId>-<int:npcId>-<int:missaoId>')
-def routeMissao(pcId,npcId,missaoId):
-    missao=read_missao(wait_for_db(),missaoId)
-    mapa=read_mapa(wait_for_db(),missao.mapa)
-    return pageMissao(pcId,npcId,missao,mapa)
-
-
-@app.route('/pegaMissao/<int:pcId>-<int:missaoId>')
-def routePegaMissao(pcId,missaoId):
-    create_realiza_missao(wait_for_db(),pcId,missaoId)
-    return redirect("/regiao/"+str(pcId))
-
-
 @app.route('/lojaVendeArmas/<int:pcId>')
 def lojaVendeArmas(pcId):
     armas = get_nome_armas(wait_for_db())

@@ -19,28 +19,26 @@ INSERT INTO LevaEm (RegiaoOrigem, RegiaoDestino) VALUES
 (1, 6), (1, 2), (6, 5), (6, 1), (5, 6), (5, 2), (5, 4), (2, 1), (2, 5), (2, 3), (3, 2), (3, 4), (4, 5), (4, 3), (8, 9), (8, 7), (7, 8), (9, 8);
 
 INSERT INTO NPC (IdNPC, Regiao, Nome, Descricao, Funcao, Raca, Genero) VALUES 
-(1, 7, 'Comandante', 'Explica a história do jogo ao player.', 'Líder da Comissão', 'Humano', 'Masculino'),
-(2, 8, 'Mestre de Forja (The Smithy)', 'Gerencia a forja e melhoria de equipamentos.', 'Ferreiro', 'Humano', 'Masculino'),
-(3, 8, 'Comerciante', 'Vende itens e provisões essenciais para sua jornada.', 'Comerciante Ambulante', 'Humano', 'Masculino'),
+(1, 9, 'Comandante', 'Explica a história do jogo ao player.', 'tutorial', 'Humano', 'Masculino'),
+(2, 8, 'Mestre de Forja (The Smithy)', 'Gerencia a forja e melhoria de equipamentos.', 'forja', 'Humano', 'Masculino'),
+(3, 8, 'Comerciante', 'Vende itens e provisões essenciais para sua jornada.', 'loja', 'Humano', 'Masculino'),
 (4, 9, 'A assistente', 'Fornece as principais informações sobre as missões.', 'assistente', 'Humano', 'Feminino');
 
 -- FALAS
 INSERT INTO Fala (IdFala, NPC, Fala, Repetivel, FoiExecutado)
 VALUES 
-    (1, 1, 'Bem-vindo à Comissão, Caçador. Nossa missão é enfrentar as criaturas que ameaçam nosso mundo. Estamos contando com você para manter o equilíbrio.', true, false),
-    (2, 1, 'Neste momento, você está em Astera.', true, false),
-    (3, 2, 'Ah, Caçador! Vejo que está em busca de força. O que quer forjar hoje?', true, false),
-    (4, 3, 'Ora, ora! Vejo que está em busca de suprimentos. ', true, false),
-    (5, 4, 'Oi, Caçador! Pronta para mais uma aventura?', true, false),
-    (6, 4, 'Sua primeira missão é de nível 1, e consiste em uma caçada. O Grande Jagras está ameaçando as áreas próximas.', false, false),
-    (7, 4, 'Sua segunda missão é de nível 2, e consiste em uma caçada.', false, false),
-    (8, 4, 'Sua terceira missão é de nível 2, e consiste em uma caçada.', false, false),
-    (9, 4, 'Sua quarta missão é de nível 3 e é muito perigosa. Três Anjanaths estão representando uma ameaça à região.', false, false);
+    (1, 2, 'Ah, Caçador! Vejo que está em busca de força. O que quer forjar hoje?', true, false),
+    (2, 3, 'Ora, ora! Vejo que está em busca de suprimentos. ', true, false),
+    (3, 4, 'Oi, Caçador! Pronta para mais uma aventura?', true, false),
+    (4, 1, 'Bem-vindo, intrépido caçador, ao Novo Mundo, um reino vasto e misterioso repleto de criaturas lendárias e desafios épicos.', true, false),
+    (5, 1, 'Este continente inexplorado é o palco de suas caçadas, onde terras exuberantes e perigosas aguardam por sua exploração. Astera, nossa base central, é o ponto de partida para suas aventuras, cercada por ecossistemas diversificados e habitats impressionantes.', true, false),
+    (6, 1, 'Aqui em Astera, você se tornará parte de uma guilda de elite de caçadores, encarregada de enfrentar criaturas colossais que dominam o Novo Mundo. Sua missão? Desbravar, caçar e se tornar um verdadeiro mestre na arte da caçada.', true, false),
+    (7, 1, 'Primeiro, familiarize-se com Astera, a nossa base central. Caminhe pelas ruas, converse com outros caçadores na Sala de Encontros e, quando estiver pronto para a ação, dirija-se ao Salão de Missões para desafios empolgantes.', false, false),
+    (8, 1, 'À sua disposição estão a Loja, onde você pode adquirir equipamentos cruciais, e a Forja, onde aprimorará suas armas e armaduras para os desafios que virão. A preparação é a chave para o sucesso.', true, false),
+    (9, 1, 'Nas vastas planícies e florestas densas, você encontrará monstros colossais, cada um com sua própria ecologia e comportamento. Cada caçada é uma jornada única, uma batalha contra a natureza selvagem que molda o Novo Mundo.', true, false),
+    (10, 1, 'Não se limite a caçar apenas pelas recompensas, mas também pela descoberta. Ruínas antigas, ecossistemas interconectados e segredos ocultos aguardam aqueles que ousam explorar. Mantenha os olhos abertos e esteja preparado para se maravilhar com a grandiosidade deste mundo.', true, false),
+    (11, 1, 'Parta agora para as terras desconhecidas, caçador! Seu objetivo é grandioso, mas lembre-se, cada passo que você dá, cada monstro que enfrenta, molda a lenda que está destinado a se tornar. Boa sorte em suas caçadas, que sejam verdadeiramente lendárias!', true, false);
 
--- FALAS PRE REQ
-
-INSERT INTO FalaPreReq (IdFalaPreReq, FalaPreReq, Fala)
-VALUES (1, 1, 2), (2, 5, 6), (3, 5, 7), (4, 5, 8), (5, 5, 9);
 
 -- MONSTROS
 
