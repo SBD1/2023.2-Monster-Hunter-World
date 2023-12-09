@@ -153,122 +153,11 @@ def pageMovimentacao(pcId):
             {
                 "type":"button",
                 "text":"Área de Encontro",
-                "action":"retornaAreaEncontro/{}".format(pcId)           
+                "action":"assistente/{}-{}".format(pcId, 4)           
             }
         ]
     }
     return render_template('index.html',page=page)
-
-def pageCentroRecursos(pcId):
-    page={
-        "name":"Centro de Recursos",
-        "background":"centro-recursos.jpg",
-        "content":[
-            {
-                "type": "text",
-                "text": "Bem-vindo ao Centro de Recursos!"
-            },
-            {
-                "type": "text",
-                "text": "Aqui você pode comprar ou forjar equipamentos!"
-            },
-            {
-                "type": "text",
-                "text": "Para onde gostaria de ir?"
-            },
-            {
-                "type":"button",
-                "text":"Loja",
-                "action":"retornaLoja/{}".format(pcId)           
-            },
-            {
-                "type":"button",
-                "text":"Forja",
-                "action":"retornaForja/{}".format(pcId)        
-            }
-        ]
-    }
-    return render_template('index.html',page=page)
-
-def pageAreaEncontro(pcId):
-    page={
-        "name":"Bem vindo à Área de Encontro",
-        "background":"mainBackground.jpg",
-        "content":[
-            {
-                "type":"button",
-                "text":"Área de Encontro",
-                "action":"retornaAreaEncontro/{}".format(pcId)   
-            }
-        ]
-    }
-    return render_template('index.html',page=page)
-
-def pageLoja(dinheiro_player, pcId):
-    page={
-        "name":"Loja",
-        "background":"loja.jpg",
-        "content":[
-            {
-                "type": "text",
-                "text": "Bem-vindo à Loja!"
-            },
-            {
-                "type": "text",
-                "text": "Aqui você pode comprar seus equipamentos! Você possui {} dinheiros!".format(dinheiro_player)
-            },
-            {
-                "type":"text",
-                "text":"O que quer comprar hoje?"         
-            },
-            {
-                "type":"button",
-                "text":"Comprar",
-                "action":"retornaComprar"           
-            },
-            {
-                "type":"button",
-                "text":"Voltar",
-                "action":"retornaCentroRecursos/{}".format(pcId)
-            }
-        ]
-    }
-    return render_template('index.html',page=page, dinheiro_player=dinheiro_player)
-
-
-
-def pageRegiao(regiao, leva_em, npcs, monstros, pcId):
-    buttons = []
-
-    for npc in npcs:
-        buttons.append({
-            "type": "button",
-            "text": npc.nome,
-            "action": "{}/{}-{}".format(npc.funcao,pcId, npc.id_npc)
-        })
-
-    for monstro in monstros:
-        buttons.append({
-            "type": "button",
-            "text": monstro.nome,
-            "action": "monstros/{}-{}".format(pcId, monstro.id_monstro)
-        })
-
-    for regiao in leva_em:
-        buttons.append({
-            "type": "button",
-            "text": regiao.nome,
-            "action": "atualizaPCRegiao/{}-{}".format(pcId, regiao.id_regiao)
-        })
-    
-
-    page = {
-        "name": regiao.nome,
-        "background": "mainBackground.jpg",
-        "content":buttons  
-    }
-
-    return render_template('index.html', page=page)
 
 
 def pageAssistente(pcId,npc,falas,missoes):
@@ -386,7 +275,7 @@ def pageForja(nomeFerreiro, pcId):
             {
                 "type":"button",
                 "text":"Voltar",
-                "action":"retornaCentroRecursos/{}".format(pcId)
+                "action":"regiao/{}".format(pcId)
             }
         ]
     }
@@ -494,3 +383,212 @@ def pageForjarArmaduras(nomeArmadura14, nomeArmadura16, pcId):
         ]
     }
     return render_template('index.html', page=page, nomeArmadura14=nomeArmadura14, nomeArmadura16=nomeArmadura16)
+
+
+def pageMovimentacao(pcId):
+    page={
+        "name":"Você está no Acampamento Base, para onde quer ir agora?",
+        "background":"mainBackground.jpg",
+        "content":[
+            {
+                "type":"button",
+                "text":"Centro de Recursos",
+                "action":"atualizaPCRegiao/{}/{}".format(pcId, 8)           
+            },
+            {
+                "type":"button",
+                "text":"Área de Encontro",
+                "action":"atualizaPCRegiao/{}/{}".format(pcId, 9)          
+            },
+
+        ]
+    }
+    return render_template('index.html',page=page)
+
+def pageCentroRecursos(pcId, leva_em, regiao):
+    buttons = [
+        {
+            "type": "button",
+            "text": "Ir para a região {}".format(regiao.nome),
+            "action": "atualizaPCRegiao/{}/{}".format(pcId, regiao.id_regiao)
+        } for regiao in leva_em
+    ]
+
+    page = {
+        "name": regiao.nome,
+        "background": "centro-recursos.jpg",
+        "content": [
+            {
+                "type": "text",
+                "text": "Bem-vindo ao Centro de Recursos!"
+            },
+            {
+                "type": "text",
+                "text": "Aqui você pode comprar ou forjar equipamentos!"
+            },
+            {
+                "type": "text",
+                "text": "Para onde gostaria de ir?"
+            },
+            {
+                "type": "button",
+                "text": "Loja",
+                "action": "retornaLoja/{}".format(pcId)
+            },
+            {
+                "type": "button",
+                "text": "Forja",
+                "action": "retornaForja/{}".format(pcId)
+            },
+            *buttons
+        ]
+    }
+    return render_template('index.html',page=page)
+
+def pageAreaEncontro(pcId, leva_em, regiao):
+    page={
+        "name":"Bem vindo à Área de Encontro",
+        "background":"mainBackground.jpg",
+        "content":[
+            {
+                "type":"button",
+                "text":"Área de Encontro, {}, {}".format(regiao.nome, leva_em[0].nome),
+                "action":"retornaAreaEncontro/{}".format(pcId)   
+            }
+        ]
+    }
+    return render_template('index.html',page=page)
+
+def pageRegiao(regiao, leva_em, pcId):
+    if regiao.id_regiao == 8:
+        return pageCentroRecursos(pcId, leva_em, regiao)
+    elif regiao.id_regiao == 9:
+        return pageAreaEncontro(pcId, leva_em, regiao)
+    elif regiao.id_regiao == 7:
+        return pageMovimentacao(pcId)
+    
+def pageLojaVendeArmas(pcId, armas):
+    buttons = [
+    {
+        "type": "button",
+        "text": "{} (Custo: $ {})".format(arma[0], arma[1]),
+        "action": "compraArma/{}/{}/{}/{}".format(pcId, arma[2], arma[1], arma[3])
+    } for arma in armas
+    ]
+
+    page = {
+        "name": "Loja",
+        "background": "loja.jpg",
+        "content": buttons
+    }
+    return render_template('index.html', page=page)
+
+def pageLojaVendeAmuletos(pcId, amuletos):
+    buttons = [
+    {
+        "type": "button",
+        "text": "{} (Custo: $ {})".format(amuleto[0], amuleto[1]),
+        "action": "compraAmuleto/{}/{}/{}/{}".format(pcId, amuleto[2], amuleto[1], amuleto[3])
+    } for amuleto in amuletos
+    ]
+
+    page = {
+        "name": "Loja",
+        "background": "loja.jpg",
+        "content": buttons
+    }
+    return render_template('index.html', page=page)
+
+def pageLojaVendeFerramentas(pcId, Ferramentas):
+    buttons = [
+    {
+        "type": "button",
+        "text": "{} (Custo: $ {})".format(ferramenta[0], ferramenta[1]),
+        "action": "compraFerramenta/{}/{}/{}/{}".format(pcId, ferramenta[2], ferramenta[1], ferramenta[3])
+    } for ferramenta in Ferramentas
+    ]
+
+    page = {
+        "name": "Loja",
+        "background": "loja.jpg",
+        "content": buttons
+    }
+    return render_template('index.html', page=page)
+
+
+def pageLoja(dinheiro_player, pcId):
+    page={
+        "name":"Loja",
+        "background":"loja.jpg",
+        "content":[
+            {
+                "type": "text",
+                "text": "Bem-vindo à Loja!"
+            },
+                        {
+                "type": "text",
+                "text": "Dinheiro: {}".format(dinheiro_player)
+            },
+            {
+                "type": "text",
+                "text": "Aqui você pode comprar equipamentos! O que procura?"
+            },
+            {
+                "type": "button",
+                "text": "Comprar armas",
+                "action": "lojaVendeArmas/{}".format(pcId)
+            },
+            {
+                "type": "button",
+                "text": "Comprar amuletos",
+                "action": "lojaVendeAmuletos/{}".format(pcId)
+            },
+            {
+                "type": "button",
+                "text": "Comprar ferramentas",
+                "action": "lojaVendeFerramentas/{}".format(pcId)
+            },
+            {
+                "type":"button",
+                "text":"Voltar",
+                "action":"regiao/{}".format(pcId)
+            }
+        ]
+    }
+    return render_template('index.html',page=page, dinheiro_player=dinheiro_player)
+
+def pageErroNaCompra(pcId):
+    page={
+        "name":"Erro na compra",
+        "background":"mainBackground.jpg",
+        "content":[
+            {
+                "type":"text",
+                "text":"Você não tem dinheiro suficiente para comprar este equipamento."
+            },
+            {
+                "type":"button",
+                "text":"Voltar",
+                "action":"retornaLoja/{}".format(pcId)
+            }
+        ]
+    }
+    return render_template('index.html',page=page)
+
+def pageSucessoNaCompra(pcId):
+    page={
+        "name":"Sucesso na compra",
+        "background":"mainBackground.jpg",
+        "content":[
+            {
+                "type":"text",
+                "text":"Parabéns! Você comprou este equipamento com sucesso."
+            },
+            {
+                "type":"button",
+                "text":"Voltar",
+                "action":"retornaLoja/{}".format(pcId)
+            }
+        ]
+    }
+    return render_template('index.html',page=page)

@@ -2607,3 +2607,186 @@ def get_nome_armadura(conn, idArmadura):
     except Exception as e:
         print(f"Erro ao obter a Nome da Armadura: {e}")
         return None
+    
+def get_nome_regiao(conn, idregiao):
+    try:
+        cursor = conn.cursor()
+        cursor.execute("SELECT nome FROM regiao WHERE idregiao = %s;", (idregiao,))
+        result = cursor.fetchone()
+        cursor.close()
+        if result:
+            return result[0]
+        else:
+            print("Região não encontrada.")
+            return None
+    except Exception as e:
+        print(f"Erro ao ler Região: {e}")
+        return None      
+    
+def get_nome_armas(conn):
+    try:
+        cursor = conn.cursor()
+        cursor.execute("SELECT A.nome, A.custocompra, A.IdArma, A.Ataque FROM vendeequipamento V JOIN Equipamento E ON V.equipamento = E.idequipamento JOIN Arma A ON E.idequipamento = A.idarma;")
+        results = cursor.fetchall()
+        cursor.close()
+        
+        # Retorna uma lista de tuplas (nome, custocompra)
+        return results
+    except Exception as e:
+        print(f"Erro ao ler todas as Armas: {e}")
+        return None
+
+def get_nome_amuletos(conn):
+    try:
+        cursor = conn.cursor()
+        cursor.execute("SELECT A.nome, A.custocompra, A.IdAmuleto, A.Melhoria FROM vendeequipamento V JOIN Equipamento E ON V.equipamento = E.idequipamento JOIN Amuleto A ON E.idequipamento = A.idamuleto;")
+        results = cursor.fetchall()
+        cursor.close()
+        
+        # Retorna uma lista de tuplas (nome, custocompra)
+        return results
+    except Exception as e:
+        print(f"Erro ao ler todas as Armas: {e}")
+        return None
+
+def get_nome_Ferramentas(conn):
+    try:
+        cursor = conn.cursor()
+        cursor.execute("SELECT A.nome, A.custocompra, A.IdFerramenta, A.Raridade FROM vendeequipamento V JOIN Equipamento E ON V.equipamento = E.idequipamento JOIN Ferramenta A ON E.idequipamento = A.idferramenta;")
+        results = cursor.fetchall()
+        cursor.close()
+        return results
+    except Exception as e:
+        print(f"Erro ao ler todas as Armas: {e}")
+        return None
+    
+def cria_inventario(conn, pcId):
+    try:
+        cursor = conn.cursor()
+        cursor.execute("INSERT INTO Inventario (PC) VALUES (%s) RETURNING IdInventario;", (pcId,))
+        id_inventario = cursor.fetchone()[0]
+        conn.commit()
+        cursor.close()
+        return id_inventario
+    except Exception as e:
+        conn.rollback()
+        print(f"Erro ao criar Inventario: {e}")
+        return None
+    
+def update_dinheiro_player(conn, pcId, dinheiroNovo):
+    try:
+        cursor = conn.cursor()
+        cursor.execute("UPDATE PC SET Dinheiro = %s WHERE IdPlayer = %s;", (dinheiroNovo, pcId))
+        conn.commit()
+        cursor.close()
+        print("Dinheiro do Player atualizado com sucesso.")
+    except Exception as e:
+        conn.rollback()
+        print(f"Erro ao atualizar Dinheiro do Player: {e}")
+
+def get_inventario(conn, pcId):
+    try:
+        cursor = conn.cursor()
+        cursor.execute("SELECT IdInventario FROM Inventario WHERE PC = %s;", (pcId,))
+        result = cursor.fetchone()
+        cursor.close()
+        if result:
+            return result[0]
+        else:
+            print("Inventario não encontrado.")
+            return None
+    except Exception as e:
+        print(f"Erro ao ler Inventario: {e}")
+        return None
+
+def insert_guarda_equipamento(conn, idInventario, idEquipamento):
+    try:
+        cursor = conn.cursor()
+        cursor.execute("INSERT INTO GuardaEquipamento (Inventario, Equipamento) VALUES (%s, %s);", (idInventario, idEquipamento))
+        conn.commit()
+        cursor.close()
+        print("GuardaEquipamento inserido com sucesso.")
+    except Exception as e:
+        conn.rollback()
+        print(f"Erro ao inserir GuardaEquipamento: {e}")
+
+def update_afinidade_player(conn, idPc, AfinidadeNova):
+    try:
+        cursor = conn.cursor()
+        cursor.execute("UPDATE PC SET Afinidade = %s WHERE IdPlayer = %s;", (AfinidadeNova, idPc))
+        conn.commit()
+        cursor.close()
+        print("Afinidade do Player atualizada com sucesso.")
+    except Exception as e:
+        conn.rollback()
+        print(f"Erro ao atualizar Afinidade do Player: {e}")
+
+def update_vida_player(conn, idPc, vidaNova):
+    try:
+        cursor = conn.cursor()
+        cursor.execute("UPDATE PC SET Vida = %s WHERE IdPlayer = %s;", (vidaNova, idPc))
+        conn.commit()
+        cursor.close()
+        print("Vida do Player atualizada com sucesso.")
+    except Exception as e:
+        conn.rollback()
+        print(f"Erro ao atualizar Vida do Player: {e}")
+
+def update_ranque_player(conn, idPc, ranqueNovo):
+    try:
+        cursor = conn.cursor()
+        cursor.execute("UPDATE PC SET Ranque = %s WHERE IdPlayer = %s;", (ranqueNovo, idPc))
+        conn.commit()
+        cursor.close()
+        print("Ranque do Player atualizada com sucesso.")
+    except Exception as e:
+        conn.rollback()
+        print(f"Erro ao atualizar Ranque do Player: {e}")
+
+
+def get_afinidade_player(conn, pcId):
+    try:
+        cursor = conn.cursor()
+        cursor.execute("SELECT Afinidade FROM PC WHERE IdPlayer = %s;", (pcId,))
+        result = cursor.fetchone()
+        cursor.close()
+        if result:
+            return result[0]
+        else:
+            print("Player não encontrado.")
+            return None
+    except Exception as e:
+        print(f"Erro ao ler Player: {e}")
+        return None
+
+def get_vida_player(conn, pcId):
+    try:
+        cursor = conn.cursor()
+        cursor.execute("SELECT Vida FROM PC WHERE IdPlayer = %s;", (pcId,))
+        result = cursor.fetchone()
+        cursor.close()
+        if result:
+            return result[0]
+        else:
+            print("Player não encontrado.")
+            return None
+    except Exception as e:
+        print(f"Erro ao ler Player: {e}")
+        return None
+    
+def get_ranque_player(conn, pcId):
+    try:
+        cursor = conn.cursor()
+        cursor.execute("SELECT Ranque FROM PC WHERE IdPlayer = %s;", (pcId,))
+        result = cursor.fetchone()
+        cursor.close()
+        if result:
+            return result[0]
+        else:
+            print("Player não encontrado.")
+            return None
+    except Exception as e:
+        print(f"Erro ao ler Player: {e}")
+        return None
+
+
