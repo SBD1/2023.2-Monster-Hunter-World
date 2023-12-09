@@ -101,6 +101,7 @@ def routeCriaPersonagem():
         pcId=int(create_pc(conn,pc))
         amigato=Amigato(-1,regiao, pcId, nome_amigato, nivel, status, vida)
         create_amigato(conn,amigato)
+        cria_inventario(conn,pcId)
         conn.close()
         return redirect("/tutorial/"+str(pcId))
     else:
@@ -118,17 +119,25 @@ def routeTutorial(pcId):
 
 @app.route('/movimentacao/<int:pcId>')
 def movimentacao(pcId):
+    update_regiao_PC(wait_for_db(), pcId, 7)
     return pageMovimentacao(pcId)
 
-@app.route('/retornaCentroRecursos/<int:pcId>')
-def retornaCentroRecursos(pcId):
-    update_regiao_PC(wait_for_db(), pcId, 8)
-    return pageCentroRecursos(pcId)
 
 @app.route('/retornaAreaEncontro/<int:pcId>')
 def retornaAreaEncontro(pcId):
     update_regiao_PC(wait_for_db(), pcId, 9)
     return pageAreaEncontro(pcId)
+
+@app.route('/regiao/<int:pcId>')
+def routeRegiao(pcId):
+    regiao =read_regiao_PC(wait_for_db(),pcId)
+    leva_em = read_leva_em(wait_for_db(), regiao.id_regiao)
+    return pageRegiao(regiao,leva_em, pcId)
+
+@app.route('/atualizaPCRegiao/<int:pcId>/<int:regiaoId>')
+def atualizaPCRegiao(pcId,regiaoId):
+    update_regiao_PC(wait_for_db(), pcId, regiaoId)
+    return redirect("/regiao/"+str(pcId))
 
 @app.route('/retornaLoja/<int:pcId>')
 def retornaLoja(pcId):
@@ -159,20 +168,6 @@ def retornaForjarArmaduras(pcId):
     nomeArmadura16 = get_nome_armadura(wait_for_db(), 16)
     return pageForjarArmaduras(nomeArmadura14, nomeArmadura16, pcId)
 
-@app.route('/regiao/<int:pcId>')
-def routeRegiao(pcId):
-    regiao =read_regiao_PC(wait_for_db(),pcId)
-    npcs=read_npc_regiao(wait_for_db(),regiao.id_regiao)
-    monstros=read_monstro_regiao(wait_for_db(),regiao.id_regiao)
-    leva_em=read_leva_em(wait_for_db(),regiao.id_regiao)
-    return pageRegiao(regiao,leva_em, npcs, monstros, pcId)
-
-@app.route('/atualizaPCRegiao/<int:pcId>-<int:regiaoId>')
-def routeAtualizaRegiao(pcId,regiaoId):
-    update_regiao_PC(wait_for_db(), pcId, regiaoId)
-    return redirect("/regiao/"+str(pcId))
-
-
 @app.route('/assistente/<int:pcId>-<int:npcId>')
 def routeAssistente(pcId,npcId):
     npc=read_npc(wait_for_db(),npcId)
@@ -192,6 +187,64 @@ def routeMissao(pcId,npcId,missaoId):
 def routePegaMissao(pcId,missaoId):
     create_realiza_missao(wait_for_db(),pcId,missaoId)
     return redirect("/regiao/"+str(pcId))
+
+
+@app.route('/lojaVendeArmas/<int:pcId>')
+def lojaVendeArmas(pcId):
+    armas = get_nome_armas(wait_for_db())
+    return pageLojaVendeArmas(pcId, armas)
+
+@app.route('/lojaVendeAmuletos/<int:pcId>')
+def lojaVendeAmuletos(pcId):
+    amuletos = get_nome_amuletos(wait_for_db())
+    return pageLojaVendeAmuletos(pcId, amuletos)
+
+@app.route('/lojaVendeFerramentas/<int:pcId>')
+def lojaVendeFerramentas(pcId):
+    Ferramentas = get_nome_Ferramentas(wait_for_db())
+    return pageLojaVendeFerramentas(pcId, Ferramentas)
+
+@app.route('/erroNaCompra/<int:pcId>')
+def erroNaCompra(pcId):
+    return pageErroNaCompra(pcId)
+
+@app.route('/sucesso/<int:pcId>')
+def sucesso(pcId):
+    return pageSucessoNaCompra(pcId)
+
+@app.route('/compraArma/<int:pcId>/<int:armaId>/<int:custo>/<int:ataque>')
+def compraArma(pcId,armaId, custo, ataque):
+    dinheiro = get_dinheiro_player(wait_for_db(), pcId)
+    if dinheiro is not None and dinheiro >= custo:
+        update_dinheiro_player(wait_for_db(), pcId, dinheiro-custo)
+        insert_guarda_equipamento(wait_for_db(), get_inventario(wait_for_db(), pcId), armaId)
+        update_afinidade_player(wait_for_db(), pcId, get_afinidade_player(wait_for_db(), pcId)+ataque)
+        return redirect("/sucesso/"+str(pcId))
+    else:
+        return redirect("/erroNaCompra/"+str(pcId))
+    
+@app.route('/compraAmuleto/<int:pcId>/<int:AmuletoId>/<int:custo>/<int:melhoria>')
+def compraAmuleto(pcId,AmuletoId, custo, melhoria):
+    dinheiro = get_dinheiro_player(wait_for_db(), pcId)
+    if dinheiro is not None and dinheiro >= custo:
+        update_dinheiro_player(wait_for_db(), pcId, dinheiro-custo)
+        insert_guarda_equipamento(wait_for_db(), get_inventario(wait_for_db(), pcId), AmuletoId)
+        update_vida_player(wait_for_db(), pcId, get_vida_player(wait_for_db(), pcId)+melhoria)
+        return redirect("/sucesso/"+str(pcId))
+    else:
+        return redirect("/erroNaCompra/"+str(pcId))
+
+@app.route('/compraFerramenta/<int:pcId>/<int:FerramentaId>/<int:custo>/<int:raridade>')
+def compraFerramenta(pcId,FerramentaId, custo, raridade):
+    dinheiro = get_dinheiro_player(wait_for_db(), pcId)
+    if dinheiro is not None and dinheiro >= custo:
+        update_dinheiro_player(wait_for_db(), pcId, dinheiro-custo)
+        insert_guarda_equipamento(wait_for_db(), get_inventario(wait_for_db(), pcId), FerramentaId)
+        update_ranque_player(wait_for_db(), pcId, get_ranque_player(wait_for_db(), pcId)+raridade)
+        return redirect("/sucesso/"+str(pcId))
+    else:
+        return redirect("/erroNaCompra/"+str(pcId))
+    
 
 if __name__ == "__main__":
     app.run(debug=True)
