@@ -145,8 +145,8 @@ def retornaLoja(pcId):
 
 @app.route('/retornaForja/<int:pcId>')
 def retornaForja(pcId):
-    nomeFerreiro = get_nome_ferreiro(wait_for_db())
-    return pageForja(nomeFerreiro, pcId)
+    dadosFerreiro = get_dados_ferreiro(wait_for_db())
+    return pageForja(dadosFerreiro, pcId)
 
 @app.route('/retornaForjarEquipamento/<int:pcId>')
 def retornaForjarEquipamento(pcId):

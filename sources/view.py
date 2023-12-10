@@ -246,7 +246,7 @@ def pageMissao(pcId, npcId, missao, mapa):
 
     return render_template('index.html', page=page)
 
-def pageForja(nomeFerreiro, pcId):
+def pageForja(dadosFerreiro, pcId):
     page = {
         "name": "Forja",
         "background": "forja.jpg",
@@ -257,7 +257,7 @@ def pageForja(nomeFerreiro, pcId):
             },
             {
                 "type": "text",
-                "text": "Eu sou o {}.".format(nomeFerreiro)  
+                "text": "Eu sou o {}.".format(dadosFerreiro)  
             },
             {
                 "type": "text",
@@ -279,7 +279,7 @@ def pageForja(nomeFerreiro, pcId):
             }
         ]
     }
-    return render_template('index.html', page=page, nomeFerreiro=nomeFerreiro)
+    return render_template('index.html', page=page)
 
 def pageForjarEquipamento(falaFerreiro, pcId):
     page = {
@@ -317,7 +317,7 @@ def pageForjarArmas(din, pcId, armas):
 
     buttons += [{
         "type": "button",
-        "text": "{} (Custo: $ {})".format(arma[0], arma[1]),
+        "text": "{} - Ataque: {} - Custo: $ {}".format(arma[0], arma[3], arma[1]),
         "action": "forjaArma/{}/{}/{}/{}".format(pcId, arma[2], arma[1], arma[3])
     } for arma in armas
     ]
@@ -343,7 +343,7 @@ def pageForjarArmaduras(din, pcId, armaduras):
         
     buttons += [{
         "type": "button",
-        "text": "{} (Custo: $ {})".format(armadura[0], armadura[1]),
+        "text": "{} - Defesa: {} - Custo: $ {}".format(armadura[0], armadura[3], armadura[1]),
         "action": "forjaArmadura/{}/{}/{}/{}".format(pcId, armadura[2], armadura[1], armadura[3])
     } for armadura in armaduras
     ]
