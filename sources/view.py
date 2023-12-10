@@ -309,80 +309,57 @@ def pageForjarEquipamento(falaFerreiro, pcId):
     }
     return render_template('index.html', page=page, falaFerreiro=falaFerreiro)
 
-def pageForjarArmas(nomeArma7, nomeArma9, nomeArma10, nomeArma11, pcId):
+def pageForjarArmas(din, pcId, armas):
+    buttons = [{
+        "type": "text",
+        "text": "Saldo atual: $ {}".format(din)
+    }]
+
+    buttons += [{
+        "type": "button",
+        "text": "{} (Custo: $ {})".format(arma[0], arma[1]),
+        "action": "forjaArma/{}/{}/{}/{}".format(pcId, arma[2], arma[1], arma[3])
+    } for arma in armas
+    ]
+
+    buttons.append({
+        "type":"button",
+        "text":"Voltar",
+        "action":"retornaForjarEquipamento/{}".format(pcId)
+    })
+
     page = {
         "name": "Forjar Armas",
         "background": "forja.jpg",
-        "content": [
-            {
-                "type": "text",
-                "text": "Qual arma deseja forjar?"
-            },
-            {
-                "type":"options",
-                "text":"Armas:",
-                "name":"arma",
-                "options":[
-                    {
-                        "text":"{}".format(nomeArma7),
-                        "value":""
-                    },
-                    {
-                        "text":"{}".format(nomeArma9),
-                        "value":""
-                    },
-                    {
-                        "text":"{}".format(nomeArma10),
-                        "value":""
-                    },
-                    {
-                        "text":"{}".format(nomeArma11),
-                        "value":""
-                    },
-                ]      
-            },
-            {
-                "type":"button",
-                "text":"Vizualizar",
-                "name":"arma",
-                "action": "visualizarArma/{}".format(pcId)          
-            },
-            {
-                "type":"button",
-                "text":"Voltar",
-                "action":"retornaForjarEquipamento/{}".format(pcId)
-            }
-        ]
+        "content": buttons
     }
-    return render_template('index.html', page=page, nomeArma7=nomeArma7, nomeArma9=nomeArma9, nomeArma10=nomeArma10, nomeArma11=nomeArma11)
+    return render_template('index.html', page=page, din=din)
 
-def pageForjarArmaduras(nomeArmadura14, nomeArmadura16, pcId):
+def pageForjarArmaduras(din, pcId, armaduras):
+    buttons = [{
+        "type": "text",
+        "text": "Saldo atual: $ {}".format(din)
+    }]
+        
+    buttons += [{
+        "type": "button",
+        "text": "{} (Custo: $ {})".format(armadura[0], armadura[1]),
+        "action": "forjaArmadura/{}/{}/{}/{}".format(pcId, armadura[2], armadura[1], armadura[3])
+    } for armadura in armaduras
+    ]
+
+    buttons.append({
+        "type":"button",
+        "text":"Voltar",
+        "action":"retornaForjarEquipamento/{}".format(pcId)
+    })
+
     page = {
         "name": "Forjar Armaduras",
         "background": "forja.jpg",
-        "content": [
-            {
-                "type": "text",
-                "text": "Qual armadura deseja forjar?"
-            },
-            {
-                "type":"button",
-                "text":"{}".format(nomeArmadura14),
-                "action":"retornaForjarLançaFerro/{}".format(pcId)         
-            },
-            {
-                "type":"button",
-                "text":"{}".format(nomeArmadura16),
-                "action":"retornaForjarLançaFerro/{}".format(pcId)         
-            },
-            {
-                "type":"button",
-                "text":"Voltar",
-                "action":"retornaForjarEquipamento/{}".format(pcId)
-            }
-        ]
+        "content": buttons
     }
-    return render_template('index.html', page=page, nomeArmadura14=nomeArmadura14, nomeArmadura16=nomeArmadura16)
+    return render_template('index.html', page=page , din=din)
 
 
 def pageMovimentacao(pcId):
@@ -569,7 +546,7 @@ def pageErroNaCompra(pcId):
             {
                 "type":"button",
                 "text":"Voltar",
-                "action":"retornaLoja/{}".format(pcId)
+                "action":"regiao/{}".format(pcId)
             }
         ]
     }
@@ -587,7 +564,7 @@ def pageSucessoNaCompra(pcId):
             {
                 "type":"button",
                 "text":"Voltar",
-                "action":"retornaLoja/{}".format(pcId)
+                "action":"regiao/{}".format(pcId)
             }
         ]
     }
