@@ -122,7 +122,6 @@ def movimentacao(pcId):
     update_regiao_PC(wait_for_db(), pcId, 7)
     return pageMovimentacao(pcId)
 
-
 @app.route('/retornaAreaEncontro/<int:pcId>')
 def retornaAreaEncontro(pcId):
     update_regiao_PC(wait_for_db(), pcId, 9)
@@ -146,8 +145,8 @@ def retornaLoja(pcId):
 
 @app.route('/retornaForja/<int:pcId>')
 def retornaForja(pcId):
-    nomeFerreiro = get_nome_ferreiro(wait_for_db())
-    return pageForja(nomeFerreiro, pcId)
+    dadosFerreiro = get_dados_ferreiro(wait_for_db())
+    return pageForja(dadosFerreiro, pcId)
 
 @app.route('/retornaForjarEquipamento/<int:pcId>')
 def retornaForjarEquipamento(pcId):
@@ -156,17 +155,37 @@ def retornaForjarEquipamento(pcId):
 
 @app.route('/retornaForjarArmas/<int:pcId>')
 def retornaForjarArmas(pcId):
-    nomeArma7 = get_nome_arma(wait_for_db(), 7)
-    nomeArma9 = get_nome_arma(wait_for_db(), 9)
-    nomeArma10 = get_nome_arma(wait_for_db(), 10)
-    nomeArma11 = get_nome_arma(wait_for_db(), 11)
-    return pageForjarArmas(nomeArma7, nomeArma9, nomeArma10, nomeArma11, pcId)
+    armas = get_nome_armas(wait_for_db())
+    din = get_dinheiro_player(wait_for_db(), pcId)
+    return pageForjarArmas(din, pcId, armas)
 
 @app.route('/retornaForjarArmaduras/<int:pcId>')
 def retornaForjarArmaduras(pcId):
-    nomeArmadura14 = get_nome_armadura(wait_for_db(), 14)
-    nomeArmadura16 = get_nome_armadura(wait_for_db(), 16)
-    return pageForjarArmaduras(nomeArmadura14, nomeArmadura16, pcId)
+    armaduras = get_nome_armaduras(wait_for_db())
+    din = get_dinheiro_player(wait_for_db(), pcId)
+    return pageForjarArmaduras(din, pcId, armaduras)
+
+@app.route('/forjaArma/<int:pcId>/<int:armaId>/<int:custo>/<int:ataque>')
+def forjaArma(pcId, armaId, custo, ataque):
+    dinheiro = get_dinheiro_player(wait_for_db(), pcId)
+    if dinheiro is not None and dinheiro >= custo:
+        update_dinheiro_player(wait_for_db(), pcId, dinheiro - custo)
+        insert_guarda_equipamento(wait_for_db(), get_inventario(wait_for_db(), pcId), armaId)
+        update_afinidade_player(wait_for_db(), pcId, get_afinidade_player(wait_for_db(), pcId) + ataque)
+        return redirect("/sucesso/"+str(pcId))
+    else:
+        return redirect("/erroNaCompra/"+str(pcId))
+    
+@app.route('/forjaArmadura/<int:pcId>/<int:armaduraId>/<int:custo>/<int:defesa>')
+def forjaArmadura(pcId, armaduraId, custo, defesa):
+    dinheiro = get_dinheiro_player(wait_for_db(), pcId)
+    if dinheiro is not None and dinheiro >= custo:
+        update_dinheiro_player(wait_for_db(), pcId, dinheiro - custo)
+        insert_guarda_equipamento(wait_for_db(), get_inventario(wait_for_db(), pcId), armaduraId)
+        update_vida_player(wait_for_db(), pcId, get_vida_player(wait_for_db(), pcId) + defesa)
+        return redirect("/sucesso/"+str(pcId))
+    else:
+        return redirect("/erroNaCompra/"+str(pcId))
 
 @app.route('/assistente/<int:pcId>-<int:npcId>')
 def routeAssistente(pcId,npcId):
@@ -245,6 +264,5 @@ def compraFerramenta(pcId,FerramentaId, custo, raridade):
     else:
         return redirect("/erroNaCompra/"+str(pcId))
     
-
 if __name__ == "__main__":
     app.run(debug=True)

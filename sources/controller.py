@@ -2548,19 +2548,19 @@ def get_nome_regiao(conn, idregiao):
         print(f"Erro ao ler Região: {e}")
         return None      
 
-def get_nome_ferreiro(conn):
+def get_dados_ferreiro(conn):
     try:
         cursor = conn.cursor()
-        cursor.execute("SELECT NPC.Nome AS NomeFerreiro FROM NPC JOIN Forja ON NPC.IdNPC = Forja.NPC WHERE NPC.IdNPC = 2;")
+        cursor.execute("SELECT NPC.Nome FROM NPC JOIN Forja ON NPC.IdNPC = Forja.NPC WHERE NPC.Funcao = 'Ferreiro';")
         result = cursor.fetchone()
         cursor.close()
         if result:
             return result[0]
         else:
-            print("Ferreiro não encontrado.")
+            print("Dados do ferreiro não encontrado.")
             return None
     except Exception as e:
-        print(f"Erro ao obter o nome do Ferreiro: {e}")
+        print(f"Erro ao obter os dados do Ferreiro: {e}")
         return None
     
 def get_fala_ferreiro(conn):
@@ -2577,36 +2577,6 @@ def get_fala_ferreiro(conn):
     except Exception as e:
         print(f"Erro ao obter a Fala do Ferreiro: {e}")
         return None
-    
-def get_nome_arma(conn, idArma):
-    try:
-        cursor = conn.cursor()
-        cursor.execute("SELECT Nome FROM Arma WHERE IdArma = %s;", (idArma,))
-        result = cursor.fetchone()
-        cursor.close()
-        if result:
-            return result[0]
-        else:
-            print("Nome da Arma não encontrada.")
-            return None
-    except Exception as e:
-        print(f"Erro ao obter a Nome da Arma: {e}")
-        return None
-
-def get_nome_armadura(conn, idArmadura):
-    try:
-        cursor = conn.cursor()
-        cursor.execute("SELECT Nome FROM Armadura WHERE IdArmadura = %s;", (idArmadura,))
-        result = cursor.fetchone()
-        cursor.close()
-        if result:
-            return result[0]
-        else:
-            print("Nome da Armadura não encontrada.")
-            return None
-    except Exception as e:
-        print(f"Erro ao obter a Nome da Armadura: {e}")
-        return None
         
 def get_nome_armas(conn):
     try:
@@ -2619,6 +2589,19 @@ def get_nome_armas(conn):
         return results
     except Exception as e:
         print(f"Erro ao ler todas as Armas: {e}")
+        return None
+    
+def get_nome_armaduras(conn):
+    try:
+        cursor = conn.cursor()
+        cursor.execute("SELECT A.nome, A.custocompra, A.IdArmadura, A.Defesa FROM CriaEquipamento V JOIN Equipamento E ON V.equipamento = E.idequipamento JOIN Armadura A ON E.idequipamento = A.idarmadura;")
+        results = cursor.fetchall()
+        cursor.close()
+        
+        # Retorna uma lista de tuplas (nome, custocompra)
+        return results
+    except Exception as e:
+        print(f"Erro ao ler todas as Armaduras: {e}")
         return None
 
 def get_nome_amuletos(conn):
@@ -2773,5 +2756,3 @@ def get_ranque_player(conn, pcId):
     except Exception as e:
         print(f"Erro ao ler Player: {e}")
         return None
-
-
