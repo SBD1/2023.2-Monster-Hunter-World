@@ -255,7 +255,7 @@ INSERT INTO Armadura (IdArmadura, Nome, Nivel, Raridade, CustoCompra, ValorVenda
     (13, 'Armadura de Couro', 1, 1, 40, 20, 'Uma armadura básica feita de couro resistente.', 1, 30, 0, 0, 0, 0, 0),
     (14, 'Armadura de Placas', 1, 1, 50, 25, 'Uma armadura reforçada com placas de metal.', 2, 40, 0, 0, 0, 0, 0),
     (15, 'Armadura de Escamas', 1, 1, 45, 22, 'Uma armadura feita de escamas de monstros resistentes.', 3, 35, 0, 0, 0, 0, 0),
-    (16, 'Armadura de Ferro', 1, 1, 55, 28, 'Uma armadura resistente feita de ferro forjado.', 4, 50, 0, 0, 0, 0, 0);
+    (16, 'Armadura de Ferro', 1, 1, 55, 28, 'Uma armadura resistente feita de ferro forjado.', 4, 50, 0, 0, 0, 0, 0),
 
 -- AMULETOS
 

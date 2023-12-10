@@ -312,12 +312,12 @@ def pageForjarEquipamento(falaFerreiro, pcId):
 def pageForjarArmas(din, pcId, armas):
     buttons = [{
         "type": "text",
-        "text": "Saldo atual: $ {}".format(din)
+        "text": "Saldo atual: {} z".format(din)
     }]
 
     buttons += [{
         "type": "button",
-        "text": "{} - Ataque: {} - Custo: $ {}".format(arma[0], arma[3], arma[1]),
+        "text": "{} - Ataque: {} - Custo: {} z".format(arma[0], arma[3], arma[1]),
         "action": "forjaArma/{}/{}/{}/{}".format(pcId, arma[2], arma[1], arma[3])
     } for arma in armas
     ]
@@ -338,12 +338,12 @@ def pageForjarArmas(din, pcId, armas):
 def pageForjarArmaduras(din, pcId, armaduras):
     buttons = [{
         "type": "text",
-        "text": "Saldo atual: $ {}".format(din)
+        "text": "Saldo atual: {} z".format(din)
     }]
         
     buttons += [{
         "type": "button",
-        "text": "{} - Defesa: {} - Custo: $ {}".format(armadura[0], armadura[3], armadura[1]),
+        "text": "{} - Defesa: {} - Custo: {} z".format(armadura[0], armadura[3], armadura[1]),
         "action": "forjaArmadura/{}/{}/{}/{}".format(pcId, armadura[2], armadura[1], armadura[3])
     } for armadura in armaduras
     ]
