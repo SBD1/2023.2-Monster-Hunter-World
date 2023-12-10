@@ -22,13 +22,10 @@ app = Flask(__name__)
 
 def execute_sql_file(filename, connection):
     with open(filename, 'r') as file:
-        sql_commands = file.read().split(';')
-        sql_commands = [cmd.strip() for cmd in sql_commands if cmd.strip()]
-
-        with connection.cursor() as cursor:
-            for cmd in sql_commands:
-                cursor.execute(cmd)
-            connection.commit()
+        sql_commands = file.read()
+        cursor= connection.cursor()
+        cursor.execute(sql_commands)
+        connection.commit()
 
 
 def wait_for_db():
@@ -88,12 +85,12 @@ def routeCriaPersonagem():
     nome_amigato = request.args.get('amigato')
 
     if nome and arma and genero and nome_amigato:
-        regiao=7
+        regiao=1
         ranque=1
-        vida=100
-        vigor=30
+        vida=1000
+        vigor=500
         afinidade=0
-        dinheiro=0
+        dinheiro=100
         status=0
         nivel=1
         pc=PC(-1, regiao, nome, ranque, vida, vigor, afinidade, dinheiro, genero)
@@ -104,7 +101,7 @@ def routeCriaPersonagem():
         cria_inventario(conn,pcId)
         conn.close()
         npc= read_npc_function(wait_for_db(), "tutorial")
-        return redirect("/tutorial/"+str(pcId)+"-"+str(npc.IdNPC)+"?firstTime=true")
+        return redirect("/tutorial/"+str(pcId)+"-"+str(npc.id_npc)+"?firstTime=true")
     else:
        return pageCriarPersonagem() 
     
@@ -116,7 +113,6 @@ def routeTutorial(pcId,npcId):
     regiao=read_regiao(wait_for_db(),npc.regiao)
     falas=read_falas_npc(wait_for_db(),npc.id_npc)
     return pageTutorial(npc, pcId,regiao,falas,firstTime)
-
 
 @app.route('/regiao/<int:pcId>')
 def routeRegiao(pcId):
@@ -151,8 +147,8 @@ def routePegaMissao(pcId,missaoId):
     create_realiza_missao(wait_for_db(),pcId,missaoId)
     return redirect("/regiao/"+str(pcId))
 
-@app.route('/retornaLoja/<int:pcId>')
-def retornaLoja(pcId):
+@app.route('/loja/<int:pcId>-<int:npcId>')
+def retornaLoja(pcId,npcId):
     din = get_dinheiro_player(wait_for_db(), pcId)
     return pageLoja(din, pcId)
 
@@ -179,6 +175,7 @@ def retornaForjarArmaduras(pcId):
     nomeArmadura14 = get_nome_armadura(wait_for_db(), 14)
     nomeArmadura16 = get_nome_armadura(wait_for_db(), 16)
     return pageForjarArmaduras(nomeArmadura14, nomeArmadura16, pcId)
+
 @app.route('/lojaVendeArmas/<int:pcId>')
 def lojaVendeArmas(pcId):
     armas = get_nome_armas(wait_for_db())
