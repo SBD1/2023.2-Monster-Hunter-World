@@ -240,6 +240,22 @@ def read_npc(conn, id_npc):
         print(f"Erro ao ler NPC: {e}")
         return None
 
+def read_npc_function(conn, function):
+    try:
+        cursor = conn.cursor()
+        cursor.execute("SELECT * FROM NPC WHERE Funcao = '%s' ORDER BY IdNPC;"%(function))
+        result = cursor.fetchone()
+        cursor.close()
+        if result:
+            npc = NPC(*result)
+            return npc
+        else:
+            print("NPC não encontrado.")
+            return None
+    except Exception as e:
+        print(f"Erro ao ler NPC: {e}")
+        return None
+
 def read_all_npcs(conn):
     try:
         cursor = conn.cursor()
@@ -358,6 +374,16 @@ def delete_pc(conn, id_player):
         conn.rollback()
         print(f"Erro ao excluir PC: {e}")
 
+def adiciona_arma_pc(conn,id_player,arma):
+    try:
+        cursor = conn.cursor()
+        cursor.execute("CALL AdicionaItemParaPlayer('%s',%s);", (arma,id_player,))
+        conn.commit()
+        cursor.close()
+    except Exception as e:
+        conn.rollback()
+        print(f"Erro ao adicionar arma para o PC: {e}")
+
 def create_amigato(conn, amigato):
     try:
         cursor = conn.cursor()
@@ -467,11 +493,13 @@ def read_all_falas(conn):
 
 def read_falas_npc(conn,id_npc):
     cursor = conn.cursor()
-    cursor.execute("SELECT F.* FROM Fala F LEFT JOIN FalaPreReq FP ON F.IdFala = FP.Fala WHERE F.NPC = %s AND (F.Repetivel = true OR F.FoiExecutado = false) AND (FP.FalaPreReq IS NULL OR (SELECT FoiExecutado FROM Fala WHERE IdFala = FP.FalaPreReq) = true) ORDER BY IdFala;"%(id_npc))
+    cursor.execute("""  SELECT * 
+                        FROM Fala
+                        WHERE NPC=%s
+                        ORDER BY IdFala;
+                        """%(id_npc))
     results = cursor.fetchall()
     falas = [Fala(*result) for result in results]
-    for fala in falas:
-        cursor.execute("CALL AtualizarFoiExecutadoParaItem(%s);"%(fala.id_fala))
     cursor.close()
     conn.commit()
     return falas
@@ -645,20 +673,27 @@ def create_instancia_monstro(conn, instancia_monstro):
         print(f"Erro ao criar InstanciaMonstro: {e}")
         return None
 
-def read_instancia_monstro(conn, id_instancia_monstro):
-    try:
-        cursor = conn.cursor()
-        cursor.execute("SELECT * FROM InstanciaMonstro WHERE IdInstanciaMonstro = %s;", (id_instancia_monstro,))
+def read_instancia_monstro(conn, id_monstro):
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM InstanciaMonstro WHERE Status=1 AND Monstro=%s;", (id_monstro,))
+    result = cursor.fetchone()
+    if not result:
+        cursor.execute("""INSERT INTO InstanciaMonstro (Monstro, Status, Vida)
+                        SELECT
+                            IdMonstro,
+                            1,
+                            Vida
+                        FROM Monstro
+                        WHERE IdMonstro =%s;"""%(id_monstro))
+        conn.commit()
+        cursor.execute("SELECT * FROM InstanciaMonstro WHERE Status=1 AND Monstro=%s;", (id_monstro,))
         result = cursor.fetchone()
-        cursor.close()
-        if result:
-            instancia_monstro = InstanciaMonstro(*result)
-            return instancia_monstro
-        else:
-            print("InstanciaMonstro não encontrada.")
-            return None
-    except Exception as e:
-        print(f"Erro ao ler InstanciaMonstro: {e}")
+    cursor.close()
+    if result:
+        instancia_monstro = InstanciaMonstro(*result)
+        return instancia_monstro
+    else:
+        print("InstanciaMonstro não encontrada.")
         return None
 
 def read_all_instancias_monstro(conn):
@@ -672,6 +707,60 @@ def read_all_instancias_monstro(conn):
     except Exception as e:
         print(f"Erro ao ler todas as InstanciasMonstro: {e}")
         return None
+
+
+def atacaInstanciaMonstro(conn, player, instancia_monstro):
+    # Criar um cursor
+    cursor = conn.cursor()
+
+    # Realizar o SELECT
+    select_query = """
+        SELECT SUM(A.Ataque) AS SomaAtaques
+        FROM UtilizaItem UI
+        JOIN Arma A ON UI.Item = A.IdArma
+        WHERE UI.PC = %s;
+    """
+
+    cursor.execute(select_query, (player,))
+
+    # Obter o resultado do SELECT
+    resultado = cursor.fetchone()
+
+    if resultado:
+        soma_ataques = resultado[0]
+        print(f"Soma dos ataques: {soma_ataques}")
+
+        # Subtrair da vida da instância do monstro
+        update_query = """
+            UPDATE InstanciaMonstro
+            SET Vida = Vida - %s
+            WHERE IdInstanciaMonstro = %s;
+        """
+
+        insert_ataca_query = """
+            INSERT INTO AtacaMonstro (PC, Monstro, Dano)
+            VALUES (%s, %s, %s);
+        """
+
+        cursor.execute(update_query, (soma_ataques, instancia_monstro))
+        cursor.execute(insert_ataca_query, (player, instancia_monstro,player))
+
+        update_query = """
+            UPDATE InstanciaMonstro
+            SET Status = 0
+            WHERE Vida <= 0;
+        """
+        cursor.execute(update_query)
+        conn.commit()
+
+        cursor.execute("SELECT Status FROM InstanciaMonstro WHERE IdInstanciaMonstro = %s"%(instancia_monstro))
+        
+        resultado = cursor.fetchone()[0]
+        print("Vida da instância do monstro atualizada.")
+        cursor.close()
+        return(resultado)
+    else:
+        print("Nenhum ataque disponível para o jogador.")    
 
 def update_instancia_monstro(conn, instancia_monstro):
     try:
@@ -897,6 +986,34 @@ def read_missao_player(conn,id_player):
         print(f"Erro ao ler todas as Missoes: {e}")
         return []
 
+def read_missao_ativa(conn,id_player):
+    try:
+        cursor = conn.cursor()
+        cursor.execute("SELECT Missao.* FROM Missao JOIN RealizaMissao ON Missao.IdMissao = RealizaMissao.Missao WHERE RealizaMissao.PC = %s AND (RealizaMissao.Status > 0 AND RealizaMissao.Status < 4);", (id_player,))
+        result = cursor.fetchone()
+        cursor.close()
+        if result:
+            missao = Missao(*result)
+            return missao
+        else:
+            print("Missao não encontrada.")
+            return None
+    except Exception as e:
+        print(f"Erro ao ler Missao: {e}")
+        return None
+
+def cancela_missao(conn,id_player,id_missao):
+    try:
+        cursor = conn.cursor()
+
+        # Define o status de RealizaMissao para 0 para a missão específica do jogador
+        cursor.execute("UPDATE RealizaMissao SET Status = 0 WHERE PC = %s AND Missao = %s;", (id_player, id_missao))
+        conn.commit()
+        cursor.close()
+
+    except Exception as e:
+        print(f"Erro ao cancelar Missão: {e}")
+    
 
 def update_missao(conn, missao):
     try:
@@ -1081,10 +1198,10 @@ def read_etapa_monstro(conn, id_etapa_monstro):
         print(f"Erro ao ler EtapaMonstro: {e}")
         return None
 
-def read_all_etapas_monstro(conn):
+def read_missao_etapas_monstro(conn):
     try:
         cursor = conn.cursor()
-        cursor.execute("SELECT * FROM EtapaMonstro;")
+        cursor.execute("SELECT * FROM EtapaMonstro Where;")
         results = cursor.fetchall()
         cursor.close()
         etapas_monstro = [EtapaMonstro(*result) for result in results]
@@ -1416,6 +1533,17 @@ def read_all_lojas(conn):
         print(f"Erro ao ler todas as Lojas: {e}")
         return None
 
+def read_npc_lojas(conn,npc):
+    try:
+        cursor = conn.cursor()
+        cursor.execute("SELECT * FROM Loja WHERE npc=%s;"%(npc))
+        results = cursor.fetchall()
+        cursor.close()
+        lojas = [Loja(*result) for result in results]
+        return lojas
+    except Exception as e:
+        print(f"Erro ao ler todas as Lojas: {e}")
+        return None
 def update_loja(conn, loja):
     try:
         cursor = conn.cursor()
@@ -2006,6 +2134,34 @@ def read_all_armas(conn):
         print(f"Erro ao ler todas as Armas: {e}")
         return None
 
+def read_all_armas_forja(conn):
+    try:
+        cursor = conn.cursor()
+        cursor.execute("""SELECT 
+                            Arma.IdArma as id_arma,
+                            Item.Nome as nome,
+                            Item.Raridade as raridade,
+                            Item.CustoCompra as custo_compra,
+                            Item.ValorVenda as valor_venda,
+                            Item.Descricao as descricao,
+                            Item.Tipo as tipo,
+                            Arma.Ataque as ataque,
+                            Arma.Afiacao as afiacao,
+                            Arma.Elemento as elemento,
+                            Arma.ValorElemento as valor_elemento
+                        FROM Arma
+                        JOIN Item ON Arma.IdArma = Item.IdItem
+                        JOIN CriaItem ON CriaItem.Item = Item.IdItem
+                        WHERE Item.Tipo >= 18;""")
+        results = cursor.fetchall()
+        cursor.close()
+        armas = [Arma(*result) for result in results]
+        return armas
+    except Exception as e:
+        print(f"Erro ao ler todas as Armas: {e}")
+        return None
+
+
 def update_arma(conn, arma):
     try:
         cursor = conn.cursor()
@@ -2065,6 +2221,31 @@ def read_armadura(conn, id_armadura):
     except Exception as e:
         print(f"Erro ao ler Armadura: {e}")
         return None
+
+def read_all_armaduras_forja(conn):
+    cursor = conn.cursor()
+    cursor.execute("""SELECT 
+                        Armadura.IdArmadura as id_armadura,
+                        Item.Nome as nome,
+                        Item.Raridade as raridade,
+                        Item.CustoCompra as custo_compra,
+                        Item.ValorVenda as valor_venda,
+                        Item.Descricao as descricao,
+                        Item.Tipo as tipo,
+                        Armadura.Defesa as defesa,
+                        Armadura.Fogo as fogo,
+                        Armadura.Agua as agua,
+                        Armadura.Raio as raio,
+                        Armadura.Gelo as gelo,
+                        Armadura.Dragao as dragao
+                    FROM Armadura
+                    JOIN Item ON Armadura.IdArmadura = Item.IdItem
+                    JOIN CriaItem ON CriaItem.Item = Item.IdItem
+                    WHERE Item.Funcao LIKE '%Armadura%';""")
+    results = cursor.fetchall()
+    cursor.close()
+    armaduras = [Armadura(*result) for result in results]
+    return armaduras
 
 def read_all_armaduras(conn):
     try:
@@ -2775,3 +2956,148 @@ def get_ranque_player(conn, pcId):
         return None
 
 
+def adicionaItemAoInventario(conn, p_nome_funcao, p_id_player):
+    try:
+        # Criar um cursor
+        cursor = conn.cursor()
+
+        # Encontrar o ID do Item
+        select_item_query = """
+            SELECT IdItem
+            FROM Item
+            WHERE Funcao = %s
+            ORDER BY Raridade, CustoCompra
+            LIMIT 1;
+        """
+        cursor.execute(select_item_query, (p_nome_funcao,))
+        v_id_item = cursor.fetchone()
+
+        if v_id_item:
+            v_id_item = v_id_item[0]
+
+            # Encontrar o ID do Inventario do jogador
+            select_inventario_query = """
+                SELECT IdInventario
+                FROM Inventario
+                WHERE PC = %s
+                LIMIT 1;
+            """
+            cursor.execute(select_inventario_query, (p_id_player,))
+            v_id_inventario = cursor.fetchone()
+
+            if v_id_inventario:
+                v_id_inventario = v_id_inventario[0]
+
+                # Adicionar o item em UtilizaItem
+                insert_utilizaitem_query = """
+                    INSERT INTO UtilizaItem (PC, Item)
+                    VALUES (%s, %s);
+                """
+                cursor.execute(insert_utilizaitem_query, (p_id_player, v_id_item))
+
+                # Adicionar o item em GuardaItem
+                insert_guardaitem_query = """
+                    INSERT INTO GuardaItem (Inventario, Item, Quantidade)
+                    VALUES (%s, %s, 1);
+                """
+                cursor.execute(insert_guardaitem_query, (v_id_inventario, v_id_item))
+
+                # Commit das transações
+                conn.commit()
+                print("Item adicionado ao inventário com sucesso.")
+            else:
+                print("Inventário do jogador não encontrado.")
+        else:
+            print("Item não encontrado.")
+
+    except (Exception, psycopg2.Error) as error:
+        print(f"Erro ao adicionar item ao inventário: {error}")
+
+
+def obter_itens_da_loja(conn, id_loja):
+    try:
+        # Criar um cursor
+        cursor = conn.cursor()
+
+        # Executar a consulta SQL
+        consulta_sql = """
+            SELECT I.*
+            FROM VendeItem VI
+            JOIN Item I ON VI.Item = I.IdItem
+            WHERE VI.Loja = %s;
+        """
+
+        cursor.execute(consulta_sql, (id_loja,))
+
+        # Obter os resultados
+        resultados = cursor.fetchall()
+
+        itens = [Item(*result) for result in resultados]
+        return itens
+
+    except (Exception, psycopg2.Error) as error:
+        print(f"Erro ao obter itens da loja: {error}")
+
+    finally:
+        # Fechar o cursor
+        if cursor:
+            cursor.close()
+
+def obter_dados_missoes(conn, id_missao, id_player):
+    try:
+        # Criar um cursor
+        cursor = conn.cursor()
+
+        # Consulta SQL para obter os dados desejados
+        consulta_sql = """
+            SELECT 
+                RE.Quantidade || ' / ' || EM.Quantidade || ' - ' || M.Nome
+            FROM 
+                RealizaEtapa RE
+            JOIN EtapaMonstro EM ON RE.EtapaMissao = EM.IdEtapaMonstro
+            JOIN Monstro M ON EM.Monstro = M.IdMonstro
+            WHERE 
+                EM.Missao = %s AND RE.PC = %s;
+        """
+
+        cursor.execute(consulta_sql, (id_missao, id_player))
+
+        # Obter os resultados
+        resultados = cursor.fetchall()
+
+        return resultados
+
+    except (Exception, psycopg2.Error) as error:
+        print(f"Erro ao obter dados da missão: {error}")
+
+    finally:
+        # Fechar o cursor
+        if cursor:
+            cursor.close()
+
+
+def obterItensConsumidos(conn, idItemPrincipal):
+    try:
+        cursor = conn.cursor()
+
+        query = """
+            SELECT CI.Quantidade, I.Nome
+            FROM CriaItem CI
+            JOIN Item I ON CI.ItemConsumido = I.IdItem
+            WHERE CI.Item = %s;
+        """
+
+        cursor.execute(query, (idItemPrincipal,))
+        resultados = cursor.fetchall()
+
+        itens_consumidos = ["{} x {}".format(quantidade, nome) for quantidade, nome in resultados]
+
+        return itens_consumidos
+
+    except (Exception, psycopg2.Error) as error:
+        print(f"Erro ao obter itens consumidos: {error}")
+        return []
+
+    finally:
+        if cursor:
+            cursor.close()
