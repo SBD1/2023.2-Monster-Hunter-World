@@ -41,6 +41,7 @@ CREATE TABLE IF NOT EXISTS PC (
     Nome varchar(64) NOT NULL,
     Ranque int DEFAULT 1,
     Vida int DEFAULT 500,
+    VidaAtual int DEFAULT 500,
     Vigor int DEFAULT 200,
     Afinidade int DEFAULT 0,
     Dinheiro int DEFAULT 0,
@@ -81,7 +82,7 @@ CREATE TABLE IF NOT EXISTS InstanciaMonstro (
     IdInstanciaMonstro serial PRIMARY KEY,
     Monstro int REFERENCES Monstro(IdMonstro),
     Status int DEFAULT 0,
-    Vida int DEFAULT 100,
+    Vida int DEFAULT 100
 );
 
 -- Tabela RegiaoMonstro
