@@ -23,15 +23,7 @@ def pageCriarPersonagem():
                     },
                     {
                         "text":"Espada Longa",
-                        "value":"espada_longa"
-                    },
-                    {
-                        "text":"Espada e Escudo",
-                        "value":"espada_escudo"
-                    },
-                    {
-                        "text":"Duplas-lâminas",
-                        "value":"duplas_laminas"
+                        "value":"espadaLonga"
                     },
                     {
                         "text":"Martelo",
@@ -95,7 +87,6 @@ def pageListaPersonagem(pcList):
     }
     return render_template('index.html',page=page)
     
-
 def pageTutorial(npc, pcId, regiao, falas, firstTime):
     content=[]
     content.append({
@@ -120,7 +111,6 @@ def pageTutorial(npc, pcId, regiao, falas, firstTime):
         "content":content
     }
     return render_template('index.html', page=page)
-
 
 def pageAssistente(pcId,npc,falas,missoes):
     content = []
@@ -154,6 +144,71 @@ def pageAssistente(pcId,npc,falas,missoes):
 
     return render_template('index.html', page=page)
 
+def pageAssistenteMissao(pcId,npc,falas,missao):
+    content = []
+
+    for fala in falas:
+        content.append({
+            
+            "type": "text",
+            "text": fala.fala
+            
+        })
+
+    content.append({
+        "type": "button",
+        "text": "Sair da missao",
+        "action": "cancelaMissao/{}-{}".format(pcId,missao.id_missao)
+    })
+
+    content.append({
+            "type": "button",
+            "text": "voltar",
+            "action": "regiao/{}".format(pcId)
+        })
+
+    page = {
+        "name": npc.nome,
+        "background": "mainBackground.jpg",
+        "content":content  
+    }
+
+    return render_template('index.html', page=page)
+
+def pageMonstro(monstro,instancia_monstro,pc):
+    content = []
+
+    content.append(
+    {
+        "type": "text",
+        "text": "Vida do monstro: %s/%s"%(instancia_monstro.vida,monstro.vida)
+    })
+
+    content.append(
+    {
+        "type": "text",
+        "text": "Sua vida: %s/%s"%(pc.vidaAtual,pc.vida)
+    })
+
+    content.append({
+        "type": "button",
+        "text": "Atacar",
+        "action": "atacaMonstro/{}-{}-{}".format(pc.id_player,monstro.id_monstro, instancia_monstro.id_instancia_monstro)
+    })
+
+    content.append({
+        "type": "button",
+        "text": "Voltar",
+        "action": "regiao/{}".format(pc.id_player)
+    })
+
+    page = {
+        "name": monstro.nome,
+        "background": "mainBackground.jpg",
+        "content":content  
+    }
+
+    return render_template('index.html', page=page)
 
 def pageMissao(pcId, npcId, missao, mapa):
     content = []
@@ -208,8 +263,14 @@ def pageMissao(pcId, npcId, missao, mapa):
 
     return render_template('index.html', page=page)
 
-def pageRegiao(regiao, leva_em, npcs, monstros, pcId):
+def pageRegiao(regiao, leva_em, npcs, monstros, pcId, missoes):
     buttons = []
+
+    for missao in missoes:
+        buttons.append({
+            "type":"text",
+            "text":str(missao[0])
+        })
 
     for npc in npcs:
         buttons.append({
@@ -241,7 +302,7 @@ def pageRegiao(regiao, leva_em, npcs, monstros, pcId):
 
     return render_template('index.html', page=page)
     
-def pageForja(nomeFerreiro, pcId):
+def pageForja(nomeFerreiro, pcId,npcId):
     page = {
         "name": "Forja",
         "background": "forja.jpg",
@@ -264,8 +325,13 @@ def pageForja(nomeFerreiro, pcId):
             },
             {
                 "type":"button",
-                "text":"Forjar Equipamento",
-                "action":"retornaForjarEquipamento/{}".format(pcId)         
+                "text":"Forjar Armaduras",
+                "action":"forjarArmaduras/{}-{}".format(pcId,npcId)         
+            },
+            {
+                "type":"button",
+                "text":"Forjar Armas",
+                "action":"forjarArmas/{}-{}".format(pcId,npcId)         
             },
             {
                 "type":"button",
@@ -276,200 +342,142 @@ def pageForja(nomeFerreiro, pcId):
     }
     return render_template('index.html', page=page, nomeFerreiro=nomeFerreiro)
 
-def pageForjarEquipamento(falaFerreiro, pcId):
-    page = {
-        "name": "Forjar Equipamento",
-        "background": "forja.jpg",
-        "content": [
-            {
-                "type": "text",
-                "text": "{}".format(falaFerreiro) 
-            },
-            {
-                "type":"button",
-                "text":"Armas",
-                "action":"retornaForjarArmas/{}".format(pcId)         
-            },
-            {
-                "type":"button",
-                "text":"Armaduras",
-                "action":"retornaForjarArmaduras/{}".format(pcId)         
-            },
-            {
-                "type":"button",
-                "text":"Voltar",
-                "action":"retornaForja/{}".format(pcId)
-            }
-        ]
-    }
-    return render_template('index.html', page=page, falaFerreiro=falaFerreiro)
+def pageForjarArmas(armas, pcId,npcId):
 
-def pageForjarArmas(nomeArma7, nomeArma9, nomeArma10, nomeArma11, pcId):
+    content=[]
+    content.append(
+    {
+        "type": "text",
+        "text": "Qual arma deseja forjar?"
+    })
+
+    for arma in armas:
+        content.append({
+            "type":"button",
+            "text":arma.nome,
+            "action":"forja/item/{}-{}-{}".format(pcId,npcId,arma.id_arma)
+    })
+
+
+    content.append({
+        "type":"button",
+        "text":"Voltar",
+        "action":"forja/{}-{}".format(pcId,npcId)
+    })
+
     page = {
         "name": "Forjar Armas",
         "background": "forja.jpg",
-        "content": [
-            {
-                "type": "text",
-                "text": "Qual arma deseja forjar?"
-            },
-            {
-                "type":"options",
-                "text":"Armas:",
-                "name":"arma",
-                "options":[
-                    {
-                        "text":"{}".format(nomeArma7),
-                        "value":""
-                    },
-                    {
-                        "text":"{}".format(nomeArma9),
-                        "value":""
-                    },
-                    {
-                        "text":"{}".format(nomeArma10),
-                        "value":""
-                    },
-                    {
-                        "text":"{}".format(nomeArma11),
-                        "value":""
-                    },
-                ]      
-            },
-            {
-                "type":"button",
-                "text":"Vizualizar",
-                "name":"arma",
-                "action": "visualizarArma/{}".format(pcId)          
-            },
-            {
-                "type":"button",
-                "text":"Voltar",
-                "action":"retornaForjarEquipamento/{}".format(pcId)
-            }
-        ]
+        "content": content
     }
-    return render_template('index.html', page=page, nomeArma7=nomeArma7, nomeArma9=nomeArma9, nomeArma10=nomeArma10, nomeArma11=nomeArma11)
+    return render_template('index.html', page=page)
 
-def pageForjarArmaduras(nomeArmadura14, nomeArmadura16, pcId):
+def pageForjarArmaduras(armaduras, pcId,npcId):
+
+    content=[]
+    content.append(
+    {
+        "type": "text",
+        "text": "Qual armadura deseja forjar?"
+    })
+
+    for armadura in armaduras:
+        content.append({
+            "type":"button",
+            "text":armadura.nome,
+            "action":"forja/item/{}-{}-{}".format(pcId,npcId,armadura.id_armadura)
+    })
+
+
+    content.append({
+        "type":"button",
+        "text":"Voltar",
+        "action":"forja/{}-{}".format(pcId,npcId)
+    })
+
     page = {
         "name": "Forjar Armaduras",
         "background": "forja.jpg",
+        "content": content
+    }
+    return render_template('index.html', page=page)
+
+def pageLoja(dinheiro_player, pcId,npcId, lojas):
+    buttons = []
+
+    for loja in lojas:
+
+        if loja.tipo == 1:
+            button_text = "Loja de Itens"
+        elif loja.tipo == 2:
+            button_text = "Loja de Plantas"
+        elif loja.tipo == 3:
+            button_text = "Loja de Insetos"
+        elif loja.tipo == 4:
+            button_text = "Loja de Materiais"
+        elif loja.tipo == 5:
+            button_text = "Loja de Armaduras"
+        elif loja.tipo == 6:
+            button_text = "Loja de Armas"
+        else:
+            button_text = "Loja Desconhecida"
+        action = f"loja/{pcId}-{npcId}-{loja.id_loja}"
+        buttons.append({
+            "type": "button",
+            "text": button_text,
+            "action": action
+        })
+
+    buttons.append({
+        "type": "button",
+        "text": "Voltar",
+        "action": f"regiao/{pcId}"
+    })
+
+    page = {
+        "name": "Loja",
+        "background": "loja.jpg",
         "content": [
-            {
-                "type": "text",
-                "text": "Qual armadura deseja forjar?"
-            },
-            {
-                "type":"button",
-                "text":"{}".format(nomeArmadura14),
-                "action":"retornaForjarLançaFerro/{}".format(pcId)         
-            },
-            {
-                "type":"button",
-                "text":"{}".format(nomeArmadura16),
-                "action":"retornaForjarLançaFerro/{}".format(pcId)         
-            },
-            {
-                "type":"button",
-                "text":"Voltar",
-                "action":"retornaForjarEquipamento/{}".format(pcId)
-            }
+            {"type": "text", "text": "Bem-vindo à Loja!"},
+            {"type": "text", "text": f"Dinheiro: {dinheiro_player}"},
+            {"type": "text", "text": "Aqui você pode comprar equipamentos! O que procura?"},
+            *buttons
         ]
     }
-    return render_template('index.html', page=page, nomeArmadura14=nomeArmadura14, nomeArmadura16=nomeArmadura16)
+    
+    return render_template('index.html', page=page, dinheiro_player=dinheiro_player)
 
-def pageLojaVendeArmas(pcId, armas):
-    buttons = [
-    {
+def pageLojaItens(dinheiro_player, pcId,npcId, itens):
+    buttons = []
+
+    for item in itens:
+        action = f"loja/item/{pcId}-{npcId}-{item.id_item}"
+        buttons.append({
+            "type": "button",
+            "text": item.nome,
+            "action": action
+        })
+
+    buttons.append({
         "type": "button",
-        "text": "{} (Custo: $ {})".format(arma[0], arma[1]),
-        "action": "compraArma/{}/{}/{}/{}".format(pcId, arma[2], arma[1], arma[3])
-    } for arma in armas
-    ]
+        "text": "Voltar",
+        "action": f"regiao/{pcId}"
+    })
 
     page = {
         "name": "Loja",
         "background": "loja.jpg",
-        "content": buttons
-    }
-    return render_template('index.html', page=page)
-
-def pageLojaVendeAmuletos(pcId, amuletos):
-    buttons = [
-    {
-        "type": "button",
-        "text": "{} (Custo: $ {})".format(amuleto[0], amuleto[1]),
-        "action": "compraAmuleto/{}/{}/{}/{}".format(pcId, amuleto[2], amuleto[1], amuleto[3])
-    } for amuleto in amuletos
-    ]
-
-    page = {
-        "name": "Loja",
-        "background": "loja.jpg",
-        "content": buttons
-    }
-    return render_template('index.html', page=page)
-
-def pageLojaVendeFerramentas(pcId, Ferramentas):
-    buttons = [
-    {
-        "type": "button",
-        "text": "{} (Custo: $ {})".format(ferramenta[0], ferramenta[1]),
-        "action": "compraFerramenta/{}/{}/{}/{}".format(pcId, ferramenta[2], ferramenta[1], ferramenta[3])
-    } for ferramenta in Ferramentas
-    ]
-
-    page = {
-        "name": "Loja",
-        "background": "loja.jpg",
-        "content": buttons
-    }
-    return render_template('index.html', page=page)
-
-
-def pageLoja(dinheiro_player, pcId):
-    page={
-        "name":"Loja",
-        "background":"loja.jpg",
-        "content":[
-            {
-                "type": "text",
-                "text": "Bem-vindo à Loja!"
-            },
-                        {
-                "type": "text",
-                "text": "Dinheiro: {}".format(dinheiro_player)
-            },
-            {
-                "type": "text",
-                "text": "Aqui você pode comprar equipamentos! O que procura?"
-            },
-            {
-                "type": "button",
-                "text": "Comprar armas",
-                "action": "lojaVendeArmas/{}".format(pcId)
-            },
-            {
-                "type": "button",
-                "text": "Comprar amuletos",
-                "action": "lojaVendeAmuletos/{}".format(pcId)
-            },
-            {
-                "type": "button",
-                "text": "Comprar ferramentas",
-                "action": "lojaVendeFerramentas/{}".format(pcId)
-            },
-            {
-                "type":"button",
-                "text":"Voltar",
-                "action":"regiao/{}".format(pcId)
-            }
+        "content": [
+            {"type": "text", "text": "Bem-vindo à Loja!"},
+            {"type": "text", "text": f"Dinheiro: {dinheiro_player}"},
+            {"type": "text", "text": "Aqui você pode comprar equipamentos! O que procura?"},
+            *buttons
         ]
     }
-    return render_template('index.html',page=page, dinheiro_player=dinheiro_player)
+    
+    return render_template('index.html', page=page, dinheiro_player=dinheiro_player)
 
-def pageErroNaCompra(pcId):
+def pageErroNaCompra(pcId,npcId):
     page={
         "name":"Erro na compra",
         "background":"mainBackground.jpg",
@@ -481,13 +489,13 @@ def pageErroNaCompra(pcId):
             {
                 "type":"button",
                 "text":"Voltar",
-                "action":"retornaLoja/{}".format(pcId)
+                "action":"loja/{}-{}".format(pcId,npcId)
             }
         ]
     }
     return render_template('index.html',page=page)
 
-def pageSucessoNaCompra(pcId):
+def pageSucessoNaCompra(pcId,npcId):
     page={
         "name":"Sucesso na compra",
         "background":"mainBackground.jpg",
@@ -499,8 +507,137 @@ def pageSucessoNaCompra(pcId):
             {
                 "type":"button",
                 "text":"Voltar",
-                "action":"retornaLoja/{}".format(pcId)
+                "action":"loja/{}-{}".format(pcId,npcId)
             }
         ]
     }
     return render_template('index.html',page=page)
+
+def pageErroNaForja(pcId, npcId):
+    page = {
+        "name": "Erro na compra",
+        "background": "mainBackground.jpg",
+        "content": [
+            {
+                "type": "text",
+                "text": "Você não tem materiais suficientes para forjar este equipamento."
+            },
+            {
+                "type": "button",
+                "text": "Voltar",
+                "action": "forja/{}-{}".format(pcId, npcId)
+            }
+        ]
+    }
+    return render_template('index.html', page=page)
+
+def pageSucessoNaForja(pcId, npcId):
+    page = {
+        "name": "Sucesso na compra",
+        "background": "mainBackground.jpg",
+        "content": [
+            {
+                "type": "text",
+                "text": "Parabéns! Você forjou este equipamento com sucesso."
+            },
+            {
+                "type": "button",
+                "text": "Voltar",
+                "action": "forja/{}-{}".format(pcId, npcId)
+            }
+        ]
+    }
+    return render_template('index.html', page=page)
+
+
+def pageLojaItem(item, pcId, npcId):
+    content = [
+        {
+            "type": "text",
+            "text": "Bem-vindo à loja!"
+        },
+        {
+            "type": "text",
+            "text": "Item disponível para compra:"
+        },
+        {
+            "type": "text",
+            "text": "Nome: {}".format(item.nome)
+        },
+        {
+            "type": "text",
+            "text": "Descrição: {}".format(item.descricao)
+        },
+        {
+            "type": "text",
+            "text": "Custo de Compra: {}".format(item.custo_compra)
+        },
+        {
+            "type": "button",
+            "text": "Comprar",
+            "action": "erroNaCompra/{}-{}".format(pcId, npcId)
+        },
+        {
+            "type": "button",
+            "text": "Voltar",
+            "action": "loja/{}-{}".format(pcId, npcId)
+        }
+    ]
+
+    page = {
+        "name": "Loja",
+        "background": "loja.jpg",
+        "content": content
+    }
+    return render_template('index.html', page=page)
+
+def pageForjaItem(item, pcId, npcId, itens):
+    content = [
+        {
+            "type": "text",
+            "text": "Bem-vindo à forja!"
+        },
+        {
+            "type": "text",
+            "text": "Item disponível para forja:"
+        },
+        {
+            "type": "text",
+            "text": "Nome: {}".format(item.nome)
+        },
+        {
+            "type": "text",
+            "text": "Descrição: {}".format(item.descricao)
+        },
+        {
+            "type": "text",
+            "text": "Custo de Forja: {}".format(item.custo_compra)
+        },
+    ]
+
+    for element in itens:
+        content.append(
+        {
+            "type": "text",
+            "text": element
+        })
+
+    
+
+    content.append(
+        {
+            "type": "button",
+            "text": "Forjar",
+            "action": "erroNaForja/{}-{}".format(pcId, npcId)
+        })
+    content.append({
+            "type": "button",
+            "text": "Voltar",
+            "action": "forja/{}-{}".format(pcId, npcId)
+        })
+    page = {
+        "name": "Forja",
+        "background": "forja.jpg",
+        "content": content
+    }
+    return render_template('index.html', page=page)

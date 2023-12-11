@@ -223,27 +223,27 @@ INSERT INTO NPC (IdNPC, Regiao, Nome, Descricao, Funcao, Raca, Genero) VALUES
 
 -- Oficina do Ferreiro
 INSERT INTO NPC (IdNPC, Regiao, Nome, Descricao, Funcao, Raca, Genero) VALUES 
-    (3, 1, 'Ferreiro', 'Responsável por forjar e melhorar equipamentos.', 'forja', 'humano', 'masculino'),
-    (4, 1, 'Vendedor de Armas', 'Oferece uma variedade de armas para compra.', 'loja', 'humano', 'masculino');
+    (3, 2, 'Ferreiro', 'Responsável por forjar e melhorar equipamentos.', 'forja', 'humano', 'masculino'),
+    (4, 2, 'Vendedor de Armas', 'Oferece uma variedade de armas para compra.', 'loja', 'humano', 'masculino');
 
 -- Canteiro de Botânicos
 INSERT INTO NPC (IdNPC, Regiao, Nome, Descricao, Funcao, Raca, Genero) VALUES 
-    (5, 1, 'Botânicos', 'Gerenciam o cultivo de itens.', 'loja', 'humano', 'ambos');
+    (5, 3, 'Botânicos', 'Gerenciam o cultivo de itens.', 'loja', 'humano', 'ambos');
 
 -- Quartel
 INSERT INTO NPC (IdNPC, Regiao, Nome, Descricao, Funcao, Raca, Genero) VALUES 
-    (6, 1, 'Assistente', 'Coordena as missões e informações gerais.', 'assistente', 'npc', 'ambos'),
-    (7, 1, 'Comandante', 'Pode ser encontrado aqui, além de outros caçadores e NPCs.', 'npc', 'humano', 'masculino');
+    (6, 4, 'Assistente', 'Coordena as missões e informações gerais.', 'assistente', 'npc', 'ambos'),
+    (7, 4, 'Comandante', 'Pode ser encontrado aqui, além de outros caçadores e NPCs.', 'npc', 'humano', 'masculino');
 
 -- Galeria de Caça
 INSERT INTO NPC (IdNPC, Regiao, Nome, Descricao, Funcao, Raca, Genero) VALUES 
-    (8, 1, 'Ecóloga', 'Fornece recursos detalhadas sobre insetos.', 'loja', 'humano', 'feminino'),
-    (9, 1, 'Biólogo', 'Mantém registros de monstros derrotados.', 'loja', 'humano', 'ambos');
+    (8, 5, 'Ecóloga', 'Fornece recursos detalhadas sobre insetos.', 'loja', 'humano', 'feminino'),
+    (9, 5, 'Biólogo', 'Mantém registros de monstros derrotados.', 'loja', 'humano', 'ambos');
 
 -- Sala de Reuniões
 INSERT INTO NPC (IdNPC, Regiao, Nome, Descricao, Funcao, Raca, Genero) VALUES 
-    (10, 1, 'Assistente', 'Pode ser encontrada aqui para atribuir missões principais.', 'assistente', 'humano', 'feminino'),
-    (11, 1, 'Mestre do Canteiro', 'Gerencia o Canteiro de Botânicos.', 'npc', 'humano', 'masculino');
+    (10, 6, 'Assistente', 'Pode ser encontrada aqui para atribuir missões principais.', 'assistente', 'humano', 'feminino'),
+    (11, 6, 'Mestre do Canteiro', 'Gerencia o Canteiro de Botânicos.', 'npc', 'humano', 'masculino');
 
 -- NPCs para Acampamentos
 INSERT INTO NPC (IdNPC, Regiao, Nome, Descricao, Funcao, Raca, Genero) VALUES 
@@ -285,11 +285,11 @@ VALUES
     (11, 4, 'Ei, caçador(a)! Precisa de uma arma nova? Aqui é o lugar certo. Dê uma olhada na minha seleção. Se precisar de conselhos, estou à disposição.', true, false),
     (12, 5, 'Olá, caçador(a)! Nós somos os Botânicos. Se precisar de recursos naturais ou quiser cultivar itens, você está no Canteiro certo. Cuidaremos das suas plantas!', true, false),
     (13, 6, 'Bem-vindo(a) ao Quartel! Eu sou o(a) Assistente. Aqui você pode reunir-se com outros caçadores, recrutar ajudantes e acessar missões multiplayer. Alguma dúvida? Estou aqui!', true, false),
-    (14, 7, 'Oi, caçador(a)! Sou a Ecóloga. Se quiser posso te fornecer alguns insetos', true, false),
-    (15, 8, 'Saudações, caçador(a)! Se quiser posso te fornecer materiais necessários para sua aventura.', true, false),
-    (16, 9, 'Olá! Eu sou o(a) Assistente da Sala de Reuniões. Precisa de alguma orientação sobre missões principais? Estou aqui para ajudar. Planejamento é a chave para o sucesso!', true, false),
-    (17, 10, 'Cumprimentos, caçador(a)! Sou o Mestre do Canteiro. Se precisar de recursos cultivados ou quiser gerenciar o Canteiro de Botânicos, estou aqui para garantir que tudo esteja em ordem.', true, false),
-    (18, 11, 'Ah, outro caçador(a) se junta às nossas fileiras. Eu sou o Comandante, líder da Comissão. Sua coragem é essencial. Consulte-me para missões principais e contribua para a prosperidade de Astera!', true, false),
+    (14, 8, 'Oi, caçador(a)! Sou a Ecóloga. Se quiser posso te fornecer alguns insetos', true, false),
+    (15, 9, 'Saudações, caçador(a)! Se quiser posso te fornecer materiais necessários para sua aventura.', true, false),
+    (16, 10, 'Olá! Eu sou o(a) Assistente da Sala de Reuniões. Precisa de alguma orientação sobre missões principais? Estou aqui para ajudar. Planejamento é a chave para o sucesso!', true, false),
+    (17, 11, 'Cumprimentos, caçador(a)! Sou o Mestre do Canteiro. Se precisar de recursos cultivados ou quiser gerenciar o Canteiro de Botânicos, estou aqui para garantir que tudo esteja em ordem.', true, false),
+    (18, 7, 'Ah, outro caçador(a) se junta às nossas fileiras. Eu sou o Comandante, líder da Comissão. Sua coragem é essencial. Consulte-me para missões principais e contribua para a prosperidade de Astera!', true, false),
     (19, 12, 'Olá, caçador(a)! Se precisar encerrar sua expedição, estou aqui para ajudar. É só me chamar quando estiver pronto(a) para voltar. Boa caçada!', true, false),
     (20, 13, 'Oi, caçador(a)! Quando quiser encerrar sua expedição, estou aqui para ajudar. É só me procurar quando estiver pronto(a) para voltar. Boa caçada!', true, false),
     (21, 14, 'Saudações, caçador(a)! Se quiser encerrar sua expedição, estou aqui para ajudar. É só me procurar quando estiver pronto(a) para voltar. Boa caçada!', true, false),

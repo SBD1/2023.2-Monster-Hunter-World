@@ -27,12 +27,13 @@ class NPC:
         self.genero = genero
 
 class PC:
-    def __init__(self, id_player, regiao, nome, ranque, vida, vigor, afinidade, dinheiro, genero):
+    def __init__(self, id_player, regiao, nome, ranque, vida, vidaAtual,vigor, afinidade, dinheiro, genero):
         self.id_player = id_player
         self.regiao = regiao
         self.nome = nome
         self.ranque = ranque
         self.vida = vida
+        self.vidaAtual = vidaAtual
         self.vigor = vigor
         self.afinidade = afinidade
         self.dinheiro = dinheiro
@@ -55,31 +56,21 @@ class Fala:
         self.fala = fala
         self.repetivel = repetivel
         self.executado = executado
-
-class FalaPreReq:
-    def __init__(self, id_fala_prereq, fala_prereq, fala):
-        self.id_fala_prereq = id_fala_prereq
-        self.fala_prereq = fala_prereq
-        self.fala = fala
-
+        
 class Monstro:
-    def __init__(self, id_monstro, nome, elemento, ataca_monstros, alcance_hostilidade, tipo):
+    def __init__(self, id_monstro, nome, elemento, vida, ataque):
         self.id_monstro = id_monstro
         self.nome = nome
         self.elemento = elemento
-        self.ataca_monstros = ataca_monstros
-        self.alcance_hostilidade = alcance_hostilidade
-        self.tipo = tipo
+        self.vida = vida
+        self.ataque = ataque
 
 class InstanciaMonstro:
-    def __init__(self, id_instancia_monstro, monstro, status, vida, tamanho, nivel, ataque):
+    def __init__(self, id_instancia_monstro, monstro, status, vida):
         self.id_instancia_monstro = id_instancia_monstro
         self.monstro = monstro
         self.status = status
         self.vida = vida
-        self.tamanho = tamanho
-        self.nivel = nivel
-        self.ataque = ataque
 
 class RegiaoMonstro:
     def __init__(self, id_regiao_monstro, regiao, monstro):
@@ -211,10 +202,9 @@ class DropaItem:
         self.item = item
 
 class Arma:
-    def __init__(self, id_arma, nome, nivel, raridade, custo_compra, valor_venda, descricao, tipo, ataque, afiacao, elemento, valor_elemento):
+    def __init__(self, id_arma, nome, raridade, custo_compra, valor_venda, descricao, tipo, ataque, afiacao, elemento, valor_elemento):
         self.id_arma = id_arma
         self.nome = nome
-        self.nivel = nivel
         self.raridade = raridade
         self.custo_compra = custo_compra
         self.valor_venda = valor_venda
@@ -226,10 +216,9 @@ class Arma:
         self.valor_elemento = valor_elemento
 
 class Armadura:
-    def __init__(self, id_armadura, nome, nivel, raridade, custo_compra, valor_venda, descricao, tipo, defesa, fogo, agua, raio, gelo, dragao):
+    def __init__(self, id_armadura, nome, raridade, custo_compra, valor_venda, descricao, tipo, defesa, fogo, agua, raio, gelo, dragao):
         self.id_armadura = id_armadura
         self.nome = nome
-        self.nivel = nivel
         self.raridade = raridade
         self.custo_compra = custo_compra
         self.valor_venda = valor_venda

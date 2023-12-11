@@ -96,7 +96,7 @@ CREATE TABLE IF NOT EXISTS RegiaoMonstro (
 CREATE TABLE IF NOT EXISTS AtacaMonstro (
     IdAtacaMonstro serial PRIMARY KEY,
     PC int REFERENCES PC(IdPlayer),
-    Monstro int REFERENCES Monstro(IdMonstro),
+    Monstro int REFERENCES InstanciaMonstro(IdInstanciaMonstro),
     Dano int DEFAULT 0,
     Horario timestamp DEFAULT current_timestamp
 );

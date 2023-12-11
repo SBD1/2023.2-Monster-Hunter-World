@@ -48,7 +48,6 @@ def wait_for_db():
     else:
         raise Exception(f"Não foi possível estabelecer conexão com o banco de dados após {max_retries} tentativas.")
 
-
 try:
     db_connection = wait_for_db()
     app.logger.info("Conexão com o banco de dados estabelecida com sucesso.")
@@ -65,9 +64,6 @@ finally:
     if 'db_connection' in locals():
         db_connection.close()
 
-
-
-
 @app.route('/')
 def routeListaPersonagem():
     conn=wait_for_db()
@@ -75,7 +71,6 @@ def routeListaPersonagem():
     app.logger.info(pcList)
     conn.close()
     return pageListaPersonagem(pcList)
-
 
 @app.route('/criarPersonagem')
 def routeCriaPersonagem():   
@@ -88,14 +83,16 @@ def routeCriaPersonagem():
         regiao=1
         ranque=1
         vida=1000
+        vidaAtual=1000
         vigor=500
         afinidade=0
         dinheiro=100
         status=0
         nivel=1
-        pc=PC(-1, regiao, nome, ranque, vida, vigor, afinidade, dinheiro, genero)
+        pc=PC(-1, regiao, nome, ranque, vida,vidaAtual, vigor, afinidade, dinheiro, genero)
         conn=wait_for_db()
         pcId=int(create_pc(conn,pc))
+        adicionaItemAoInventario(conn,arma,pcId)
         amigato=Amigato(-1,regiao, pcId, nome_amigato, nivel, status, vida)
         create_amigato(conn,amigato)
         cria_inventario(conn,pcId)
@@ -119,8 +116,28 @@ def routeRegiao(pcId):
     regiao =read_regiao_PC(wait_for_db(),pcId)
     npcs=read_npc_regiao(wait_for_db(),regiao.id_regiao)
     monstros=read_monstro_regiao(wait_for_db(),regiao.id_regiao)
+    missao=read_missao_ativa(wait_for_db(),pcId)
+    if(missao):
+        missoes=obter_dados_missoes(wait_for_db(),missao.id_missao,pcId)
+    else:
+        missoes=[]
     leva_em=read_leva_em(wait_for_db(),regiao.id_regiao)
-    return pageRegiao(regiao,leva_em, npcs, monstros, pcId)
+    return pageRegiao(regiao,leva_em, npcs, monstros, pcId,missoes)
+
+@app.route('/monstros/<int:pcId>-<int:monstroId>')
+def routeMonstro(pcId,monstroId):
+    pc=read_pc(wait_for_db(),pcId)
+    monstro=read_monstro(wait_for_db(),monstroId)
+    instancia_monstro=read_instancia_monstro(wait_for_db(),monstroId)
+    return pageMonstro(monstro,instancia_monstro,pc)
+
+@app.route('/atacaMonstro/<int:pcId>-<int:monstroId>-<int:instanciaId>')
+def routeAtacaMonstro(pcId,monstroId,instanciaId):
+    ataque=atacaInstanciaMonstro(wait_for_db(),pcId,instanciaId)
+    if(ataque):
+        return redirect("/monstros/"+str(pcId)+"-"+str(monstroId))
+    else:
+        return redirect("/regiao/"+str(pcId))
 
 
 @app.route('/atualizaPCRegiao/<int:pcId>-<int:regiaoId>')
@@ -135,6 +152,18 @@ def routeAssistente(pcId,npcId):
     missoes=read_missao_player(wait_for_db(),pcId)
     return pageAssistente(pcId,npc,falas,missoes)
 
+@app.route('/AssistenteMissao/<int:pcId>-<int:npcId>')
+def routeAssistenteMissao(pcId,npcId):
+    npc=read_npc(wait_for_db(),npcId)
+    falas=read_falas_npc(wait_for_db(),npcId)
+    missao=read_missao_ativa(wait_for_db(),pcId)
+    return pageAssistenteMissao(pcId,npc,falas,missao)
+
+@app.route('/cancelaMissao/<int:pcId>-<int:missaoId>')
+def routeCancelaMissao(pcId,missaoId):
+    cancela_missao(wait_for_db(),pcId,missaoId)
+    update_regiao_PC(wait_for_db(), pcId, 1)
+    return redirect("/regiao/"+str(pcId))
 
 @app.route('/missao/<int:pcId>-<int:npcId>-<int:missaoId>')
 def routeMissao(pcId,npcId,missaoId):
@@ -150,54 +179,56 @@ def routePegaMissao(pcId,missaoId):
 @app.route('/loja/<int:pcId>-<int:npcId>')
 def retornaLoja(pcId,npcId):
     din = get_dinheiro_player(wait_for_db(), pcId)
-    return pageLoja(din, pcId)
+    lojas=read_npc_lojas(wait_for_db(),npcId)
+    return pageLoja(din, pcId,npcId,lojas)
 
-@app.route('/retornaForja/<int:pcId>')
-def retornaForja(pcId):
-    nomeFerreiro = get_nome_ferreiro(wait_for_db())
-    return pageForja(nomeFerreiro, pcId)
+@app.route('/loja/<int:pcId>-<int:npcId>-<int:lojaId>')
+def retornaLojaItens(pcId,npcId,lojaId):
+    din = get_dinheiro_player(wait_for_db(), pcId)
+    itens=obter_itens_da_loja(wait_for_db(),lojaId)
+    return pageLojaItens(din, pcId,npcId,itens)
 
-@app.route('/retornaForjarEquipamento/<int:pcId>')
-def retornaForjarEquipamento(pcId):
-    falaFerreiro = get_fala_ferreiro(wait_for_db())
-    return pageForjarEquipamento(falaFerreiro, pcId)
+@app.route('/forja/<int:pcId>-<int:npcId>')
+def retornaForja(pcId,npcId):
+    nomeFerreiro = read_npc(wait_for_db(),npcId).nome
+    return pageForja(nomeFerreiro, pcId, npcId)
 
-@app.route('/retornaForjarArmas/<int:pcId>')
-def retornaForjarArmas(pcId):
-    nomeArma7 = get_nome_arma(wait_for_db(), 7)
-    nomeArma9 = get_nome_arma(wait_for_db(), 9)
-    nomeArma10 = get_nome_arma(wait_for_db(), 10)
-    nomeArma11 = get_nome_arma(wait_for_db(), 11)
-    return pageForjarArmas(nomeArma7, nomeArma9, nomeArma10, nomeArma11, pcId)
+@app.route('/forjarArmas/<int:pcId>-<int:npcId>')
+def retornaForjarArmas(pcId,npcId):
+    armas = read_all_armas_forja(wait_for_db())
+    return pageForjarArmas(armas, pcId, npcId)
 
-@app.route('/retornaForjarArmaduras/<int:pcId>')
-def retornaForjarArmaduras(pcId):
-    nomeArmadura14 = get_nome_armadura(wait_for_db(), 14)
-    nomeArmadura16 = get_nome_armadura(wait_for_db(), 16)
-    return pageForjarArmaduras(nomeArmadura14, nomeArmadura16, pcId)
+@app.route('/forjarArmaduras/<int:pcId>-<int:npcId>')
+def retornaForjarArmaduras(pcId,npcId):
+    armaduras = read_all_armaduras_forja(wait_for_db())
+    return pageForjarArmaduras(armaduras, pcId, npcId)
 
-@app.route('/lojaVendeArmas/<int:pcId>')
-def lojaVendeArmas(pcId):
-    armas = get_nome_armas(wait_for_db())
-    return pageLojaVendeArmas(pcId, armas)
+@app.route('/forja/item/<int:pcId>-<int:npcId>-<int:itemId>')
+def routeForjaItem(pcId,npcId,itemId):
+    item = read_item(wait_for_db(),itemId)
+    itens= obterItensConsumidos(wait_for_db(),itemId)
+    return pageForjaItem(item, pcId, npcId,itens)
 
-@app.route('/lojaVendeAmuletos/<int:pcId>')
-def lojaVendeAmuletos(pcId):
-    amuletos = get_nome_amuletos(wait_for_db())
-    return pageLojaVendeAmuletos(pcId, amuletos)
+@app.route('/loja/item/<int:pcId>-<int:npcId>-<int:itemId>')
+def routeLojaItem(pcId,npcId,itemId):
+    item = read_item(wait_for_db(),itemId)
+    return pageLojaItem(item, pcId, npcId)
+    
+@app.route('/erroNaCompra/<int:pcId>-<int:npcId>')
+def erroNaCompra(pcId,npcId):
+    return pageErroNaCompra(pcId,npcId)
 
-@app.route('/lojaVendeFerramentas/<int:pcId>')
-def lojaVendeFerramentas(pcId):
-    Ferramentas = get_nome_Ferramentas(wait_for_db())
-    return pageLojaVendeFerramentas(pcId, Ferramentas)
+@app.route('/sucessoNaCompra/<int:pcId>-<int:npcId>')
+def sucesso(pcId,npcId):
+    return pageSucessoNaCompra(pcId,npcId)
 
-@app.route('/erroNaCompra/<int:pcId>')
-def erroNaCompra(pcId):
-    return pageErroNaCompra(pcId)
+@app.route('/erroNaForja/<int:pcId>-<int:npcId>')
+def erroNaForja(pcId,npcId):
+    return pageErroNaForja(pcId,npcId)
 
-@app.route('/sucesso/<int:pcId>')
-def sucesso(pcId):
-    return pageSucessoNaCompra(pcId)
+@app.route('/sucessoNaForja/<int:pcId>-<int:npcId>')
+def sucessoForja(pcId,npcId):
+    return pageSucessoNaForja(pcId,npcId)
 
 @app.route('/compraArma/<int:pcId>/<int:armaId>/<int:custo>/<int:ataque>')
 def compraArma(pcId,armaId, custo, ataque):
@@ -209,28 +240,7 @@ def compraArma(pcId,armaId, custo, ataque):
         return redirect("/sucesso/"+str(pcId))
     else:
         return redirect("/erroNaCompra/"+str(pcId))
-    
-@app.route('/compraAmuleto/<int:pcId>/<int:AmuletoId>/<int:custo>/<int:melhoria>')
-def compraAmuleto(pcId,AmuletoId, custo, melhoria):
-    dinheiro = get_dinheiro_player(wait_for_db(), pcId)
-    if dinheiro is not None and dinheiro >= custo:
-        update_dinheiro_player(wait_for_db(), pcId, dinheiro-custo)
-        insert_guarda_equipamento(wait_for_db(), get_inventario(wait_for_db(), pcId), AmuletoId)
-        update_vida_player(wait_for_db(), pcId, get_vida_player(wait_for_db(), pcId)+melhoria)
-        return redirect("/sucesso/"+str(pcId))
-    else:
-        return redirect("/erroNaCompra/"+str(pcId))
 
-@app.route('/compraFerramenta/<int:pcId>/<int:FerramentaId>/<int:custo>/<int:raridade>')
-def compraFerramenta(pcId,FerramentaId, custo, raridade):
-    dinheiro = get_dinheiro_player(wait_for_db(), pcId)
-    if dinheiro is not None and dinheiro >= custo:
-        update_dinheiro_player(wait_for_db(), pcId, dinheiro-custo)
-        insert_guarda_equipamento(wait_for_db(), get_inventario(wait_for_db(), pcId), FerramentaId)
-        update_ranque_player(wait_for_db(), pcId, get_ranque_player(wait_for_db(), pcId)+raridade)
-        return redirect("/sucesso/"+str(pcId))
-    else:
-        return redirect("/erroNaCompra/"+str(pcId))
     
 
 if __name__ == "__main__":
