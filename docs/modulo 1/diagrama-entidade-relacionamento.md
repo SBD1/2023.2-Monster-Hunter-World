@@ -23,6 +23,12 @@ Na figura 3, é possível ver a terceira e última versão do Diagrama Entidade 
 
 ![DER3](https://github.com/SBD1/2023.2-Monster-Hunter-World/blob/main/docs/imagens/DER_MonsterHunter_V3.png?raw=true)
 
+Na figura 4, é possível ver a terceira e última versão do Diagrama Entidade Relacionamento. Para visualizar a imagem em alta resolução, clique [aqui](https://raw.githubusercontent.com/SBD1/2023.2-Monster-Hunter-World/main/docs/imagens/DER_MonsterHunter_V4.png).
+
+<font size="3"><p style="text-align: center">Figura 4: Diagrama entidade relacionamento - versão 4.</p></font>
+
+![DER4](https://raw.githubusercontent.com/SBD1/2023.2-Monster-Hunter-World/main/docs/imagens/DER_MonsterHunter_V4.png?raw=true)
+
 <font size="3"><p style="text-align: center">Fonte: Autores.</p></font>
 ## Entidades e Relacionamentos
 
