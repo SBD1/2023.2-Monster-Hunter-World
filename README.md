@@ -48,16 +48,32 @@ Este repositório servirá para aprofundarmos e trabalharmos os conhecimentos co
 
 ## Como jogar
 
-- Clone o repositório através do comando ```git clone https://github.com/SBD1/2023.2-Monster-Hunter-World.git```
-- Abra o terminal dentro da pasta *sources* e digite o seguinte comando ```docker compose up --build``` ou ```sudo docker compose up --build```
-- Acesse o *Pgadmin* em ```localhost:5050```, e faça o login com o email *admin@admin.com* e a senha *123456*
-- Crie um servidor com os seguintes dados, sendo a senha *123456*:
+### Pré-requisitos:
 
-<br>
+-- Docker
 
-![Configuração do servidor](https://raw.githubusercontent.com/SBD1/2023.2-Monster-Hunter-World/f526c0dcd4bed4bc5e2a080ed9698455fc6b8554/docs/imagens/config-servidor.png)
+- Após ter o *Docker* instalado, clone o repositório através do comando:
+  
+```bash
+git clone https://github.com/SBD1/2023.2-Monster-Hunter-World.git
+```
 
-<br>
+- Dentro do terminal integrado ao projeto navegue até a pasta *sources*:
 
-- Acesse ```localhost:8000/``` e **bom jogo!**
+```bash
+cd sources
+```
+
+- Após isso, digite o seguinte comando:
+  
+```bash
+docker compose-up --build
+```
+ou
+
+```bash
+sudo docker compose-up --build
+```
+
+- Após concluido, acesse ```http://localhost:8000``` no seu navegador e **bom jogo!**
    
