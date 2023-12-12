@@ -82,11 +82,11 @@ def routeCriaPersonagem():
     if nome and arma and genero and nome_amigato:
         regiao=1
         ranque=1
-        vida=1000
-        vidaAtual=1000
+        vida=1000000
+        vidaAtual=1000000
         vigor=500
         afinidade=0
-        dinheiro=100
+        dinheiro=1000000
         status=0
         nivel=1
         pc=PC(-1, regiao, nome, ranque, vida,vidaAtual, vigor, afinidade, dinheiro, genero)
@@ -134,11 +134,22 @@ def routeMonstro(pcId,monstroId):
 @app.route('/atacaMonstro/<int:pcId>-<int:monstroId>-<int:instanciaId>')
 def routeAtacaMonstro(pcId,monstroId,instanciaId):
     ataque=atacaInstanciaMonstro(wait_for_db(),pcId,instanciaId)
-    if(ataque):
+    dano=calcular_dano_e_atualizar_vida(wait_for_db(),pcId,monstroId)
+    if(dano):
+        return redirect("/regiao/"+str(pcId))
+    elif(ataque):
         return redirect("/monstros/"+str(pcId)+"-"+str(monstroId))
     else:
-        return redirect("/regiao/"+str(pcId))
+        atualiza_quantidade_realiza_etapa(wait_for_db(),monstroId,pcId)
+        concluiu=verifica_quantidades_e_atualiza_status_e_pc(wait_for_db(),pcId)
+        if concluiu:
+            return redirect("/sucessoMissao/"+str(pcId))
+        else:
+            return redirect("/regiao/"+str(pcId))
 
+@app.route('/sucessoMissao/<int:pcId>')
+def routeSucessoMissao(pcId):
+    return(pageSucessoNaMissao(pcId))
 
 @app.route('/atualizaPCRegiao/<int:pcId>-<int:regiaoId>')
 def atualizaPCRegiao(pcId,regiaoId):
@@ -230,17 +241,38 @@ def erroNaForja(pcId,npcId):
 def sucessoForja(pcId,npcId):
     return pageSucessoNaForja(pcId,npcId)
 
-@app.route('/compraArma/<int:pcId>/<int:armaId>/<int:custo>/<int:ataque>')
-def compraArma(pcId,armaId, custo, ataque):
+@app.route('/compraItem/<int:pcId>/<int:npcId>/<int:itemId>/<int:custo>/')
+def compraItem(pcId,npcId, itemId, custo):
     dinheiro = get_dinheiro_player(wait_for_db(), pcId)
     if dinheiro is not None and dinheiro >= custo:
         update_dinheiro_player(wait_for_db(), pcId, dinheiro-custo)
-        insert_guarda_equipamento(wait_for_db(), get_inventario(wait_for_db(), pcId), armaId)
-        update_afinidade_player(wait_for_db(), pcId, get_afinidade_player(wait_for_db(), pcId)+ataque)
-        return redirect("/sucesso/"+str(pcId))
+        insert_guarda_item(wait_for_db(), get_inventario(wait_for_db(), pcId), itemId)
+        return redirect("/sucessoNaCompra/"+str(pcId)+"-"+str(npcId))
     else:
-        return redirect("/erroNaCompra/"+str(pcId))
+        return redirect("/erroNaCompra/"+str(pcId)+"-"+str(npcId))
 
+@app.route('/forjaItem/<int:pcId>/<int:npcId>/<int:itemId>/')
+def forjaItem(pcId,npcId, itemId):
+    pc=read_pc(wait_for_db(),pcId)
+    npc=read_npc(wait_for_db(),npcId)
+    item=read_item(wait_for_db(),itemId)
+    itens_requisitos=read_all_itens_consumidos(wait_for_db(),itemId)
+    if(item.custo_compra>pc.dinheiro):
+        return redirect("/erroNaForja/"+str(pcId)+"-"+str(npcId))
+    
+    for item_requisito in itens_requisitos:
+        if(not verifica_quantidade_item(wait_for_db(),pcId,item_requisito["item"].id_item,item_requisito["quantidade"])):
+            return redirect("/erroNaForja/"+str(pcId)+"-"+str(npcId))
+
+    update_dinheiro_player(wait_for_db(), pcId, pc.dinheiro-item.custo_compra)
+    for item_requisito in itens_requisitos:
+        subtrai_quantidade_item(wait_for_db(),pcId,item_requisito["item"].id_item,item_requisito["quantidade"])
+
+
+    return redirect("/sucessoNaForja/"+str(pcId)+"-"+str(npcId))
+
+
+    
     
 
 if __name__ == "__main__":

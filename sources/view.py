@@ -549,6 +549,24 @@ def pageSucessoNaForja(pcId, npcId):
     }
     return render_template('index.html', page=page)
 
+def pageSucessoNaMissao(pcId):
+    page = {
+        "name": "Sucesso na compra",
+        "background": "mainBackground.jpg",
+        "content": [
+            {
+                "type": "text",
+                "text": "Parabéns! Você Concluiu uma missao."
+            },
+            {
+                "type": "button",
+                "text": "Voltar",
+                "action": "regiao/{}".format(pcId)
+            }
+        ]
+    }
+    return render_template('index.html', page=page)
+
 
 def pageLojaItem(item, pcId, npcId):
     content = [
@@ -575,7 +593,7 @@ def pageLojaItem(item, pcId, npcId):
         {
             "type": "button",
             "text": "Comprar",
-            "action": "erroNaCompra/{}-{}".format(pcId, npcId)
+            "action": "compraItem/{}/{}/{}/{}".format(pcId, npcId,item.id_item,item.custo_compra)
         },
         {
             "type": "button",
@@ -628,7 +646,7 @@ def pageForjaItem(item, pcId, npcId, itens):
         {
             "type": "button",
             "text": "Forjar",
-            "action": "erroNaForja/{}-{}".format(pcId, npcId)
+            "action": "forjaItem/{}/{}/{}".format(pcId, npcId,item.id_item)
         })
     content.append({
             "type": "button",
