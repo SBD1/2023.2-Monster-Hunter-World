@@ -1,4 +1,6 @@
 from model import *
+import random
+
 
 def create_mapa(conn, mapa):
     try:
@@ -308,19 +310,14 @@ def delete_npc(conn, id_npc):
         print(f"Erro ao excluir NPC: {e}")
 
 def create_pc(conn, pc):
-    try:
-        cursor = conn.cursor()
-        cursor.execute("INSERT INTO PC (Regiao, Nome, Ranque, Vida, Vigor, Afinidade, Dinheiro, Genero) "
-                       "VALUES (%s, %s, %s, %s, %s, %s, %s, %s) RETURNING IdPlayer;",
-                       (pc.regiao, pc.nome, pc.ranque, pc.vida, pc.vigor, pc.afinidade, pc.dinheiro, pc.genero))
-        id_player = cursor.fetchone()[0]
-        conn.commit()
-        cursor.close()
-        return id_player
-    except Exception as e:
-        conn.rollback()
-        print(f"Erro ao criar PC: {e}")
-        return None
+    cursor = conn.cursor()
+    cursor.execute("INSERT INTO PC (Regiao, Nome, Ranque, Vida, VidaAtual, Vigor, Afinidade, Dinheiro, Genero) "
+                    "VALUES (%s, %s, %s,%s, %s, %s, %s, %s, %s) RETURNING IdPlayer;",
+                    (pc.regiao, pc.nome, pc.ranque, pc.vida, pc.vidaAtual, pc.vigor, pc.afinidade, pc.dinheiro, pc.genero))
+    id_player = cursor.fetchone()[0]
+    conn.commit()
+    cursor.close()
+    return id_player
 
 def read_pc(conn, id_player):
     try:
@@ -973,11 +970,18 @@ def read_all_missoes(conn):
         print(f"Erro ao ler todas as Missoes: {e}")
         return None
 
-
-def read_missao_player(conn,id_player):
+def read_missao_player(conn, id_player):
     try:
         cursor = conn.cursor()
-        cursor.execute("SELECT DISTINCT M.* FROM Missao M LEFT JOIN MissaoPreReq MP ON M.IdMissao = MP.Missao LEFT JOIN RealizaMissao RM ON M.IdMissao = RM.Missao WHERE MP.MissaoPreReq IS NULL OR (RM.Status = 5 AND MP.MissaoPreReq IN (SELECT Missao FROM RealizaMissao WHERE PC = %s AND Status = 5));"%(id_player))
+        cursor.execute("""
+            SELECT  m.*
+            FROM Missao m 
+            LEFT OUTER JOIN MissaoPreReq mp ON m.IdMissao = mp.Missao
+            WHERE mp.MissaoPreReq IS NULL OR mp.MissaoPreReq in 
+            (SELECT MISSAO FROM RealizaMissao WHERE STATUS=5 and PC=%s)
+            ORDER BY IdMissao;
+
+        """, (id_player, ))
         results = cursor.fetchall()
         cursor.close()
         missoes = [Missao(*result) for result in results]
@@ -985,6 +989,9 @@ def read_missao_player(conn,id_player):
     except Exception as e:
         print(f"Erro ao ler todas as Missoes: {e}")
         return []
+
+
+
 
 def read_missao_ativa(conn,id_player):
     try:
@@ -2000,6 +2007,24 @@ def read_all_itens(conn):
         print(f"Erro ao ler todos os Itens: {e}")
         return None
 
+def read_all_itens_consumidos(conn,id_item):
+    cursor = conn.cursor()
+    cursor.execute("SELECT i.* FROM Item i INNER JOIN CriaItem ci ON ci.ItemConsumido=i.IdItem WHERE ci.Item=%s;"%(id_item))
+    results = cursor.fetchall()
+    itens = [Item(*result) for result in results]
+    cursor.execute("SELECT ci.Quantidade FROM Item i INNER JOIN CriaItem ci ON ci.ItemConsumido=i.IdItem WHERE ci.Item=%s;"%(id_item))
+
+
+    quantidade = cursor.fetchall()
+    resultado=[]
+    for i in range(len(itens)):
+        resultado.append({
+            "quantidade":quantidade[i][0],
+            "item":itens[i]
+        })
+    cursor.close()
+    return resultado
+
 def update_item(conn, item):
     try:
         cursor = conn.cursor()
@@ -2865,16 +2890,16 @@ def get_inventario(conn, pcId):
         print(f"Erro ao ler Inventario: {e}")
         return None
 
-def insert_guarda_equipamento(conn, idInventario, idEquipamento):
+def insert_guarda_item(conn, idInventario, idItem):
     try:
         cursor = conn.cursor()
-        cursor.execute("INSERT INTO GuardaEquipamento (Inventario, Equipamento) VALUES (%s, %s);", (idInventario, idEquipamento))
+        cursor.execute("INSERT INTO GuardaItem (Inventario, Item) VALUES (%s, %s);", (idInventario, idItem))
         conn.commit()
         cursor.close()
-        print("GuardaEquipamento inserido com sucesso.")
+        print("GuardaItem inserido com sucesso.")
     except Exception as e:
         conn.rollback()
-        print(f"Erro ao inserir GuardaEquipamento: {e}")
+        print(f"Erro ao inserir GuardaItem: {e}")
 
 def update_afinidade_player(conn, idPc, AfinidadeNova):
     try:
@@ -3080,6 +3105,7 @@ def obterItensConsumidos(conn, idItemPrincipal):
     try:
         cursor = conn.cursor()
 
+        # Obter os itens consumidos
         query = """
             SELECT CI.Quantidade, I.Nome
             FROM CriaItem CI
@@ -3101,3 +3127,194 @@ def obterItensConsumidos(conn, idItemPrincipal):
     finally:
         if cursor:
             cursor.close()
+
+def atualiza_quantidade_realiza_etapa(conn, id_monstro, id_pc):
+    try:
+        with conn.cursor() as cursor:
+            # Verifica se existe uma entrada para o monstro na tabela EtapaMonstro
+            cursor.execute("SELECT IdEtapaMonstro FROM EtapaMonstro WHERE Monstro = %s", (id_monstro,))
+            etapa_monstro = cursor.fetchone()
+
+            if etapa_monstro:
+                id_etapa_monstro = etapa_monstro[0]
+
+                # Atualiza a quantidade na tabela RealizaEtapa
+                cursor.execute("UPDATE RealizaEtapa SET Quantidade = Quantidade + 1 WHERE EtapaMissao = %s AND PC = %s", (id_etapa_monstro, id_pc))
+            else:
+                print("Não existe uma entrada correspondente na tabela EtapaMonstro para o monstro com ID:", id_monstro)
+
+        # Commit da transação
+        conn.commit()
+
+    except psycopg2.Error as e:
+        print("Erro ao executar a operação:", e)
+
+
+def verifica_quantidades_e_atualiza_status_e_pc(conn, id_pc):
+    try:
+        with conn.cursor() as cursor:
+            # Verifica se existe uma entrada correspondente na tabela RealizaMissao
+            cursor.execute("SELECT rm.IdRealizaMissao, em.Quantidade, re.Quantidade, m.Premio, pc.Regiao, pc.Dinheiro "
+                           "FROM RealizaMissao rm "
+                           "JOIN EtapaMonstro em ON rm.Missao = em.Missao AND rm.PC = %s "
+                           "JOIN RealizaEtapa re ON em.IdEtapaMonstro = re.EtapaMissao AND re.PC = %s "
+                           "JOIN Missao m ON rm.Missao = m.IdMissao "
+                           "JOIN PC pc ON rm.PC = pc.IdPlayer "
+                           "WHERE em.Quantidade = re.Quantidade", (id_pc, id_pc))
+            resultado = cursor.fetchone()
+
+            if resultado:
+                id_realiza_missao, _, _, premio, regiao, dinheiro = resultado
+
+                # Atualiza o status na tabela RealizaMissao para 5
+                cursor.execute("UPDATE RealizaMissao SET Status = 5 WHERE IdRealizaMissao = %s", (id_realiza_missao,))
+
+                # Atualiza a região do PC para 1
+                cursor.execute("UPDATE PC SET Regiao = 1 WHERE IdPlayer = %s", (id_pc,))
+
+                # Adiciona o prêmio da missão ao dinheiro do PC
+                novo_dinheiro = dinheiro + premio
+                cursor.execute("UPDATE PC SET Dinheiro = %s WHERE IdPlayer = %s", (novo_dinheiro, id_pc))
+                return 1
+            else:
+                print("Não há quantidades iguais entre RealizaEtapa e EtapaMonstro para o PC com ID:", id_pc)
+                return 0
+
+        # Commit da transação
+        conn.commit()
+
+    except psycopg2.Error as e:
+        print("Erro ao executar a operação:", e)
+
+def calcular_dano_e_atualizar_vida(conn, id_player, id_monster):
+    # Conectar ao banco de dados
+    cursor = conn.cursor()
+
+    # Obter a soma das defesas de todas as armaduras do jogador
+    cursor.execute("""
+        SELECT COALESCE(SUM(a.Defesa), 0) AS DefesaTotal
+        FROM UtilizaItem ui
+        JOIN Armadura a ON ui.Item = a.IdArmadura
+        WHERE ui.PC = %s
+    """, (id_player,))
+
+    defesa_total = cursor.fetchone()[0]
+
+    # Obter o ataque do monstro
+    cursor.execute("SELECT Ataque FROM Monstro WHERE IdMonstro = %s"%(id_monster,))
+    ataque_monstro = cursor.fetchone()[0]
+
+    # Obter a vida atual e o valor máximo da vida do jogador
+    cursor.execute("SELECT VidaAtual, Vida FROM PC WHERE IdPlayer = %s", (id_player,))
+    vida_atual, vida_maxima = cursor.fetchone()
+
+    # Calcular o dano (aleatoriamente defesa ou 0)
+    dano = max(0, random.choice([0, defesa_total]))
+
+    # Calcular o dano total do monstro (ataque - defesa)
+    dano_total_monstro = max(0, ataque_monstro - dano)
+
+    # Atualizar a vida do jogador
+    nova_vida = max(0, vida_atual - dano_total_monstro)
+
+    # Verificar se a vida atingiu zero e, se sim, restaurar para o valor máximo
+    morreu=0
+    if nova_vida == 0:
+        nova_vida = vida_maxima
+        morreu=1
+
+    cursor.execute("UPDATE PC SET VidaAtual = %s WHERE IdPlayer = %s", (nova_vida, id_player))
+
+    # Commit das alterações
+    conn.commit()
+
+    # Fechar a conexão
+    cursor.close()
+
+    # Retornar 0 se a vida do jogador chegou a 0, ou 1 se não
+    return morreu
+
+def verifica_quantidade_item(conn, jogador_id, item_id, quantidade_verificar):
+    try:
+        with conn.cursor() as cursor:
+            # Verifica se o jogador e o item existem
+            cursor.execute("SELECT 1 FROM PC WHERE IdPlayer = %s", (jogador_id,))
+            if not cursor.fetchone():
+                raise ValueError(f"Jogador não encontrado: {jogador_id}")
+
+            cursor.execute("SELECT 1 FROM Item WHERE IdItem = %s", (item_id,))
+            if not cursor.fetchone():
+                raise ValueError(f"Item não encontrado: {item_id}")
+
+            # Obtém a quantidade atual do item no inventário do jogador
+            query = sql.SQL("""
+                SELECT COALESCE(SUM(Quantidade), 0)
+                FROM GuardaItem
+                WHERE Inventario IN (SELECT IdInventario FROM Inventario WHERE PC = %s)
+                    AND Item = %s
+            """)
+            cursor.execute(query, (jogador_id, item_id))
+            quantidade_atual = cursor.fetchone()[0]
+
+            # Retorna verdadeiro se a quantidade for maior ou igual à quantidade desejada
+            return quantidade_atual >= quantidade_verificar
+
+    except Exception as e:
+        print("Erro ao executar a operação:", e)
+
+def subtrai_quantidade_item(conn, jogador_id, item_id, quantidade_subtrair):
+    try:
+        with conn.cursor() as cursor:
+            # Verifica se o jogador e o item existem
+            cursor.execute("SELECT 1 FROM PC WHERE IdPlayer = %s", (jogador_id,))
+            if not cursor.fetchone():
+                raise ValueError(f"Jogador não encontrado: {jogador_id}")
+
+            cursor.execute("SELECT 1 FROM Item WHERE IdItem = %s", (item_id,))
+            if not cursor.fetchone():
+                raise ValueError(f"Item não encontrado: {item_id}")
+
+            # Obtém a quantidade atual do item no inventário do jogador
+            query_quantidade_atual = sql.SQL("""
+                SELECT Quantidade
+                FROM GuardaItem
+                WHERE Inventario IN (SELECT IdInventario FROM Inventario WHERE PC = %s)
+                    AND Item = %s
+            """)
+            cursor.execute(query_quantidade_atual, (jogador_id, item_id))
+            quantidade_atual = cursor.fetchone()
+
+            if quantidade_atual is not None:
+                quantidade_atual = quantidade_atual[0]
+
+                # Subtrai a quantidade desejada
+                nova_quantidade = quantidade_atual - quantidade_subtrair
+
+                # Atualiza a quantidade no inventário
+                if nova_quantidade > 0:
+                    query_atualiza_quantidade = sql.SQL("""
+                        UPDATE GuardaItem
+                        SET Quantidade = %s
+                        WHERE Inventario IN (SELECT IdInventario FROM Inventario WHERE PC = %s)
+                            AND Item = %s
+                    """)
+                    cursor.execute(query_atualiza_quantidade, (nova_quantidade, jogador_id, item_id))
+                else:
+                    # Se a quantidade for menor ou igual a zero, exclui o registro
+                    query_exclui_registro = sql.SQL("""
+                        DELETE FROM GuardaItem
+                        WHERE Inventario IN (SELECT IdInventario FROM Inventario WHERE PC = %s)
+                            AND Item = %s
+                    """)
+                    cursor.execute(query_exclui_registro, (jogador_id, item_id))
+
+                conn.commit()
+                return True
+
+            else:
+                print(f"Item não encontrado no inventário do jogador: {jogador_id}")
+                return False
+
+    except Exception as e:
+        print(f"Erro ao subtrair a quantidade do item: {e}")
+        return False

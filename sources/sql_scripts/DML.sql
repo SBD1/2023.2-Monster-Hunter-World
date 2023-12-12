@@ -233,7 +233,7 @@ INSERT INTO NPC (IdNPC, Regiao, Nome, Descricao, Funcao, Raca, Genero) VALUES
 -- Quartel
 INSERT INTO NPC (IdNPC, Regiao, Nome, Descricao, Funcao, Raca, Genero) VALUES 
     (6, 4, 'Assistente', 'Coordena as missões e informações gerais.', 'assistente', 'npc', 'ambos'),
-    (7, 4, 'Comandante', 'Pode ser encontrado aqui, além de outros caçadores e NPCs.', 'npc', 'humano', 'masculino');
+    (7, 4, 'Comandante', 'Pode ser encontrado aqui, além de outros caçadores e NPCs.', 'tutorial', 'humano', 'masculino');
 
 -- Galeria de Caça
 INSERT INTO NPC (IdNPC, Regiao, Nome, Descricao, Funcao, Raca, Genero) VALUES 
@@ -243,7 +243,6 @@ INSERT INTO NPC (IdNPC, Regiao, Nome, Descricao, Funcao, Raca, Genero) VALUES
 -- Sala de Reuniões
 INSERT INTO NPC (IdNPC, Regiao, Nome, Descricao, Funcao, Raca, Genero) VALUES 
     (10, 6, 'Assistente', 'Pode ser encontrada aqui para atribuir missões principais.', 'assistente', 'humano', 'feminino'),
-    (11, 6, 'Mestre do Canteiro', 'Gerencia o Canteiro de Botânicos.', 'npc', 'humano', 'masculino');
 
 -- NPCs para Acampamentos
 INSERT INTO NPC (IdNPC, Regiao, Nome, Descricao, Funcao, Raca, Genero) VALUES 
@@ -288,7 +287,6 @@ VALUES
     (14, 8, 'Oi, caçador(a)! Sou a Ecóloga. Se quiser posso te fornecer alguns insetos', true, false),
     (15, 9, 'Saudações, caçador(a)! Se quiser posso te fornecer materiais necessários para sua aventura.', true, false),
     (16, 10, 'Olá! Eu sou o(a) Assistente da Sala de Reuniões. Precisa de alguma orientação sobre missões principais? Estou aqui para ajudar. Planejamento é a chave para o sucesso!', true, false),
-    (17, 11, 'Cumprimentos, caçador(a)! Sou o Mestre do Canteiro. Se precisar de recursos cultivados ou quiser gerenciar o Canteiro de Botânicos, estou aqui para garantir que tudo esteja em ordem.', true, false),
     (18, 7, 'Ah, outro caçador(a) se junta às nossas fileiras. Eu sou o Comandante, líder da Comissão. Sua coragem é essencial. Consulte-me para missões principais e contribua para a prosperidade de Astera!', true, false),
     (19, 12, 'Olá, caçador(a)! Se precisar encerrar sua expedição, estou aqui para ajudar. É só me chamar quando estiver pronto(a) para voltar. Boa caçada!', true, false),
     (20, 13, 'Oi, caçador(a)! Quando quiser encerrar sua expedição, estou aqui para ajudar. É só me procurar quando estiver pronto(a) para voltar. Boa caçada!', true, false),
@@ -415,6 +413,8 @@ VALUES
 (12, 12, 46), -- Radobaan
 (13, 12, 47), -- Raging Brachydios
 (14, 12, 71), -- Zorah Magdaros
+(79, 12, 74), -- Zorah Magdaros
+(80, 12, 73), -- Zorah Magdaros
 
 -- Área de Anjanath (13)
 (15, 13, 4),  -- Anjanath
@@ -438,6 +438,7 @@ VALUES
 (25, 17, 19), -- Dodogama
 (26, 17, 28), -- Great Jagras
 (27, 17, 27), -- Great Girros
+(78, 17, 72), -- Great Girros
 
 -- Planícies de Areia (21)
 (28, 21, 12), -- Black Diablos
@@ -1193,7 +1194,6 @@ INSERT INTO MissaoPreReq (IdMissaoPreReq, MissaoPreReq, Missao) VALUES
 INSERT INTO EtapaMonstro (Missao, Monstro, Quantidade) VALUES
     (1, 72, 7),
     (2, 73, 5),
-    (2, 74, 3),
     (3, 28, 1),
     (4, 31, 1),
     (5, 45, 1),
