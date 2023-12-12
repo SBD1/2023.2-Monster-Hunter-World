@@ -34,11 +34,17 @@ Este repositório servirá para aprofundarmos e trabalharmos os conhecimentos co
     - [Correções do mapeamento pro modelo relacional](https://raw.githubusercontent.com/SBD1/2023.2-Monster-Hunter-World/main/docs/imagens/mermhw.drawio.png)
     - [Triggers e Procedures](https://github.com/SBD1/2023.2-Monster-Hunter-World/blob/main/sources/sql_scripts/Triggers-e-Stored-Procedures.sql)
     - Partes iniciais do jogo
+- Módulo 4
+    - [Correções no DER: Versão 4](https://github.com/SBD1/2023.2-Monster-Hunter-World/blob/main/docs/imagens/DER_MonsterHunter_V4.png?raw=true)
+    - [Correções no mapeamento pro modelo relacional](https://github.com/SBD1/2023.2-Monster-Hunter-World/blob/main/docs/imagens/mapeamento-v5.png?raw=true)
+    - [Correções no DDL, no DML e nos Triggers e Procedures](https://github.com/SBD1/2023.2-Monster-Hunter-World/tree/main/sources/sql_scripts)
+    - Jogo completo
 
 ## Apresentações
 - [Módulo 1](https://unbbr-my.sharepoint.com/:v:/g/personal/211063149_aluno_unb_br/EZMSun3UQ4JEqEoEa4H_HUYBgKvWdvKDfzN-Mr9kkcnI3Q?e=m2EhVo&nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZyIsInJlZmVycmFsQXBwUGxhdGZvcm0iOiJXZWIiLCJyZWZlcnJhbE1vZGUiOiJ2aWV3In19)
 - [Módulo 2](https://unbbr-my.sharepoint.com/personal/211063149_aluno_unb_br/_layouts/15/stream.aspx?id=%2Fpersonal%2F211063149%5Faluno%5Funb%5Fbr%2FDocuments%2FGrava%C3%A7%C3%B5es%2FGrava%C3%A7%C3%A3o%20%2D%20SBD1%20%2D%20M%C3%B3dulo%202%2D20231029%5F154516%2DGrava%C3%A7%C3%A3o%20de%20Reuni%C3%A3o%2Emp4&ga=1&referrer=StreamWebApp%2EWeb&referrerScenario=AddressBarCopied%2Eview)
 - [Módulo 3](https://www.youtube.com/watch?v=UBlQU7Fp7vY)
+- [Módulo 4](https://unbbr-my.sharepoint.com/:v:/g/personal/211062016_aluno_unb_br/EcMv0iF5dwNJhGLIzCMWa8ABrJPHlmQFiAOrizjzqG2jJA?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D&e=EaIyi4)
 
 ## Como jogar
 
