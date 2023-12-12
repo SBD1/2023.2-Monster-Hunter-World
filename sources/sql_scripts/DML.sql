@@ -242,7 +242,7 @@ INSERT INTO NPC (IdNPC, Regiao, Nome, Descricao, Funcao, Raca, Genero) VALUES
 
 -- Sala de Reuniões
 INSERT INTO NPC (IdNPC, Regiao, Nome, Descricao, Funcao, Raca, Genero) VALUES 
-    (10, 6, 'Assistente', 'Pode ser encontrada aqui para atribuir missões principais.', 'assistente', 'humano', 'feminino'),
+    (10, 6, 'Assistente', 'Pode ser encontrada aqui para atribuir missões principais.', 'assistente', 'humano', 'feminino');
 
 -- NPCs para Acampamentos
 INSERT INTO NPC (IdNPC, Regiao, Nome, Descricao, Funcao, Raca, Genero) VALUES 
