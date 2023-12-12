@@ -67,12 +67,12 @@ cd sources
 - Após isso, digite o seguinte comando:
   
 ```bash
-docker compose-up --build
+docker-compose up --build
 ```
 ou
 
 ```bash
-sudo docker compose-up --build
+sudo docker-compose up --build
 ```
 
 - Após concluido, acesse ```http://localhost:8000``` no seu navegador e **bom jogo!**
